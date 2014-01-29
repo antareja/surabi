@@ -1,5 +1,5 @@
 <?php
 		foreach ($user as $users) {
-		 echo $users->username;
+		 echo $users->user_name;
 		 }
 		 ?>
