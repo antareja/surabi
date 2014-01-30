@@ -1,2 +1,0 @@
-[24-Jan-2014 23:36:27 Asia/Jakarta] PHP Fatal error:  Call to a member function result_array() on a non-object in C:\nginx\html\gpstrack\application\views\gps.php on line 2
-[24-Jan-2014 23:37:23 Asia/Jakarta] PHP Fatal error:  Call to a member function result_array() on a non-object in C:\nginx\html\gpstrack\application\views\gps.php on line 2
