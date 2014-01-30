@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Navbar example</h1>
@@ -13,10 +11,3 @@
 		 }
 		 ?>
       </div>
-=======
-<?php
-		foreach ($user as $users) {
-		 echo $users->user_name;
-		 }
-		 ?>
->>>>>>> branch 'master' of git@github.com:antareja/surabi.git
