@@ -12,7 +12,7 @@ class MGps extends CI_Model {
 	}
 	
 	function getUser() {
-		$sql = "SELECT * FROM users";
+		$sql = "SELECT * FROM tuser";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}

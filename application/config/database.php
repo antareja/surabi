@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'HAIDAR\HAIDARSQLEXPRESS';
+$db['default']['hostname'] = 'rizki-lenovo\SQLEXPRESS';
 $db['default']['username'] = 'sa';
-$db['default']['password'] = 'haitech';
-$db['default']['database'] = 'testing';
+$db['default']['password'] = 'sqlserver2012';
+$db['default']['database'] = 'db1';
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
