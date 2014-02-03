@@ -3,6 +3,8 @@
 
     <!-- Core Scripts - Include with every page -->
     <script src="<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+    <!-- Map -->
+    <script src="<?php echo site_url() ?>assets/js/map.js"></script>
     <script src="<?php echo site_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?php echo site_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
