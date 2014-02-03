@@ -2,8 +2,8 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Dashboard</h1>
-
+			<!-- <h1 class="page-header">Dashboard</h1> -->
+			<br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Maps</h3>

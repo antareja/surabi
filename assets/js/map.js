@@ -45,5 +45,4 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 
 function doNothing() {
 }
-
 // ]]>

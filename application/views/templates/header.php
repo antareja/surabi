@@ -13,9 +13,6 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo site_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo site_url()?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <! -- Maps Google -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script src="http://localhost:8000/socket.io/socket.io.js"></script>
     <!-- Page-Level Plugin CSS - Dashboard -->
     <link href="<?php echo site_url()?>assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
     <link href="<?php echo site_url()?>assets/css/plugins/timeline/timeline.css" rel="stylesheet">
@@ -24,8 +21,6 @@
     <link href="<?php echo site_url()?>assets/css/sb-admin.css" rel="stylesheet">
     
     
-
-   
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -55,7 +50,7 @@
                         <i class="fa fa-users fa-fw"></i> Admin <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> System Configuration</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -203,7 +198,7 @@
                         <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Vehicles<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Vehicles List<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level in">
                             <li>
                                 <a href="#">Volvo-3324</a>
