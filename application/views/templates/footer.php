@@ -1,12 +1,21 @@
-</div> <!-- /container -->
+ </div>
+    <!-- /#wrapper -->
 
+    <!-- Core Scripts - Include with every page -->
+    <script src="<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+    <script src="<?php echo site_url() ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo site_url() ?>assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo site_url()?>assets/js/jquery.js"></script>
-    <script src="<?php echo site_url()?>assets/js/bootstrap.min.js"></script>
-  </body>
+    <!-- Page-Level Plugin Scripts - Dashboard -->
+    <script src="<?php echo site_url() ?>assets/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="<?php echo site_url() ?>assets/js/plugins/morris/morris.js"></script>
 
-<!-- Mirrored from getbootstrap.com/examples/navbar/ by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 02 Oct 2013 12:14:32 GMT -->
+    <!-- SB Admin Scripts - Include with every page -->
+    <script src="<?php echo site_url() ?>assets/js/sb-admin.js"></script>
+
+    <!-- Page-Level Demo Scripts - Dashboard - Use for reference -->
+    <script src="<?php echo site_url() ?>assets/js/demo/dashboard-demo.js"></script>
+
+</body>
+
 </html>

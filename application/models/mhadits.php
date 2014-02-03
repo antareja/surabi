@@ -1,17 +1,8 @@
 <?php
 
-/* By Haidar Mar'ie
- * Email = coder5@ymail.com
- https://www.facebook.com/Dlinkerz
- https://www.facebook.com/aan.alfarghani
- https://www.facebook.com/rezaa.LinkinParkSoldiers
- https://www.facebook.com/lilidiayana.fitri
- https://www.facebook.com/hudakhoirullail
- https://www.facebook.com/happy.fernando.50
- 
- ok @FAUZI ... coba deh ambil wudhu .. solat 2 rakaat .. lalu liat lagi rumus nya .. biar otak n tubuh nte fresh .. dan dapet jawaban tepat ..
- 
-  marticle */
+/* 
+ * MHadits for reference
+ */
 
 class MHadits extends CI_Model {
 
