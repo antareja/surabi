@@ -10,14 +10,17 @@ class Admin extends CI_Controller {
 	public function index() {
 		$this->company_data();
 	}
-	public function company_data() {
+	public function company_data($users=NULL) {
 		$data['pageTitle'] = 'General Company Data';
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
 			$this->madmin->insertCompanyData($post);
+		} elseif ($users) {
+			$data['users'] = $this->madmin->getUser();
+			$this->load->template("admin/company_data/general",$data);
 		} else {
-			$this->load->template("admin/company_data/general");
+			$this->load->template("admin/company_data/general",$data);
 		}
 	}
 }
