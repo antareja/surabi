@@ -4,8 +4,8 @@ if (! defined('BASEPATH'))
 class Fleet_config extends CI_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model('madmin');
-		$this->madmin = new Madmin();
+		$this->load->model('admin/fllet_config');
+		$this->fleet_config = new Fleet_config();
 	}
 	public function index() {
 		$this->company_data();
@@ -16,9 +16,9 @@ class Fleet_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->madmin->insertCompanyData($post);
+			$this->fleet_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->madmin->getUser();
+			$data['users'] = $this->fleet_config->getUser();
 			$this->load->template("admin/fleet_config/base",$data);
 		} else {
 			$this->load->template("admin/fleet_config/base",$data);
