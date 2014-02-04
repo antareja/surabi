@@ -6,8 +6,8 @@ class Sys_config extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this->load->model('madmin');
-		$this->madmin = new Madmin();
+		$this->load->model('admin/sys_config');
+		$this->sys_config = new Sys_config();
 	}
 
 	public function index() {
@@ -19,9 +19,9 @@ class Sys_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->madmin->insertCompanyData($post);
+			$this->sys_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->madmin->getUser();
+			$data['users'] = $this->sys_config->getUser();
 			$this->load->template("admin/sys_config/general", $data);
 		} else {
 			$this->load->template("admin/sys_config/general", $data);
@@ -33,9 +33,9 @@ class Sys_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->madmin->insertCompanyData($post);
+			$this->sys_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->madmin->getUser();
+			$data['users'] = $this->sys_config->getUser();
 			$this->load->template("admin/sys_config/icon", $data);
 		} else {
 			$this->load->template("admin/sys_config/icon", $data);
@@ -47,9 +47,9 @@ class Sys_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->madmin->insertCompanyData($post);
+			$this->sys_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->madmin->getUser();
+			$data['users'] = $this->sys_config->getUser();
 			$this->load->template("admin/sys_config/hardware_type", $data);
 		} else {
 			$this->load->template("admin/sys_config/hardware_type", $data);
