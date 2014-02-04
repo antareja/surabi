@@ -20,4 +20,22 @@ class Madmin extends CI_Model {
 		$query = $this->db->query($sql);
 		return $query;
 	}
+//--------------------------------------icon----------------------------	
+	function insertIcon($data) {
+		$this->db->insert("{PRE}icon", $data);
+	}
+	function getIcon() {
+		$sql = "SELECT * FROM {PRE}users";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+//--------------------------------------hardware----------------------------
+	function insertHardwareType($data) {
+		$this->db->insert("{PRE}hardware_type", $data);
+	}
+	function getHardwareType() {
+		$sql = "SELECT * FROM {PRE}hardware_type";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 }	

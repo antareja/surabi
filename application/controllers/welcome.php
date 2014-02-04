@@ -30,7 +30,7 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function gps() {
-		//echo "gps";
+		//echo "gpsserere";
 		$data['user'] = $this->mgps->getUser();
 		$this->load->template('gps',$data);
 	}
