@@ -8,7 +8,7 @@
 					<h3 class="panel-title">Maps</h3>
 				</div>
 				<div class="panel-body">
-					<!-- <div id="map" style="width: 50%; height: 300px"></div>  -->
+					<div id="map" style="width: 50%; height: 300px"></div>
 				</div>
 			</div>
 		</div>
