@@ -1,27 +1,39 @@
 <?php
 if (! defined('BASEPATH'))
 	exit('No direct script access allowed');
+
+/**
+ *
+ * @author haidar & rizki
+ *        
+ */
 class Fleet_config extends CI_Controller {
+
 	function __construct() {
 		parent::__construct();
-		$this->load->model('admin/fllet_config');
-		$this->fleet_config = new Fleet_config();
+		$this->load->model('admin/mfleet_config');
+		$this->fleet_config = new MFleet_config();
 	}
+
 	public function index() {
-		$this->company_data();
+		$this->base();
 	}
-	//-------------------------------------icon---------------------------
-	public function base($users=NULL) {
+
+	/**
+	 *
+	 * @param string $users        	
+	 */
+	public function base($base = NULL) {
 		$data['pageTitle'] = 'Base';
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
 			$this->fleet_config->insertCompanyData($post);
-		} elseif ($users) {
+		} elseif ($base) {
 			$data['users'] = $this->fleet_config->getUser();
-			$this->load->template("admin/fleet_config/base",$data);
+			$this->load->template("admin/fleet_config/base", $data);
 		} else {
-			$this->load->template("admin/fleet_config/base",$data);
+			$this->load->template("admin/fleet_config/base", $data);
 		}
 	}
 }
