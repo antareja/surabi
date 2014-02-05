@@ -14,7 +14,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>admin/sys_config/company_data/"
+				action="<?php echo site_url();?>admin/fleet_config/base/"
 				method="POST" />
 
 			<div class="form-group">
@@ -23,7 +23,7 @@
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="name" name="name"
 						placeholder="Name"
-						value="<?php  isset($base) ? $base->address : '';?>">
+						value="<?php echo isset($base) ? $base->name : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
@@ -31,11 +31,11 @@
 					for="form-field-select-2"> Vehicle Icon for this Base </label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2" 
-						data-placeholder="Choose a Country...">
+						data-placeholder="Choose a Vehicle Base" name="icon_id">
 						<option value="">&nbsp;</option>
-						<option value="base1">Base1</option>
-						<option value="base2">Base2</option>
-						<option value="base3">Base3</option>
+						<option value="1">car</option>
+						<option value="2">Fire Truck</option>
+						<option value="3">Taxi</option>
 					</select>
 				</div>
 			</div>
@@ -100,8 +100,8 @@
 					</button>
 				</div>
 			</div>
-			<input type="hidden" name="id_company"
-				value="<?php echo isset($base) ? $base->id_company : '';?>">
+			
+				<?php echo isset($base) ? '<input type="hidden" name="id_base" value="'.$base->base_id.'" >' : '';?>"
 			</form>
 		</div>
 

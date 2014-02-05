@@ -12,7 +12,7 @@ class Sys_config extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('admin/msys_config');
-		$this->sys_config = new MSys_config();
+		$this->msys_config = new MSys_config();
 	}
 
 	public function index() {
@@ -35,13 +35,13 @@ class Sys_config extends CI_Controller {
 			$name['phone2'] = $post['phone2']; 
 			$name['fax'] = $post['fax']; 
 			if ($post['id_company']) {
-				$this->sys_config->editCompany($post['id_company'], $name);
+				$this->msys_config->editCompany($post['id_company'], $name);
 			} else {
-				$this->sys_config->insertCompanyData($name);
+				$this->msys_config->insertCompanyData($name);
 			}
 			redirect('admin/sys_config');
 		} elseif ($id_company) {
-			$data['users'] = $this->sys_config->getCompany($id_company);
+			$data['users'] = $this->msys_config->getCompany($id_company);
 			$this->load->template("admin/sys_config/general", $data);
 		} else {
 			$this->load->template("admin/sys_config/general", $data);
@@ -58,9 +58,9 @@ class Sys_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->sys_config->insertCompanyData($post);
+			$this->msys_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->sys_config->getUser();
+			$data['users'] = $this->msys_config->getUser();
 			$this->load->template("admin/sys_config/icon", $data);
 		} else {
 			$this->load->template("admin/sys_config/icon", $data);
@@ -77,9 +77,9 @@ class Sys_config extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			print_r($post);
-			$this->sys_config->insertCompanyData($post);
+			$this->msys_config->insertCompanyData($post);
 		} elseif ($users) {
-			$data['users'] = $this->sys_config->getUser();
+			$data['users'] = $this->msys_config->getUser();
 			$this->load->template("admin/sys_config/hardware_type", $data);
 		} else {
 			$this->load->template("admin/sys_config/hardware_type", $data);

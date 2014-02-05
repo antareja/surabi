@@ -12,12 +12,25 @@ class MFleet_config extends CI_Model {
 	}
 
 	function insertBase($data) {
-		return $this->db->insert("base", $data);
+		$this->db->insert("base", $data);
+		return $this->db->insert_id();
 	}
 
-	function getBase() {
-		$sql = "SELECT * FROM {PRE}base";
-		$query = $this->db->query($sql);
+	function editBase($base_id, $data) {
+		return $this->db->update("base", $data, array(
+				"base_id" => $base_id 
+		));
+	}
+
+	function getBase($base_id) {
+		$query = $this->db->get_where("base", array(
+				"base_id" => $base_id 
+		));
+		return $query->row();
+	}
+	
+	function getAllBase(){
+		$query = $this->db->get("base");
 		return $query->result();
 	}
 }	
