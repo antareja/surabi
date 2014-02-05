@@ -8,7 +8,7 @@ class MGps extends CI_Model {
 		parent::__construct();
 	}
 	function getUser() {
-		$sql = "SELECT * FROM users";
+		$sql = "SELECT * FROM {PRE}users";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}

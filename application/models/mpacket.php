@@ -9,7 +9,7 @@ class MPacket extends CI_Model {
 	}
 
 	function insertPacket($data) {
-		$this->db->insert("users", $data);
+		$this->db->insert("packet", $data);
 	}
 
 	function getUser() {
