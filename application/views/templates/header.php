@@ -1,288 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="Haidar Mar'ie">
-    <link rel="shortcut icon" href="<?php echo site_url()?>assets/ico/favicon.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Haidar Mar'ie">
+<link rel="shortcut icon"
+	href="<?php echo site_url()?>assets/ico/favicon.png">
 
-    <title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
+<title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo site_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo site_url()?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <!-- Page-Level Plugin CSS - Dashboard -->
-    <link href="<?php echo site_url()?>assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
-    <link href="<?php echo site_url()?>assets/css/plugins/timeline/timeline.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="<?php echo site_url()?>assets/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="<?php echo site_url()?>assets/css/font-awesome.min.css"
+	rel="stylesheet">
 
-    <!-- SB Admin CSS - Include with every page -->
-    <link href="<?php echo site_url()?>assets/css/sb-admin.css" rel="stylesheet">
-    
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
+<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+
+<!-- page specific plugin styles -->
+
+<!-- fonts -->
+
+<link rel="stylesheet" href="assets/css/ace-fonts.css" />
+
+<!-- ace styles -->
+
+<link rel="stylesheet" href="assets/css/ace.min.css" />
+<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+<!-- inline styles related to this page -->
+
+<!-- ace settings handler -->
+
+<script src="assets/js/ace-extra.min.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+</head>
 
 <body>
 
-    <div id="wrapper">
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
 
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">GPS Tracker V1.0</a>
-            </div>
-            <!-- /.navbar-header -->
+		<div class="navbar-container" id="navbar-container">
+			<div class="navbar-header pull-left">
+				<a href="#" class="navbar-brand"> <small> <i class="icon-leaf"></i>
+						GPS Tracker Apps
+				</small>
+				</a>
+				<!-- /.brand -->
+			</div>
+			<!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-users fa-fw"></i> Admin <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> System Configuration</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-admin -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i> Fleet State <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-Fleet -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-upload fa-fw"></i>  I/O State <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-I/O State -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-road fa-fw"></i> Map <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-map -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> Messaging <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-gears fa-fw"></i> Replay <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-book fa-fw"></i> Reports <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> Status Grid <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+			<div class="navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-group"></i> Admin <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Company Data
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Icon
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> H/W Types
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Client Security
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="light-green"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-tasks"></i> Fleet State <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="light-blue2"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-download-alt"></i> I/O Grid <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="purple"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-laptop"></i> Job Module<i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Contact
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> New Contact
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="green"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-tasks"></i> Map <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="blue"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-comments"></i> Messaging <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="light-purple"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-tasks"></i> Replay <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="red"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-bar-chart"></i> Reports <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
+						href="#"> <i class="icon-tasks"></i> Status Grid <i
+							class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- /.ace-nav -->
+			</div>
+			<!-- /.navbar-header -->
+		</div>
+		<!-- /.container -->
+	</div>
 
-        </nav>
-        <!-- /.navbar-static-top -->
 
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                     
-                    <li>
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Vehicles List<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level in">
-                            <li>
-                                <a href="#">Volvo-3324</a>
-                            </li>
-                            <li>
-                                <a href="#">Ford-2313</a>
-                            </li>
-                            <li>
-                                <a href="#">Mazda-3422 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Flot Charts</a>
-                            </li>
-                            <li>
-                                <a href="#">Morris.js Charts</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Panels and Wells</a>
-                            </li>
-                            <li>
-                                <a href="#">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="#">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="#">Typography</a>
-                            </li>
-                            <li>
-                                <a href="#">Grid</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="#">Login Page</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                </ul>
-                <!-- /#side-menu -->
-            </div>
-            <!-- /.sidebar-collapse -->
-        </nav>
-        <!-- /.navbar-static-side -->
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
 
-       
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#"> <span
+				class="menu-text"></span>
+			</a>
+
+			<div class="sidebar" id="sidebar">
+				<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="icon-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="icon-pencil"></i>
+						</button>
+
+						<button class="btn btn-warning">
+							<i class="icon-group"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="icon-cogs"></i>
+						</button>
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span> <span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
+					</div>
+				</div>
+				<!-- #sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li><a href="index.html"> <i class="icon-dashboard"></i> <span
+							class="menu-text"> Dashboard </span>
+					</a></li>
+
+					<li><a href="typography.html"> <i class="icon-text-width"></i> <span
+							class="menu-text"> Typography </span>
+					</a></li>
+
+					<li><a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i>
+							<span class="menu-text"> UI Elements </span> <b
+							class="arrow icon-angle-down"></b>
+					</a>
+
+						<ul class="submenu">
+							<li><a href="elements.html"> <i class="icon-double-angle-right"></i>
+									Elements
+							</a></li>
+
+							<li><a href="buttons.html"> <i class="icon-double-angle-right"></i>
+									Buttons &amp; Icons
+							</a></li>
+
+							<li><a href="treeview.html"> <i class="icon-double-angle-right"></i>
+									Treeview
+							</a></li>
+
+							<li><a href="jquery-ui.html"> <i class="icon-double-angle-right"></i>
+									jQuery UI
+							</a></li>
+
+							<li><a href="nestable-list.html"> <i
+									class="icon-double-angle-right"></i> Nestable Lists
+							</a></li>
+
+							<li><a href="#" class="dropdown-toggle"> <i
+									class="icon-double-angle-right"></i> Three Level Menu <b
+									class="arrow icon-angle-down"></b>
+							</a>
+
+								<ul class="submenu">
+									<li><a href="#"> <i class="icon-leaf"></i> Item #1
+									</a></li>
+
+									<li><a href="#" class="dropdown-toggle"> <i class="icon-pencil"></i>
+
+											4th level <b class="arrow icon-angle-down"></b>
+									</a>
+
+										<ul class="submenu">
+											<li><a href="#"> <i class="icon-plus"></i> Add Product
+											</a></li>
+
+											<li><a href="#"> <i class="icon-eye-open"></i> View Products
+											</a></li>
+										</ul></li>
+								</ul></li>
+						</ul></li>
+
+					<li><a href="#" class="dropdown-toggle"> <i class="icon-list"></i>
+							<span class="menu-text"> Tables </span> <b
+							class="arrow icon-angle-down"></b>
+					</a>
+
+						<ul class="submenu">
+							<li><a href="tables.html"> <i class="icon-double-angle-right"></i>
+									Simple &amp; Dynamic
+							</a></li>
+
+							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i>
+									jqGrid plugin
+							</a></li>
+						</ul></li>
+
+					<li><a href="#" class="dropdown-toggle"> <i class="icon-edit"></i>
+							<span class="menu-text"> Forms </span> <b
+							class="arrow icon-angle-down"></b>
+					</a>
+
+						<ul class="submenu">
+							<li><a href="form-elements.html"> <i
+									class="icon-double-angle-right"></i> Form Elements
+							</a></li>
+
+							<li><a href="form-wizard.html"> <i
+									class="icon-double-angle-right"></i> Wizard &amp; Validation
+							</a></li>
+
+							<li><a href="wysiwyg.html"> <i class="icon-double-angle-right"></i>
+									Wysiwyg &amp; Markdown
+							</a></li>
+
+							<li><a href="dropzone.html"> <i class="icon-double-angle-right"></i>
+									Dropzone File Upload
+							</a></li>
+						</ul></li>
+
+					<li><a href="widgets.html"> <i class="icon-list-alt"></i> <span
+							class="menu-text"> Widgets </span>
+					</a></li>
+
+					<li><a href="calendar.html"> <i class="icon-calendar"></i> <span
+							class="menu-text"> Calendar <span
+								class="badge badge-transparent tooltip-error"
+								title="2&nbsp;Important&nbsp;Events"> <i
+									class="icon-warning-sign red bigger-130"></i>
+							</span>
+						</span>
+					</a></li>
+
+					<li><a href="gallery.html"> <i class="icon-picture"></i> <span
+							class="menu-text"> Gallery </span>
+					</a></li>
+
+					<li><a href="#" class="dropdown-toggle"> <i class="icon-tag"></i> <span
+							class="menu-text"> More Pages </span> <b
+							class="arrow icon-angle-down"></b>
+					</a>
+
+						<ul class="submenu">
+							<li><a href="profile.html"> <i class="icon-double-angle-right"></i>
+									User Profile
+							</a></li>
+
+							<li><a href="inbox.html"> <i class="icon-double-angle-right"></i>
+									Inbox
+							</a></li>
+
+							<li><a href="pricing.html"> <i class="icon-double-angle-right"></i>
+									Pricing Tables
+							</a></li>
+
+							<li><a href="invoice.html"> <i class="icon-double-angle-right"></i>
+									Invoice
+							</a></li>
+
+							<li><a href="timeline.html"> <i class="icon-double-angle-right"></i>
+									Timeline
+							</a></li>
+
+							<li><a href="login.html"> <i class="icon-double-angle-right"></i>
+									Login &amp; Register
+							</a></li>
+						</ul></li>
+
+					<li class="active open"><a href="#" class="dropdown-toggle"> <i
+							class="icon-file-alt"></i> <span class="menu-text"> Other Pages <span
+								class="badge badge-primary ">5</span>
+						</span> <b class="arrow icon-angle-down"></b>
+					</a>
+
+						<ul class="submenu">
+							<li><a href="faq.html"> <i class="icon-double-angle-right"></i>
+									FAQ
+							</a></li>
+
+							<li><a href="error-404.html"> <i class="icon-double-angle-right"></i>
+									Error 404
+							</a></li>
+
+							<li><a href="error-500.html"> <i class="icon-double-angle-right"></i>
+									Error 500
+							</a></li>
+
+							<li><a href="grid.html"> <i class="icon-double-angle-right"></i>
+									Grid
+							</a></li>
+
+							<li class="active"><a href="blank.html"> <i
+									class="icon-double-angle-right"></i> Blank Page
+							</a></li>
+						</ul></li>
+				</ul>
+				<!-- /.nav-list -->
+
+				<div class="sidebar-collapse" id="sidebar-collapse">
+					<i class="icon-double-angle-left"
+						data-icon1="icon-double-angle-left"
+						data-icon2="icon-double-angle-right"></i>
+				</div>
+
+				<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					</script>
+			</div>
+			<div class="main-content">

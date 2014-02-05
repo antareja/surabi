@@ -23,8 +23,7 @@ var socket = io.connect('http://localhost:8000');
 socket.on('notification', function(data) {
 	$.each(data.users, function(index, user) {
 		var name = user.name;
-		var point = new google.maps.LatLng(parseFloat(user.lat),
-				parseFloat(user.lng));
+		var point = new google.maps.LatLng(-6.915499,107.594301);
 		var html = "<b>" + name + "</b> <br/>";
 		var icon = customIcons[name] || {};
 		var marker = new google.maps.Marker({
