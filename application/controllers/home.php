@@ -21,12 +21,12 @@ class Home extends CI_Controller {
 	public function home() {
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
-		$this->load->template('home', $data);
+		$this->load->template('gps', $data);
 	}
 
 	public function demo() {
 		$data['pageTitle'] = 'Demo';
 		$data['user'] = $this->mgps->getUser();
-		$this->load->template('home', $data);
+		$this->load->template('gps', $data);
 	}
 }

@@ -10,8 +10,33 @@
 	href="<?php echo site_url()?>assets/ico/favicon.png">
 
 <title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
+<!-- basic scripts -->
 
-<!-- Bootstrap core CSS -->
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- page specific plugin scripts -->
+
+		<!-- ace scripts -->
+
+
+		<!-- inline scripts related to this page -->
+    <!-- Bootstrap core CSS -->
 <link href="<?php echo site_url()?>assets/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<?php echo site_url()?>assets/css/font-awesome.min.css"
