@@ -47,25 +47,36 @@
 						placeholder="Description"><?php  echo  isset($icon) ? $icon->description : '';?></textarea>
 				</div>
 			</div>
-			<?php if (isset($icon)) {
-					if($icon->image_name) { ?>
+			<?php
+			if (isset($icon->image_name)) {
+					?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Icon File Name</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="phone" name="phone"
 						placeholder="Phone"
-						value="<?php echo isset($icon) ? $icon->icon_name : '';?>">
+						value="<?php echo isset($icon) ? $icon->image_name : '';?>">
 				</div>
 			</div>
-				<?php } ?>
 			<?php } ?>
+			<?php if($icon->image_type) { ?> 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="icon"> Icon </label>
-					<?php echo isset($icon->icon) ? $icon->icon : '';?>
+					for="form-field-1"> Icon</label>
 				<div class="col-sm-9">
-					<input type="file" id="id-input-file-2" name="icon"/>
+					<img
+						src="<?php echo base_url() ?>assets/uploads/icon_<?php echo $icon->icon_id.'.'.$icon->image_type?>" />
+				</div>
+			</div>
+			<?php } ?>
+			<div class="form-group">
+
+				<label class="col-sm-3 control-label no-padding-right" for="icon">
+				<?php echo isset($icon->image_type) ? 'Change' : "";?>	Icon </label>
+
+				<div class="col-sm-9">
+					<input type="file" id="id-input-file-2" name="icon" />
 				</div>
 			</div>
 			<div class="clearfix form-actions">
@@ -77,8 +88,7 @@
 					</button>
 				</div>
 			</div>
-			
-				<?php echo isset($icon) ? '<input type="hidden" name="id_base" value="'.$icon->icon_id.'" >' : '';?>"
+				<?php echo isset($icon) ? '<input type="hidden" name="id_base" value="'.$icon->icon_id.'" >' : '';?>
 			</form>
 		</div>
 

@@ -78,17 +78,14 @@ class Sys_config extends CI_Controller {
 			}
 			// for edit data
 			if (isset($post['icon_id'])) {
-				$post_data['icon'] = 'icon_' . $post['icon_id'] . '.' . $ext;
 				$this->msys_config->editIcon($post_data, $post['icon_id']);
-				redirect('admin/sys_config/icon/'.$icon_id);
+				upload_to('icon', 'icon_' . $post_data['icon'] . '.' . $ext);
+				redirect('admin/sys_config/icon/' . $icon_id);
 			} else {
 				// for add $_POST data
 				$id = $this->msys_config->insertIcon($post_data);
-				$post_data['icon'] = 'icon_' . $id . '.' . $ext;
-				redirect('admin/sys_config/icon/'.$id);
-			}
-			if ($_FILES['icon']) {
-				move_uploaded_file($_FILES["icon"]["tmp_name"], FCPATH . "assets/uploads/" . $post_data['icon']);
+				upload_to('icon', 'icon_' . $id . '.' . $ext);
+				redirect('admin/sys_config/icon/' . $id);
 			}
 			// for view or edit data
 		} elseif ($icon_id) {
