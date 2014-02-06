@@ -19,8 +19,13 @@
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
-						haidar
-						haidar
+						
+						<?php 
+							foreach ($all_icon as $icons)
+							{
+								echo "<p><img src='".base_url()."assets/uploads/icon_".$icons->icon_id.".".$icons->image_type."'/>".$icons->name."</p>";
+							}
+						?>
 						<p>
 					</div>
 				</div>
