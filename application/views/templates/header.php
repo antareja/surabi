@@ -62,6 +62,10 @@
 /* .form-control::-moz-placeholder {
 	color: #000000;
 } */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;    
+}
+
 </style>
 </head>
 
@@ -84,15 +88,19 @@
 
 			<div class="navbar-header pull-right" role="navigation">
 				<ul class="nav ace-nav">
-					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-gears"></i> Admin <i
-							class="icon-caret-down"></i>
+					<li class="grey dropdown-hover"><a class="" href="#"> <i
+							class="icon-gears"></i> Admin <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>admin/sys_config"> <i
-									class="icon-cog"></i> System Configuration
-							</a></li>
+							<li class="dropdown-hover"><a class="clearfix dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="<?php echo site_url()?>admin/sys_config"> 
+							<span class="pull-left"><i class="icon-cog"></i> System Configuration </span> <i class="icon-caret-right"></i></a> 
+								<ul class="dropdown-menu dropdown-danger pull-right">
+									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/company_data">Company Data</a></li>
+									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/icon">Icon</a></li>
+									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/hardware">Hardware</a></li>
+								</ul>	
+							</li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
 									class="icon-user"></i> Fleet Configuration
 							</a></li>
@@ -102,101 +110,40 @@
 							</a></li>
 							<li></li>
 						</ul></li>
-					<li class="light-green"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-tasks"></i> Fleet
-							State <i class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="light-blue2"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-download-alt"></i>
-							I/O Grid <i class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="purple"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-laptop"></i> Job
-							Module<i class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Contact
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> New Contact
-							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="green"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-road"></i> Map <i class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="blue"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-comments"></i> Messaging <i
-							class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="light-purple"><a data-toggle="dropdown"
+					<li class="light-green dropdown-hover"><a href="#"> <i
+							class="icon-tasks"></i> Fleet State
+					</a></li>
+					<li class="light-blue2 dropdown-hover"><a href="#"> <i
+							class="icon-download-alt"></i> I/O Grid
+					</a></li>
+					<li class="purple dropdown-hover"><a href="#"> <i
+							class="icon-laptop"></i> Job Module
+					</a></li>
+					<li class="green dropdown-hover"><a href="#"> <i class="icon-road"></i>
+							Map
+					</a></li>
+					<li class="blue"><a href="#"> <i class="icon-comments"></i>
+							Messaging
+					</a></li>
+					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
-							<i class="icon-caret-down"></i>
+					</a></li>
+					<li class="red dropdown-hover"><a href="#"> <i
+							class="icon-bar-chart"></i> Reports <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
+							<li><a href="#"> <i class="icon-cog"></i> System Report
 							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
+							<li><a href="#"> <i class="icon-user"></i> Activity Report
 							</a></li>
-							<li></li>
-						</ul></li>
-					<li class="red"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-bar-chart"></i> Reports <i
-							class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
+							<li><a href="#"> <i class="icon-user"></i> Compressed
 							</a></li>
 							<li></li>
 						</ul></li>
 					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-tasks"></i> Status Grid <i
-							class="icon-caret-down"></i>
-					</a>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="#"> <i class="icon-cog"></i> Settings
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li></li>
-						</ul></li>
+						href="#"> <i class="icon-tasks"></i> Status Grid
+					</a></li>
 				</ul>
 				<!-- /.ace-nav -->
 			</div>
