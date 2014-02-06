@@ -9,7 +9,23 @@
 	<!-- /.page-header -->
 
 	<div class="row">
-
+		<div class="col-sm-3">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4 class="smaller">
+						List Base 
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main">
+						<p class="muted">
+						haidar
+						haidar
+						<p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 
 			<form role="form" class="form-horizontal"
@@ -30,7 +46,7 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Vehicle Icon for this Base </label>
 				<div class="col-sm-9">
-					<select class="form-control" id="form-field-select-2" 
+					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Vehicle Base" name="icon_id">
 						<option value="">&nbsp;</option>
 						<option value="1">car</option>

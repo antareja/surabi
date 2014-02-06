@@ -62,10 +62,9 @@
 /* .form-control::-moz-placeholder {
 	color: #000000;
 } */
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;    
+ul.nav li.dropdown:hover>ul.dropdown-menu {
+	display: block;
 }
-
 </style>
 </head>
 
@@ -93,16 +92,19 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li class="dropdown-hover"><a class="clearfix dropdown-toggle" data-toggle="dropdown" tabindex="-1" href="<?php echo site_url()?>admin/sys_config"> 
-							<span class="pull-left"><i class="icon-cog"></i> System Configuration </span> <i class="icon-caret-right"></i></a> 
-								<ul class="dropdown-menu dropdown-danger pull-right">
-									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/company_data">Company Data</a></li>
-									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/icon">Icon</a></li>
-									<li><a tabindex="-1" href="<?php echo site_url()?>admin/sys_config/hardware">Hardware</a></li>
-								</ul>	
-							</li>
+							<li class="dropdown-hover"><a class="clearfix dropdown-toggle"
+								data-toggle="dropdown" tabindex="-1"
+								href="<?php echo site_url()?>admin/sys_config"> 
+								<span class="pull-left"><i class="icon-cog"></i> System Configuration
+								</span> </a>
+								</li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/company_data">Company
+									Data</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/icon">Icon</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/hardware">Hardware</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
 									class="icon-user"></i> Fleet Configuration
+							<li><a href="<?php echo site_url()?>admin/fleet_config/base">Base</a></li>
 							</a></li>
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
