@@ -60,7 +60,7 @@
 				</div>
 			</div>
 			<?php } ?>
-			<?php if($icon->image_type) { ?> 
+			<?php if(isset($icon->image_type)) { ?> 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Icon</label>
