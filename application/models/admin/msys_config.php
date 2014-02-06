@@ -11,17 +11,15 @@ class MSys_config extends CI_Model {
 		parent::__construct();
 	}
 
+	function getCompany($id_company) {
+		$query = $this->db->get_where('company_data', array('id_company' => $id_company));
+		return $query->row();
+	}
+	
 	function insertCompanyData($data) {
 		$this->db->insert("company_data", $data);
 	}
 
-	function getCompany($id_company) {
-		// $sql = "SELECT * FROM {PRE}company_data WHERE id_company=".$id_user;
-		$query = $this->db->get_where('company_data', array('id_company' => $id_company));
-		// $query = $this->db->query($sql);
-		return $query->row();
-	}
-	
 	function editCompany($id_company,$data) {
 		return $this->db->update('company_data',$data,array("id_company"=>$id_company));
 	}
@@ -34,12 +32,21 @@ class MSys_config extends CI_Model {
 
 	function insertIcon($data) {
 		$this->db->insert("icon", $data);
+		return $this->db->insert_id();
+	}
+	
+	function editIcon($data,$icon_id) {
+		return $this->db->update("icon",$data,array("icon_id"=>$icon_id));
 	}
 
-	function getIcon() {
-		$sql = "SELECT * FROM {PRE}users";
-		$query = $this->db->query($sql);
+	function getAllIcon() {
+		$query = $this->db->get('icon');
 		return $query->result();
+	}
+	
+	function getIcon($icon_id) {
+		$query = $this->db->get_where('icon',array('icon_id'=>$icon_id));
+		return $query->row();
 	}
 
 	function insertHardwareType($data) {
