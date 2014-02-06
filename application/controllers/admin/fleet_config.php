@@ -21,7 +21,7 @@ class Fleet_config extends CI_Controller {
 
 	/**
 	 *
-	 * @param string $users        	
+	 * @param string $base_id        	
 	 */
 	public function base($base_id = NULL) {
 		$data['pageTitle'] = 'Base';
@@ -52,9 +52,12 @@ class Fleet_config extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * @param string $vehicle_id
+	 */
 	public function vehicle($vehicle_id = NULL) {
 		$data['pageTitle'] = 'Vehicle';
-		$data['all_hardware'] = $this->mfleet_config->getAllHardwareType();
+		$data['all_hardware'] = $this->mfleet_config->getAllVehicles();
 		$post = $this->input->post();
 		if ($post) {
 			// print_r($this->upload->data());
@@ -67,25 +70,25 @@ class Fleet_config extends CI_Controller {
 			$post_data['max_message_length'] = $post['max_message_length'];
 			// for edit data
 			if (isset($post['hardware_id'])) {
-				$this->mfleet_config->updateHardwareType($post_data, $post['hardware_id']);
-				redirect('admin/fleet_config/hardware/' . $vehicle_id);
+				$this->mfleet_config->updateVehicle($post_data, $post['hardware_id']);
+				redirect('admin/fleet_config/vehicle/' . $vehicle_id);
 			} else {
 				// for add $_POST data
-				$id = $this->mfleet_config->insertHardwareType($post_data);
-				redirect('admin/fleet_config/hardware/' . $id);
+				$id = $this->mfleet_config->insertVehicle($post_data);
+				redirect('admin/fleet_config/vehicle/' . $id);
 			}
 			// for view or edit data
 		} elseif ($vehicle_id) {
-			$data['hardware'] = $this->mfleet_config->getHardwareType($vehicle_id);
+			$data['hardware'] = $this->mfleet_config->getVehicle($vehicle_id);
 			if(isset($data['hardware']->hardware_id)){
-				$this->load->template("admin/fleet_config/hardware_type", $data);
+				$this->load->template("admin/fleet_config/vehicle", $data);
 			} else {
 				unset($data['hardware']);
-				$this->load->template("admin/fleet_config/hardware_type", $data);
+				$this->load->template("admin/fleet_config/vehicle", $data);
 			}
 			// for add data only
 		} else {
-			$this->load->template("admin/fleet_config/hardware_type", $data);
+			$this->load->template("admin/fleet_config/vehicle", $data);
 		}
 	}
 }

@@ -138,3 +138,5 @@
 	}
 
     //]]>
+
+	$('.check').removeAttr('checked');

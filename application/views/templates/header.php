@@ -1,63 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Haidar Mar'ie">
 <link rel="shortcut icon"
-	href="<?php echo site_url()?>assets/ico/favicon.png">
+	href="<?php echo base_url()?>assets/ico/favicon.png">
 
 <title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
-<!-- basic scripts -->
 
-
-
-<!-- inline scripts related to this page -->
 <!-- Bootstrap core CSS -->
-<link href="<?php echo site_url()?>assets/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="<?php echo site_url()?>assets/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet">
 
 <!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
-
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
+<![endif]-->
 
 <!-- page specific plugin styles -->
 
 <!-- fonts -->
-
-<link rel="stylesheet"
-	href="<?php echo site_url()?>assets/css/ace-fonts.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-fonts.css" />
 
 <!-- ace styles -->
-
-<link rel="stylesheet"
-	href="<?php echo site_url()?>assets/css/ace.min.css" />
-<link rel="stylesheet"
-	href="<?php echo site_url()?>assets/css/ace-rtl.min.css" />
-<link rel="stylesheet"
-	href="<?php echo site_url()?>assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-skins.min.css" />
 
 <!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-<!-- inline styles related to this page -->
-
-<!-- ace settings handler -->
-
-<script src="assets/js/ace-extra.min.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-ie.min.css" />
+<![endif]-->
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 <!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+	<script src="<?php echo base_url()?>assets/js/html5shiv.js"></script>
+	<script src="<?php echo base_url()?>assets/js/respond.min.js"></script>
+<![endif]-->
 <style type="text/css">
 /* .form-control::-moz-placeholder {
 	color: #000000;
@@ -67,7 +47,6 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 }
 </style>
 </head>
-
 <body>
 
 	<div class="navbar navbar-default" id="navbar">
@@ -92,41 +71,27 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li class="dropdown-hover"><a class="clearfix dropdown-toggle"
-								data-toggle="dropdown" tabindex="-1"
-								href="<?php echo site_url()?>admin/sys_config"> 
-								<span class="pull-left"><i class="icon-cog"></i> System Configuration
-								</span> </a>
-								</li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/company_data">Company
-									Data</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/icon">Icon</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/hardware">Hardware</a></li>
-							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
-									class="icon-user"></i> Fleet Configuration
-							<li><a href="<?php echo site_url()?>admin/fleet_config/base">Base</a></li>
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
-							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Items
-							</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config"> <i class="icon-cog"></i> System Configuration</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/company_data"><i class="icon-briefcase"></i>Company Data</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i class="icon-picture"></i>Icon</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i class="icon-wrench"></i>Hardware</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i class="icon-cog"></i> Fleet Configuration</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i class="icon-home"></i>Base</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i class="icon-truck"></i> Vehicle</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile</a></li>
+							<li><a href="#"> <i class="icon-pencil"></i> Items</a></li>
 							<li></li>
 						</ul></li>
-					<li class="light-green dropdown-hover"><a href="#"> <i
-							class="icon-tasks"></i> Fleet State
-					</a></li>
-					<li class="light-blue2 dropdown-hover"><a href="#"> <i
-							class="icon-download-alt"></i> I/O Grid
-					</a></li>
-					<li class="purple dropdown-hover"><a href="#"> <i
-							class="icon-laptop"></i> Job Module
-					</a></li>
-					<li class="green dropdown-hover"><a href="#"> <i class="icon-road"></i>
-							Map
-					</a></li>
+					<li class="light-green dropdown-hover"><a href="#"> <i class="icon-tasks"></i> 
+					Fleet State</a></li>
+					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i> 
+					I/O Grid</a></li>
+					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i> 
+					Job Module</a></li>
+					<li class="green dropdown-hover"><a href="#"> <i class="icon-globe"></i> 
+					Map </a></li>
 					<li class="blue"><a href="#"> <i class="icon-comments"></i>
-							Messaging
-					</a></li>
+					Messaging </a></li>
 					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
 					</a></li>

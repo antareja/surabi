@@ -33,4 +33,25 @@ class MFleet_config extends CI_Model {
 		$query = $this->db->get("base");
 		return $query->result();
 	}
+	
+	function getAllVehicles(){
+		$query = $this->db->get("vehicles");
+		return $query->result();
+	}
+	
+	function getVehicle($vehicle_id){
+		$query = $this->db->get_where("vehicles",array("vehicle_id"=>$vehicle_id));
+		return $query->row();
+	}
+	
+	function insertVehicle($data){
+		$this->db->insert('vehicles',$data);
+		return $this->db->insert_id();
+	}
+	
+	function updateVehicle($data, $vehicle_id){
+		return $this->db->update("vehicles",$data,array("vehicle_id"=>$vehicle_id));	
+	}
+	
+	
 }	

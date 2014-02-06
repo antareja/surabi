@@ -25,5 +25,4 @@ Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
 <br>
 Long :<span id="txt_long"></span><br>
 <script>
-$('.check').removeAttr('checked');
 </script>
