@@ -51,4 +51,41 @@ class Fleet_config extends CI_Controller {
 			$this->load->template("admin/fleet_config/base", $data);
 		}
 	}
+	
+	public function vehicle($vehicle_id = NULL) {
+		$data['pageTitle'] = 'Vehicle';
+		$data['all_hardware'] = $this->mfleet_config->getAllHardwareType();
+		$post = $this->input->post();
+		if ($post) {
+			// print_r($this->upload->data());
+			print_r($post);
+			// Upload file image
+			$post_data['name'] = $post['name'];
+			$post_data['description'] = $post['description'];
+			$post_data['message_enabled'] = $post['message_enabled'];
+			$post_data['garmin_support'] = $post['garmin_support'];
+			$post_data['max_message_length'] = $post['max_message_length'];
+			// for edit data
+			if (isset($post['hardware_id'])) {
+				$this->mfleet_config->updateHardwareType($post_data, $post['hardware_id']);
+				redirect('admin/fleet_config/hardware/' . $vehicle_id);
+			} else {
+				// for add $_POST data
+				$id = $this->mfleet_config->insertHardwareType($post_data);
+				redirect('admin/fleet_config/hardware/' . $id);
+			}
+			// for view or edit data
+		} elseif ($vehicle_id) {
+			$data['hardware'] = $this->mfleet_config->getHardwareType($vehicle_id);
+			if(isset($data['hardware']->hardware_id)){
+				$this->load->template("admin/fleet_config/hardware_type", $data);
+			} else {
+				unset($data['hardware']);
+				$this->load->template("admin/fleet_config/hardware_type", $data);
+			}
+			// for add data only
+		} else {
+			$this->load->template("admin/fleet_config/hardware_type", $data);
+		}
+	}
 }
