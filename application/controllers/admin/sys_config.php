@@ -99,18 +99,41 @@ class Sys_config extends CI_Controller {
 
 	/**
 	 *
-	 * @param string $users
+	 * @param string $hardware_id
 	 *        	Hardware
 	 */
-	public function hardware_type($users = NULL) {
-		$data['pageTitle'] = 'Hardware Type';
+	public function hardware($hardware_id = NULL) {
+		$data['pageTitle'] = 'Hardware';
+		$data['all_hardware'] = $this->msys_config->getAllHardwareType();
 		$post = $this->input->post();
 		if ($post) {
+			// print_r($this->upload->data());
 			print_r($post);
-			$this->msys_config->insertCompanyData($post);
-		} elseif ($users) {
-			$data['users'] = $this->msys_config->getUser();
-			$this->load->template("admin/sys_config/hardware_type", $data);
+			// Upload file image
+			$post_data['name'] = $post['name'];
+			$post_data['description'] = $post['description'];
+			$post_data['message_enabled'] = $post['message_enabled'];
+			$post_data['garmin_support'] = $post['garmin_support'];
+			$post_data['max_message_length'] = $post['max_message_length'];
+			// for edit data
+			if (isset($post['hardware_id'])) {
+				$this->msys_config->updateHardwareType($post_data, $post['hardware_id']);
+				redirect('admin/sys_config/hardware/' . $hardware_id);
+			} else {
+				// for add $_POST data
+				$id = $this->msys_config->insertHardwareType($post_data);
+				redirect('admin/sys_config/hardware/' . $id);
+			}
+			// for view or edit data
+		} elseif ($hardware_id) {
+			$data['hardware'] = $this->msys_config->getHardwareType($hardware_id);
+			if(isset($data['hardware']->hardware_id)){
+				$this->load->template("admin/sys_config/hardware_type", $data);
+			} else {
+				 unset($data['hardware']);
+				$this->load->template("admin/sys_config/hardware_type", $data);
+			}
+			// for add data only
 		} else {
 			$this->load->template("admin/sys_config/hardware_type", $data);
 		}

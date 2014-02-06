@@ -88,7 +88,7 @@
 					</button>
 				</div>
 			</div>
-				<?php echo isset($icon) ? '<input type="hidden" name="id_base" value="'.$icon->icon_id.'" >' : '';?>
+				<?php echo isset($icon) ? '<input type="hidden" name="icon_id" value="'.$icon->icon_id.'" >' : '';?>
 			</form>
 		</div>
 
