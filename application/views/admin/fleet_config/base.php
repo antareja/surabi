@@ -19,8 +19,12 @@
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
-						haidar
-						haidar
+						<?php 
+							foreach ($all_base as $bases)
+							{
+								echo "<p>".$bases->name."</p>";
+							}
+						?>
 						<p>
 					</div>
 				</div>
