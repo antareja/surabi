@@ -12,31 +12,10 @@
 <title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 <!-- basic scripts -->
 
-		<!--[if !IE]> -->
-
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='<?php echo site_url() ?>assets/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- page specific plugin scripts -->
-
-		<!-- ace scripts -->
 
 
-		<!-- inline scripts related to this page -->
-    <!-- Bootstrap core CSS -->
+<!-- inline scripts related to this page -->
+<!-- Bootstrap core CSS -->
 <link href="<?php echo site_url()?>assets/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<?php echo site_url()?>assets/css/font-awesome.min.css"
@@ -51,13 +30,17 @@
 
 <!-- fonts -->
 
-<link rel="stylesheet" href="<?php echo site_url()?>assets/css/ace-fonts.css" />
+<link rel="stylesheet"
+	href="<?php echo site_url()?>assets/css/ace-fonts.css" />
 
 <!-- ace styles -->
 
-<link rel="stylesheet" href="<?php echo site_url()?>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<?php echo site_url()?>assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="<?php echo site_url()?>assets/css/ace-skins.min.css" />
+<link rel="stylesheet"
+	href="<?php echo site_url()?>assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="<?php echo site_url()?>assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="<?php echo site_url()?>assets/css/ace-skins.min.css" />
 
 <!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -76,9 +59,9 @@
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
 <style type="text/css">
-.form-control::-moz-placeholder {
-    color: #000000;
-}
+/* .form-control::-moz-placeholder {
+	color: #000000;
+} */
 </style>
 </head>
 
@@ -107,20 +90,21 @@
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>admin/sys_config"> <i class="icon-cog"></i> System Configuration
+							<li><a href="<?php echo site_url()?>admin/sys_config"> <i
+									class="icon-cog"></i> System Configuration
 							</a></li>
-							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i class="icon-user"></i> Fleet Configuration
+							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
+									class="icon-user"></i> Fleet Configuration
 							</a></li>
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li><a href="#"> <i class="icon-user"></i> Items
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
-					<li class="light-green"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-tasks"></i> Fleet State <i
-							class="icon-caret-down"></i>
+						</ul></li>
+					<li class="light-green"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-tasks"></i> Fleet
+							State <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
@@ -129,11 +113,10 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
-					<li class="light-blue2"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-download-alt"></i> I/O Grid <i
-							class="icon-caret-down"></i>
+						</ul></li>
+					<li class="light-blue2"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-download-alt"></i>
+							I/O Grid <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
@@ -142,11 +125,10 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
-					<li class="purple"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-laptop"></i> Job Module<i
-							class="icon-caret-down"></i>
+						</ul></li>
+					<li class="purple"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-laptop"></i> Job
+							Module<i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
@@ -155,11 +137,9 @@
 							<li><a href="#"> <i class="icon-user"></i> New Contact
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li class="green"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-road"></i> Map <i
-							class="icon-caret-down"></i>
+						href="#"> <i class="icon-road"></i> Map <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
@@ -168,8 +148,7 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li class="blue"><a data-toggle="dropdown" class="dropdown-toggle"
 						href="#"> <i class="icon-comments"></i> Messaging <i
 							class="icon-caret-down"></i>
@@ -181,11 +160,10 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
-					<li class="light-purple"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-play"></i> Replay <i
-							class="icon-caret-down"></i>
+						</ul></li>
+					<li class="light-purple"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
+							<i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
@@ -194,8 +172,7 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li class="red"><a data-toggle="dropdown" class="dropdown-toggle"
 						href="#"> <i class="icon-bar-chart"></i> Reports <i
 							class="icon-caret-down"></i>
@@ -207,8 +184,7 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
+						</ul></li>
 					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
 						href="#"> <i class="icon-tasks"></i> Status Grid <i
 							class="icon-caret-down"></i>
@@ -220,8 +196,7 @@
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li></li>
-						</ul>
-					</li>
+						</ul></li>
 				</ul>
 				<!-- /.ace-nav -->
 			</div>
@@ -240,5 +215,3 @@
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span
 				class="menu-text"></span>
 			</a>
-
-			

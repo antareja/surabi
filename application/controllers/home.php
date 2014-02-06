@@ -29,4 +29,8 @@ class Home extends CI_Controller {
 		$data['user'] = $this->mgps->getUser();
 		$this->load->template('gps', $data);
 	}
+	
+	public function test() {
+		echo FCPATH;
+	}
 }

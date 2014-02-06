@@ -63,37 +63,33 @@ class Sys_config extends CI_Controller {
 		$data['pageTitle'] = 'Icon';
 		$data['all_icon'] = $this->msys_config->getAllIcon();
 		$post = $this->input->post();
-		// Upload file image
-		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '100';
-		$config['max_width'] = '1024';
-		$config['max_height'] = '768';
-		$this->load->library('upload', $config);
 		if ($post) {
+			// print_r($this->upload->data());
 			print_r($post);
+			// Upload file image
 			$post_data['name'] = $post['name'];
 			$post_data['description'] = $post['description'];
-			$post_data['icon'] = $post['icon'];
-			if (! $this->upload->do_upload()) {
-				$error = array(
-						'error' => $this->upload->display_errors() 
-				);
-				$this->load->view('admin/sys_config/icon', $error);
-			} else {
-				$data = array(
-						'upload_data' => $this->upload->data() 
-				);
-				$this->load->view('admin/sys_config/icon', $data);
+			if ($_FILES['icon']) {
+				print_r($_FILES['icon']);
+				$post_data['image_name'] = $_FILES['icon']['name'];
+				$ext = pathinfo($post_data['image_name'], PATHINFO_EXTENSION);
+				$post_data['image_type'] = $ext;
+				$post_data['image_size'] = $_FILES['icon']['size'];
 			}
 			// for edit data
-			if ($post['icon_id']) {
+			if (isset($post['icon_id'])) {
+				$post_data['icon'] = 'icon_' . $post['icon_id'] . '.' . $ext;
 				$this->msys_config->editIcon($post_data, $post['icon_id']);
-				// for add $_POST data
+				redirect('admin/sys_config/icon/'.$icon_id);
 			} else {
-				$this->msys_config->insertIcon($post_data);
+				// for add $_POST data
+				$id = $this->msys_config->insertIcon($post_data);
+				$post_data['icon'] = 'icon_' . $id . '.' . $ext;
+				redirect('admin/sys_config/icon/'.$id);
 			}
-			redirect('admin/sys_config/icon');
+			if ($_FILES['icon']) {
+				move_uploaded_file($_FILES["icon"]["tmp_name"], FCPATH . "assets/uploads/" . $post_data['icon']);
+			}
 			// for view or edit data
 		} elseif ($icon_id) {
 			$data['icon'] = $this->msys_config->getIcon($icon_id);

@@ -31,7 +31,7 @@
 					for="form-field-select-2"> Available Local Icon </label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
-						data-placeholder="Choose a Vehicle Base" name="local_icon">
+						data-placeholder="Choose a Vehicle Base">
 						<option value="">&nbsp;</option>
 						<option value="1">car</option>
 						<option value="2">Fire Truck</option>
@@ -47,6 +47,8 @@
 						placeholder="Description"><?php  echo  isset($icon) ? $icon->description : '';?></textarea>
 				</div>
 			</div>
+			<?php if (isset($icon)) {
+					if($icon->image_name) { ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Icon File Name</label>
@@ -56,13 +58,14 @@
 						value="<?php echo isset($icon) ? $icon->icon_name : '';?>">
 				</div>
 			</div>
-			
+				<?php } ?>
+			<?php } ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Icon </label>
+					for="icon"> Icon </label>
+					<?php echo isset($icon->icon) ? $icon->icon : '';?>
 				<div class="col-sm-9">
-					<input type="file" id="id-input-file-2" name="icon_file"/>
-					<?php echo isset($icon) ? $icon->icon : '';?>
+					<input type="file" id="id-input-file-2" name="icon"/>
 				</div>
 			</div>
 			<div class="clearfix form-actions">
@@ -75,7 +78,7 @@
 				</div>
 			</div>
 			
-				<?php echo isset($icon) ? '<input type="hidden" name="id_base" value="'.$icon->base_id.'" >' : '';?>"
+				<?php echo isset($icon) ? '<input type="hidden" name="id_base" value="'.$icon->icon_id.'" >' : '';?>"
 			</form>
 		</div>
 
