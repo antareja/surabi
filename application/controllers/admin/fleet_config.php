@@ -25,7 +25,7 @@ class Fleet_config extends CI_Controller {
 	 */
 	public function base($base_id = NULL) {
 		$data['pageTitle'] = 'Base';
-		$data['bases'] = $this->mfleet_config->getAllBase();
+		$data['all_base'] = $this->mfleet_config->getAllBase();
 		$post = $this->input->post();
 		if ($post) {
 			$post_data['name'] = $post['name'];
@@ -59,7 +59,7 @@ class Fleet_config extends CI_Controller {
 		$data['hardwares'] = $this->mfleet_config->getAllHardware();
 		$data['bases'] = $this->mfleet_config->getAllBase();
 		$data['icons'] = $this->mfleet_config->getAllIcon();
-		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
+		$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
 		$post = $this->input->post();
 		if ($post) {
 			// print_r($this->upload->data());

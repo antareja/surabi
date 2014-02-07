@@ -18,8 +18,8 @@
 					<div class="widget-main">
 						<p class="muted">
 						<?php
-						foreach ($bases as $base) {
-							echo "<p><a href='" . base_url() . "admin/fleet_config/base/" . $base->base_id . "'>" . $base->name . "</a></p>";
+						foreach ($all_base as $bases) {
+							echo "<p><a href='" . base_url() . "admin/fleet_config/base/" . $bases->base_id . "'>" . $bases->name . "</a></p>";
 						}
 						?>
 						<p>

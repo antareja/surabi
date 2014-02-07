@@ -18,18 +18,11 @@
 					<div class="widget-main">
 						<p class="muted">
 						<?php
-						foreach ($vehicles as $vehicle) {
-							echo "<p><a href='" . base_url() . "admin/fleet_config/vehicle/" . $vehicle->vehicle_id . "'>" . $vehicle->name . "</a></p>";
+						foreach ($all_vehicle as $vehicles) {
+							echo "<p><a href='" . base_url() . "admin/fleet_config/vehicle/" . $vehicles->vehicle_id . "'>" . $vehicles->name . "</a></p>";
 						}
 						?>
-						
-						
-						
-						
-						
-						
 						<p>
-					
 					</div>
 				</div>
 			</div>
@@ -86,7 +79,10 @@
 						data-placeholder="Choose a Icon" name="icon_id">
 						<?php foreach ($icons as $icon) { ?>
 						<option value="<?php echo $icon->icon_id?>"
-							<?php echo $icon->icon_id == $vehicle->icon_id ? 'selected':''?>><?php echo $icon->name?></option>
+							<?php 
+							if (isset($vehicle)) {
+							echo $icon->icon_id == $vehicle->icon_id ? 'selected':'';
+							}?>><?php echo $icon->name?></option>
 						<?php } ?>
 					</select>
 				</div>
