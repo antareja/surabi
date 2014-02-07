@@ -22,7 +22,7 @@
 						<?php 
 							foreach ($all_base as $bases)
 							{
-								echo "<p>".$bases->name."</p>";
+								echo "<p><a href='".base_url()."admin/fleet_config/base/".$bases->base_id."'>".$bases->name."</a></p>";
 							}
 						?>
 						<p>

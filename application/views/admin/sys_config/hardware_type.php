@@ -23,7 +23,7 @@
 						<?php 
 							foreach ($all_hardware as $hardwares)
 							{
-								echo "<p>".$hardwares->name."</p>";
+								echo "<p><a href='".base_url()."admin/sys_config/hardware/".$hardwares->hardware_id."'>".$hardwares->name."</a></p>";
 							}
 						?>
 						<p>
@@ -55,7 +55,9 @@
 						placeholder="Description"><?php  echo  isset($hardware) ? $hardware->description : '';?></textarea>
 				</div>
 			</div>
-
+			<?php 
+			/*
+			?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"></label>
 				<div class="col-sm-9">
@@ -81,6 +83,9 @@
 						value="<?php echo isset($hardware) ? $hardware->max_message_length : '';?>">
 				</div>
 			</div>
+			<?php
+			*/
+			?>
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
 					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
