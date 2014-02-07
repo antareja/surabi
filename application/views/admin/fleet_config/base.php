@@ -12,18 +12,15 @@
 		<div class="col-sm-3">
 			<div class="widget-box">
 				<div class="widget-header">
-					<h4 class="smaller">
-						List Base 
-					</h4>
+					<h4 class="smaller">List Base</h4>
 				</div>
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
-						<?php 
-							foreach ($all_base as $bases)
-							{
-								echo "<p><a href='".base_url()."admin/fleet_config/base/".$bases->base_id."'>".$bases->name."</a></p>";
-							}
+						<?php
+						foreach ($bases as $base) {
+							echo "<p><a href='" . base_url() . "admin/fleet_config/base/" . $base->base_id . "'>" . $base->name . "</a></p>";
+						}
 						?>
 						<p>
 					</div>

@@ -25,7 +25,7 @@ class Fleet_config extends CI_Controller {
 	 */
 	public function base($base_id = NULL) {
 		$data['pageTitle'] = 'Base';
-		$data['all_base'] = $this->mfleet_config->getAllBase();
+		$data['bases'] = $this->mfleet_config->getAllBase();
 		$post = $this->input->post();
 		if ($post) {
 			$post_data['name'] = $post['name'];

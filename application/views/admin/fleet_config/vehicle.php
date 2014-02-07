@@ -9,7 +9,31 @@
 	<!-- /.page-header -->
 
 	<div class="row">
-
+		<div class="col-sm-3">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4 class="smaller">List Vehicle</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main">
+						<p class="muted">
+						<?php
+						foreach ($vehicles as $vehicle) {
+							echo "<p><a href='" . base_url() . "admin/fleet_config/vehicle/" . $vehicle->vehicle_id . "'>" . $vehicle->name . "</a></p>";
+						}
+						?>
+						
+						
+						
+						
+						
+						
+						<p>
+					
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 
 			<form role="form" class="form-horizontal"
@@ -45,7 +69,11 @@
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Vehicle" name="base_id">
 						<?php foreach ($bases as $base) { ?>
-						<option value="<?php echo $base->base_id?>" <?php echo $base->base_id == $vehicle->base_id ? 'selected':''?>><?php echo $base->name?></option>
+						<option value="<?php echo $base->base_id?>"
+							<?php 
+								if (isset($vehicle)) {
+								echo $base->base_id == $vehicle->base_id ? 'selected' : '';
+							} ?>><?php echo $base->name?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -57,7 +85,8 @@
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Icon" name="icon_id">
 						<?php foreach ($icons as $icon) { ?>
-						<option value="<?php echo $icon->icon_id?>" <?php echo $icon->icon_id == $vehicle->icon_id ? 'selected':''?>><?php echo $icon->name?></option>
+						<option value="<?php echo $icon->icon_id?>"
+							<?php echo $icon->icon_id == $vehicle->icon_id ? 'selected':''?>><?php echo $icon->name?></option>
 						<?php } ?>
 					</select>
 				</div>
