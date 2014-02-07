@@ -34,6 +34,16 @@ class MFleet_config extends CI_Model {
 		return $query->result();
 	}
 	
+	function getAllIcon(){
+		$query = $this->db->get("icon");
+		return $query->result();
+	}
+	
+	function getAllHardware(){
+		$query = $this->db->get("hardware_type");
+		return $query->result();
+	}
+	
 	function getAllVehicles(){
 		$query = $this->db->get("vehicles");
 		return $query->result();

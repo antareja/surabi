@@ -57,20 +57,22 @@ class Fleet_config extends CI_Controller {
 	 */
 	public function vehicle($vehicle_id = NULL) {
 		$data['pageTitle'] = 'Vehicle';
-		$data['all_hardware'] = $this->mfleet_config->getAllVehicles();
+		$data['hardwares'] = $this->mfleet_config->getAllHardware();
+		$data['bases'] = $this->mfleet_config->getAllBase();
+		$data['icons'] = $this->mfleet_config->getAllIcon();
+		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
 		$post = $this->input->post();
 		if ($post) {
 			// print_r($this->upload->data());
 			print_r($post);
 			// Upload file image
 			$post_data['name'] = $post['name'];
-			$post_data['description'] = $post['description'];
-			$post_data['message_enabled'] = $post['message_enabled'];
-			$post_data['garmin_support'] = $post['garmin_support'];
-			$post_data['max_message_length'] = $post['max_message_length'];
+			$post_data['base_id'] = $post['base_id'];
+			$post_data['icon_id'] = $post['icon_id'];
+			// $post_data['status_alert_profile'] = $post['status_alert_profile'];
 			// for edit data
-			if (isset($post['hardware_id'])) {
-				$this->mfleet_config->updateVehicle($post_data, $post['hardware_id']);
+			if (isset($post['vehicle_id'])) {
+				$this->mfleet_config->updateVehicle($post_data, $post['vehicle_id']);
 				redirect('admin/fleet_config/vehicle/' . $vehicle_id);
 			} else {
 				// for add $_POST data
@@ -79,11 +81,12 @@ class Fleet_config extends CI_Controller {
 			}
 			// for view or edit data
 		} elseif ($vehicle_id) {
-			$data['hardware'] = $this->mfleet_config->getVehicle($vehicle_id);
-			if(isset($data['hardware']->hardware_id)){
+			$data['vehicle'] = $this->mfleet_config->getVehicle($vehicle_id);
+			// check if id exists
+			if(isset($data['vehicle']->vehicle_id)){
 				$this->load->template("admin/fleet_config/vehicle", $data);
 			} else {
-				unset($data['hardware']);
+				unset($data['vehicle']);
 				$this->load->template("admin/fleet_config/vehicle", $data);
 			}
 			// for add data only

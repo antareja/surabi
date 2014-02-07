@@ -8,15 +8,12 @@
 						<button class="btn btn-success">
 							<i class="icon-signal"></i>
 						</button>
-
 						<button class="btn btn-info">
 							<i class="icon-pencil"></i>
 						</button>
-
 						<button class="btn btn-warning">
 							<i class="icon-group"></i>
 						</button>
-
 						<button class="btn btn-danger">
 							<i class="icon-cogs"></i>
 						</button>
@@ -35,12 +32,9 @@
 							class="menu-text"> Dashboard </span>
 					</a></li>
 
-					<li><a href="typography.html"> <i class="icon-text-width"></i> <span
-							class="menu-text"> Typography </span>
-					</a></li>
 
-					<li><a href="#" class="dropdown-toggle"> <i class="icon-desktop"></i>
-							<span class="menu-text"> UI Elements </span> <b
+					<li class="active open"><a href="#" class="dropdown-toggle"> <i class="icon-truck"></i>
+							<span class="menu-text"> Vehicles </span> <b
 							class="arrow icon-angle-down"></b>
 					</a>
 
@@ -48,41 +42,31 @@
 							<li><a href="elements.html"> <i class="icon-double-angle-right"></i>
 									Elements
 							</a></li>
-
 							<li><a href="buttons.html"> <i class="icon-double-angle-right"></i>
 									Buttons &amp; Icons
 							</a></li>
-
 							<li><a href="treeview.html"> <i class="icon-double-angle-right"></i>
 									Treeview
 							</a></li>
-
 							<li><a href="jquery-ui.html"> <i class="icon-double-angle-right"></i>
 									jQuery UI
 							</a></li>
-
 							<li><a href="nestable-list.html"> <i
 									class="icon-double-angle-right"></i> Nestable Lists
 							</a></li>
-
 							<li><a href="#" class="dropdown-toggle"> <i
 									class="icon-double-angle-right"></i> Three Level Menu <b
 									class="arrow icon-angle-down"></b>
 							</a>
-
 								<ul class="submenu">
 									<li><a href="#"> <i class="icon-leaf"></i> Item #1
 									</a></li>
-
 									<li><a href="#" class="dropdown-toggle"> <i class="icon-pencil"></i>
-
 											4th level <b class="arrow icon-angle-down"></b>
 									</a>
-
 										<ul class="submenu">
 											<li><a href="#"> <i class="icon-plus"></i> Add Product
 											</a></li>
-
 											<li><a href="#"> <i class="icon-eye-open"></i> View Products
 											</a></li>
 										</ul></li>
@@ -175,7 +159,7 @@
 							</a></li>
 						</ul></li>
 
-					<li class="active open"><a href="#" class="dropdown-toggle"> <i
+					<li><a href="#" class="dropdown-toggle"> <i
 							class="icon-file-alt"></i> <span class="menu-text"> Other Pages <span
 								class="badge badge-primary ">5</span>
 						</span> <b class="arrow icon-angle-down"></b>
