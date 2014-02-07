@@ -36,7 +36,6 @@ class Fleet_config extends CI_Controller {
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['fax'] = $post['fax'];
 			$post_data['email'] = $post['email'];
-			$this->mfleet_config->insertBase($post);
 			if ($post['id_base']) {
 				$this->mfleet_config->editBase($base_id, $post_data);
 				redirect('admin/fleet_config/'.$base_id);
