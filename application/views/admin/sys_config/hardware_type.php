@@ -9,7 +9,28 @@
 	<!-- /.page-header -->
 
 	<div class="row">
-
+		<div class="col-sm-3">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4 class="smaller">
+						List Icon 
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main">
+						<p class="muted">
+						
+						<?php 
+							foreach ($all_hardware as $hardwares)
+							{
+								echo "<p>".$hardwares->name."</p>";
+							}
+						?>
+						<p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 
 			<form role="form" class="form-horizontal"
