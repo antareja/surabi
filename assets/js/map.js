@@ -1,5 +1,5 @@
     //<![CDATA[
-	var filter = [];
+	var filter = ['00'];
 	var cek_marker = [];
 	var marker_array = [];
 	var z=1;
