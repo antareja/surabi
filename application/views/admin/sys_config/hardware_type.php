@@ -9,7 +9,28 @@
 	<!-- /.page-header -->
 
 	<div class="row">
-
+		<div class="col-sm-3">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4 class="smaller">
+						List Icon 
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main">
+						<p class="muted">
+						
+						<?php 
+							foreach ($all_hardware as $hardwares)
+							{
+								echo "<p><a href='".base_url()."admin/sys_config/hardware/".$hardwares->hardware_id."'>".$hardwares->name."</a></p>";
+							}
+						?>
+						<p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 
 			<form role="form" class="form-horizontal"
@@ -34,7 +55,9 @@
 						placeholder="Description"><?php  echo  isset($hardware) ? $hardware->description : '';?></textarea>
 				</div>
 			</div>
-
+			<?php 
+			/*
+			?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"></label>
 				<div class="col-sm-9">
@@ -60,6 +83,9 @@
 						value="<?php echo isset($hardware) ? $hardware->max_message_length : '';?>">
 				</div>
 			</div>
+			<?php
+			*/
+			?>
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
 					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
