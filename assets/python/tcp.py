@@ -21,7 +21,7 @@ while True:
         base_ip=line[32:47]
         packet_number=line[47:50]
         base_modem_channel=line[50:51]
-        url="http://localhost:8000/?source="+source+"&system="+system+"&mobile="+mobile+"&base_ip="+base_ip+"&packet_number="+packet_number+"&base_modem_channel="+base_modem_channel;
+        url="http://192.168.12.250:8000/?source="+source+"&system="+system+"&mobile="+mobile+"&base_ip="+base_ip+"&packet_number="+packet_number+"&base_modem_channel="+base_modem_channel;
         if packet_number == '072' :
             input=line[55]
             output=line[56]

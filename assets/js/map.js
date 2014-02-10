@@ -23,7 +23,7 @@
       var infoWindow = new google.maps.InfoWindow;
 	
 	// create a new websocket
-        var socket = io.connect('http://localhost:8000');
+        var socket = io.connect('http://192.168.12.250:8000');
         // on message received we print all the data inside the #container div
         socket.on('notification', function (data) {
 			var data_map=data.data;
