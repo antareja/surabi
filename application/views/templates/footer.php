@@ -28,7 +28,7 @@
 
 
     <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
-	<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+	<script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 
 	<script src="<?php echo base_url() ?>assets/js/typeahead-bs2.min.js"></script>

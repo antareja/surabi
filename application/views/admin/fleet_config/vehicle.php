@@ -43,6 +43,15 @@
 						value="<?php echo isset($vehicle) ? $vehicle->name : '';?>">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-1"> GPS ID</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="gps_id" name="gps_id"
+						placeholder="GPS ID"
+						value="<?php echo isset($vehicle) ? $vehicle->gps_id : '';?>">
+				</div>
+			</div>
 			<!-- <div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Hardware Type </label>

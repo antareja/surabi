@@ -66,13 +66,14 @@ class Fleet_config extends CI_Controller {
 			print_r($post);
 			// Upload file image
 			$post_data['name'] = $post['name'];
+			$post_data['gps_id'] = $post['gps_id'];
 			$post_data['base_id'] = $post['base_id'];
 			$post_data['icon_id'] = $post['icon_id'];
 			// $post_data['status_alert_profile'] = $post['status_alert_profile'];
 			// for edit data
 			if (isset($post['vehicle_id'])) {
 				$this->mfleet_config->updateVehicle($post_data, $post['vehicle_id']);
-				redirect('admin/fleet_config/vehicle/' . $vehicle_id);
+				redirect('admin/fleet_config/vehicle/' . $post['vehicle_id']);
 			} else {
 				// for add $_POST data
 				$id = $this->mfleet_config->insertVehicle($post_data);
