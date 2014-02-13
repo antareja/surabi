@@ -14,9 +14,21 @@
       icon_mobil00000000000000000000000521: {
     	icon: 'http://surabi.dev/assets/uploads/icon_5.png'
       },
-      icon_mobi00000000000000000000000321: {
+      icon_mobil00000000000000000000000321: {
       	icon: 'http://surabi.dev/assets/uploads/icon_6.png'
       }
+    };
+    
+    var nama_mobil = {
+    	nama_mobil00000000000000000000000320: {
+    	   nama: 'Houling'
+    	},
+    	nama_mobil00000000000000000000000521: {
+    	   nama: 'Dump Truck'
+    	},
+    	nama_mobil00000000000000000000000321: {
+    	   nama: 'Car'
+    	}
     };
     google.maps.Polygon.prototype.Contains = function (point) {
         // ray casting alogrithm http://rosettacode.org/wiki/Ray-casting_algorithm
@@ -101,7 +113,7 @@
 			var lat = data_map["lat"];
 			var lng = data_map["lng"];
 			
-			var marker_id='marker_' + name;
+			var marker_id='marker_' + data_map["mobile"];
 			var ada=jQuery.inArray( name, filter );
 			if(ada>=0)
 			{
@@ -110,9 +122,9 @@
 			{
 				if (status == google.maps.GeocoderStatus.OK) 
 				{
-					if (results[1]) 
+					if (results[0]) 
 					{
-						html2="<b> Location : Near "+results[0].formatted_address+"</b><br>";
+						html2="<b> Location : Near "+results[0]["address_components"][0].short_name+"</b><br>";
 					} 
 					else 
 					{
@@ -123,14 +135,14 @@
 				{
 					html2="<b> Location : Unknow</b> <br/>";
 				}
-			var html = "<div id='infowindow' style='height:100px;width:500px'><b> Name : Mobil1</b> <br/>";
+			var html = "<div id='infowindow' style='height:100px;width:500px'><b> Name : "+nama_mobil["nama_mobil"+data_map["mobile"]].nama+"</b> <br/>";
 			if(data_map["packet_number"]=="100")
 			{
-				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
+				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["tanggal"] + " " + data_map["jam"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
 			}
 			if(data_map["packet_number"]=="104")
 			{
-				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + " &nbsp;km/h</b> <br/>";
+				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["tanggal"] + " " + data_map["jam"] + "</b> <br/><b> Speed : " + data_map["velocity"] + " &nbsp;km/h</b> <br/>";
 			}
 			html+=html2+"</div>";
 			var icon = customIcons["icon_mobil"+data_map["mobile"]] || {};
