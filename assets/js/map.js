@@ -7,7 +7,6 @@
 	var marker="";
 	var boundaryPolygon;
 	var geocoder = new google.maps.Geocoder();
-	alert(customIcons[icon_mobil00000000000000000000000320]);
     var customIcons = {
       icon_mobil00000000000000000000000320: {
         icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
@@ -19,7 +18,6 @@
           icon: 'http://labs.google.com/ridefinder/images/mm_20_green.png'
       }
     };
-    
     google.maps.Polygon.prototype.Contains = function (point) {
         // ray casting alogrithm http://rosettacode.org/wiki/Ray-casting_algorithm
         var crossings = 0,
