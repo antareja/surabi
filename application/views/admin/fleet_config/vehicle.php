@@ -47,9 +47,16 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> GPS ID</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="gps_id" name="gps_id"
-						placeholder="GPS ID"
-						value="<?php echo isset($vehicle) ? $vehicle->gps_id : '';?>">
+					<select class="form-control" name="mobile_address" id="form-field-select-2"
+						data-placeholder="Choose a Vehicle">
+						<?php foreach ($all_mobile as $mobile) { ?>
+						<option value="<?php echo $mobile->mobile_address?>" 
+							<?php 
+							if (isset($vehicle)) {
+							echo $mobile->mobile_address == $vehicle->gps_mobile_address ? 'selected':'';
+							}?>><?php echo $mobile->mobile_address?></option>
+						<?php } ?>
+					</select>
 				</div>
 			</div>
 			<!-- <div class="form-group">

@@ -49,6 +49,13 @@ class MFleet_config extends CI_Model {
 		return $query->result();
 	}
 	
+	function getAllMobileAddress(){
+		$this->db->group_by('mobile_address');
+		$this->db->select("mobile_address");
+		$query = $this->db->get("packet");
+		return $query->result();
+	}
+	
 	function getVehicle($vehicle_id){
 		$query = $this->db->get_where("vehicles",array("vehicle_id"=>$vehicle_id));
 		return $query->row();

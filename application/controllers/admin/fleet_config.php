@@ -60,15 +60,16 @@ class Fleet_config extends CI_Controller {
 		$data['bases'] = $this->mfleet_config->getAllBase();
 		$data['icons'] = $this->mfleet_config->getAllIcon();
 		$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
+		$data['all_mobile'] = $this->mfleet_config->getAllMobileAddress();
 		$post = $this->input->post();
 		if ($post) {
 			// print_r($this->upload->data());
 			print_r($post);
 			// Upload file image
 			$post_data['name'] = $post['name'];
-			$post_data['gps_id'] = $post['gps_id'];
 			$post_data['base_id'] = $post['base_id'];
 			$post_data['icon_id'] = $post['icon_id'];
+			$post_data['gps_mobile_address'] = $post['mobile_address'];
 			// $post_data['status_alert_profile'] = $post['status_alert_profile'];
 			// for edit data
 			if (isset($post['vehicle_id'])) {

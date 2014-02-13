@@ -27,31 +27,33 @@ class Packet extends CI_Controller {
 	public function resv() {
 		$post = $this->input->post();
 		if ($post) {
+			print_r($post);
 			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
-			$data['full_packet'] = $post['full_packet'];
+			//$data['full_packet'] = $post['full_packet'];
 			$data['source_type'] = $post['source'];
 			$data['system_id'] = $post['system'];
 			$data['mobile_address'] = $post['mobile'];
 			$data['base_ip_address'] = $post['base_ip'];
+			$data['base_modem_channel_address'] = $post['base_modem_channel'];
 			if($post['packet_number'] == '104' || $post['packet_number'] == '100') {
 				$data['packet_number'] = $post['packet_number'];
-				$data['base_modem_channel_address'] = $post['base_modem_channel'];
-				$data['status'] = $post['status_key'];
-				$data['offset'] = $post['minutes_offset'];
-				$data['numeric'] = $post['numeric'];
-				$data['jam'] = $post['jam'];
-				$data['lat'] = $post['lat'];
+				$data['status_key'] = $post['status'];
+				$data['minutes_offset'] = $post['offset'];
+				$data['numerics'] = $post['numeric'];
+				$data['time'] = $post['jam'];
+				$data['latitude'] = $post['lat'];
+				$data['longitude'] = $post['lng'];
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
-				$data['tanggal'] = $post['date'];
-				$data['satelite'] = $post['tanggal'];
+				$data['date'] = $post['tanggal'];
+				$data['satellite'] = $post['satelite'];
 				$data['hdop'] = $post['hdop'];
 			} elseif ($post['packet_number'] == '072') {
 				$data['input'] = $post['input'];
 				$data['state'] = $post['state'];
 			}
 			if ($this->mpacket->insertPacket($data)) {
-				print_r($data);
+				//print_r($data);
 				echo 'success';
 			}
 		}
