@@ -9,13 +9,13 @@
 	var geocoder = new google.maps.Geocoder();
     var customIcons = {
       icon_mobil00000000000000000000000320: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
+        icon: 'http://surabi.dev/assets/uploads/icon_3.png'
       },
       icon_mobil00000000000000000000000521: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'
+    	icon: 'http://surabi.dev/assets/uploads/icon_5.png'
       },
       icon_mobi00000000000000000000000321: {
-          icon: 'http://labs.google.com/ridefinder/images/mm_20_green.png'
+      	icon: 'http://surabi.dev/assets/uploads/icon_6.png'
       }
     };
     google.maps.Polygon.prototype.Contains = function (point) {
