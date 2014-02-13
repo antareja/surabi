@@ -7,12 +7,16 @@
 	var marker="";
 	var boundaryPolygon;
 	var geocoder = new google.maps.Geocoder();
+	alert(customIcons[icon_mobil00000000000000000000000320]);
     var customIcons = {
-      00: {
+      icon_mobil00000000000000000000000320: {
         icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
       },
-      01: {
+      icon_mobil00000000000000000000000521: {
         icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'
+      },
+      icon_mobi00000000000000000000000321: {
+          icon: 'http://labs.google.com/ridefinder/images/mm_20_green.png'
       }
     };
     
@@ -110,7 +114,7 @@
 				{
 					if (results[1]) 
 					{
-						html2="<b> Location : Near "+results[1].formatted_address+"</b><br>";
+						html2="<b> Location : Near "+results[0].formatted_address+"</b><br>";
 					} 
 					else 
 					{
@@ -121,17 +125,17 @@
 				{
 					html2="<b> Location : Unknow</b> <br/>";
 				}
-			var html = "<div id='infowindow' style='height:100px;width:500px'><b> Name : " + name + "</b> <br/>";
+			var html = "<div id='infowindow' style='height:100px;width:500px'><b> Name : Mobil1</b> <br/>";
 			if(data_map["packet_number"]=="100")
 			{
-				html2+="<b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
+				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
 			}
 			if(data_map["packet_number"]=="104")
 			{
-				html2+="<b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + " &nbsp;km/h</b> <br/>";
+				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["jam"] + "</b> <br/><b> Date : " + data_map["tanggal"] + "</b> <br/><b> Speed : " + data_map["velocity"] + " &nbsp;km/h</b> <br/>";
 			}
 			html+=html2+"</div>";
-			var icon = customIcons[name] || {};
+			var icon = customIcons["icon_mobil"+data_map["mobile"]] || {};
 			if(jQuery.inArray( marker_id, cek_marker )<0)
 			{
 				marker = new google.maps.Marker({

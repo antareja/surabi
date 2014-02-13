@@ -24,5 +24,4 @@
 Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
 <br>
 Long :<span id="txt_long"></span><br>
-<script>
-</script>
+<script src="<?php echo base_url() ?>assets/js/map.js"></script>

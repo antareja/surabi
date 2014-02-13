@@ -27,8 +27,6 @@
 	</script>
 
 
-    <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
-	<script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 
 	<script src="<?php echo base_url() ?>assets/js/typeahead-bs2.min.js"></script>
@@ -41,9 +39,7 @@
 	<script src="<?php echo base_url()?>assets/js/ace-extra.min.js"></script>
     <!-- page specific plugin scripts -->
     <script src="<?php echo base_url() ?>assets/js/surabi.js"></script>
-    <!-- Maps Google -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script src="<?php echo base_url() ?>assets/js/map.js"></script>	
+    <!-- Maps Google -->	
 
 
 </body>
