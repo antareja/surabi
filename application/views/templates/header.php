@@ -88,7 +88,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 <!-- 					I/O Grid</a></li> -->
 <!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
 <!-- 					Job Module</a></li> -->
-					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
+					<li class="green dropdown-hover"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map  <i class="icon-caret-down"></i>
 					</a>
 					<ul

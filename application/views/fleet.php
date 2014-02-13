@@ -4,7 +4,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="table-header">Results for "Latest Registered Domains"</div>
+			<div class="table-header">Results for "Latest Vehicle Fleet Status"</div>
 
 			<div class="table-responsive">
 				<table id="sample-table-2"
@@ -31,10 +31,10 @@
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">app.com</a></td>
-							<td>$45</td>
-							<td class="hidden-480">3,330</td>
-							<td>Feb 12</td>
+							<td><a href="#">Volvo-120</a></td>
+							<td>45</td>
+							<td class="hidden-480">Near Bandung</td>
+							<td>Feb 12 10:45:23</td>
 
 							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span>
 							</td>
@@ -86,12 +86,12 @@
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">base.com</a></td>
-							<td>$35</td>
-							<td class="hidden-480">2,595</td>
-							<td>Feb 18</td>
+							<td><a href="#">Mitsubishi-355</a></td>
+							<td>55</td>
+							<td class="hidden-480">Near Cimahi</td>
+							<td>Feb 18 11:55</td>
 
-							<td class="hidden-480"><span class="label label-sm label-success">Registered</span>
+							<td class="hidden-480"><span class="label label-sm label-success">Free</span>
 							</td>
 
 							<td>
@@ -141,13 +141,13 @@
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">once.com</a></td>
-							<td>$20</td>
-							<td class="hidden-480">1,400</td>
-							<td>Apr 04</td>
+							<td><a href="#">Ford-430</a></td>
+							<td>60</td>
+							<td class="hidden-480">Near Garut</td>
+							<td>Apr 04 07:30</td>
 
 							<td class="hidden-480"><span
-								class="label label-sm label-info arrowed arrowed-righ">Sold</span>
+								class="label label-sm label-info arrowed arrowed-righ">En Route</span>
 							</td>
 
 							<td>
