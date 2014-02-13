@@ -78,20 +78,27 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i class="icon-cog"></i> Fleet Configuration</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i class="icon-home"></i>Base</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i class="icon-truck"></i> Vehicle</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile</a></li>
-							<li><a href="#"> <i class="icon-pencil"></i> Items</a></li>
 							<li></li>
 						</ul></li>
 					<li class="light-green dropdown-hover"><a href="<?php echo site_url()?>fleet"> <i class="icon-tasks"></i> 
 					Fleet State</a></li>
-					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i> 
-					I/O Grid</a></li>
-					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i> 
-					Job Module</a></li>
-					<li class="green dropdown-hover"><a href="#"> <i class="icon-globe"></i> 
-					Map </a></li>
-					<li class="blue"><a href="#"> <i class="icon-comments"></i>
-					Messaging </a></li>
+<!-- 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i>  -->
+<!-- 					I/O Grid</a></li> -->
+<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
+<!-- 					Job Module</a></li> -->
+					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map  <i class="icon-caret-down"></i>
+					</a>
+					<ul
+						class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<li><a href="#"> <i class="icon-cog"></i> Create Region
+						</a></li>
+						<li><a href="#"> <i class="icon-user"></i> Compressed
+						</a></li>
+						<li></li>
+					</ul></li>
+<!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
+<!-- 					Messaging </a></li> -->
 					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
 					</a></li>
@@ -108,9 +115,6 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							</a></li>
 							<li></li>
 						</ul></li>
-					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle"
-						href="#"> <i class="icon-tasks"></i> Status Grid
-					</a></li>
 				</ul>
 				<!-- /.ace-nav -->
 			</div>
