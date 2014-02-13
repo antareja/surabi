@@ -13,7 +13,9 @@
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
 <link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet">
-
+<script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
 <!--[if IE 7]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
 <![endif]-->
@@ -91,7 +93,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 					<ul
 						class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-						<li><a href="#"> <i class="icon-cog"></i> Create Region
+						<li><a href="<?php echo site_url()?>map/region"> <i class="icon-cog"></i> Create Region
 						</a></li>
 						<li><a href="#"> <i class="icon-user"></i> Compressed
 						</a></li>
