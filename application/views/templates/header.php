@@ -82,7 +82,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="#"> <i class="icon-pencil"></i> Items</a></li>
 							<li></li>
 						</ul></li>
-					<li class="light-green dropdown-hover"><a href="#"> <i class="icon-tasks"></i> 
+					<li class="light-green dropdown-hover"><a href="<?php echo site_url()?>fleet"> <i class="icon-tasks"></i> 
 					Fleet State</a></li>
 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i> 
 					I/O Grid</a></li>
