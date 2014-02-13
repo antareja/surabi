@@ -63,6 +63,7 @@
     var map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(-6.915499,107.594301),
         zoom: 13,
+        scaleControl:true,
         mapTypeId: 'roadmap'
       });
     
