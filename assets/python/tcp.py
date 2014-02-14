@@ -52,7 +52,7 @@ while True:
             if len(tanggal)<6 :
                 tanggal='0'+tanggal
             jam=jam[0:2]+":"+jam[2:4]+":"+jam[4:6]
-            tanggal=tanggal[0:2]+"-"+tanggal[2:4]+tanggal[4:6]
+            tanggal=tanggal[0:2]+"-"+tanggal[2:4]+"-"+tanggal[4:6]
             url=url+"&status="+status+"&offset="+offset+"&numeric="+numeric+"&jam="+jam+"&lat="+lat+"&lng="+lng+"&velocity="+velocity+"&bearing="+bearing+"&tanggal="+tanggal+"&satelite="+satelite+"&hdop="+hdop
             urllib2.urlopen(url)
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)

@@ -8,25 +8,25 @@
 	var boundaryPolygon;
 	var geocoder = new google.maps.Geocoder();
     var customIcons = {
-      icon_mobil00000000000000000000000320: {
+      icon_mobil_00000000000000000000000320: {
         icon: 'http://surabi.dev/assets/uploads/icon_3.png'
       },
-      icon_mobil00000000000000000000000521: {
+      icon_mobil_00000000000000000000000521: {
     	icon: 'http://surabi.dev/assets/uploads/icon_5.png'
       },
-      icon_mobil00000000000000000000000321: {
+      icon_mobil_00000000000000000000000321: {
       	icon: 'http://surabi.dev/assets/uploads/icon_6.png'
       }
     };
     
     var nama_mobil = {
-    	nama_mobil00000000000000000000000320: {
+    	nama_mobil_00000000000000000000000320: {
     	   nama: 'Houling'
     	},
-    	nama_mobil00000000000000000000000521: {
+    	nama_mobil_00000000000000000000000521: {
     	   nama: 'Dump Truck'
     	},
-    	nama_mobil00000000000000000000000321: {
+    	nama_mobil_00000000000000000000000321: {
     	   nama: 'Car'
     	}
     };
@@ -135,7 +135,7 @@
 				{
 					html2="<b> Location : Unknow</b> <br/>";
 				}
-			var html = "<div id='infowindow' style='height:100px;width:300px'><b> Name : "+nama_mobil["nama_mobil"+data_map["mobile"]].nama+"</b> <br/>";
+			var html = "<div id='infowindow' style='height:100px;width:300px'><b> Name : "+nama_mobil["nama_mobil_"+data_map["mobile"]].nama+"</b> <br/>";
 			if(data_map["packet_number"]=="100")
 			{
 				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["tanggal"] + " " + data_map["jam"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
@@ -145,7 +145,7 @@
 				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["tanggal"] + " " + data_map["jam"] + "</b> <br/><b> Speed : " + data_map["velocity"] + " &nbsp;km/h</b> <br/>";
 			}
 			html+=html2+"</div>";
-			var icon = customIcons["icon_mobil"+data_map["mobile"]] || {};
+			var icon = customIcons["icon_mobil_"+data_map["mobile"]] || {};
 			if(jQuery.inArray( marker_id, cek_marker )<0)
 			{
 				marker = new google.maps.Marker({

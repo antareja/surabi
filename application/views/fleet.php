@@ -1,3 +1,4 @@
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
 <div class="page-content">
 	<div class="page-header">
 		<h1>Fleet State Module</h1>
@@ -26,15 +27,15 @@
 					</thead>
 
 					<tbody>
-						<tr>
+						<tr id="tr_00000000000000000000000320">
 							<td class="center"><label> <input type="checkbox" class="ace" />
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">Volvo-120</a></td>
-							<td>45</td>
-							<td class="hidden-480">Near Bandung</td>
-							<td>Feb 12 10:45:23</td>
+							<td><a href="#">Houling</a></td>
+							<td id="speed_00000000000000000000000320">45</td>
+							<td id="location_00000000000000000000000320" class="hidden-480">Near Bandung</td>
+							<td id="position_00000000000000000000000320">Feb 12 10:45:23</td>
 
 							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span>
 							</td>
@@ -81,15 +82,15 @@
 							</td>
 						</tr>
 
-						<tr>
+						<tr id="tr_00000000000000000000000521">
 							<td class="center"><label> <input type="checkbox" class="ace" />
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">Mitsubishi-355</a></td>
-							<td>55</td>
-							<td class="hidden-480">Near Cimahi</td>
-							<td>Feb 18 11:55</td>
+							<td><a href="#">Dump Truck</a></td>
+							<td id="speed_00000000000000000000000521">55</td>
+							<td id="location_00000000000000000000000521"class="hidden-480">Near Cimahi</td>
+							<td id="position_00000000000000000000000521">Feb 18 11:55</td>
 
 							<td class="hidden-480"><span class="label label-sm label-success">Free</span>
 							</td>
@@ -136,15 +137,15 @@
 							</td>
 						</tr>
 
-						<tr>
+						<tr id="tr_00000000000000000000000321">
 							<td class="center"><label> <input type="checkbox" class="ace" />
 									<span class="lbl"></span>
 							</label></td>
 
-							<td><a href="#">Ford-430</a></td>
-							<td>60</td>
-							<td class="hidden-480">Near Garut</td>
-							<td>Apr 04 07:30</td>
+							<td><a href="#">Car</a></td>
+							<td id="speed_00000000000000000000000321">60</td>
+							<td id="location_00000000000000000000000321"class="hidden-480">Near Garut</td>
+							<td id="position_00000000000000000000000321">Apr 04 07:30</td>
 
 							<td class="hidden-480"><span
 								class="label label-sm label-info arrowed arrowed-righ">En Route</span>
@@ -200,3 +201,4 @@
 	<!-- /.row -->
 </div>
 <!-- /.page-content -->
+<script src="<?php echo base_url() ?>assets/js/fleet.js"></script>

@@ -73,7 +73,7 @@
 	    });
 	    markers.push(marker);
 	    marker.setTitle("#" + path.length);
-		$("#div_input").html($("#div_input").html()+"<input type='text' id='txt_posisi_"+path.length+"' name='txt_posisi[]' value='"+latlng+"'>");
+		$("#div_input").html($("#div_input").html()+"<input type='hidden' id='txt_posisi_"+path.length+"' name='txt_posisi[]' value='"+latlng+"'>");
 
 	    google.maps.event.addListener(marker, 'click', function() {
 	      marker.setMap(null);

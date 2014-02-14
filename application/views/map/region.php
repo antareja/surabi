@@ -116,7 +116,7 @@
 				<?php echo isset($hardware) ? '<input type="hidden" name="hardware_id" value="'.$hardware->hardware_id.'" >' : '';?>
 			</form>
 		</div>
-		<textarea id="tmp_position"><?php echo isset($region) ? $region->latlng : '';?></textarea>
+		<textarea id="tmp_position" style="display:none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
