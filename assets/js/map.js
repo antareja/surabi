@@ -135,7 +135,7 @@
 				{
 					html2="<b> Location : Unknow</b> <br/>";
 				}
-			var html = "<div id='infowindow' style='height:100px;width:500px'><b> Name : "+nama_mobil["nama_mobil"+data_map["mobile"]].nama+"</b> <br/>";
+			var html = "<div id='infowindow' style='height:100px;width:300px'><b> Name : "+nama_mobil["nama_mobil"+data_map["mobile"]].nama+"</b> <br/>";
 			if(data_map["packet_number"]=="100")
 			{
 				html2+="<b> Position : " + point + "</b> <br/><b> Time : " + data_map["tanggal"] + " " + data_map["jam"] + "</b> <br/><b> Speed : " + data_map["velocity"] + "km/h</b> <br/>";
