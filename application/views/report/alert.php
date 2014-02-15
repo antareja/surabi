@@ -7,7 +7,7 @@
 -->
 </style>
 <div id="header" align="center">
-<h1>Activity Report</h1>
+<h1>Alert Report</h1>
 <?php
 echo date("d/m/Y");
 $data_report=array
