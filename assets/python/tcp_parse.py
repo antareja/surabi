@@ -36,7 +36,7 @@ while True:
             values = dict(value.items() + value2.items())
             parse_data = urllib.urlencode(values)
             req = urllib2.Request(url_parse, parse_data)
-            urllib2.urlopen(req)
+            # urllib2.urlopen(req)
             urllib2.urlopen(url)
         # gps status with position    
         elif packet_number == '104' :
@@ -57,7 +57,7 @@ while True:
             values = dict(value.items() + value2.items())
             parse_data = urllib.urlencode(values)
             req = urllib2.Request(url_parse, parse_data)
-            urllib2.urlopen(req)
+            # urllib2.urlopen(req)
             urllib2.urlopen(url)
         # gps status with position
         elif packet_number == '100' :
@@ -78,7 +78,7 @@ while True:
             values = dict(value.items() + value2.items())
             parse_data = urllib.urlencode(values)
             req = urllib2.Request(url_parse, parse_data)
-            urllib2.urlopen(req)
+            # urllib2.urlopen(req)
             # print(response.read())
             urllib2.urlopen(url)
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)
