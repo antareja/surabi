@@ -39,39 +39,21 @@
 					</a>
 
 						<ul class="submenu">
-							<?php ?>
-							<li><a href="elements.html"> <i class="icon-double-angle-right"></i>
-									Elements
-							</a></li>
-							<li><a href="buttons.html"> <i class="icon-double-angle-right"></i>
-									Buttons &amp; Icons
-							</a></li>
-							<li><a href="treeview.html"> <i class="icon-double-angle-right"></i>
-									Treeview
-							</a></li>
-							<li><a href="jquery-ui.html"> <i class="icon-double-angle-right"></i>
-									jQuery UI
-							</a></li>
-							<li><a href="nestable-list.html"> <i
-									class="icon-double-angle-right"></i> Nestable Lists
-							</a></li>
-							<li><a href="#" class="dropdown-toggle"> <i
-									class="icon-double-angle-right"></i> Three Level Menu <b
-									class="arrow icon-angle-down"></b>
-							</a>
-								<ul class="submenu">
-									<li><a href="#"> <i class="icon-leaf"></i> Item #1
-									</a></li>
-									<li><a href="#" class="dropdown-toggle"> <i class="icon-pencil"></i>
-											4th level <b class="arrow icon-angle-down"></b>
-									</a>
-										<ul class="submenu">
-											<li><a href="#"> <i class="icon-plus"></i> Add Product
-											</a></li>
-											<li><a href="#"> <i class="icon-eye-open"></i> View Products
-											</a></li>
-										</ul></li>
-								</ul></li>
+							<?php 
+							$this->load->model('mfleet');
+							$this->mfleet = new MFleet();
+							$vehicle = $this->mfleet->getVehicle();
+							foreach ($vehicle as $vec) {
+							?>
+								<li>
+								<div class="checkbox">
+									 <label>
+								     <input class="ace" type="checkbox" name="car" /> 
+									 <span class="lbl"><?php echo $vec->name;?></span>
+									 </label>
+								</div>
+								</li>
+							<?php } ?>
 						</ul></li>
 
 					<li><a href="#" class="dropdown-toggle"> <i class="icon-list"></i>
@@ -84,6 +66,9 @@
 									Simple &amp; Dynamic
 							</a></li>
 
+							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i>
+									Haidar
+							</a></li>
 							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i>
 									jqGrid plugin
 							</a></li>

@@ -21,6 +21,7 @@ class Fleet extends CI_Controller {
 
 	public function fleet() {
 		$data['pageTitle'] = "Fleet State Modul";
+		$data['vehicles'] = $this->mfleet->getVehicle(); 
 		$this->load->template('fleet',$data);
 	}
 }
