@@ -23,4 +23,11 @@ class MPacket extends CI_Model {
 		$query = $this->db->query($sql);
 		return $query;
 	}
+	
+	function getReplay($mobile_address) {
+		$this->db->order_by("create_at", "ASC");
+		$this->db->limit('10');
+		$query = $this->db->get_where('packet',array('mobile_address'=>$mobile_address));
+		return $query->result();
+	}
 }	

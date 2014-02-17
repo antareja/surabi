@@ -21,6 +21,8 @@ class Replay extends CI_Controller {
 	
 	public function replay() {
 		$data['pageTitle'] = "Replay Module";
+		$mobile_address = '00000000000000000000000521';
+		$data['replay'] = $this->mpacket->getReplay($mobile_address);
 		$this->load->template('replay',$data);
 	}
 	

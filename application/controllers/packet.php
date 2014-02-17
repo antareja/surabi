@@ -53,10 +53,10 @@ class Packet extends CI_Controller {
 				$data['input'] = $post['input'];
 				$data['state'] = $post['state'];
 			}
-			if ($this->mpacket->insertPacket($data)) {
-				//print_r($data);
-				echo 'success';
-			}
+// 			if ($this->mpacket->insertPacket($data)) {
+// 				//print_r($data);
+// 				echo 'success';
+// 			}
 		}
 	}
 
