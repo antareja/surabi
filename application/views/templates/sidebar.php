@@ -49,7 +49,7 @@
 								<div class="checkbox">
 									 <label>
 								     <input class="ace" type="checkbox" name="car" /> 
-									 <span class="lbl"><?php echo $vec->name;?></span>
+									 <span class="lbl" id="vehicle_<?php echo $vec->gps_mobile_address?>"><?php echo $vec->name;?></span>
 									 </label>
 								</div>
 								</li>
