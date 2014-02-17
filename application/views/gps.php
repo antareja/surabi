@@ -19,7 +19,6 @@
 </div>
 <!-- /.page-content -->
 
-<input type="checkbox" class="check" value="00" onclick="if(this.checked)add_filter(this.value);else remove_filter(this.value);"> 00  <br>
 <div id="map_canvas" style="width:100%; height:80%"></div>
 Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
 <br>

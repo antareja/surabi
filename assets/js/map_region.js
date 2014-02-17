@@ -1,14 +1,4 @@
   var posisi=$("#tmp_position").html();
-  if(posisi!-"")
-  {
-	  posisi=posisi.replace("(","");
-	  posisi=posisi.replace(")","");
-	  posisi=posisi.split(";");
-	  for(var x=0;x<posisi.length;x++)
-	  {
-		  addPoint2(new google.maps.LatLng(posisi[x]));
-	  }
-  }
   var poly, map;
   var markers = [];
   var path = new google.maps.MVCArray;
@@ -19,7 +9,18 @@
       zoom: 14,
       center: uluru,
     });
-
+//-------------------------------tampilkan marker jika edit----------------------------
+    if(posisi!="")
+    {
+  	  posisi=posisi.split(";");
+  	  for(var x=0;x<posisi.length;x++)
+  	  {
+  		  posisi[x]=posisi[x].replace("(","");
+  		  posisi[x]=posisi[x].replace(")","");
+  		  addPoint2(posisi[x]);
+  	  }
+    }
+//--------------------------------------------------------------------------------------    
     poly = new google.maps.Polygon({
       strokeWeight: 3,
       fillColor: '#5555FF'
@@ -60,7 +61,9 @@
   }
   
   function addPoint2(latlng) {
-	    path.insertAt(path.length, latlng);
+	  	latlng=latlng.split(",");
+	  	latlng=new google.maps.LatLng(latlng[0],latlng[1]);
+	  	path.insertAt(path.length, latlng);
 
 	    var marker = new google.maps.Marker({
 	      position: latlng,

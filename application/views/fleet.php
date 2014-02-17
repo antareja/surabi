@@ -1,3 +1,4 @@
+<script src="http://localhost:8000/socket.io/socket.io.js"></script>
 <div class="page-content">
 	<div class="page-header">
 		<h1>Fleet State Module</h1>
@@ -21,176 +22,24 @@
 							<th><i class="icon-time bigger-110 hidden-480"></i>Position At</th>
 							<th class="hidden-480">Status</th>
 
-							<th></th>
+							<th>Bearing</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<tr>
+						<?php  foreach ($vehicles as $vehicle) {?>
+						<tr id="tr_<?php echo $vehicle->gps_mobile_address?>">
 							<td class="center"><label> <input type="checkbox" class="ace" />
 									<span class="lbl"></span>
 							</label></td>
-
-							<td><a href="#">Volvo-120</a></td>
-							<td>45</td>
-							<td class="hidden-480">Near Bandung</td>
-							<td>Feb 12 10:45:23</td>
-
-							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span>
-							</td>
-
-							<td>
-								<div
-									class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-									<a class="blue" href="#"> <i class="icon-zoom-in bigger-130"></i>
-									</a> <a class="green" href="#"> <i
-										class="icon-pencil bigger-130"></i>
-									</a> <a class="red" href="#"> <i class="icon-trash bigger-130"></i>
-									</a>
-								</div>
-
-								<div class="visible-xs visible-sm hidden-md hidden-lg">
-									<div class="inline position-relative">
-										<button class="btn btn-minier btn-yellow dropdown-toggle"
-											data-toggle="dropdown">
-											<i class="icon-caret-down icon-only bigger-120"></i>
-										</button>
-
-										<ul
-											class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-											<li><a href="#" class="tooltip-info" data-rel="tooltip"
-												title="View"> <span class="blue"> <i
-														class="icon-zoom-in bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-success" data-rel="tooltip"
-												title="Edit"> <span class="green"> <i
-														class="icon-edit bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-error" data-rel="tooltip"
-												title="Delete"> <span class="red"> <i
-														class="icon-trash bigger-120"></i>
-												</span>
-											</a></li>
-										</ul>
-									</div>
-								</div>
-							</td>
+							<td><a href="#"><?php echo $vehicle->name?></a></td>
+							<td id="speed_<?php echo $vehicle->gps_mobile_address?>">45</td>
+							<td id="location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480">Near Bandung</td>
+							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Feb 12 10:45:23</td>
+							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span></td>
+							<td id="bearing_<?php echo $vehicle->gps_mobile_address?>">N (98)</td>
 						</tr>
-
-						<tr>
-							<td class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></td>
-
-							<td><a href="#">Mitsubishi-355</a></td>
-							<td>55</td>
-							<td class="hidden-480">Near Cimahi</td>
-							<td>Feb 18 11:55</td>
-
-							<td class="hidden-480"><span class="label label-sm label-success">Free</span>
-							</td>
-
-							<td>
-								<div
-									class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-									<a class="blue" href="#"> <i class="icon-zoom-in bigger-130"></i>
-									</a> <a class="green" href="#"> <i
-										class="icon-pencil bigger-130"></i>
-									</a> <a class="red" href="#"> <i class="icon-trash bigger-130"></i>
-									</a>
-								</div>
-
-								<div class="visible-xs visible-sm hidden-md hidden-lg">
-									<div class="inline position-relative">
-										<button class="btn btn-minier btn-yellow dropdown-toggle"
-											data-toggle="dropdown">
-											<i class="icon-caret-down icon-only bigger-120"></i>
-										</button>
-
-										<ul
-											class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-											<li><a href="#" class="tooltip-info" data-rel="tooltip"
-												title="View"> <span class="blue"> <i
-														class="icon-zoom-in bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-success" data-rel="tooltip"
-												title="Edit"> <span class="green"> <i
-														class="icon-edit bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-error" data-rel="tooltip"
-												title="Delete"> <span class="red"> <i
-														class="icon-trash bigger-120"></i>
-												</span>
-											</a></li>
-										</ul>
-									</div>
-								</div>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></td>
-
-							<td><a href="#">Ford-430</a></td>
-							<td>60</td>
-							<td class="hidden-480">Near Garut</td>
-							<td>Apr 04 07:30</td>
-
-							<td class="hidden-480"><span
-								class="label label-sm label-info arrowed arrowed-righ">En Route</span>
-							</td>
-
-							<td>
-								<div
-									class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-									<a class="blue" href="#"> <i class="icon-zoom-in bigger-130"></i>
-									</a> <a class="green" href="#"> <i
-										class="icon-pencil bigger-130"></i>
-									</a> <a class="red" href="#"> <i class="icon-trash bigger-130"></i>
-									</a>
-								</div>
-
-								<div class="visible-xs visible-sm hidden-md hidden-lg">
-									<div class="inline position-relative">
-										<button class="btn btn-minier btn-yellow dropdown-toggle"
-											data-toggle="dropdown">
-											<i class="icon-caret-down icon-only bigger-120"></i>
-										</button>
-
-										<ul
-											class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-											<li><a href="#" class="tooltip-info" data-rel="tooltip"
-												title="View"> <span class="blue"> <i
-														class="icon-zoom-in bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-success" data-rel="tooltip"
-												title="Edit"> <span class="green"> <i
-														class="icon-edit bigger-120"></i>
-												</span>
-											</a></li>
-
-											<li><a href="#" class="tooltip-error" data-rel="tooltip"
-												title="Delete"> <span class="red"> <i
-														class="icon-trash bigger-120"></i>
-												</span>
-											</a></li>
-										</ul>
-									</div>
-								</div>
-							</td>
-						</tr>
+						<?php }?>
 					</tbody>
 				</table>
 			</div>
@@ -200,3 +49,4 @@
 	<!-- /.row -->
 </div>
 <!-- /.page-content -->
+<script src="<?php echo base_url() ?>assets/js/fleet.js"></script>

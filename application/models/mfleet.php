@@ -14,5 +14,8 @@ class Mfleet extends CI_Model {
 				INNER JOIN {PRE}vehicles v on p.";		
 	}
 	
-	
+	function getVehicle(){
+		$query = $this->db->get('vehicles');
+		return $query->result();
+	}
 }
