@@ -100,6 +100,12 @@
 				<br>
 				<br>
 				<div class="panel-body">
+					<br>
+					* Klik kanan untuk menandai peta
+					<br>
+					* Klik pada penanda peta untuk menghapus penanda
+					<br>
+					* Anda bisa menggeser penanda dengan cara drag penanda
 					<div id="map_canvas_region" style="width: 100%; height: 400px"></div>
 					<div id="div_input"></div>
 				</div>
