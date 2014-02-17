@@ -1,4 +1,4 @@
-<script src="http://localhost:8000/socket.io/socket.io.js"></script>
+<script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">

@@ -9,13 +9,13 @@
 	var geocoder = new google.maps.Geocoder();
     var customIcons = {
       icon_mobil00000000000000000000000320: {
-        icon: 'http://surabi.dev/assets/uploads/icon_3.png'
+        icon: 'http://192.168.12.250/assets/uploads/icon_3.png'
       },
       icon_mobil00000000000000000000000521: {
-    	icon: 'http://surabi.dev/assets/uploads/icon_5.png'
+    	icon: 'http://192.168.12.250/assets/uploads/icon_5.png'
       },
       icon_mobil00000000000000000000000321: {
-      	icon: 'http://surabi.dev/assets/uploads/icon_6.png'
+      	icon: 'http://192.168.12.250/assets/uploads/icon_6.png'
       }
     };
     
