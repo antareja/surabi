@@ -1,3 +1,14 @@
+<?php 
+if($this->input->post("html")!="")
+{
+	$this->load->helper("dompdf_helper");
+	if(!isset($other))$other="";
+	pdf_create($this->input->post("html"));
+}
+else
+{
+?>
+<div id="isi">
 <style>
 <!--
 .ganjil
@@ -6,6 +17,8 @@
 }
 -->
 </style>
+<br>
+<input type="button" onclick="f1.submit()" value="Print">
 <div id="header" align="center">
 <h1>Alert Report</h1>
 <?php
@@ -76,3 +89,11 @@ $x++;
 }
 ?>
 </table>
+</div>
+<form id="f1" name="f1" action="" method="post">
+<textarea id="html" name="html" style="display: none"></textarea>
+</form>
+<script>html.innerHTML=isi.innerHTML</script>
+<?php 
+}
+?>
