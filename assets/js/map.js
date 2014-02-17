@@ -1,4 +1,4 @@
-    //<![CDATA[asdasdkjh
+    //<![CDATA[
 	var filter = ['00'];
 	var cek_marker = [];
 	var marker_array = [];
