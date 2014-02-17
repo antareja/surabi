@@ -102,7 +102,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 <!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
 <!-- 					Messaging </a></li> -->
 					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
+						class="dropdown-toggle" href="<?php echo site_url()?>replay"> <i class="icon-play"></i> Replay
 					</a></li>
 					<li class="red dropdown-hover"><a href="#"> <i
 							class="icon-bar-chart"></i> Reports <i class="icon-caret-down"></i>
