@@ -61,7 +61,7 @@ class Packet extends CI_Controller {
 	}
 
 	public function test_post() {
-		$data['create_at'] = date("Y-m-d H:i:s.m");
+			$data['create_at'] = date("Y-m-d H:i:s.m");
 		$this->mpacket->insertPacket($data);
 	}
 
