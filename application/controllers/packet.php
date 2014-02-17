@@ -31,7 +31,7 @@ class Packet extends CI_Controller {
 			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
 			//$data['full_packet'] = $post['full_packet'];
 			$data['source_type'] = $post['source'];
-			$data['create_at'] = date("Y-m-d H:i:s");
+			$data['create_at'] = date("Y-m-d H:i:s.m");
 			$data['system_id'] = $post['system'];
 			$data['mobile_address'] = $post['mobile'];
 			$data['base_ip_address'] = $post['base_ip'];
@@ -61,7 +61,8 @@ class Packet extends CI_Controller {
 	}
 
 	public function test_post() {
-		echo date("Y-m-d H:i:s");
+		$data['create_at'] = date("Y-m-d H:i:s.m");
+		$this->mpacket->insertPacket($data);
 	}
 
 	public function parse() {
