@@ -95,14 +95,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 						<li><a href="<?php echo site_url()?>map/region"> <i class="icon-cog"></i> Create Region
 						</a></li>
-						<li><a href="#"> <i class="icon-user"></i> Compressed
-						</a></li>
-						<li></li>
 					</ul></li>
 <!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
 <!-- 					Messaging </a></li> -->
-					<li class="light-purple dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-play"></i> Replay
+					<li class="light-purple dropdown-hover"><a href="<?php echo site_url()?>replay"> <i class="icon-play"></i> Replay
 					</a></li>
 					<li class="red dropdown-hover"><a href="#"> <i
 							class="icon-bar-chart"></i> Reports <i class="icon-caret-down"></i>
@@ -114,7 +110,6 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>report/activity/"> <i class="icon-user"></i> Activity Report</a></li>
 							<li><a href="#"> <i class="icon-cog"></i> System Report</a></li>
 							<li><a href="#"> <i class="icon-user"></i> Activity Report</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Compressed</a></li>
 							<li></li>
 						</ul></li>
 				</ul>
