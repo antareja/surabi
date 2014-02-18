@@ -36,6 +36,7 @@
 	
 	<script src="<?php echo base_url() ?>assets/js/ace-elements.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/ace.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/date-time/bootstrap-datepicker.min.js"></script>
 	<script src="<?php echo base_url()?>assets/js/ace-extra.min.js"></script>
     <!-- page specific plugin scripts -->
     <script src="<?php echo base_url() ?>assets/js/surabi.js"></script>

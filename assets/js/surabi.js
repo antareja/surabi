@@ -49,4 +49,11 @@ jQuery(function($) {
 			return 'right';
 		return 'left';
 	}
+	
+	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
+	$('.date-picker2').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
 });

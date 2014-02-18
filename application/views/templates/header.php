@@ -12,6 +12,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/datepicker.css" rel="stylesheet">
 <link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
