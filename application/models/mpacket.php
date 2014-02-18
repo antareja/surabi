@@ -28,6 +28,7 @@ class MPacket extends CI_Model {
 		$this->db->order_by("create_at", "ASC");
 		$this->db->limit('10');
 		$query = $this->db->get_where('packet',array('mobile_address'=>$mobile_address));
-		return $query->result();
+		//echo $this->db->last_query();
+		return $query;
 	}
 }	

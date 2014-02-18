@@ -17,17 +17,17 @@
     google.maps.event.addDomListener(document, "keyup", function(e) { shiftPressed = e.shiftKey; });
 	
 	var lineCoordinates = [
-	   	<?php foreach ($replay as $row)  {?>
+	   	<?php foreach ($replay->result() as $row)  {?>
 		new google.maps.LatLng(<?php echo $row->latitude ?>,<?php echo $row->longitude ?>),
 		<?php } ?>
 	/*
 	*/
 	];
-		
+		<?php $rep = $replay->row();?>
     function Init() {
       var myOptions = {
         zoom: 17,
-        center: new google.maps.LatLng(-6.915957,107.603508),
+        center: new google.maps.LatLng(<?php echo $rep->latitude;?>,<?php echo $rep->longitude;?>),
         scaleControl:true,
         draggable:false,
 		zoomControl:false,
