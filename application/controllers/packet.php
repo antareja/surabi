@@ -59,7 +59,7 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
-				$data['location'] = $post['lat'] . ',' . $post['lng'];
+				$data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
