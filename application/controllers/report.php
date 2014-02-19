@@ -33,6 +33,7 @@ class Report extends CI_Controller {
 
 	public function activity_form() {
 		$data['pageTitle'] = "Select Acivity";
+		$data['vehicles'] = $this->mreport->getAllVehicles();
 		$this->load->template("report/activity_report", $data);
 	}
 
@@ -40,11 +41,19 @@ class Report extends CI_Controller {
 		$data['pageTitle'] = 'Activity Report';
 		$post = $this->input->post();
 		if ($post) {
+			//print_r($post);exit;
 			$begin = $post['begin'];
 			$end = $post['end'];
-			$data['activity'] = $this->mreport->getActivityReport($begin, $end);
+			$vehicle = implode(", ", $post['vehicle']);
+			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
 		}
 		$this->load->view("report/activity", $data);
+	}
+	
+	public function test(){
+		$vehicle = 'haidar, rizki, arief';
+		$array = array($vehicle);
+		print_r($array);
 	}
 
 	public function alert($region_id = NULL) {
