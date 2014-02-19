@@ -52,7 +52,7 @@ if ($this->input->post("html") != "") {
 <tr class="<?php echo $class?>">
 			<td><?php echo $row->name ?></td>
 			<td><?php echo $row->time ?></td>
-			<td><button onclick="searchLocations(<?php echo $row->latitude.",".$row->longitude?>)">Try it</button></td>
+			<td><?php echo $row->location ?></td>
 			<td><?php echo $row->velocity ?></td>
 			<td><?php echo $row->bearing ?></td>
 			<td><?php echo $row->latitude ?></td>

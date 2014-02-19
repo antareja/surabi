@@ -8,7 +8,7 @@
 <link rel="shortcut icon"
 	href="<?php echo base_url()?>assets/ico/favicon.png">
 
-<title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
+<title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
