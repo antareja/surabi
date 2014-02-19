@@ -11,8 +11,6 @@ jQuery(function($) {
 			{
 				if (results[0]) 
 				{
-					//alert(results[0]["address_components"][0].short_name);
-					//$( "div" ).html( "<span class='red'>Hello <b>Again</b></span>" );
 					$( "div" ).html(results[0]["address_components"][0].short_name);
 				} 
 				else 

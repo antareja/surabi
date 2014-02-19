@@ -24,14 +24,29 @@ class Packet extends CI_Controller {
 		print_r($post);
 	}
 
+	public function location($lat) {
+		$location = explode(',', $lat);
+		$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" . $lat . "&sensor=false&language=id";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1000);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		$json = json_decode($data, true);
+		$short_name = $json['results'][0]['address_components'][0]['short_name'];
+		return $short_name;
+	}
+
 	public function resv() {
 		$post = $this->input->post();
 		if ($post) {
-			//print_r($post);
+			// print_r($post);
 			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
 			// $data['full_packet'] = $post['full_packet'];
 			$data['source_type'] = $post['source'];
-			$data['create_at'] = date("Y-m-d H:i:s.m");
+			//$data['create_at'] = date("Y-m-d H:i:s.m");  # for ms sql only
 			$data['system_id'] = $post['system'];
 			$data['mobile_address'] = $post['mobile'];
 			$data['base_ip_address'] = $post['base_ip'];
@@ -44,6 +59,7 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
+				$data['location'] = $post['lat'] . ',' . $post['lng'];
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
