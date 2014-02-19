@@ -48,12 +48,14 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.12.250\SQLEXPRESS,1433';
+//$db['default']['hostname'] = '192.168.12.250\SQLEXPRESS,1433';
+$db['default']['hostname'] = '192.168.12.250';
 //$db['default']['hostname'] = 'HAIDAR\HAIDARSQLEXPRESS';
-$db['default']['username'] = 'sa';
-$db['default']['password'] = '@t3ch1nfo';
+$db['default']['username'] = 'postgres';
+$db['default']['password'] = 'root';
+//$db['default']['password'] = '@t3ch1nfo';
 $db['default']['database'] = 'gps_tracker';
-$db['default']['dbdriver'] = 'sqlsrv';
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = 'tcm_';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
