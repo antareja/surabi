@@ -48,8 +48,8 @@
 								<li>
 								<div class="checkbox">
 									 <label>
-								     <input class="ace" type="checkbox" name="car" /> 
-									 <span class="lbl" id="vehicle_<?php echo $vec->gps_mobile_address?>"><?php echo $vec->name;?></span>
+								     <input class="ace cek" type="checkbox" name="car" id="marker_<?php echo $vec->gps_mobile_address?>" onclick="if(this.checked)add_filter(this.id);else remove_filter(this.id);"/> 
+									 <span class="lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>"><?php echo $vec->name;?></span>
 									 </label>
 								</div>
 								</li>

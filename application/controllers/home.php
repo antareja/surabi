@@ -19,6 +19,7 @@ class Home extends CI_Controller {
 	}
 
 	public function home() {
+		$data['all_vehicle'] = $this->mgps->getDataVehicle();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$this->load->template('gps', $data);
