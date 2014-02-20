@@ -20,7 +20,7 @@ else
 <br>
 <input type="button" onclick="f1.submit()" value="Print">
 <div id="header" align="center">
-<h1>Speed Report</h1>
+<h1>Speed Report <?php echo $pageTitle;?></h1>
 <?php
 echo date("d/m/Y");
 $data_report=array

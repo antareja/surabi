@@ -40,14 +40,24 @@ class Report extends CI_Controller {
 	public function activity($region_id = NULL) {
 		$data['pageTitle'] = 'Activity Report';
 		$post = $this->input->post();
-		if ($post) {
+		if (isset($post['begin'])) {
 			//print_r($post);exit;
 			$begin = $post['begin'];
 			$end = $post['end'];
 			$vehicle = implode(", ", $post['vehicle']);
 			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
+			
 		}
-		$this->load->view("report/activity", $data);
+		$html = $this->load->view("report/activity", $data);
+		$html = $this->output->get_output();
+		
+		// Load library
+		$this->load->library('dompdf_gen');
+		
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
 	}
 	
 	public function test(){
@@ -65,6 +75,10 @@ class Report extends CI_Controller {
 	public function speed($region_id = NULL) {
 		$data['pageTitle'] = 'Speed Report';
 		$data['data_report'] = $this->mreport->getSpeedReport();
-		$this->load->view("report/speed", $data);
+		$html = $this->load->view("report/speed", $data,$data);
+		$html = $this->output->get_output();
+		$this->load->helper(array('dompdf', 'file'));
+		$pdfData = pdf_create($html, 'test');
+		write_file('Progress Repost', $pdfData);
 	}
 }
