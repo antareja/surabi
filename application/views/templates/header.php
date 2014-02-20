@@ -60,7 +60,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img width="30" src="<?php echo base_url()?>assets/images/logo-small.png"> <i class="icon-leaf"></i>
-						GPS Tracker Apps
+						GPS Tracking Apps
 				</small>
 				</a>
 				<!-- /.brand -->
