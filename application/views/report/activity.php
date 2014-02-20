@@ -1,3 +1,6 @@
+<script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="<?php echo base_url() ?>assets/js/location.js"></script>
 <?php
 //print_r($_POST);
 //print_r($activity);
@@ -54,7 +57,7 @@ if ($this->input->post("html") != "") {
 			<td><?php echo $row->bearing ?></td>
 			<td><?php echo $row->latitude ?></td>
 			<td><?php echo $row->longitude ?></td>
-			<td><?php echo $row->region ?></td>
+			<td><?php //echo $row->region ?></td>
 		</tr>	
 <?php
 		$x ++;

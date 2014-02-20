@@ -21,13 +21,24 @@ class MReport extends CI_Model {
 		return $query->result();
 	}
 
-	function getActivityReport($begin, $end) {
-		$this->db->select('vehicles.name ,time, velocity, bearing,  latitude, longitude');
+	function getAllVehicles() {
+		$query = $this->db->get('vehicles');
+		return $query->result();
+	}
+
+	function getMobileAddress($vehicle) {
+		$this->db->get("vehicle");
+	}
+
+	function getActivityReport($begin, $end, $vehicles) {
+		$this->db->select('vehicles.name ,time, velocity, bearing,  latitude, longitude, location');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->where_in('vehicle_id', $vehicles);
 		$query = $this->db->get_where('packet', array(
 				'create_at >=' => $begin . ' 09:00',
 				'create_at <=' => $end . ' 23:00' 
 		));
+		$this->db->last_query();
 		return $query;
 	}
 

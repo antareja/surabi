@@ -8,7 +8,7 @@
 <link rel="shortcut icon"
 	href="<?php echo base_url()?>assets/ico/favicon.png">
 
-<title>GPS Tracker <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
+<title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img width="30" src="<?php echo base_url()?>assets/images/logo-small.png"> <i class="icon-leaf"></i>
-						GPS Tracker Apps
+						GPS Tracking Apps
 				</small>
 				</a>
 				<!-- /.brand -->
@@ -108,10 +108,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>report/vehicle/"> <i class="icon-truck"></i> Vehicles Report</a></li>
 							<li><a href="<?php echo site_url()?>report/employee/"> <i class="icon-user"></i> Employee Report</a></li>
-							<li><a href="<?php echo site_url()?>report/activity/"> <i class="icon-user"></i> Activity Report</a></li>
+							<li><a href="<?php echo site_url()?>report/activity_form/"> <i class="icon-user"></i> Activity Report</a></li>
 							<li><a href="#"> <i class="icon-cog"></i> System Report</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Activity Report</a></li>
-							<li></li>
 						</ul></li>
 				</ul>
 				<!-- /.ace-nav -->

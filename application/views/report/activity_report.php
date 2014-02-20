@@ -16,6 +16,17 @@
 				action="<?php echo site_url();?>report/activity/" method="POST" />
 
 			<div class="form-group">
+			<div class="col-sm-5">
+				<label for="form-field-select-2 control-label no-padding-right">Vehicles</label> 
+				<select name="vehicle[]" class="form-control" id="form-field-select-2" multiple siz="3">
+					<?php foreach($vehicles as $vehicle) {?>
+					<option value="<?php echo $vehicle->vehicle_id?>"><?php echo $vehicle->name?></option>
+					<?php } ?>
+				</select>
+			</div>
+			</div>
+
+			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Beginning</label>
 				<div class="col-sm-5">
@@ -32,12 +43,12 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Ending</label>
 				<div class="col-sm-5">
-						<div class="input-group">
-							<input type="text" class="form-control date-picker2" id="name"
-								name="end" placeholder="Name" date-format="dd-mm-yyyy"><span
-								class="input-group-addon"> <i class="icon-calendar bigger-110"></i>
-							</span>
-						</div>
+					<div class="input-group">
+						<input type="text" class="form-control date-picker2" id="name"
+							name="end" placeholder="Name" date-format="dd-mm-yyyy"><span
+							class="input-group-addon"> <i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
 				</div>
 				<div class="form-group"></div>
 				<div class="clearfix form-actions">
