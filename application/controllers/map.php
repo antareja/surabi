@@ -15,7 +15,7 @@ class Map extends CI_Controller {
 	}
 
 	public function index() {
-		$this->home();
+		$this->region();
 	}
 
 	public function region($region_id = NULL) {
