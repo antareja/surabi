@@ -211,11 +211,14 @@ var boundarydata<?php echo $i; ?> = [
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			tampung_posisi["marker_"+data_map["mobile"]].html=html;
 		//------------------------------polygon---------------------------------------
-		                       
-		if (boundaryPolygon.Contains(point)) {
+		<?php 
+		// for in region only
+		$i=0;
+		foreach($regions as $region) { 
+		$i++;?>                       
+		if (boundaryPolygon<?php echo $i;?>.Contains(point)) {
 			alert("Sampai");
-		} 
-		
+		} 		<?php } ?>
 	  });
 	  }
   });

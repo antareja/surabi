@@ -16,7 +16,7 @@ class MMap extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	function editRegion($data, $region_id) {
+	function updateRegion($data, $region_id) {
 		return $this->db->update("region_alert", $data, array(
 				"region_id" => $region_id 
 		));
