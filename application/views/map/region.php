@@ -12,7 +12,7 @@
 			<div class="widget-box">
 				<div class="widget-header">
 					<h4 class="smaller">
-						List Icon 
+						List Region 
 					</h4>
 				</div>
 				<div class="widget-body">

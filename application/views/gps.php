@@ -47,7 +47,8 @@ var marker_array = [];
 var z=1;
 var markers={};
 var marker="";
-var boundaryPolygon;
+var boundaryPolygon1;
+var boundaryPolygon2;
 var geocoder = new google.maps.Geocoder();
 var customIcons = {
 <?php 
@@ -122,25 +123,32 @@ var map = new google.maps.Map(document.getElementById("map"), {
   });
 
 
-var boundarydata = [
-    new google.maps.LatLng(-6.936800354144058, 107.60258674621582),
-	new google.maps.LatLng(-6.9389091089626485, 107.60250091552734),
-	new google.maps.LatLng(-6.937971885764778, 107.60687828063965),
-	new google.maps.LatLng(-6.936672550518212, 107.60687828063965)
+                    <?php $i=0;
+                     foreach($regions as $region) { 
+						$i++;
+                    	$latlng = explode(";", $region->latlng); ?>
+var boundarydata<?php echo $i; ?> = [
+                    		<?php foreach($latlng as $lat) {?>
+    new google.maps.LatLng(<?php echo rm_brace($lat);?>),
+							<?php } ?>
+// 	new google.maps.LatLng(-6.9389091089626485, 107.60250091552734),
+// 	new google.maps.LatLng(-6.937971885764778, 107.60687828063965),
+// 	new google.maps.LatLng(-6.936672550518212, 107.60687828063965)
                   ];
 
 
-                        boundaryPolygon = new google.maps.Polygon({
-                            path: boundarydata,
+                        boundaryPolygon<?php echo $i;?> = new google.maps.Polygon({
+                            path: boundarydata<?php echo $i;?>,
                             strokeColor: "#0000FF",
                             strokeOpacity: 0.8,
                             strokeWeight: 2,
-                            fillColor: 'Red',
+                            fillColor: 'Yellow',
                             fillOpacity: 0.4
 
                         });
 
-  boundaryPolygon.setMap(map);
+  boundaryPolygon<?php echo $i;?>.setMap(map);
+							<?php 	}?>
   var infoWindow = new google.maps.InfoWindow;
 
 // create a new websocket

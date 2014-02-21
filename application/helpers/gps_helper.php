@@ -31,3 +31,8 @@ function pg_to_php($array){
 	return $last;
 	
 }
+
+function rm_brace($str) {
+	$last = substr($str, 1, -1); // remove curly brace
+	return $last;
+}
