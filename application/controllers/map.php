@@ -26,8 +26,7 @@ class Map extends CI_Controller {
 			$post_data['name'] = $post['name'];
 			$post_data['description'] = $post['description'];
 			$post_data['employee_id'] = "1";
-			$post_data['latlng'] = $post['txt_posisi'];
-			$post_data['latlng'] = implode(";",$post_data['latlng']);
+			$post_data['latlng'] = implode(";",$post['txt_posisi']);
 			$post_data['expire_time'] = $post['expire_time'];
 			$post_data['time_start'] = $post['time_start'];
 			$post_data['time_end'] = $post['time_end'];

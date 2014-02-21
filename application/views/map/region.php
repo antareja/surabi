@@ -119,7 +119,7 @@
 					</button>
 				</div>
 			</div>
-				<?php echo isset($hardware) ? '<input type="hidden" name="hardware_id" value="'.$hardware->hardware_id.'" >' : '';?>
+				<?php echo isset($region) ? '<input type="hidden" name="region_id" value="'.$region->region_id.'" >' : '';?>
 			</form>
 		</div>
 		<textarea id="tmp_position" style="display:none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
