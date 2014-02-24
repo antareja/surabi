@@ -19,7 +19,7 @@ class Muser extends CI_Model {
 	function updateUser($data,$user_id){
 		return $this->db->update('user',$data, array('user_id'=> $user_id));
 	}
-	function getAlluser() {
+	function getAllUser() {
 		$query = $this->db->get('user');
 		return $query->result();
 	}

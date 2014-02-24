@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>
 			Fleet Configuration <small> <i class="icon-double-angle-right"></i>
-				Driver
+				User
 			</small>
 		</h1>
 	</div>
@@ -12,14 +12,14 @@
 		<div class="col-sm-3">
 			<div class="widget-box">
 				<div class="widget-header">
-					<h4 class="smaller">List Driver</h4>
+					<h4 class="smaller">List User</h4>
 				</div>
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
 						<?php
-						foreach ($all_driver as $drivers) {
-							echo "<p><a href='" . site_url() . "driver/" . $drivers->driver_id . "'>" . $drivers->name . "</a></p>";
+						foreach ($all_user as $users) {
+							echo "<p><a href='" . site_url() . "admin/user/" . $users->user_id . "'>" . $users->username . "</a></p>";
 						}
 						?>
 						<p>
@@ -31,45 +31,55 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>driver/"
+				action="<?php echo site_url();?>admin/user/"
 				method="POST" />
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Name </label>
+					for="form-field-1"> Full Name </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="name" name="name"
+					<input type="text" class="form-control" id="fullname" name="fullname"
 						placeholder="Name"
-						value="<?php echo isset($driver) ? $driver->name : '';?>">
+						value="<?php echo isset($user) ? $user->fullname : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-select-2"> Vehicle Use </label>
+					for="form-field-1"> User Name </label>
 				<div class="col-sm-9">
-					<select class="form-control" id="form-field-select-2"
-						data-placeholder="Choose a Vehicle driver" name="vehicle_id">
-						<option value="">&nbsp;</option>
-						<?php foreach($vehicles as $vehicle) {?>
-						<option value="<?php echo $vehicle->vehicle_id?>"><?php echo $vehicle->name?></option>
-						<?php }?>
-					</select>
+					<input type="text" class="form-control" id="username" name="username"
+						placeholder="Name"
+						value="<?php echo isset($user) ? $user->username : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Description </label>
+					for="form-field-1"> Password </label>
 				<div class="col-sm-9">
-					<textarea class="form-control" id="description" name="description"
-						placeholder="Description"><?php  echo  isset($driver) ? $driver->description : '';?></textarea>
+					<input type="password" class="form-control" id="password" name="password"
+						placeholder="Name"
+						value="<?php echo isset($user) ? $user->password : '';?>">
 				</div>
 			</div>
+<!-- 			<div class="form-group"> -->
+<!-- 				<label class="col-sm-3 control-label no-padding-right" -->
+<!-- 					for="form-field-select-2"> Vehicle Use </label> -->
+<!-- 				<div class="col-sm-9"> -->
+<!-- 					<select class="form-control" id="form-field-select-2" -->
+<!-- 						data-placeholder="Choose a Vehicle user" name="vehicle_id"> -->
+<!-- 						<option value="">&nbsp;</option> -->
+						<?php // foreach($vehicles as $vehicle) {?>
+						<option value="<?php // echo $vehicle->vehicle_id ?>"><?php // echo $vehicle->name?></option>
+						<?php // }?>
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Address </label>
 				<div class="col-sm-9">
 					<textarea class="form-control" id="address" name="address"
-						placeholder="Address"><?php  echo  isset($driver) ? $driver->address : '';?></textarea>
+						placeholder="Address"><?php  echo  isset($user) ? $user->address : '';?></textarea>
 				</div>
 			</div>
 			<div class="form-group">
@@ -78,7 +88,7 @@
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="phone" name="phone"
 						placeholder="Phone"
-						value="<?php echo isset($driver) ? $driver->phone : '';?>">
+						value="<?php echo isset($user) ? $user->phone : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
@@ -87,7 +97,7 @@
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="phone2" name="phone2"
 						placeholder="Phone2"
-						value="<?php echo isset($driver) ? $driver->phone2 : '';?>">
+						value="<?php echo isset($user) ? $user->phone2 : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
@@ -96,7 +106,7 @@
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="email" name="email"
 						placeholder="Email"
-						value="<?php echo isset($driver) ? $driver->email : '';?>">
+						value="<?php echo isset($user) ? $user->email : '';?>">
 				</div>
 			</div>
 			<div class="clearfix form-actions">
@@ -109,7 +119,7 @@
 				</div>
 			</div>
 			
-				<?php echo isset($driver) ? '<input type="hidden" name="driver_id" value="'.$driver->driver_id.'" >' : '';?>"
+				<?php echo isset($user) ? '<input type="hidden" name="user_id" value="'.$user->user_id.'" >' : '';?>
 			</form>
 		</div>
 
