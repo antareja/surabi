@@ -19,7 +19,7 @@
 						<p class="muted">
 						<?php
 						foreach ($all_user as $users) {
-							echo "<p><a href='" . site_url() . "admin/user/" . $users->user_id . "'>" . $users->username . "</a></p>";
+							echo "<p><a href='" . site_url() . "admin/sys_config/user/" . $users->user_id . "'>" . $users->username . "</a></p>";
 						}
 						?>
 						<p>
@@ -57,8 +57,7 @@
 					for="form-field-1"> Password </label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password" name="password"
-						placeholder="Name"
-						value="<?php echo isset($user) ? $user->password : '';?>">
+						placeholder="Name">
 				</div>
 			</div>
 <!-- 			<div class="form-group"> -->

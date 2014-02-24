@@ -31,6 +31,7 @@ class Muser extends CI_Model {
 	
 	function getUser($user_id){
 		$query = $this->db->get_where('user',array('user_id'=> $user_id));
+// 		echo $this->db->last_query();
 		return $query->row();
 	}
 	

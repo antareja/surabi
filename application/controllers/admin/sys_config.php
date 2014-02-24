@@ -12,7 +12,9 @@ class Sys_config extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('admin/msys_config');
+		$this->load->model('admin/muser');
 		$this->msys_config = new MSys_config();
+		$this->muser = new MUser();
 	}
 
 	public function index() {
@@ -96,7 +98,65 @@ class Sys_config extends CI_Controller {
 			$this->load->template("admin/sys_config/icon", $data);
 		}
 	}
-
+	
+	public function user($user_id = NULL) {
+		$data['pageTitle'] = 'user';
+		$data['all_user'] = $this->muser->getAlluser();
+		// 		$data['vehicles'] = $this->muser->getAllVehicle();
+		$post = $this->input->post();
+		if ($post) {
+			$post_data['fullname'] = $post['fullname'];
+			$post_data['username'] = $post['username'];
+			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
+			$post_data['password'] = md5($post['password']);
+			$post_data['address'] = $post['address'];
+			$post_data['phone'] = $post['phone'];
+			$post_data['phone2'] = $post['phone2'];
+			$post_data['email'] = $post['email'];
+			if ($post['user_id']) {
+				$this->muser->updateUser($user_id, $post_data);
+				redirect('admin/sys_config/user/' . $user_id);
+			} else {
+				$id = $this->muser->insertUser($post_data);
+				redirect('admin/sys_config/user/' . $id);
+			}
+		} elseif ($user_id) {
+			// 			die($user_id);
+			$data['user'] = $this->muser->getUser($user_id);
+			$this->load->template("admin/sys_config/user", $data);
+		} else {
+			$this->load->template("admin/sys_config/user", $data);
+		}
+	}
+	
+	public function driver($driver_id = NULL) {
+		$data['pageTitle'] = 'driver';
+		$data['all_driver'] = $this->msys_config->getAllDriver();
+		$data['vehicles'] = $this->msys_config->getAllVehicle();
+		$post = $this->input->post();
+		if ($post) {
+			$post_data['name'] = $post['name'];
+			$post_data['vehicle_id'] = $post['vehicle_id'];
+			$post_data['description'] = $post['description'];
+			$post_data['address'] = $post['address'];
+			$post_data['phone'] = $post['phone'];
+			$post_data['phone2'] = $post['phone2'];
+			$post_data['email'] = $post['email'];
+			if ($post['driver_id']) {
+				$this->msys_config->updateDriver($driver_id, $post_data);
+				redirect('admin/sys_config/driver/' . $driver_id);
+			} else {
+				$id = $this->msys_config->insertDriver($post_data);
+				redirect('admin/sys_config/driver/' . $id);
+			}
+		} elseif ($driver_id) {
+			$data['driver'] = $this->msys_config->getDriver($driver_id);
+			$this->load->template("admin/sys_config/driver", $data);
+		} else {
+			$this->load->template("admin/sys_config/driver", $data);
+		}
+	}
+	
 	/**
 	 *
 	 * @param string $hardware_id

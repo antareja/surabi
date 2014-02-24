@@ -19,7 +19,7 @@
 						<p class="muted">
 						<?php
 						foreach ($all_driver as $drivers) {
-							echo "<p><a href='" . site_url() . "driver/" . $drivers->driver_id . "'>" . $drivers->name . "</a></p>";
+							echo "<p><a href='" . site_url() . "admin/sys_config/driver/" . $drivers->driver_id . "'>" . $drivers->name . "</a></p>";
 						}
 						?>
 						<p>

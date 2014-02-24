@@ -21,7 +21,7 @@ class User extends CI_Controller {
 	
 	public function login(){
 		$data['pageTitle'] = "Login";
-		$this->load->template('login',$data);
+		$this->load->view('login',$data);
 	}
 	
 }
