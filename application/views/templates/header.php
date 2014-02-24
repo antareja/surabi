@@ -76,6 +76,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>admin/sys_config"> <i class="icon-cog"></i> System Configuration</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/company_data"><i class="icon-briefcase"></i>Company Data</a></li>
+							<li><a href="<?php echo site_url()?>driver"><i class="icon-briefcase"></i>Driver</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i class="icon-picture"></i>Icon</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i class="icon-wrench"></i>Hardware</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i class="icon-cog"></i> Fleet Configuration</a></li>
