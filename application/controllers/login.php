@@ -7,7 +7,7 @@ if (! defined('BASEPATH'))
  * @author haidar
  *        
  */
-class User extends CI_Controller {
+class Login extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
@@ -18,10 +18,18 @@ class User extends CI_Controller {
 	public function index() {
 		$this->login();
 	}
-	
-	public function login(){
+
+	public function login() {
 		$data['pageTitle'] = "Login";
-		$this->load->view('login',$data);
+		$post = $this->input->post();
+		if ($post) {
+			if ($this->muser->login($post['username'], $post['password'])) {
+				echo 'masuk';
+			} else {
+				echo 'mistake';
+			}
+		} else {
+			$this->load->view('login', $data);
+		}
 	}
-	
 }
