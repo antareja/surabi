@@ -1,3 +1,10 @@
+<?php 
+if(isset($_SESSION['username'])) {
+	// echo 'login';
+} else {
+	redirect(site_url().'login');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

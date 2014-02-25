@@ -24,9 +24,12 @@ class Login extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			if ($this->muser->login($post['username'], $post['password'])) {
-				echo 'masuk';
+				// echo 'masuk';
+				$_SESSION['username'] = $post['username'];
+				redirect('home');
 			} else {
 				echo 'mistake';
+				redirect('login');
 			}
 		} else {
 			$this->load->view('login', $data);

@@ -1,4 +1,5 @@
 <?php
+@session_start();
 
 function parse_packet($packet) {
 }

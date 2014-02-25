@@ -37,7 +37,7 @@ class Muser extends CI_Model {
 	
 	function login($username, $password) {
 		$query = $this->db->get_where('user',array('username'=> $username, 'password' => md5($password)));
-		echo $this->db->last_query();
+		//echo $this->db->last_query();
 		return $query->row();
 	}
 	
