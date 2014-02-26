@@ -74,23 +74,10 @@ class Packet extends CI_Controller {
 			// check Speed if exceed
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
-			$this->read_region($post['lat'], $post['lng'], $insert_id);
+			$this->check_point($post['lat'], $post['lng'], $insert_id);
 			// test Region
 			// $this->test_region();
 		}
-	}
-
-	public function read_region($lat, $lng, $packet_id) {
-		$url = site_url() . 'packet/check_region/' . $lat . "/" . $lng . '/' . $packet_id;
-		echo $url;
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
-		$data = curl_exec($ch);
-		echo $data;
-		curl_close($ch);
 	}
 
 	public function check_region($lat, $lng, $packet_id) {
@@ -100,6 +87,7 @@ class Packet extends CI_Controller {
 		$vehicle_id = $this->mpacket->getVehicle($packet_id);
 		$data['region'] = $this->mpacket->getRegion($vehicle_id);
 		$region = $data['region'];
+		print_r($region);
 		$latlngs = explode(';', $region->latlng);
 		$point = array($lat,$lng);
 		$polygon = array();
@@ -107,16 +95,9 @@ class Packet extends CI_Controller {
 			$lat = explode(',',rm_brace($latlng));
 			array_push($polygon, array($lat[0],$lat[1]));
 		}
-		$inside = array('40.790533','-73.965071');
-		$central_park2 = array(
-				array('40.768109','-73.981885'),
-				array('40.800636','-73.958067'),
-				array('40.796900','-73.949184'),
-				array('40.764307','-73.972959'),
-		);
-		print_r($point);
 		$data['in_out'] = poly_contains($point, $polygon)?'IN':'OUT';
 		echo $data['in_out'];
+		$data['in_out'] == $region->in_out ? $this->region_alert(): '';  
 // 		print_r($polygon);
 // 		print_r($central_park2);
 		$this->load->view('alert_region', $data);
@@ -136,11 +117,20 @@ class Packet extends CI_Controller {
 			$lat = explode(',',rm_brace($latlng));
 			array_push($polygon, array($lat[0],$lat[1]));
 		}
-		print_r($point);
-		$in_out = poly_contains($point, $polygon)?'IN':'OUT';
-		$in_out;
+		$in_out = poly_contains($point, $polygon)?'in':'out';
+		$in_out == $region->in_out ? $this->region_alert(): '';
+		echo 'test';
 	}
 
+	public function region_alert() {
+		$post = $this->input->post();
+		$data['type'] = 'region';
+		$data['type_id'] = $post['region_id'];
+		$data['packet_id'] = $post['packet_id'];
+		// print_r($data);
+		$this->mpacket->insertRegionAlert($data);
+	}
+	
 	public function get_vehicle($id) {
 		echo $this->mpacket->getVehicle($id);
 	}
@@ -152,15 +142,6 @@ class Packet extends CI_Controller {
 			$data['packet_id'] = $packet_id;
 			echo $this->mpacket->insertSpeedAlert($data);
 		}
-	}
-
-	public function region_alert() {
-		$post = $this->input->post();
-		$data['type'] = 'region';
-		$data['type_id'] = $post['region_id'];
-		$data['packet_id'] = $post['packet_id'];
-		// print_r($data);
-		$this->mpacket->insertRegionAlert($data);
 	}
 
 	public function check_test($speed) {
