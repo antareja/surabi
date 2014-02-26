@@ -65,8 +65,7 @@ function previous_url() {
 		return redirect('home');
 	}
 }
-
-# For check Point in Polygon
+// For check Point in Polygon
 function poly_contains($point, $polygon) {
 	if ($polygon[0] != $polygon[count($polygon) - 1])
 		$polygon[count($polygon)] = $polygon[0];

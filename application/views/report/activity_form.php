@@ -13,7 +13,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>report/stop/" method="POST" />
+				action="<?php echo site_url();?>report/activity/" method="POST" />
 
 			<div class="form-group">
 			<div class="col-sm-5">

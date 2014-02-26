@@ -72,17 +72,16 @@ var marker = new google.maps.Marker({
 });
 
                     <?php $i=0;
-                     foreach($regions as $region) { 
 						$i++;
                     	$latlng = explode(";", $region->latlng); ?>
-                    	var boundaryPolygon<?php echo $region->region_id;?>;
-var boundarydata<?php echo $region->region_id; ?> = [
+                    	var boundaryPolygon;
+var boundarydata = [
                     		<?php foreach($latlng as $lats) {?>
     new google.maps.LatLng(<?php echo rm_brace($lats);?>),
 							<?php } ?>
                   ];
-                        boundaryPolygon<?php echo $region->region_id;?> = new google.maps.Polygon({
-                            path: boundarydata<?php echo $region->region_id;?>,
+                        boundaryPolygon = new google.maps.Polygon({
+                            path: boundarydata,
                             strokeColor: "#0000FF",
                             strokeOpacity: 0.8,
                             strokeWeight: 2,
@@ -91,15 +90,11 @@ var boundarydata<?php echo $region->region_id; ?> = [
 
                         });
 
-  boundaryPolygon<?php echo $region->region_id;?>.setMap(map);
-							<?php 	}?>
+  boundaryPolygon.setMap(map);
   var infoWindow = new google.maps.InfoWindow;
-  <?php 
-  $i=0;
-	foreach($regions as $region) { ?>        
 		var point = new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>);               
-		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon<?php echo $region->region_id;?>.Contains(point)) {
-			 //alert("<?php echo $region->in_out?> Area");
+		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
+			 alert("<?php echo $region->in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert",
 				 { 
 				packet_id: <?php echo $packet_id;?>, 
@@ -108,7 +103,6 @@ var boundarydata<?php echo $region->region_id; ?> = [
 					// alert( "Data Loaded: " + data );
 				});
 		} 		
-	<?php } ?>
 </script>
 test<?php echo $lat;?> 
 </body>

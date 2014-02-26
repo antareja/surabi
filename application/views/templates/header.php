@@ -130,7 +130,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>profile/region"> <i
+							<li><a href="<?php echo site_url()?>profile/region_alert"> <i
 									class="icon-cog"></i> Create Region
 							</a></li>
 						</ul></li>

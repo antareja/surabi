@@ -39,6 +39,27 @@ class MPacket extends CI_Model {
 		$query = $this->db->get('region_alert');
 		return $query->result();
 	}
+	
+	function getMobileAddress($vehicle_id){
+		$query = $this->db->get_where('vehicles',array('vehicle_id'=>$vehicle_id));
+		$data = $query->row();		
+		return $data->gps_mobile_address;
+	}
+	
+	function getVehicle($packet_id) {
+		$this->db->join('vehicles', 'packet.mobile_address = vehicles.gps_mobile_address');
+		$query = $this->db->get_where('packet', array('id_packet'=>$packet_id));
+		$data = $query->row();
+		//echo $this->db->last_query();
+		return $data->vehicle_id;
+	}
+	
+	function getRegion($vehicle_id){
+		$this->db->where_in('vehicle_id',$vehicle_id);
+		$query = $this->db->get('region_alert');
+		//echo $this->db->last_query();exit;
+		return $query->row();
+	}
 
 	function getDefaultSpeed($speed) {
 		$query = $this->db->get_where('speed_alert', array(
