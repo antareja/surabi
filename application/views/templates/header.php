@@ -157,6 +157,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							</a></li>
 							<li><a href="#"> <i class="icon-cog"></i> Idling Report
 							</a></li>
+							<li></li>
 						</ul></li>
 
 					<li class="light-blue"><a data-toggle="dropdown" href="#"

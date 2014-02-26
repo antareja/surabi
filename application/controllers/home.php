@@ -35,6 +35,10 @@ class Home extends CI_Controller {
 		$this->load->template('gps', $data);
 	}
 	
+	public function info(){
+		phpinfo();
+	}
+	
 	public function test() {
 // 		echo FCPATH;
 		$regions = $this->mmap->getAllRegion();
