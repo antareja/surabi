@@ -1,8 +1,8 @@
-<?php 
-if(isset($_SESSION['username'])) {
+<?php
+if (isset($_SESSION['username'])) {
 	// echo 'login';
 } else {
-	redirect(site_url().'login');
+	redirect(site_url() . 'login');
 }
 ?>
 <!DOCTYPE html>
@@ -18,11 +18,15 @@ if(isset($_SESSION['username'])) {
 <title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
 <!-- Bootstrap core CSS -->
-<link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
-<link href="<?php echo base_url()?>assets/css/datepicker.css" rel="stylesheet">
-<link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/datepicker.css"
+	rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/font-awesome.min.css"
+	rel="stylesheet">
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
 <!--[if IE 7]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
@@ -31,12 +35,16 @@ if(isset($_SESSION['username'])) {
 <!-- page specific plugin styles -->
 
 <!-- fonts -->
-<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-fonts.css" />
+<link rel="stylesheet"
+	href="<?php echo base_url()?>assets/css/ace-fonts.css" />
 
 <!-- ace styles -->
-<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-skins.min.css" />
+<link rel="stylesheet"
+	href="<?php echo base_url()?>assets/css/ace.min.css" />
+<link rel="stylesheet"
+	href="<?php echo base_url()?>assets/css/ace-rtl.min.css" />
+<link rel="stylesheet"
+	href="<?php echo base_url()?>assets/css/ace-skins.min.css" />
 
 <!--[if lte IE 8]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-ie.min.css" />
@@ -66,9 +74,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img width="30" src="<?php echo base_url()?>assets/images/logo-small.png"> <i class="icon-leaf"></i>
-						GPS Tracking Apps
-				</small>
+				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img
+						width="30"
+						src="<?php echo base_url()?>assets/images/logo-small.png"> <i
+						class="icon-leaf"></i> GPS Tracking Apps </small>
 				</a>
 				<!-- /.brand -->
 			</div>
@@ -81,46 +90,90 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>admin/sys_config"> <i class="icon-cog"></i> System Configuration</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i class="icon-briefcase"></i>User</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/company_data"><i class="icon-briefcase"></i>Company Data</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i class="icon-briefcase"></i>Driver</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i class="icon-picture"></i>Icon</a></li>
-							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i class="icon-wrench"></i>Hardware</a></li>
-							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i class="icon-cog"></i> Fleet Configuration</a></li>
-							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i class="icon-home"></i>Base</a></li>
-							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i class="icon-truck"></i> Vehicle</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config"> <i
+									class="icon-cog"></i> System Configuration
+							</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
+									class="icon-briefcase"></i>User</a></li>
+							<li><a
+								href="<?php echo site_url()?>admin/sys_config/company_data"><i
+									class="icon-briefcase"></i>Company Data</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i
+									class="icon-briefcase"></i>Driver</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i
+									class="icon-picture"></i>Icon</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i
+									class="icon-wrench"></i>Hardware</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
+									class="icon-cog"></i> Fleet Configuration
+							</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i
+									class="icon-home"></i>Base</a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i
+									class="icon-truck"></i> Vehicle</a></li>
 							<li></li>
 						</ul></li>
-					<li class="light-green dropdown-hover"><a href="<?php echo site_url()?>fleet"> <i class="icon-tasks"></i> 
-					Fleet State</a></li>
-<!-- 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i>  -->
-<!-- 					I/O Grid</a></li> -->
-<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
-<!-- 					Job Module</a></li> -->
+					<li class="light-green dropdown-hover"><a
+						href="<?php echo site_url()?>fleet"> <i class="icon-tasks"></i>
+							Fleet State
+					</a></li>
+					<!-- 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i>  -->
+					<!-- 					I/O Grid</a></li> -->
+					<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
+					<!-- 					Job Module</a></li> -->
 					<li class="green dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map  <i class="icon-caret-down"></i>
+						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map <i
+							class="icon-caret-down"></i>
 					</a>
-					<ul
-						class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-						<li><a href="<?php echo site_url()?>map/region"> <i class="icon-cog"></i> Create Region
-						</a></li>
-					</ul></li>
-<!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
-<!-- 					Messaging </a></li> -->
-					<li class="light-purple dropdown-hover"><a href="<?php echo site_url()?>replay"> <i class="icon-play"></i> Replay
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="<?php echo site_url()?>map/region"> <i
+									class="icon-cog"></i> Create Region
+							</a></li>
+						</ul></li>
+					<!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
+					<!-- 					Messaging </a></li> -->
+					<li class="light-purple dropdown-hover"><a
+						href="<?php echo site_url()?>replay"> <i class="icon-play"></i>
+							Replay
 					</a></li>
 					<li class="red dropdown-hover"><a href="#"> <i
 							class="icon-bar-chart"></i> Reports <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>report/vehicle/"> <i class="icon-truck"></i> Vehicles Report</a></li>
-							<li><a href="<?php echo site_url()?>report/employee/"> <i class="icon-user"></i> Employee Report</a></li>
-							<li><a href="<?php echo site_url()?>report/activity_form/"> <i class="icon-user"></i> Activity Report</a></li>
-							<li><a href="#"> <i class="icon-cog"></i> Alerts Report</a></li>
-							<li><a href="#"> <i class="icon-cog"></i> Speed Report</a></li>
-							<li><a href="#"> <i class="icon-cog"></i> Idling Report</a></li>
+							<li><a href="<?php echo site_url()?>report/vehicle/"> <i
+									class="icon-truck"></i> Vehicles Report
+							</a></li>
+							<li><a href="<?php echo site_url()?>report/employee/"> <i
+									class="icon-user"></i> Employee Report
+							</a></li>
+							<li><a href="<?php echo site_url()?>report/activity_form/"> <i
+									class="icon-user"></i> Activity Report
+							</a></li>
+							<li><a href="#"> <i class="icon-cog"></i> Alerts Report
+							</a></li>
+							<li><a href="#"> <i class="icon-cog"></i> Speed Report
+							</a></li>
+							<li><a href="#"> <i class="icon-cog"></i> Idling Report
+							</a></li>
+						</ul></li>
+
+					<li class="light-blue"><a data-toggle="dropdown" href="#"
+						class="dropdown-toggle"> <img class="nav-user-photo"
+							src="assets/avatars/user.jpg" alt="<?php echo $_SESSION['username']?>'s Photo" /> <span
+							class="user-info"> <small>Welcome,</small> <?php echo $_SESSION['username']?>
+						</span> <i class="icon-caret-down"></i>
+					</a>
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+							<li class="divider"></li>
+							<li><a href="#"> <i class="icon-off"></i> Logout
+							</a></li>
 						</ul></li>
 				</ul>
 				<!-- /.ace-nav -->
