@@ -71,4 +71,8 @@ class MReport extends CI_Model {
 		$query = $this->db->get('region_alert');
 		return $query->result();
 	}
+	
+	function getIdling() {
+		
+	}
 }	

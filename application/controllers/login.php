@@ -19,20 +19,31 @@ class Login extends CI_Controller {
 		$this->login();
 	}
 
-	public function login() {
+	public function login($msg = NULL) {
+		$data['msg'] = $msg;
 		$data['pageTitle'] = "Login";
+		$this->load->view('login', $data);
+	}
+
+	public function do_login() {
 		$post = $this->input->post();
 		if ($post) {
-			if ($this->muser->login($post['username'], $post['password'])) {
-				// echo 'masuk';
-				$_SESSION['username'] = $post['username'];
-				redirect('home');
-			} else {
-				echo 'mistake';
-				redirect('login');
+			try {
+				if ($this->muser->login($post['username'], $post['password']) === FALSE) {
+					//throw new Exception("Username Or Password is invalid");
+					$msg = "Username Or Password is invalid";
+					$this->login($msg);
+				} else {
+					$_SESSION['username'] = $post['username'];
+				}
+			} catch ( Exception $e ) {
+				echo $e->getMessage();
 			}
-		} else {
-			$this->load->view('login', $data);
 		}
+	}
+	
+	public function logout(){
+		 session_destroy();
+		 redirect('login');
 	}
 }

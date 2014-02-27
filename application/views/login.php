@@ -64,12 +64,12 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="icon-coffee green"></i>
-												Please Enter Your Information
+												<?php echo $msg == '' ?  'Please Enter Your Information' : $msg ;?>
 											</h4>
 
 											<div class="space-6"></div>
 
-											<form method="post" action="<?php echo site_url()?>login">
+											<form method="post" action="<?php echo site_url()?>login/do_login">
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">

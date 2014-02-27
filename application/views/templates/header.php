@@ -173,7 +173,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="#"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li class="divider"></li>
-							<li><a href="#"> <i class="icon-off"></i> Logout
+							<li><a href="<?php echo site_url()?>login/logout"> <i class="icon-off"></i> Logout
 							</a></li>
 						</ul></li>
 				</ul>
