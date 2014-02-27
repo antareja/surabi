@@ -41,6 +41,28 @@ class MReport extends CI_Model {
 		$this->db->last_query();
 		return $query;
 	}
+	
+	function getStopReportGroup($begin, $end,$vehicles) {
+		$this->db->group_by('latitude, longitude, mobile_address');
+		$this->db->select('vehicle.name, time, mobile_address, latitude,longitude, location');
+		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->where_in('vehicle_id', $vehicles);
+		$query = $this->db->get_where('packet', array(
+				'create_at >=' => $begin . ' 08:00',
+				'create_at <=' => $end . ' 23:00'
+		));
+		$this->db->last_query();
+		return $query;
+	}
+	
+	function getStopReport($begin,$end, $lat, $lng , $vehicle) {
+		$this->db->select('TIMEDIFF(MAX(time),MIN(time)) AS duration', false);
+		$query = $this->db->get_where('packet', array(
+				'create_at >=' => $begin . ' 08:00',
+				'create_at <=' => $end . ' 23:00'
+		));
+		
+	}
 
 	function getAlertReport() {
 		$query = $this->db->get('region_alert');

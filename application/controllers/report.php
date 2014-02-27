@@ -60,6 +60,35 @@ class Report extends CI_Controller {
 		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
 	}
 	
+	public function stop_report_form(){
+		$data['pageTitle'] = "Stop Or Idling Report";
+		$data['vehicle'] = $this->mreport->getAllVehicles();
+		$this->load->template('stop_report_form',$data);
+	}
+	
+	public function stop_report($region_id = NULL) {
+		$data['pageTitle'] = 'Stop Idling Report';
+		$post = $this->input->post();
+		if (isset($post['begin'])) {
+			//print_r($post);exit;
+			$begin = $post['begin'];
+			$end = $post['end'];
+			$vehicle = implode(", ", $post['vehicle']);
+			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
+				
+		}
+		$html = $this->load->view("report/activity", $data);
+		$html = $this->output->get_output();
+	
+		// Load library
+		$this->load->library('dompdf_gen');
+	
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+	}
+	
 	public function test(){
 		$vehicle = 'haidar, rizki, arief';
 		$array = array($vehicle);
