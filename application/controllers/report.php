@@ -42,8 +42,8 @@ class Report extends CI_Controller {
 		$post = $this->input->post();
 		if (isset($post['begin'])) {
 			//print_r($post);exit;
-			$begin = $post['begin'];
-			$end = $post['end'];
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
 			$vehicle = implode(", ", $post['vehicle']);
 			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
 			

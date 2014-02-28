@@ -50,10 +50,16 @@ jQuery(function($) {
 		return 'left';
 	}
 	
-	$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+	$('#date-picker').datepicker({autoclose:true , dateFormat: 'yy-mm-dd',  minDate: getFormattedDate(new Date())}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
-	$('.date-picker2').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+	$('#date-picker2').datepicker({autoclose:true,  dateFormat: 'yy-mm-dd', minDate: getFormattedDate(new Date())}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
 });
+function getFormattedDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear().toString().slice(2);
+    return year + '-' + month + '-' + day;
+}

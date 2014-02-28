@@ -32,8 +32,8 @@
 				<div class="col-sm-5">
 					<div class="input-group">
 						<input type="text" class="form-control date-picker"
-							id="date-picker" name="begin" placeholder="Name"
-							date-format="yy-mm-dd"> <span class="input-group-addon"> <i
+							id="id-date-picker-1" name="begin" placeholder="Name"
+							date-format="dd-mm-yyyy"> <span class="input-group-addon"> <i
 							class="icon-calendar bigger-110"></i>
 						</span>
 					</div>
@@ -44,8 +44,8 @@
 					for="form-field-1"> Ending</label>
 				<div class="col-sm-5">
 					<div class="input-group">
-						<input type="text" class="form-control" id="date-picker2"
-							name="end" placeholder="Name" date-format="yy-mm-dd"><span
+						<input type="text" class="form-control date-picker2" id="name"
+							name="end" placeholder="Name" date-format="dd-mm-yyyy"><span
 							class="input-group-addon"> <i class="icon-calendar bigger-110"></i>
 						</span>
 					</div>

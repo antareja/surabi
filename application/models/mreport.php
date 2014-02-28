@@ -38,7 +38,7 @@ class MReport extends CI_Model {
 				'create_at >=' => $begin . ' 09:00',
 				'create_at <=' => $end . ' 23:00' 
 		));
-		$this->db->last_query();
+		//echo $this->db->last_query();exit;
 		return $query;
 	}
 	
@@ -55,15 +55,22 @@ class MReport extends CI_Model {
 		return $query;
 	}
 	
-	function getStopReport($begin,$end, $lat, $lng , $vehicle) {
-		$this->db->select('TIMEDIFF(MAX(time),MIN(time)) AS duration', false);
+	function getStopReport($begin,$end, $lat, $lng , $mobile_address) {
+// 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->select('TIMEDIFF(MAX(time),MIN(time)) AS duration,vehicle.name, time, mobile_address, latitude,longitude, location', false);
 		$query = $this->db->get_where('packet', array(
-				'create_at >=' => $begin . ' 08:00',
-				'create_at <=' => $end . ' 23:00'
+				'create_at >=' => $begin . $this->getWorkingHour()->start_working_hour,
+				'create_at <=' => $end . $this->getWorkingHour()->end_working_hour
 		));
-		
+		$this->db->where_in('mobile_address', $mobile_address);
+		$this->db->last_query();
+		return $query;
 	}
 
+	function getWorkingHour(){
+		$query = $this->db->get_where('default_profile', array('default'=>1));
+		return $query->row();
+	}
 	function getAlertReport() {
 		$query = $this->db->get('region_alert');
 		return $query->result();
