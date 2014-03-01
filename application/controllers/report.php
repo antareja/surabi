@@ -44,8 +44,7 @@ class Report extends CI_Controller {
 			//print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
-			$vehicle = implode(", ", $post['vehicle']);
-			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
+			$data['activity'] = $this->mreport->getActivityReport($begin, $end, empty($post['vehicle']) ? '':$post['vehicle']  );
 			
 		}
 		$html = $this->load->view("report/activity", $data);
@@ -58,6 +57,20 @@ class Report extends CI_Controller {
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
 		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+	}
+	
+	public function activity_demo(){
+		$html = $this->load->view('report/activity_demo');
+		$html = $this->output->get_output();
+		
+		// Load library
+		$this->load->library('dompdf_gen');
+		
+		// Convert to PDF
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+		
 	}
 	
 	public function stop_report_form(){
