@@ -2,6 +2,7 @@
 if (isset($_SESSION['username'])) {
 	// echo 'login';
 } else {
+	$_SESSION['last_url'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	redirect(site_url() . 'login');
 }
 ?>
@@ -155,7 +156,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							</a></li>
 							<li><a href="#"> <i class="icon-cog"></i> Speed Report
 							</a></li>
-							<li><a href="#"> <i class="icon-cog"></i> Idling Report
+							<li><a href="<?php echo site_url()?>report/stop_form"> <i class="icon-cog"></i> Stop/Idling Report
 							</a></li>
 							<li></li>
 						</ul></li>

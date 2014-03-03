@@ -16,16 +16,16 @@ class Report extends CI_Controller {
 	}
 
 	public function index() {
-		$this->home();
+		$this->activity();
 	}
 
-	public function vehicle($region_id = NULL) {
+	public function vehicle() {
 		$data['pageTitle'] = 'Vehicles Report';
 		$data['data_report'] = $this->mreport->getVehicleReport();
 		$this->load->view("report/vehicle", $data);
 	}
 
-	public function employee($region_id = NULL) {
+	public function employee() {
 		$data['pageTitle'] = 'Employee Report';
 		$data['data_report'] = $this->mreport->getEmployeeReport();
 		$this->load->view("report/employee", $data);
@@ -34,10 +34,10 @@ class Report extends CI_Controller {
 	public function activity_form() {
 		$data['pageTitle'] = "Select Acivity";
 		$data['vehicles'] = $this->mreport->getAllVehicles();
-		$this->load->template("report/activity_report", $data);
+		$this->load->template("report/activity_form", $data);
 	}
 
-	public function activity($region_id = NULL) {
+	public function activity() {
 		$data['pageTitle'] = 'Activity Report';
 		$post = $this->input->post();
 		if (isset($post['begin'])) {
@@ -73,33 +73,31 @@ class Report extends CI_Controller {
 		
 	}
 	
-	public function stop_report_form(){
+	public function stop_form(){
 		$data['pageTitle'] = "Stop Or Idling Report";
-		$data['vehicle'] = $this->mreport->getAllVehicles();
-		$this->load->template('stop_report_form',$data);
+		$data['vehicles'] = $this->mreport->getAllVehicles();
+		$this->load->template('report/stop_form',$data);
 	}
 	
-	public function stop_report($region_id = NULL) {
+	public function stop() {
 		$data['pageTitle'] = 'Stop Idling Report';
 		$post = $this->input->post();
 		if (isset($post['begin'])) {
 			//print_r($post);exit;
-			$begin = $post['begin'];
-			$end = $post['end'];
-			$vehicle = implode(", ", $post['vehicle']);
-			$data['activity'] = $this->mreport->getActivityReport($begin, $end, $post['vehicle']);
-				
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$data['stop'] = $this->mreport->getStopReportGroup($begin, $end, $post['vehicle']);
 		}
-		$html = $this->load->view("report/activity", $data);
-		$html = $this->output->get_output();
+		$html = $this->load->view("report/stop", $data);
+// 		$html = $this->output->get_output();
 	
-		// Load library
-		$this->load->library('dompdf_gen');
+// 		// Load library
+// 		$this->load->library('dompdf_gen');
 	
-		// Convert to PDF
-		$this->dompdf->load_html($html);
-		$this->dompdf->render();
-		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+// 		// Convert to PDF
+// 		$this->dompdf->load_html($html);
+// 		$this->dompdf->render();
+// 		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
 	}
 	
 	public function test(){
@@ -108,13 +106,13 @@ class Report extends CI_Controller {
 		print_r($array);
 	}
 
-	public function alert($region_id = NULL) {
+	public function alert() {
 		$data['pageTitle'] = 'Alert Report';
 		$data['data_report'] = $this->mreport->getAlertReport();
 		$this->load->view("report/alert", $data);
 	}
 
-	public function speed($region_id = NULL) {
+	public function speed() {
 		$data['pageTitle'] = 'Speed Report';
 		$data['data_report'] = $this->mreport->getSpeedReport();
 		$html = $this->load->view("report/speed", $data,$data);

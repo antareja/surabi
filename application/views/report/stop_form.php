@@ -13,7 +13,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>report/activity/" method="POST" />
+				action="<?php echo site_url();?>report/stop/" method="POST" />
 
 			<div class="form-group">
 			<div class="col-sm-5">
@@ -31,9 +31,9 @@
 					for="form-field-1"> Beginning</label>
 				<div class="col-sm-5">
 					<div class="input-group">
-						<input type="text" class="form-control date-picker"
+						<input type="text" class="form-control"
 							id="date-picker" name="begin" placeholder="Name"
-							date-format="yy-mm-dd"> <span class="input-group-addon"> <i
+							date-format="dd-mm-yyyy"> <span class="input-group-addon"> <i
 							class="icon-calendar bigger-110"></i>
 						</span>
 					</div>
@@ -45,7 +45,7 @@
 				<div class="col-sm-5">
 					<div class="input-group">
 						<input type="text" class="form-control" id="date-picker2"
-							name="end" placeholder="Name" date-format="yy-mm-dd"><span
+							name="end" placeholder="Name" date-format="dd-mm-yyyy"><span
 							class="input-group-addon"> <i class="icon-calendar bigger-110"></i>
 						</span>
 					</div>

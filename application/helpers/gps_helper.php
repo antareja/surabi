@@ -26,14 +26,37 @@ function to_pg_array($set) {
 	return '{' . implode(",", $result) . '}'; // format
 }
 
-function pg_to_php($array){
+function pg_to_php($array) {
 	$str = str_replace('"', '', $array);
-	$last = substr($array, 1, -1); // remove curly brace
+	$last = substr($array, 1, - 1); // remove curly brace
 	return $last;
-	
 }
 
 function rm_brace($str) {
-	$last = substr($str, 1, -1); // remove curly brace
+	$last = substr($str, 1, - 1); // remove curly brace
 	return $last;
+}
+
+function previous_url() {
+	if ($_SESSION['last_url']) {
+		return header('Location: ' . $_SESSION['last_url']);
+	} else {
+		return redirect('home');
+	}
+}
+
+function sum_the_time($times) {
+	$seconds = 0;
+	foreach ($times as $time) {
+		list($hour, $minute) = explode(':', $time);
+		$seconds += $hour * 3600;
+		$seconds += $minute * 60;
+		// $seconds += $second;
+	}
+	$hours = floor($seconds / 3600);
+	$seconds -= $hours * 3600;
+	$minutes = floor($seconds / 60);
+	$seconds -= $minutes * 60;
+	// return "{$hours}:{$minutes}:{$seconds}";
+	return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }

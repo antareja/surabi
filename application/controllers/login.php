@@ -35,7 +35,7 @@ class Login extends CI_Controller {
 					$this->login($msg);
 				} else {
 					$_SESSION['username'] = $post['username'];
-					redirect('home');
+					previous_url();
 				}
 			} catch ( Exception $e ) {
 				echo $e->getMessage();
