@@ -1,7 +1,7 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Map <small> <i class="icon-double-angle-right"></i>
+			Profile <small> <i class="icon-double-angle-right"></i>
 				Region
 			</small>
 		</h1>
@@ -21,7 +21,7 @@
 							<?php 
 							foreach ($all_region as $regions)
 							{
-								echo "<p><a href='".base_url()."map/region/".$regions->region_id."'>".$regions->name."</a></p>";
+								echo "<p><a href='".base_url()."profile/region_alert/".$regions->region_id."'>".$regions->name."</a></p>";
 							}
 							?>
 						<p>
@@ -33,7 +33,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>map/region/"
+				action="<?php echo site_url();?>profile/region_alert/"
 				method="POST" />
 
 			<div class="form-group">

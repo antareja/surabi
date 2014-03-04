@@ -12,9 +12,9 @@ class Home extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('mgps');
-		$this->load->model('mmap');
+		$this->load->model('mprofile');
 		$this->mgps = new MGps();
-		$this->mmap = new MMap();
+		$this->mprofile = new MProfile();
 	}
 
 	public function index() {
@@ -23,7 +23,7 @@ class Home extends CI_Controller {
 
 	public function home() {
 		$data['all_vehicle'] = $this->mgps->getDataVehicle();
-		$data['regions'] = $this->mmap->getAllRegion();
+		$data['regions'] = $this->mprofile->getAllRegion();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$this->load->template('gps', $data);

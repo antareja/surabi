@@ -1,7 +1,9 @@
 <?php
-if (isset($_SESSION['username'])) {
+if (!isset($_SESSION['gps_username'])) {
+	print_r($_SESSION);
+	//echo 'ga dapet';exit;
 	// echo 'login';
-} else {
+	// print_r($_SESSION);
 	$_SESSION['last_url'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	redirect(site_url() . 'login');
 }
@@ -128,7 +130,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>map/region"> <i
+							<li><a href="<?php echo site_url()?>profile/region"> <i
 									class="icon-cog"></i> Create Region
 							</a></li>
 						</ul></li>
@@ -163,8 +165,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 					<li class="light-blue"><a data-toggle="dropdown" href="#"
 						class="dropdown-toggle"> <img class="nav-user-photo"
-							src="assets/avatars/user.jpg" alt="<?php echo $_SESSION['username']?>'s Photo" /> <span
-							class="user-info"> <small>Welcome,</small> <?php echo $_SESSION['username']?>
+							src="assets/avatars/user.jpg" alt="<?php echo $_SESSION['gps_username']?>'s Photo" /> <span
+							class="user-info"> <small>Welcome,</small> <?php echo $_SESSION['gps_username']?>
 						</span> <i class="icon-caret-down"></i>
 					</a>
 						<ul

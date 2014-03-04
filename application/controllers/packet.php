@@ -61,6 +61,10 @@ class Packet extends CI_Controller {
 				$data['longitude'] = $post['lng'];
 				$data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
 				$data['velocity'] = $post['velocity'];
+				# check Speed if exceed 
+				$this->check_speed($post['velocity'], $post['mobile'], $post['lat'], $post['lng']);
+				# check Region 
+				
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
 				$data['satellite'] = $post['satelite'];
@@ -80,6 +84,21 @@ class Packet extends CI_Controller {
 		$data['create_at'] = date("Y-m-d H:i:s.m");
 		$this->mpacket->insertPacket($data);
 		echo 'test';
+	}
+	
+	public function check_speed($speed,$mobile_address,$latitude,$longitude){
+		if($this->mpacket->getSpeed($speed, $mobile_address)) {
+			$data['type'] = 'speed';
+			$data['speed'] = $speed;
+			$data['mobile_address'] = $mobile_address;
+			$data['latitude'] = $latitude;
+			$data['longitude'] = $longitude;
+			$this->mpacket->insertSpeedAlert($data);
+		}
+	}
+	
+	public function check_region($mobile_address,$latitude,$longitude){
+		
 	}
 
 	public function parse() {

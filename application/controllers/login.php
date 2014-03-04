@@ -29,13 +29,16 @@ class Login extends CI_Controller {
 		$post = $this->input->post();
 		if ($post) {
 			try {
-				if ($this->muser->login($post['username'], $post['password']) === FALSE) {
+				$login = $this->muser->login($post['username'], $post['password']);
+				if ($login !== FALSE) {
+					//print_r($login);
+					define_sess($login->username, $login->user_id, $login->fullname);
+					//print_r($_SESSION);exit;
+					previous_url();
+				} else {
 					//throw new Exception("Username Or Password is invalid");
 					$msg = "Username Or Password is invalid";
 					$this->login($msg);
-				} else {
-					$_SESSION['username'] = $post['username'];
-					previous_url();
 				}
 			} catch ( Exception $e ) {
 				echo $e->getMessage();

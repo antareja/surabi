@@ -37,9 +37,22 @@ function rm_brace($str) {
 	return $last;
 }
 
+function define_sess($username,$user_id,$full_name){
+	$_SESSION['gps_username'] = $username; 
+	$_SESSION['gps_user_id'] = $user_id; 
+	$_SESSION['gps_full_name'] = $full_name;
+	define('USERNAME', $username); 
+	define('USER_ID', $user_id); 
+	define('FULLNAME', $full_name); 
+	//echo USERNAME;exit;
+	//print_r($_SESSION);exit;
+}
+
 function previous_url() {
 	if ($_SESSION['last_url']) {
 		return header('Location: ' . $_SESSION['last_url']);
+	} elseif($_SESSION['last_url'] == 'logout' ) {
+		echo 'bad';
 	} else {
 		return redirect('home');
 	}

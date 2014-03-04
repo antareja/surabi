@@ -31,4 +31,28 @@ class MPacket extends CI_Model {
 		//echo $this->db->last_query();
 		return $query;
 	}
+	
+	function getSpeed($speed,$mobile_address) {
+		$query = $this->db->get_where('speed_alert', array('max_speed'=>$speed, 'mobile_address'=>$mobile_address));
+		if ($query->num_row() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function insertSpeedAlert($data) {
+		$this->db->insert('alert',$data);
+		return $this->db->insert_id();
+	}
+	
+	function getAlert() {
+		$query = $this->db->get('region_alert');
+		return $query->result();
+	}
+	
+	function insertRegionAlert($data){
+		$this->db->insert('alert',$data);
+		return $this->db->insert_id();
+	}
 }	
