@@ -41,68 +41,66 @@ class Report extends CI_Controller {
 		$data['pageTitle'] = 'Activity Report';
 		$post = $this->input->post();
 		if (isset($post['begin'])) {
-			//print_r($post);exit;
+			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
-			$data['activity'] = $this->mreport->getActivityReport($begin, $end, empty($post['vehicle']) ? '':$post['vehicle']  );
-			
+			$data['activity'] = $this->mreport->getActivityReport($begin, $end, empty($post['vehicle']) ? '' : $post['vehicle']);
 		}
 		$html = $this->load->view("report/activity", $data);
 		$html = $this->output->get_output();
-		
 		// Load library
 		$this->load->library('dompdf_gen');
-		
 		// Convert to PDF
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
-		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+		$this->dompdf->stream("activity.pdf", array(
+				'Attachment' => 0 
+		));
 	}
-	
-	public function activity_demo(){
+
+	public function activity_demo() {
 		$html = $this->load->view('report/activity_demo');
 		$html = $this->output->get_output();
-		
 		// Load library
 		$this->load->library('dompdf_gen');
-		
 		// Convert to PDF
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
-		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
-		
+		$this->dompdf->stream("activity.pdf", array(
+				'Attachment' => 0 
+		));
 	}
-	
-	public function stop_form(){
+
+	public function stop_form() {
 		$data['pageTitle'] = "Stop Or Idling Report";
 		$data['vehicles'] = $this->mreport->getAllVehicles();
-		$this->load->template('report/stop_form',$data);
+		$this->load->template('report/stop_form', $data);
 	}
-	
+
 	public function stop() {
 		$data['pageTitle'] = 'Stop Idling Report';
 		$post = $this->input->post();
 		if (isset($post['begin'])) {
-			//print_r($post);exit;
+			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
 			$data['stop'] = $this->mreport->getStopReportGroup($begin, $end, $post['vehicle']);
 		}
 		$html = $this->load->view("report/stop", $data);
-// 		$html = $this->output->get_output();
-	
-// 		// Load library
-// 		$this->load->library('dompdf_gen');
-	
-// 		// Convert to PDF
-// 		$this->dompdf->load_html($html);
-// 		$this->dompdf->render();
-// 		$this->dompdf->stream("activity.pdf",array('Attachment'=>0));
+		// $html = $this->output->get_output();
+		// // Load library
+		// $this->load->library('dompdf_gen');
+		// // Convert to PDF
+		// $this->dompdf->load_html($html);
+		// $this->dompdf->render();
+		// $this->dompdf->stream("activity.pdf",array('Attachment'=>0));
 	}
-	
-	public function test(){
+
+	public function test() {
 		$vehicle = 'haidar, rizki, arief';
-		$array = array($vehicle);
+		$array = array(
+				$vehicle 
+		);
 		print_r($array);
 	}
 
@@ -112,13 +110,21 @@ class Report extends CI_Controller {
 		$this->load->view("report/alert", $data);
 	}
 
+	public function speed_form() {
+		$data['pageTitle'] = 'Speed Report';
+		$data['vehicles'] = $this->mreport->getAllVehicles();
+		$this->load->template('report/speed_form', $data);
+	}
+
 	public function speed() {
 		$data['pageTitle'] = 'Speed Report';
-		$data['data_report'] = $this->mreport->getSpeedReport();
-		$html = $this->load->view("report/speed", $data,$data);
-		$html = $this->output->get_output();
-		$this->load->helper(array('dompdf', 'file'));
-		$pdfData = pdf_create($html, 'test');
-		write_file('Progress Repost', $pdfData);
+		$post = $this->input->post();
+		if (isset($post['begin'])) {
+			//print_r($post);exit;
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$data['speed'] = $this->mreport->getSpeedReport($begin, $end, $post['vehicle']);
+		}
+		$html = $this->load->view("report/speed", $data);
 	}
 }

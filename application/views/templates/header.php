@@ -156,7 +156,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							</a></li>
 							<li><a href="#"> <i class="icon-cog"></i> Alerts Report
 							</a></li>
-							<li><a href="#"> <i class="icon-cog"></i> Speed Report
+							<li><a href="<?php echo site_url()?>report/speed_form"> <i class="icon-cog"></i> Speed Report
 							</a></li>
 							<li><a href="<?php echo site_url()?>report/stop_form"> <i class="icon-cog"></i> Stop/Idling Report
 							</a></li>

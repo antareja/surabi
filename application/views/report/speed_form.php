@@ -1,8 +1,8 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Stop Report<small> <i class="icon-double-angle-right"></i>
-				Stop Form
+			Speed Report<small> <i class="icon-double-angle-right"></i>
+				Speed Form
 			</small>
 		</h1>
 	</div>
@@ -13,7 +13,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>report/stop/" method="POST" />
+				action="<?php echo site_url();?>report/speed" method="POST" />
 
 			<div class="form-group">
 			<div class="col-sm-5">

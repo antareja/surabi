@@ -44,6 +44,19 @@ class MReport extends CI_Model {
 		return $query;
 	}
 	
+	function getSpeedReport($begin, $end, $vehicles) {
+		$this->db->select('vehicles.name, velocity, create_at, location, bearing');
+		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		if ($vehicles != '') {
+			$this->db->where_in('vehicle_id', $vehicles);
+		}
+		$query = $this->db->get_where('packet' , array(
+			'create_at >=' => $begin . ' 09:00',
+			'create_at <=' => $end . ' 23:00'
+		));
+		return $query->result();
+	}
+	
 	function getStopReportGroup($begin, $end,$vehicles) {
 		$this->db->group_by('latitude, longitude, mobile_address,DATE(create_at)');
 		$this->db->select('vehicles.name, MIN(time) start_time, MAX(time) end_time, mobile_address, latitude,longitude
@@ -76,11 +89,6 @@ class MReport extends CI_Model {
 		return $query->row();
 	}
 	function getAlertReport() {
-		$query = $this->db->get('region_alert');
-		return $query->result();
-	}
-
-	function getSpeedReport() {
 		$query = $this->db->get('region_alert');
 		return $query->result();
 	}
