@@ -75,7 +75,7 @@
 					for="form-field-1"> Maximum Speed </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="max_speed" name="max_speed"
-						placeholder="color"
+						placeholder="max_speed"
 						value="<?php echo isset($speed) ? $speed->max_speed : '';?>">
 				</div>
 			</div>

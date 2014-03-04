@@ -88,7 +88,7 @@ class Packet extends CI_Controller {
 			$data['type'] = 'speed';
 			$data['type_id'] = 1;
 			$data['packet_id'] = $packet_id;
-			$this->mpacket->insertSpeedAlert($data);
+			echo $this->mpacket->insertSpeedAlert($data);
 		}
 	}
 	
