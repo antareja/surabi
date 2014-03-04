@@ -89,7 +89,7 @@ class Packet extends CI_Controller {
 	public function check_speed($speed,$mobile_address,$latitude,$longitude){
 		if($this->mpacket->getDefaultSpeed($speed)) {
 			$data['type'] = 'speed';
-			$data['speed'] = $speed;
+			$data['type_id'] = 1;
 			$data['mobile_address'] = $mobile_address;
 			$data['latitude'] = $latitude;
 			$data['longitude'] = $longitude;
