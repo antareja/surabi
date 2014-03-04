@@ -72,7 +72,7 @@ class Packet extends CI_Controller {
 			}
 			$insert_id = $this->mpacket->insertPacket($data);
 			# check Speed if exceed 
-			$this->check_speed($post['velocity'], $insert_id);
+			$this->check_speed($data['velocity'], $insert_id);
 			# check Region 
 		}
 	}
