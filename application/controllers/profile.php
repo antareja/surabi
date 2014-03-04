@@ -73,9 +73,9 @@ class Profile extends CI_Controller {
 			$post_data['user_id'] = $_SESSION['gps_user_id'];
 			$post_data['name'] = $post['name'];
 			$post_data['description'] = $post['description'];
-			if ($post['speed_id']) {
-				$this->mprofile->updateSpeedAlert($post_data, $speed_id);
-				redirect('profile/speed_alert/' . $speed_id);
+			if (isset($post['speed_id'])) {
+				$this->mprofile->updateSpeedAlert($post_data, $post['speed_id']);
+				redirect('profile/speed_alert/' . $post['speed_id']);
 			} else {
 				$id = $this->mprofile->insertSpeedAlert($post_data);
 				redirect('profile/speed_alert/' . $id);

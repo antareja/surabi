@@ -91,7 +91,6 @@
 				<?php echo isset($speed) ? '<input type="hidden" name="speed_id" value="'.$speed->speed_id.'" >' : '';?>
 			</form>
 		</div>
-		<textarea id="tmp_position" style="display:none"><?php echo isset($speed) ? $speed->latlng : '';?></textarea>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>

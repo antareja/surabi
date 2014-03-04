@@ -120,9 +120,9 @@
 				</div>
 			</div>
 				<?php echo isset($region) ? '<input type="hidden" name="region_id" value="'.$region->region_id.'" >' : '';?>
+				<textarea id="tmp_position" style="display:none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
 			</form>
 		</div>
-		<textarea id="tmp_position" style="display:none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
