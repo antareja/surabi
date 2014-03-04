@@ -97,6 +97,14 @@ class Packet extends CI_Controller {
 		}
 	}
 	
+	public function check_test($speed){
+		if($this->mpacket->getDefaultSpeed($speed)) {
+			echo 'exceed max';
+		} else  {
+			echo 'kecepatan aman';
+		}
+	}
+	
 	public function check_region($mobile_address,$latitude,$longitude){
 		
 	}

@@ -36,10 +36,10 @@ class MPacket extends CI_Model {
 
 	function getDefaultSpeed($speed) {
 		$query = $this->db->get_where('speed_alert', array(
-				'max_speed >=' => $speed,
+				'max_speed <=' => $speed,
 				'default' => 1 
 		));
-		if ($query->num_row() >0){
+		if ($query->num_rows() >0){
 			return true;
 		} else {
 			return false;
@@ -51,7 +51,7 @@ class MPacket extends CI_Model {
 				'max_speed' => $speed,
 				'mobile_address' => $mobile_address 
 		));
-		if ($query->num_row() > 0) {
+		if ($query->num_rows() > 0) {
 			return true;
 		} else {
 			return false;
