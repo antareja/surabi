@@ -64,7 +64,7 @@ while True:
                 if err.code == 404:
                     print 'error'
                 else:
-                    print err.code
+                    raise    
             urllib2.urlopen(url)
         # gps status with position
         elif packet_number == '100' :
@@ -92,7 +92,7 @@ while True:
                 if err.code == 404:
                     print 'error'
                 else:
-                    print err.code
+                    raise
             # print(response.read())
             urllib2.urlopen(url)
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)
