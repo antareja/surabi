@@ -1,26 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	
+<div id="map" style="width: 100%; height: 400px"></div>
 <script type="text/javascript">
 var geocoder = new google.maps.Geocoder();
-var customIcons = {
-<?php 
-foreach($all_vehicle as $vehicle)
-{
-  echo "icon_mobil_".$vehicle->gps_mobile_address.": { \n";
-  echo "icon: 'http://surabi.dev/assets/uploads/icon_".$vehicle->icon_id.".".$vehicle->image_type."' \n";
-  echo "}, \n";
-}
-?>
-};
-
-var nama_mobil = {
-<?php 
-	foreach($all_vehicle as $vehicle)
-	{
-		echo "nama_mobil_".$vehicle->gps_mobile_address.": { \n";
-		echo "nama: '".$vehicle->name."' \n";
-		echo "}, \n";
-	}
-?>
-};
 google.maps.Polygon.prototype.Contains = function (point) {
     // ray casting alogrithm http://rosettacode.org/wiki/Ray-casting_algorithm
     var crossings = 0,
@@ -67,18 +57,28 @@ google.maps.Polygon.prototype.Contains = function (point) {
 
 var map = new google.maps.Map(document.getElementById("map"), {
     center: new google.maps.LatLng(-6.915499,107.594301),
-    zoom: 13,
+    zoom: 12,
     scaleControl:true,
     mapTypeId: 'roadmap'
   });
+
+
+var myLatlng = new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lng;?>);
+
+var marker = new google.maps.Marker({
+    position: myLatlng,
+    map: map,
+    title: 'Hello World!'
+});
+
                     <?php $i=0;
                      foreach($regions as $region) { 
 						$i++;
                     	$latlng = explode(";", $region->latlng); ?>
                     	var boundaryPolygon<?php echo $region->region_id;?>;
 var boundarydata<?php echo $region->region_id; ?> = [
-                    		<?php foreach($latlng as $lat) {?>
-    new google.maps.LatLng(<?php echo rm_brace($lat);?>),
+                    		<?php foreach($latlng as $lats) {?>
+    new google.maps.LatLng(<?php echo rm_brace($lats);?>),
 							<?php } ?>
                   ];
                         boundaryPolygon<?php echo $region->region_id;?> = new google.maps.Polygon({
@@ -99,8 +99,17 @@ var boundarydata<?php echo $region->region_id; ?> = [
 	foreach($regions as $region) { ?>        
 		var point = new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>);               
 		if (boundaryPolygon<?php echo $region->region_id;?>.Contains(point)) {
-			alert("Sampai");
-			$.post( "<?php echo site_url();?>packet/region_alert", { packet_id: "2131", region_id: <?php echo $region->region_id?> } );
+			// alert("In Area");
+			$.post( "<?php echo site_url();?>packet/region_alert",
+				 { 
+				packet_id: <?php echo $packet_id;?>, 
+				region_id: <?php echo $region->region_id?> 
+				} ) .done(function( data ) {
+					// alert( "Data Loaded: " + data );
+				});
 		} 		
 	<?php } ?>
-  </script>
+</script>
+test<?php echo $lat;?> 
+</body>
+</html>

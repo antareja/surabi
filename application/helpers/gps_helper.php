@@ -48,6 +48,14 @@ function define_sess($username, $user_id, $full_name) {
 	// print_r($_SESSION);exit;
 }
 
+function user_id_sess(){
+	return $_SESSION['gps_user_id'];
+}
+
+function username_sess(){
+	return $_SESSION['gps_username'];
+}
+
 function previous_url() {
 	if ($_SESSION['last_url']) {
 		return header('Location: ' . $_SESSION['last_url']);

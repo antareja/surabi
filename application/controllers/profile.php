@@ -26,7 +26,7 @@ class Profile extends CI_Controller {
 		if ($post) {
 			$post_data['name'] = $post['name'];
 			$post_data['description'] = $post['description'];
-			$post_data['employee_id'] = "1";
+			$post_data['user_id'] = user_id_sess();
 			$post_data['latlng'] = implode(";", $post['txt_posisi']);
 			$post_data['expire_time'] = $post['expire_time'];
 			$post_data['time_start'] = $post['time_start'];

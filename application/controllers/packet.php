@@ -78,10 +78,12 @@ class Packet extends CI_Controller {
 		}
 	}
 
-	public function test_post() {
-		$data['create_at'] = date("Y-m-d H:i:s.m");
-		$this->mpacket->insertPacket($data);
-		echo 'test';
+	public function check_region($lat, $lng, $packet_id) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		$data['packet_id'] = $packet_id;
+		$data['regions'] = $this->mpacket->getAllRegion();
+		$this->load->view('alert_region', $data);
 	}
 
 	public function check_speed($speed, $packet_id) {
@@ -93,14 +95,12 @@ class Packet extends CI_Controller {
 		}
 	}
 
-	public function check_region($lat, $lng) {
-	}
-
 	public function region_alert() {
 		$post = $this->input->post();
 		$data['type'] = 'region';
 		$data['type_id'] = $post['region_id'];
 		$data['packet_id'] = $post['packet_id'];
+		//print_r($data);
 		$this->mpacket->insertRegionAlert($data);
 	}
 
@@ -112,14 +112,14 @@ class Packet extends CI_Controller {
 		}
 	}
 
-	public function check_region($lat, $lng, $packet_id) {
-		$data['lat'] = $lat;
-		$data['lng'] = $lng;
-		$data['packet_id'] = $packet_id;
-		$this->load->view('alert_region', $data);
-	}
-
 	public function parse() {
 		$packet = '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04';
 	}
+	
+	public function test_post() {
+		$data['create_at'] = date("Y-m-d H:i:s.m");
+		$this->mpacket->insertPacket($data);
+		echo 'test';
+	}
+	
 }

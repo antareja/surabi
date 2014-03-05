@@ -34,6 +34,11 @@ class MPacket extends CI_Model {
 		// echo $this->db->last_query();
 		return $query;
 	}
+	
+	function getAllRegion() {
+		$query = $this->db->get('region_alert');
+		return $query->result();
+	}
 
 	function getDefaultSpeed($speed) {
 		$query = $this->db->get_where('speed_alert', array(
