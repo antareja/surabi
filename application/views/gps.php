@@ -47,8 +47,6 @@ var marker_array = [];
 var z=1;
 var markers={};
 var marker="";
-var boundaryPolygon1;
-var boundaryPolygon2;
 var geocoder = new google.maps.Geocoder();
 var customIcons = {
 <?php 
@@ -127,6 +125,7 @@ var map = new google.maps.Map(document.getElementById("map"), {
                      foreach($regions as $region) { 
 						$i++;
                     	$latlng = explode(";", $region->latlng); ?>
+                    	var boundaryPolygon<?php echo $i;?>;
 var boundarydata<?php echo $i; ?> = [
                     		<?php foreach($latlng as $lat) {?>
     new google.maps.LatLng(<?php echo rm_brace($lat);?>),

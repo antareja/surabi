@@ -35,7 +35,7 @@ class Packet extends CI_Controller {
 		$data = curl_exec($ch);
 		curl_close($ch);
 		$json = json_decode($data, true);
-		//print_r($json);
+		// print_r($json);
 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
 		return $short_name;
 	}
@@ -47,7 +47,7 @@ class Packet extends CI_Controller {
 			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
 			// $data['full_packet'] = $post['full_packet'];
 			$data['source_type'] = $post['source'];
-			//$data['create_at'] = date("Y-m-d H:i:s.m");  # for ms sql only
+			// $data['create_at'] = date("Y-m-d H:i:s.m"); # for ms sql only
 			$data['system_id'] = $post['system'];
 			$data['mobile_address'] = $post['mobile'];
 			$data['base_ip_address'] = $post['base_ip'];
@@ -62,7 +62,6 @@ class Packet extends CI_Controller {
 				$data['longitude'] = $post['lng'];
 				$data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
 				$data['velocity'] = $post['velocity'];
-				
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
 				$data['satellite'] = $post['satelite'];
@@ -72,9 +71,10 @@ class Packet extends CI_Controller {
 				$data['state'] = $post['state'];
 			}
 			$insert_id = $this->mpacket->insertPacket($data);
-			# check Speed if exceed 
+			// check Speed if exceed
 			$this->check_speed($data['velocity'], $insert_id);
-			# check Region 
+			// check Region
+			$this->check_region($post['lat'], $post['lng'], $insert_id);
 		}
 	}
 
@@ -83,26 +83,40 @@ class Packet extends CI_Controller {
 		$this->mpacket->insertPacket($data);
 		echo 'test';
 	}
-	
-	public function check_speed($speed,$packet_id){
-		if($this->mpacket->getDefaultSpeed($speed)) {
+
+	public function check_speed($speed, $packet_id) {
+		if ($this->mpacket->getDefaultSpeed($speed)) {
 			$data['type'] = 'speed';
 			$data['type_id'] = 1;
 			$data['packet_id'] = $packet_id;
 			echo $this->mpacket->insertSpeedAlert($data);
 		}
 	}
-	
-	public function check_test($speed){
-		if($this->mpacket->getDefaultSpeed($speed)) {
+
+	public function check_region($lat, $lng) {
+	}
+
+	public function region_alert() {
+		$post = $this->input->post();
+		$data['type'] = 'region';
+		$data['type_id'] = $post['region_id'];
+		$data['packet_id'] = $post['packet_id'];
+		$this->mpacket->insertRegionAlert($data);
+	}
+
+	public function check_test($speed) {
+		if ($this->mpacket->getDefaultSpeed($speed)) {
 			echo 'exceed max';
-		} else  {
+		} else {
 			echo 'kecepatan aman';
 		}
 	}
-	
-	public function check_region($mobile_address,$latitude,$longitude){
-		
+
+	public function check_region($lat, $lng, $packet_id) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		$data['packet_id'] = $packet_id;
+		$this->load->view('alert_region', $data);
 	}
 
 	public function parse() {
