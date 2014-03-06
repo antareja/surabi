@@ -216,7 +216,7 @@ var boundarydata<?php echo $i; ?> = [
 		foreach($regions as $region) { 
 		$i++;?>                       
 		if (<?php echo $region->in_out == 'out'? '!':''?>boundaryPolygon<?php echo $i;?>.Contains(point)) {
-			alert("Sampai");
+			alert("<?php echo $region->in_out?> Area");
 		} 		<?php } ?>
 	  });
 	  }
