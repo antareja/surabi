@@ -75,6 +75,8 @@ class Packet extends CI_Controller {
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
 			$this->check_region($post['lat'], $post['lng'], $insert_id);
+			# test Region
+			$this->test_region();
 		}
 	}
 
@@ -96,16 +98,22 @@ class Packet extends CI_Controller {
 	
 	public function test_region(){
 		//$this->check_region($lat='-6.853657', $lng='107.690721', $packet_id='16381');
-
+// 		$data['lat']='-6.853657' ;
+// 		$data['lng']='107.690721';
+		$data['type'] = 'region';
+		$data['type_id'] = '123';
+		$data['packet_id']='16381';
+		$this->mpacket->insertRegionAlert($data);
 		$url = 'http://192.168.12.250/surabi/index.php/packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16381';
-		echo $url;
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
-		$data = curl_exec($ch);
-		curl_close($ch);
+// 		echo $url;
+		
+// 		$ch = curl_init();
+// 		curl_setopt($ch, CURLOPT_URL, $url);
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+// 		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+// 		$data = curl_exec($ch);
+// 		curl_close($ch);
 	}
 
 	public function check_speed($speed, $packet_id) {

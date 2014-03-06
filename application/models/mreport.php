@@ -102,10 +102,6 @@ class MReport extends CI_Model {
 		$query = $this->db->get_where('default_profile', array('default'=>1));
 		return $query->row();
 	}
-	function getAlertReport() {
-		$query = $this->db->get('region_alert');
-		return $query->result();
-	}
 
 	function getTimeClockReport() {
 		$query = $this->db->get('region_alert');
