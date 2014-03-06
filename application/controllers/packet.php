@@ -83,7 +83,28 @@ class Packet extends CI_Controller {
 		$data['lng'] = $lng;
 		$data['packet_id'] = $packet_id;
 		$data['regions'] = $this->mpacket->getAllRegion();
+// 		$url = 'http://192.168.12.250/packet/check_region/' . $lat . "/".$lng. '/'.$packet_id;
+// 		$ch = curl_init();
+// 		curl_setopt($ch, CURLOPT_URL, $url);
+// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+// 		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+// 		$data = curl_exec($ch);
+// 		curl_close($ch);
 		$this->load->view('alert_region', $data);
+	}
+	
+	public function test_region(){
+		//$this->check_region($lat='-6.853657', $lng='107.690721', $packet_id='16381');
+
+		$url = 'http://192.168.12.250/packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16381';
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+		$data = curl_exec($ch);
+		curl_close($ch);
 	}
 
 	public function check_speed($speed, $packet_id) {
