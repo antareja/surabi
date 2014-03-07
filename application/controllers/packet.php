@@ -74,10 +74,24 @@ class Packet extends CI_Controller {
 			// check Speed if exceed
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
-			$this->check_region($post['lat'], $post['lng'], $insert_id);
+			$this->read_region($post['lat'], $post['lng'], $insert_id);
 			# test Region
 			//$this->test_region();
 		}
+	}
+	
+	public function read_region($lat,$lng,$packet_id) {
+		$url = site_url().'packet/check_region/' . $lat . "/".$lng. '/'.$packet_id;
+		echo $url;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+		$data = curl_exec($ch);
+		echo $data;
+		curl_close($ch);
+		
 	}
 
 	public function check_region($lat, $lng, $packet_id) {
@@ -85,14 +99,6 @@ class Packet extends CI_Controller {
 		$data['lng'] = $lng;
 		$data['packet_id'] = $packet_id;
 		$data['regions'] = $this->mpacket->getAllRegion();
-		$url = site_url().'/packet/check_region/' . $lat . '/'.$lng. '/'.$packet_id;
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
-		$data = curl_exec($ch);
-		curl_close($ch);
 		$this->load->view('alert_region', $data);
 	}
 	
@@ -102,9 +108,9 @@ class Packet extends CI_Controller {
 // 		$data['lng']='107.690721';
 		$data['type'] = 'region';
 		$data['type_id'] = '123';
-		$data['packet_id']='16381';
-		$this->mpacket->insertRegionAlert($data);
-		$url = 'http://surabi.dev/packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16381';
+		$data['packet_id']='16390';
+		//$this->mpacket->insertRegionAlert($data);
+		$url = site_url().'packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16390';
 		echo $url;
 		
 		$ch = curl_init();

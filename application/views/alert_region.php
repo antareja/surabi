@@ -99,7 +99,7 @@ var boundarydata<?php echo $region->region_id; ?> = [
 	foreach($regions as $region) { ?>        
 		var point = new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>);               
 		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon<?php echo $region->region_id;?>.Contains(point)) {
-			 alert("<?php echo $region->in_out?> Area");
+			 //alert("<?php echo $region->in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert",
 				 { 
 				packet_id: <?php echo $packet_id;?>, 
