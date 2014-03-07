@@ -40,6 +40,7 @@ class Packet extends CI_Controller {
 		return $short_name;
 	}
 
+	
 	public function resv() {
 		$post = $this->input->post();
 		if ($post) {
