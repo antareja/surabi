@@ -76,7 +76,7 @@ class Packet extends CI_Controller {
 			// check Region
 			$this->check_region($post['lat'], $post['lng'], $insert_id);
 			# test Region
-			$this->test_region();
+			//$this->test_region();
 		}
 	}
 
@@ -85,14 +85,14 @@ class Packet extends CI_Controller {
 		$data['lng'] = $lng;
 		$data['packet_id'] = $packet_id;
 		$data['regions'] = $this->mpacket->getAllRegion();
-// 		$url = 'http://192.168.12.250/packet/check_region/' . $lat . "/".$lng. '/'.$packet_id;
-// 		$ch = curl_init();
-// 		curl_setopt($ch, CURLOPT_URL, $url);
-// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-// 		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-// 		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
-// 		$data = curl_exec($ch);
-// 		curl_close($ch);
+		$url = site_url().'/packet/check_region/' . $lat . '/'.$lng. '/'.$packet_id;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+		$data = curl_exec($ch);
+		curl_close($ch);
 		$this->load->view('alert_region', $data);
 	}
 	
@@ -104,16 +104,16 @@ class Packet extends CI_Controller {
 		$data['type_id'] = '123';
 		$data['packet_id']='16381';
 		$this->mpacket->insertRegionAlert($data);
-		$url = 'http://192.168.12.250/surabi/index.php/packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16381';
-// 		echo $url;
+		$url = 'http://surabi.dev/packet/check_region/' . $lat='-6.853657' . "/".$lng='107.690721'. '/'.$packet_id='16381';
+		echo $url;
 		
-// 		$ch = curl_init();
-// 		curl_setopt($ch, CURLOPT_URL, $url);
-// 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-// 		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
-// 		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
-// 		$data = curl_exec($ch);
-// 		curl_close($ch);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 3000);
+		$data = curl_exec($ch);
+		curl_close($ch);
 	}
 
 	public function check_speed($speed, $packet_id) {
