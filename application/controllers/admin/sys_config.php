@@ -134,6 +134,7 @@ class Sys_config extends CI_Controller {
 		$data['all_driver'] = $this->msys_config->getAllDriver();
 		$data['vehicles'] = $this->msys_config->getAllVehicle();
 		$post = $this->input->post();
+		//print_r($post);exit;
 		if ($post) {
 			$post_data['name'] = $post['name'];
 			$post_data['vehicle_id'] = $post['vehicle_id'];
@@ -143,8 +144,8 @@ class Sys_config extends CI_Controller {
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
 			if ($post['driver_id']) {
-				$this->msys_config->updateDriver($driver_id, $post_data);
-				redirect('admin/sys_config/driver/' . $driver_id);
+				$this->msys_config->updateDriver($post['driver_id'], $post_data);
+				redirect('admin/sys_config/driver/' . $post['driver_id']);
 			} else {
 				$id = $this->msys_config->insertDriver($post_data);
 				redirect('admin/sys_config/driver/' . $id);

@@ -85,7 +85,7 @@ class MSys_config extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	function updateDriver($data, $driver_id) {
+	function updateDriver($driver_id ,$data) {
 		return $this->db->update('driver', $data, array(
 				'driver_id' => $driver_id 
 		));

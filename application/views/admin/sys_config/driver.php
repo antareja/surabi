@@ -31,7 +31,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>driver/"
+				action="<?php echo site_url();?>admin/sys_config/driver/"
 				method="POST" />
 
 			<div class="form-group">
@@ -51,8 +51,12 @@
 						data-placeholder="Choose a Vehicle driver" name="vehicle_id">
 						<option value="">&nbsp;</option>
 						<?php foreach($vehicles as $vehicle) {?>
-						<option value="<?php echo $vehicle->vehicle_id?>"><?php echo $vehicle->name?></option>
-						<?php }?>
+						<option value="<?php echo $vehicle->vehicle_id?>"
+						<?php 
+							if (isset($driver)) {
+							echo $vehicle->vehicle_id == $driver->vehicle_id ? 'selected':'';
+							}?>><?php echo $vehicle->name?></option>
+						<?php } ?>
 					</select>
 				</div>
 			</div>
@@ -109,7 +113,7 @@
 				</div>
 			</div>
 			
-				<?php echo isset($driver) ? '<input type="hidden" name="driver_id" value="'.$driver->driver_id.'" >' : '';?>"
+				<?php echo isset($driver) ? '<input type="hidden" name="driver_id" value="'.$driver->driver_id.'" >' : '';?>
 			</form>
 		</div>
 
