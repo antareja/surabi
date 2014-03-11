@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 //$db['default']['hostname'] = '192.168.12.250\SQLEXPRESS,1433';
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = '192.168.12.250';
 //$db['default']['hostname'] = 'HAIDAR\HAIDARSQLEXPRESS';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'root';
