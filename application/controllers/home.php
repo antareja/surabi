@@ -26,7 +26,7 @@ class Home extends CI_Controller {
 		$data['regions'] = $this->mprofile->getAllRegion();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
-		$this->load->template('gps', $data);
+		$this->load->template('gps_google', $data);
 	}
 
 	public function demo() {

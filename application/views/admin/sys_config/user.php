@@ -31,7 +31,7 @@
 
 			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>admin/user/"
+				action="<?php echo site_url();?>admin/sys_config/user/"
 				method="POST" />
 
 			<div class="form-group">

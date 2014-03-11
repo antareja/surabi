@@ -30,7 +30,7 @@ if (!isset($_SESSION['gps_username'])) {
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script>
+<!-- <script src="http://192.168.12.250:8000/socket.io/socket.io.js"></script> -->
 <!--[if IE 7]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
 <![endif]-->
