@@ -21,39 +21,6 @@ else
 <input type="button" onclick="f1.submit()" value="Print">
 <div id="header" align="center">
 <h1>Alert Report</h1>
-<?php
-echo date("d/m/Y");
-$data_report=array
-			(
-					"0"=>array
-					(
-								"vehicle"=>"Dump Truck",
-								"driver"=>"Driver 1",
-								"alert_time"=>"10:11:12",
-								"alert_type"=>"Region Entry",
-								"location"=>"Jl Budhi",
-								"alert_description"=>"Arrive at Cimahi",
-					),
-					"1"=>array
-					(
-								"vehicle"=>"Dump Truck",
-								"driver"=>"Driver 1",
-								"alert_time"=>"11:12:13",
-								"alert_type"=>"Region Entry",
-								"location"=>"Jl BKR",
-								"alert_description"=>"Arrive at Tegallega",
-					),
-					"2"=>array
-					(
-								"vehicle"=>"Dump Truck",
-								"driver"=>"Driver 1",
-								"alert_time"=>"12:13:14",
-								"alert_type"=>"Region Entry",
-								"location"=>"Jl Pajajaran",
-								"alert_description"=>"Arrive at Hussein",
-					)
-			);
-?>
 </div>
 Sorted By : Vehicle
 <hr>
@@ -71,18 +38,18 @@ Sorted By : Vehicle
 </tr>
 <?php
 $x=1;
-foreach($data_report as $data)
+foreach($alert as $data)
 {
 if($x%2==0)$class="genap";
 else $class="ganjil";
 ?>
 <tr class="<?php echo $class?>">
-	<td><?php echo $data["vehicle"]?></td>
-	<td><?php echo $data["driver"]?></td>
-	<td><?php echo $data["alert_time"]?></td>
-	<td><?php echo $data["alert_type"]?></td>
-	<td><?php echo $data["location"]?></td>
-	<td><?php echo $data["alert_description"]?></td>
+	<td><?php echo $data->name?></td>
+	<td><?php echo $data->driver_name?></td>
+	<td><?php echo $data->create_at?></td>
+	<td><?php echo $data->type?></td>
+	<td><?php echo $data->location?></td>
+	<td><?php echo 'alert description'?></td>
 </tr>	
 <?php
 $x++;

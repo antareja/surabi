@@ -106,10 +106,22 @@ class Report extends CI_Controller {
 
 	public function alert() {
 		$data['pageTitle'] = 'Alert Report';
-		$data['data_report'] = $this->mreport->getAlertReport();
+		$post = $this->input->post();
+		if (isset($post['begin'])) {
+			//print_r($post);exit;
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$data['alert'] = $this->mreport->getAlertReport($begin, $end, $post['vehicle']);
+		}
 		$this->load->view("report/alert", $data);
 	}
 
+	public function alert_form() {
+		$data['pageTitle'] = 'Speed Report';
+		$data['vehicles'] = $this->mreport->getAllVehicles();
+		$this->load->template('report/alert_form', $data);
+	}
+	
 	public function speed_form() {
 		$data['pageTitle'] = 'Speed Report';
 		$data['vehicles'] = $this->mreport->getAllVehicles();

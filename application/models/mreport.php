@@ -58,15 +58,17 @@ class MReport extends CI_Model {
 	}
 	
 	function getAlertReport($begin, $end, $vehicle) {
-		$this->db->select('vehicles.name, velocity, create_at, location, bearing');
-		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
-		if ($vehicles != '') {
-			$this->db->where_in('vehicle_id', $vehicles);
-		}
+		$this->db->select('vehicles.name, driver.name as driver_name,  
+				alert.type, velocity, packet.create_at as create_at, location, bearing');
 		$this->db->join('packet', 'alert.packet_id = packet.id_packet');
+		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id');
+		if ($vehicle != '') {
+			$this->db->where_in('vehicles.vehicle_id', $vehicle);
+		}
 		$query = $this->db->get_where('alert' , array(
-				'create_at >=' => $begin . ' 09:00',
-				'create_at <=' => $end . ' 23:00'
+				'alert.create_at >=' => $begin . ' 09:00',
+				'alert.create_at <=' => $end . ' 23:00'
 		));
 		return $query->result();
 	}
