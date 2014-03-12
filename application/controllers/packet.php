@@ -119,7 +119,7 @@ class Packet extends CI_Controller {
 		}
 		$in_out = poly_contains($point, $polygon)?'in':'out';
 		$in_out == $region->in_out ? $this->region_alert(): '';
-		echo 'test';
+		//echo 'test';
 	}
 
 	public function region_alert() {
