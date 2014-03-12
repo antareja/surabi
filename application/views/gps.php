@@ -51,6 +51,15 @@ var marker_array = [];
 var z=1;
 var markers={};
 var marker="";
+var popupContentHTML="";
+var data_map="";
+var name = "";
+var lat = "";
+var lng = "";
+var marker_id="";
+var markerClick="";
+
+var geo_url = "http://192.168.12.58:8080/geoserver/tcm/wms" ;
 
 var popup_marker = {
 <?php 
@@ -100,6 +109,40 @@ foreach($all_vehicle as $vehicle)
             var map;
             var untiled;
             var tiled;
+			
+		AutoSizeAnchored = OpenLayers.Class(OpenLayers.Popup.Anchored, {
+            'autoSize': true
+        });
+
+        AutoSizeAnchoredMinSize = OpenLayers.Class(OpenLayers.Popup.Anchored, {
+            'autoSize': true, 
+            'minSize': new OpenLayers.Size(400,400)
+        });
+
+        AutoSizeAnchoredMaxSize = OpenLayers.Class(OpenLayers.Popup.Anchored, {
+            'autoSize': true, 
+            'maxSize': new OpenLayers.Size(100,100)
+        });
+
+        //framed
+
+        //disable the autosize for the purpose of our matrix
+        OpenLayers.Popup.FramedCloud.prototype.autoSize = false;
+
+        AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+            'autoSize': true
+        });
+
+        AutoSizeFramedCloudMinSize = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+            'autoSize': true, 
+            'minSize': new OpenLayers.Size(400,400)
+        });
+
+        AutoSizeFramedCloudMaxSize = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+            'autoSize': true, 
+            'maxSize': new OpenLayers.Size(100,100)
+        });
+			
             // pink tile avoidance
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
             // make OL compute scale according to WMS spec
@@ -122,11 +165,10 @@ foreach($all_vehicle as $vehicle)
                     projection: "EPSG:4326",
                     units: 'degrees'
                 };
-				map = new OpenLayers.Map('map', options);
-            
+				map = new OpenLayers.Map('map', options);           
                 // setup tiled layer
                 tiled = new OpenLayers.Layer.WMS(
-                    "Geoserver layers - Tiled", "http://192.168.12.58:8080/geoserver/tcm/wms",
+                    "Geoserver layers - Tiled", geo_url ,
                     {
                         LAYERS: 'tcm-layer_group',
                         STYLES: '',
@@ -144,7 +186,7 @@ foreach($all_vehicle as $vehicle)
             
                 // setup single tiled layer
                 untiled = new OpenLayers.Layer.WMS(
-                    "Geoserver layers - Untiled", "http://192.168.12.58:8080/geoserver/tcm/wms",
+                    "Geoserver layers - Untiled", geo_url,
                     {
                         LAYERS: 'tcm-layer_group',
                         STYLES: '',
@@ -213,39 +255,40 @@ foreach($all_vehicle as $vehicle)
     var socket = io.connect('http://192.168.12.250:8000');
     // on message received we print all the data inside the #container div
     socket.on('notification', function (data) {
-		var data_map=data.data;
-		
-		var name = data_map["system"];
-		var lat = data_map["lat"];
-		var lng = data_map["lng"];
-		
-		var marker_id='marker_' + data_map["mobile"];
-		var ada=jQuery.inArray( marker_id, filter );
-		if(ada>=0)
+		data_map=data.data;
+		if(data_map["packet_number"]=="104" || data_map["packet_number"]=="100")
 		{
-		if(jQuery.inArray( marker_id, cek_marker )>=0)
-		{
-			marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
-		}
+			name = data_map["system"];
+			lat = data_map["lat"];
+			lng = data_map["lng"];
+		
+			marker_id='marker_' + data_map["mobile"];
+			var ada=jQuery.inArray( marker_id, filter );
+			if(ada>=0)
+			{
+				if(jQuery.inArray( marker_id, cek_marker )>=0)
+				{
+					marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+				}
 			
-					var point2=new OpenLayers.LonLat(lng,lat);
-					var pixel=map.getPixelFromLonLat(point2);
+				var point2=new OpenLayers.LonLat(lng,lat);
+				var pixel=map.getPixelFromLonLat(point2);
 					
-					document.getElementById('nodelist').innerHTML = "Loading... please wait...";
-                    var params = {
-                        REQUEST: "GetFeatureInfo",
-                        EXCEPTIONS: "application/vnd.ogc.se_xml",
-                        BBOX: map.getExtent().toBBOX(),
-                        SERVICE: "WMS",
-                        INFO_FORMAT: 'application/json',
-                        QUERY_LAYERS: map.layers[0].params.LAYERS,
-                        FEATURE_COUNT: 50,
-                        Layers: 'tcm-layer_group',
-                        WIDTH: map.size.w,
-                        HEIGHT: map.size.h,
-                        format: format,
-                        styles: map.layers[0].params.STYLES,
-                        srs: map.layers[0].params.SRS};
+				document.getElementById('nodelist').innerHTML = "Loading... please wait...";
+                var params = {
+                    REQUEST: "GetFeatureInfo",
+                    EXCEPTIONS: "application/vnd.ogc.se_xml",
+                    BBOX: map.getExtent().toBBOX(),
+                    SERVICE: "WMS",
+                    INFO_FORMAT: 'application/json',
+                    QUERY_LAYERS: map.layers[0].params.LAYERS,
+                    FEATURE_COUNT: 50,
+                    Layers: 'tcm-layer_group',
+                    WIDTH: map.size.w,
+                    HEIGHT: map.size.h,
+                    format: format,
+                    styles: map.layers[0].params.STYLES,
+                    srs: map.layers[0].params.SRS};
                     
                     // handle the wms 1.3 vs wms 1.1 madness
                     if(map.layers[0].params.VERSION == "1.3.0") {
@@ -268,48 +311,105 @@ foreach($all_vehicle as $vehicle)
                     if(map.layers[0].params.FEATUREID) {
                         params.featureid = map.layers[0].params.FEATUREID;
                     }
-                    OpenLayers.loadURL("http://localhost:8080/geoserver/tcm/wms", params, this, setHTML, setHTML);
-			
-			var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
-			var point=new OpenLayers.LonLat(lng,lat);
-			nama_marker["marker_"+data_map["mobile"]].nama=new OpenLayers.Marker(point,icon);
-			nama_marker["marker_"+data_map["mobile"]].nama.events.register('mouseover', nama_marker["marker_"+data_map["mobile"]].nama, function(evt) {
-			alert("xxx");
-			});
-			nama_marker["marker_"+data_map["mobile"]].nama.events.register('mouseout', nama_marker["marker_"+data_map["mobile"]].nama, function(evt) {popup.hide();});
-			marker_layer.addMarker(nama_marker["marker_"+data_map["mobile"]].nama);
-			var point_marker=new OpenLayers.Geometry.Point(lng,lat);
-			var dalam=poly.containsPoint(point_marker);
-			if(dalam)alert("Sampai");
-			cek_marker.push(marker_id);
-			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
-	  }
+                    OpenLayers.loadURL(geo_url, params, this, setHTML, setHTML);
+					
+				marker_layer.setZIndex( 1001 ); 
+			}
+		}
   });
 
 
-function setHTML(response){
+function setHTML(response)
+{
 				response2=eval("(" + response.responseText + ")");
-                var provinsi = "";
+				$("#nodelist").html(response.responseText);
+				var provinsi = "";
                 var jalan =  "";
                 var jalan_tambang = "";
-                
-				provinsi = JSON.stringify(response2.features[0].properties.PROV);
-                if(response2.features.length>1)
-				{
-					jalan =  JSON.stringify(response2.features[1].properties.name);
-				}
-                if(response2.features.length>2)
-                {
-					jalan_tambang = JSON.stringify(response2.features[2].properties.NAME);
-				}
-				if(! jalan)jalan="";
-				if(! jalan_tambang)jalan_tambang="";
-				jalan=jalan.replace(/"/g,"")+"&nbsp;";
-				jalan_tambang=jalan_tambang.replace(/"/g,"")+"&nbsp;";
-				provinsi=provinsi.replace(/"/g,"")+"&nbsp;";
-				var lokasi=jalan_tambang+jalan+provinsi;
-				document.getElementById('nodelist').innerHTML=lokasi;
+					provinsi = JSON.stringify(response2.features[0].properties.PROV);
+					if(response2.features.length>1)
+					{
+						jalan =  JSON.stringify(response2.features[1].properties.name);
+					}
+					if(response2.features.length>2)
+					{
+						jalan_tambang = JSON.stringify(response2.features[2].properties.NAME);
+					}
+					if(! jalan)jalan="";
+					if(! jalan_tambang)jalan_tambang="";
+					jalan=jalan.replace(/"/g,"");
+					if(jalan!="")
+					{
+						jalan+="&nbsp;";
+					}
+					jalan_tambang=jalan_tambang.replace(/"/g,"");
+					if(jalan_tambang!="")
+					{
+						jalan_tambang+="&nbsp;";
+					}
+					provinsi=provinsi.replace(/"/g,"");
+					var lokasi=jalan_tambang+jalan+provinsi;
+				
+				popupContentHTML="<b>";
+				popupContentHTML+="<table>";
+				popupContentHTML+="<tr>";
+				popupContentHTML+="		<td>Name</td>";
+				popupContentHTML+="		<td>&nbsp;:</td>";
+				popupContentHTML+="		<td>  &nbsp;&nbsp;"+nama_mobil["nama_mobil_"+data_map["mobile"]].nama+"</td>";
+				popupContentHTML+="</tr>";
+				popupContentHTML+="<tr>";
+				popupContentHTML+="		<td>Location</td>";
+				popupContentHTML+="		<td>&nbsp;:</td>";
+				popupContentHTML+="		<td>&nbsp;&nbsp;"+lokasi+"</td>";
+				popupContentHTML+="</tr>";
+				popupContentHTML+="<tr>";
+				popupContentHTML+="		<td>Position</td>";
+				popupContentHTML+="		<td>&nbsp;:</td>";
+				popupContentHTML+="		<td> &nbsp;&nbsp;"+lat+","+lng+"</td>";
+				popupContentHTML+="</tr>";
+				popupContentHTML+="		<td>Time</td>";
+				popupContentHTML+="		<td>&nbsp;:</td>";
+				popupContentHTML+="		<td> &nbsp;&nbsp;" + data_map["tanggal"] + " " + data_map["jam"]+"</td>";
+				popupContentHTML+="<tr>";
+				popupContentHTML+="<tr>";
+				popupContentHTML+="		<td>Speed</td>";
+				popupContentHTML+="		<td>&nbsp;:</td>";
+				popupContentHTML+="		<td> &nbsp;&nbsp;" + data_map["velocity"] + "km/h</td>";
+				popupContentHTML+="</tr>";
+				popupContentHTML+="</table>";
+				popupContentHTML+="</b>";
+				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
+			
+			var point=new OpenLayers.LonLat(lng,lat);
+			nama_marker["marker_"+data_map["mobile"]].nama=new OpenLayers.Marker(point,icon);
+			
+			ll = new OpenLayers.LonLat(-35,20);
+            var popupClass = AutoSizeAnchored;
+            
+			popup_marker["popup_marker_"+data_map["mobile"]].popup = new OpenLayers.Feature(marker_layer, point); 
+            popup_marker["popup_marker_"+data_map["mobile"]].popup.closeBox = true;
+            popup_marker["popup_marker_"+data_map["mobile"]].popup.popupClass = popupClass;
+            popup_marker["popup_marker_"+data_map["mobile"]].popup.data.popupContentHTML = popupContentHTML;
+            markerClick = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(this.closeBox);
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.toggle();
+                }
+                currentPopup = this.popup;
+                OpenLayers.Event.stop(evt);
             };
+            nama_marker["marker_"+data_map["mobile"]].nama.events.register("mouseover", popup_marker["popup_marker_"+data_map["mobile"]].popup, markerClick);
+			
+			marker_layer.addMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+			var point_marker=new OpenLayers.Geometry.Point(lng,lat);
+			cek_marker.push(marker_id);
+			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
+			var dalam=poly.containsPoint(point_marker);
+			if(dalam)alert("Sampai");
+};
 
 function doNothing() {}
 
@@ -335,7 +435,9 @@ function add_marker(isi)
 	isi2=isi.replace("marker_","");
 	var icon2=new OpenLayers.Icon(customIcons["icon_mobil_"+isi2].icon);
 	var point2=tampung_posisi[isi].posisi;
-	marker_layer.addMarker(nama_marker[isi].nama=new OpenLayers.Marker(point2,icon2));
+	nama_marker[isi].nama=new OpenLayers.Marker(point2,icon2);
+	nama_marker[isi].nama.events.register("mouseover", popup_marker["popup_marker_"+isi2].popup, markerClick);
+	marker_layer.addMarker(nama_marker[isi].nama);
 	
 }
 

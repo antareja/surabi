@@ -8,7 +8,28 @@
 	<!-- /.page-header -->
 
 	<div class="row">
-
+		<div class="col-sm-3">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4 class="smaller">
+						List Company 
+					</h4>
+				</div>
+				<div class="widget-body">
+					<div class="widget-main">
+						<p class="muted">
+						
+						<?php 
+							foreach ($all_company as $companies)
+							{
+								echo "<p><a href='".base_url()."admin/sys_config/company/".$companies->id_company."'>".$companies->name."</a></p>";
+							}
+						?>
+						<p>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-sm-6">
 			<div class="tabbable">
 				<ul class="nav nav-tabs padding-12 tab-color-blue background-blue"

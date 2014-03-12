@@ -17,6 +17,11 @@ class MSys_config extends CI_Model {
 		));
 		return $query->row();
 	}
+	
+	function getAllCompany(){
+		$query = $this->db->get('company_data');
+		return $query->result();
+	}
 
 	function insertCompanyData($data) {
 		$this->db->insert("company_data", $data);

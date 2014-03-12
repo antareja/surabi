@@ -99,7 +99,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
 									class="icon-briefcase"></i>User</a></li>
 							<li><a
-								href="<?php echo site_url()?>admin/sys_config/company_data"><i
+								href="<?php echo site_url()?>admin/sys_config/company"><i
 									class="icon-briefcase"></i>Company Data</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i
 									class="icon-briefcase"></i>Driver</a></li>

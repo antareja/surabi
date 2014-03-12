@@ -27,8 +27,9 @@ class Sys_config extends CI_Controller {
 	 *        	for 1 company only
 	 *        	
 	 */
-	public function company_data($id_company = 1) {
+	public function company($id_company = NULL) {
 		$data['pageTitle'] = 'General Company Data';
+		$data['all_company'] = $this->msys_config->getAllCompany();
 		$post = $this->input->post();
 		// if add or edit
 		if ($post) {
