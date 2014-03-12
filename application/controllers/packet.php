@@ -74,12 +74,34 @@ class Packet extends CI_Controller {
 			// check Speed if exceed
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
-			if ($post['packet_number'] == '104' || $post['packet_number'] == '100') {
+			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
 				$this->check_point($post['lat'], $post['lng'], $insert_id);
 			}
 			// test Region
 			// $this->test_region();
 		}
+	}
+
+	public function check_point($lat, $lng, $packet_id) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		$data['packet_id'] = $packet_id;
+		$vehicle_id = $this->mpacket->getVehicle($packet_id);
+		$data['region'] = $this->mpacket->getRegion($vehicle_id);
+		$region = $data['region'];
+		$latlngs = explode(';', $region->latlng);
+		$point = array($lat,$lng);
+		$polygon = array();
+		foreach ($latlngs as $latlng) {
+			$lat = explode(',', rm_brace($latlng));
+			array_push($polygon, array(
+					$lat[0],
+					$lat[1] 
+			));
+		}
+		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
+		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
+		// echo 'test';
 	}
 
 	public function check_region($lat, $lng, $packet_id) {
@@ -91,37 +113,21 @@ class Packet extends CI_Controller {
 		$region = $data['region'];
 		print_r($region);
 		$latlngs = explode(';', $region->latlng);
-		$point = array($lat,$lng);
+		$point = array($lat,$lng );
 		$polygon = array();
 		foreach ($latlngs as $latlng) {
-			$lat = explode(',',rm_brace($latlng));
-			array_push($polygon, array($lat[0],$lat[1]));
+			$lat = explode(',', rm_brace($latlng));
+			array_push($polygon, array(
+					$lat[0],
+					$lat[1] 
+			));
 		}
-		$data['in_out'] = poly_contains($point, $polygon)?'IN':'OUT';
+		$data['in_out'] = poly_contains($point, $polygon) ? 'IN' : 'OUT';
 		echo $data['in_out'];
-		$data['in_out'] == $region->in_out ? $this->region_alert(): '';  
-// 		print_r($polygon);
-// 		print_r($central_park2);
+		$data['in_out'] == $region->in_out ? $this->region_alert() : '';
+		// print_r($polygon);
+		// print_r($central_park2);
 		$this->load->view('alert_region', $data);
-	}
-	
-	public function check_point($lat, $lng, $packet_id){
-		$data['lat'] = $lat;
-		$data['lng'] = $lng;
-		$data['packet_id'] = $packet_id;
-		$vehicle_id = $this->mpacket->getVehicle($packet_id);
-		$data['region'] = $this->mpacket->getRegion($vehicle_id);
-		$region = $data['region'];
-		$latlngs = explode(';', $region->latlng);
-		$point = array($lat,$lng);
-		$polygon = array();
-		foreach ($latlngs as $latlng) {
-			$lat = explode(',',rm_brace($latlng));
-			array_push($polygon, array($lat[0],$lat[1]));
-		}
-		$in_out = poly_contains($point, $polygon)?'in':'out';
-		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id): '';
-		//echo 'test';
 	}
 
 	public function region_alert($region_id, $packet_id) {
@@ -131,7 +137,7 @@ class Packet extends CI_Controller {
 		// print_r($data);
 		$this->mpacket->insertRegionAlert($data);
 	}
-	
+
 	public function get_vehicle($id) {
 		echo $this->mpacket->getVehicle($id);
 	}
