@@ -87,6 +87,28 @@ function poly_contains($point, $polygon) {
 	}
 	return $oddNodes;
 }
+// For check Point in Polygon
+function poly_contains_op($point, $polygon) {
+	if ($polygon[0] != $polygon[count($polygon) - 1])
+		$polygon[count($polygon)] = $polygon[0];
+	$j = 0;
+	$oddNodes = false;
+	$x = $point[0];
+	$y = $point[1];
+	$n = count($polygon);
+	for($i = 0; $i < $n; $i ++) {
+		$j ++;
+		if ($j == $n) {
+			$j = 0;
+		}
+		if ((($polygon[0][$i] < $y) && ($polygon[0][$j] >= $y)) || (($polygon[0][$j] < $y) && ($polygon[0][$i] >= $y))) {
+			if ($polygon[1][$i] + ($y - $polygon[0][$i]) / ($polygon[0][$j] - $polygon[0][$i]) * ($polygon[1][$j] - $polygon[1][$i]) < $x) {
+				$oddNodes = ! $oddNodes;
+			}
+		}
+	}
+	return $oddNodes;
+}
 
 function prev_url() {
 	return $_SERVER['HTTP_REFERER'];
@@ -106,4 +128,19 @@ function sum_the_time($times) {
 	$seconds -= $minutes * 60;
 	// return "{$hours}:{$minutes}:{$seconds}";
 	return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+}
+
+function array_reverse_sub($array) {
+	$index = 0;
+	foreach ($array as $subarray) {
+		if (is_array($subarray)) {
+			$subarray = array_reverse($subarray);
+			$arr = Reverse_Array($subarray);
+			$array[$index] = $arr;
+		} else {
+			$array[$index] = $subarray;
+		}
+		$index ++;
+	}
+	return $array;
 }

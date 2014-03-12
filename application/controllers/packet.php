@@ -75,7 +75,7 @@ class Packet extends CI_Controller {
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
 			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
-				$this->check_point($post['lat'], $post['lng'], $insert_id);
+				$this->check_point_op($post['lat'], $post['lng'], $insert_id);
 			}
 			// test Region
 			// $this->test_region();
@@ -101,6 +101,27 @@ class Packet extends CI_Controller {
 		// echo 'test';
 	}
 
+	
+	public function check_point_op($lng, $lat, $packet_id) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		$data['packet_id'] = $packet_id;
+		$vehicle_id = $this->mpacket->getVehicle($packet_id);
+		$data['region'] = $this->mpacket->getRegion($vehicle_id);
+		$region = $data['region'];
+		$latlngs = explode(';', $region->latlng);
+		$point = array($lng,$lat);
+		$polygon = array();
+		foreach ($latlngs as $latlng) {
+			$lat = explode(',', rm_brace($latlng));
+			array_push($polygon, array($lat[1],$lat[0]));
+		}
+		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
+		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
+		// echo 'test';
+	}
+	
+	
 	public function check_region($lat, $lng, $packet_id) {
 		$data['lat'] = $lat;
 		$data['lng'] = $lng;
