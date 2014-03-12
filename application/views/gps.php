@@ -126,7 +126,7 @@ foreach($all_vehicle as $vehicle)
             
                 // setup tiled layer
                 tiled = new OpenLayers.Layer.WMS(
-                    "Geoserver layers - Tiled", "http://localhost:8080/geoserver/tcm/wms",
+                    "Geoserver layers - Tiled", "http://192.168.12.58:8080/geoserver/tcm/wms",
                     {
                         LAYERS: 'tcm-layer_group',
                         STYLES: '',
@@ -144,7 +144,7 @@ foreach($all_vehicle as $vehicle)
             
                 // setup single tiled layer
                 untiled = new OpenLayers.Layer.WMS(
-                    "Geoserver layers - Untiled", "http://localhost:8080/geoserver/tcm/wms",
+                    "Geoserver layers - Untiled", "http://192.168.12.58:8080/geoserver/tcm/wms",
                     {
                         LAYERS: 'tcm-layer_group',
                         STYLES: '',
