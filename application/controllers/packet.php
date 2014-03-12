@@ -74,7 +74,9 @@ class Packet extends CI_Controller {
 			// check Speed if exceed
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
-			$this->check_point($post['lat'], $post['lng'], $insert_id);
+			if ($post['packet_number'] == '104' || $post['packet_number'] == '100') {
+				$this->check_point($post['lat'], $post['lng'], $insert_id);
+			}
 			// test Region
 			// $this->test_region();
 		}
@@ -118,15 +120,14 @@ class Packet extends CI_Controller {
 			array_push($polygon, array($lat[0],$lat[1]));
 		}
 		$in_out = poly_contains($point, $polygon)?'in':'out';
-		$in_out == $region->in_out ? $this->region_alert(): '';
+		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id): '';
 		//echo 'test';
 	}
 
-	public function region_alert() {
-		$post = $this->input->post();
+	public function region_alert($region_id, $packet_id) {
 		$data['type'] = 'region';
-		$data['type_id'] = $post['region_id'];
-		$data['packet_id'] = $post['packet_id'];
+		$data['type_id'] = $region_id;
+		$data['packet_id'] = $packet_id;
 		// print_r($data);
 		$this->mpacket->insertRegionAlert($data);
 	}
