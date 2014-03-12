@@ -114,7 +114,7 @@ class Packet extends CI_Controller {
 		$polygon = array();
 		foreach ($latlngs as $latlng) {
 			$lat = explode(',', rm_brace($latlng));
-			array_push($polygon, array($lat[1],$lat[0]));
+			array_push($polygon, array($lat[0],$lat[1]));
 		}
 		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
 		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
