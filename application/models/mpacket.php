@@ -57,7 +57,7 @@ class MPacket extends CI_Model {
 	function getRegion($vehicle_id){
 		//$this->db->where_in('vehicle_id',$vehicle_id);
 		$query = $this->db->get('region_alert');
-		echo $this->db->last_query();exit;
+		//echo $this->db->last_query();exit;
 		return $query->row();
 	}
 
