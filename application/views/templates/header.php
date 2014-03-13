@@ -94,8 +94,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>admin/sys_config"> <i
-									class="icon-cog"></i> System Configuration
-							</a></li>
+<!-- 									class="icon-cog"></i> System Configuration -->
+<!-- 							</a></li> -->
 							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
 									class="icon-briefcase"></i>User</a></li>
 							<li><a
