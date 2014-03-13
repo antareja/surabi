@@ -56,45 +56,45 @@
 							<?php } ?>
 						</ul></li>
 
-					<li><a href="#" class="dropdown-toggle"> <i class="icon-globe"></i>
-							<span class="menu-text"> Map </span> <b
-							class="arrow icon-angle-down"></b>
-					</a>
-						<ul class="submenu">
-							<li><a href="tables.html"> <i class="icon-double-angle-right"></i>
-									Simple &amp; Dynamic
-							</a></li>
+<!-- 					<li><a href="#" class="dropdown-toggle"> <i class="icon-globe"></i> -->
+<!-- 							<span class="menu-text"> Map </span> <b -->
+<!-- 							class="arrow icon-angle-down"></b> -->
+<!-- 					</a> -->
+<!-- 						<ul class="submenu"> -->
+<!-- 							<li><a href="tables.html"> <i class="icon-double-angle-right"></i> -->
+<!-- 									Simple &amp; Dynamic -->
+<!-- 							</a></li> -->
 
-							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i>
-									Haidar
-							</a></li>
-							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i>
-									jqGrid plugin
-							</a></li>
-						</ul></li>
+<!-- 							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i> -->
+<!-- 									Haidar -->
+<!-- 							</a></li> -->
+<!-- 							<li><a href="jqgrid.html"> <i class="icon-double-angle-right"></i> -->
+<!-- 									jqGrid plugin -->
+<!-- 							</a></li> -->
+<!-- 						</ul></li> -->
 
-					<li><a href="#" class="dropdown-toggle"> <i class="icon-edit"></i>
-							<span class="menu-text"> Reports </span> <b
-							class="arrow icon-angle-down"></b>
-					</a>
+<!-- 					<li><a href="#" class="dropdown-toggle"> <i class="icon-edit"></i> -->
+<!-- 							<span class="menu-text"> Reports </span> <b -->
+<!-- 							class="arrow icon-angle-down"></b> -->
+<!-- 					</a> -->
 
-						<ul class="submenu">
-							<li><a href="form-elements.html"> <i
-									class="icon-double-angle-right"></i> Form Elements
-							</a></li>
+<!-- 						<ul class="submenu"> -->
+<!-- 							<li><a href="form-elements.html"> <i -->
+<!-- 									class="icon-double-angle-right"></i> Form Elements -->
+<!-- 							</a></li> -->
 
-							<li><a href="form-wizard.html"> <i
-									class="icon-double-angle-right"></i> Wizard &amp; Validation
-							</a></li>
+<!-- 							<li><a href="form-wizard.html"> <i -->
+<!-- 									class="icon-double-angle-right"></i> Wizard &amp; Validation -->
+<!-- 							</a></li> -->
 
-							<li><a href="wysiwyg.html"> <i class="icon-double-angle-right"></i>
-									Wysiwyg &amp; Markdown
-							</a></li>
+<!-- 							<li><a href="wysiwyg.html"> <i class="icon-double-angle-right"></i> -->
+<!-- 									Wysiwyg &amp; Markdown -->
+<!-- 							</a></li> -->
 
-							<li><a href="dropzone.html"> <i class="icon-double-angle-right"></i>
-									Dropzone File Upload
-							</a></li>
-						</ul></li>
+<!-- 							<li><a href="dropzone.html"> <i class="icon-double-angle-right"></i> -->
+<!-- 									Dropzone File Upload -->
+<!-- 							</a></li> -->
+<!-- 						</ul></li> -->
 				</ul>
 				<!-- /.nav-list -->
 
