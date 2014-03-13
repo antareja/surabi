@@ -413,37 +413,10 @@ function setHTML(response)
 
 function doNothing() {}
 
-function add_filter(isi)
-{
-	
-	var ada=jQuery.inArray( isi, filter );
-	if(ada<0)filter.push(isi);
-	add_marker(isi);
-}
 
-function remove_filter(isi)
-{
-	filter = jQuery.grep(filter, function(value) {
-	return value != isi;
-	});
-	marker_layer.removeMarker(nama_marker[isi].nama);
-}
-
-
-function add_marker(isi)
-{
-	isi2=isi.replace("marker_","");
-	var icon2=new OpenLayers.Icon(customIcons["icon_mobil_"+isi2].icon);
-	var point2=tampung_posisi[isi].posisi;
-	nama_marker[isi].nama=new OpenLayers.Marker(point2,icon2);
-	nama_marker[isi].nama.events.register("mouseover", popup_marker["popup_marker_"+isi2].popup, markerClick);
-	marker_layer.addMarker(nama_marker[isi].nama);
-	
-}
 
 
 //]]>
 
-$('.cek').removeAttr('checked');
 
 </script>

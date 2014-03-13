@@ -49,17 +49,72 @@ jQuery(function($) {
 			return 'right';
 		return 'left';
 	}
+
+	$('#date-picker').datepicker({
+		autoclose : true,
+		dateFormat : 'yy-mm-dd',
+		minDate : getFormattedDate(new Date())
+	}).next().on(ace.click_event, function() {
+		$(this).prev().focus();
+	});
+	$('#date-picker2').datepicker({
+		autoclose : true,
+		dateFormat : 'yy-mm-dd',
+		minDate : getFormattedDate(new Date())
+	}).next().on(ace.click_event, function() {
+		$(this).prev().focus();
+	});
+	// $('.cek').removeAttr('checked');
+	//$('.cek').prop('checked', true);
 	
-	$('#date-picker').datepicker({autoclose:true , dateFormat: 'yy-mm-dd',  minDate: getFormattedDate(new Date())}).next().on(ace.click_event, function(){
-		$(this).prev().focus();
-	});
-	$('#date-picker2').datepicker({autoclose:true,  dateFormat: 'yy-mm-dd', minDate: getFormattedDate(new Date())}).next().on(ace.click_event, function(){
-		$(this).prev().focus();
-	});
+	//$('.cek').
 });
+
 function getFormattedDate(date) {
-    var day = date.getDate();
-    var month = date.getMonth() + 1;
-    var year = date.getFullYear().toString().slice(2);
-    return year + '-' + month + '-' + day;
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear().toString().slice(2);
+	return year + '-' + month + '-' + day;
+}
+$('.cek').click(function () {
+	$('.cek').attr('checked','checked');
+	//var currentId = $(this).attr('id');
+	add_filter(this.id);
+});
+
+
+//$(document).ready(my_function);
+
+$(document).ready(function() {
+	$('.cek').attr('checked','checked');
+	$('.cek').each(function(){
+		add_filter(this.id);
+	});
+//	$('.test').each(function(){
+//		alert(this.id);
+//	});
+});
+function add_marker(isi) {
+	isi2 = isi.replace("marker_", "");
+	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
+	var point2 = tampung_posisi[isi].posisi;
+	nama_marker[isi].nama = new OpenLayers.Marker(point2, icon2);
+	nama_marker[isi].nama.events.register("mouseover",
+			popup_marker["popup_marker_" + isi2].popup, markerClick);
+	marker_layer.addMarker(nama_marker[isi].nama);
+
+}
+
+function add_filter(isi) {
+	var ada = jQuery.inArray(isi, filter);
+	if (ada < 0)
+		filter.push(isi);
+	add_marker(isi);
+}
+
+function remove_filter(isi) {
+	filter = jQuery.grep(filter, function(value) {
+		return value != isi;
+	});
+	marker_layer.removeMarker(nama_marker[isi].nama);
 }
