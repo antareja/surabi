@@ -24,9 +24,9 @@
 Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
 <br>
 Long :<span id="txt_long"></span><br>
-<div id="nodelist">
-            <em>Click on the map to get feature info</em>
-        </div>
+<!-- <div id="nodelist"> -->
+<!--             <em>Click on the map to get feature info</em> -->
+<!--         </div> -->
 <?php
 /*
 ------------------------------------js------------------------------------------------------
