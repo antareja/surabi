@@ -39,6 +39,10 @@ class Home extends CI_Controller {
 		phpinfo();
 	}
 	
+	public function base(){
+		echo base_url_new();
+	}
+	
 	public function test() {
 // 		echo FCPATH;
 		$regions = $this->mmap->getAllRegion();

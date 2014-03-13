@@ -59,7 +59,7 @@ var lng = "";
 var marker_id="";
 var markerClick="";
 
-var geo_url = "<?php echo base_url()?>:8080/geoserver/tcm/wms" ;
+var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
 
 var popup_marker = {
 <?php 
@@ -252,7 +252,7 @@ foreach($all_vehicle as $vehicle)
 				map.addLayer(vectors);
 				vectors.addFeatures([polygonFeature]);
 
-    var socket = io.connect('<?php echo base_url()?>:8000');
+    var socket = io.connect('<?php echo base_url_new()?>:8000');
     // on message received we print all the data inside the #container div
     socket.on('notification', function (data) {
 		data_map=data.data;

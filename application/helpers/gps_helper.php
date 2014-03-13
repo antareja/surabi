@@ -37,6 +37,11 @@ function rm_brace($str) {
 	return $last;
 }
 
+function base_url_new() {
+	$base_url = substr(base_url(), 0, -1);
+	return $base_url;
+}
+
 function define_sess($username, $user_id, $full_name) {
 	$_SESSION['gps_username'] = $username;
 	$_SESSION['gps_user_id'] = $user_id;

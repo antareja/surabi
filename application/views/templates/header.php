@@ -16,7 +16,7 @@ if (!isset($_SESSION['gps_username'])) {
 <meta name="description" content="">
 <meta name="author" content="Haidar Mar'ie, Rizki Faishal">
 <link rel="shortcut icon"
-	href="<?php echo base_url()?>assets/ico/favicon.png">
+	href="<?php echo base_url_new()?>assets/ico/favicon.png">
 
 <title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
