@@ -274,7 +274,7 @@ foreach($all_vehicle as $vehicle)
 				var point2=new OpenLayers.LonLat(lng,lat);
 				var pixel=map.getPixelFromLonLat(point2);
 					
-				document.getElementById('nodelist').innerHTML = "Loading... please wait...";
+				//document.getElementById('nodelist').innerHTML = "Loading... please wait...";
                 var params = {
                     REQUEST: "GetFeatureInfo",
                     EXCEPTIONS: "application/vnd.ogc.se_xml",
