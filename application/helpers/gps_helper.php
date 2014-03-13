@@ -38,7 +38,7 @@ function rm_brace($str) {
 }
 
 function base_url_new() {
-	if($_SERVER['DOCUMENT_ROOT'] == 'techinfo.dnset.com') {
+	if($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
 		$base_url = substr(base_url(), 0, -1);
 		return $base_url;
 	} else {
