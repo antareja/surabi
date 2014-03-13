@@ -335,6 +335,10 @@ function setHTML(response)
 					{
 						jalan_tambang = JSON.stringify(response2.features[2].properties.NAME);
 					}
+					if(response2.features.length>3)
+					{
+						jalan_tambang = JSON.stringify(response2.features[3].properties.NAME);
+					}
 					if(! jalan)jalan="";
 					if(! jalan_tambang)jalan_tambang="";
 					jalan=jalan.replace(/"/g,"");
