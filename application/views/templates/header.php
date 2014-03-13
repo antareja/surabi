@@ -16,7 +16,7 @@ if (!isset($_SESSION['gps_username'])) {
 <meta name="description" content="">
 <meta name="author" content="Haidar Mar'ie, Rizki Faishal">
 <link rel="shortcut icon"
-	href="<?php echo base_url_new()?>assets/ico/favicon.png">
+	href="<?php echo base_url()?>assets/ico/favicon.png">
 
 <title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
@@ -30,7 +30,7 @@ if (!isset($_SESSION['gps_username'])) {
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script src="<?php echo base_url()?>:8000/socket.io/socket.io.js"></script>
+<script src="<?php echo base_url_new()?>:8000/socket.io/socket.io.js"></script>
 <!--[if IE 7]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
 <![endif]-->
