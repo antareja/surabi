@@ -40,7 +40,8 @@ class Home extends CI_Controller {
 	}
 	
 	public function base(){
-		echo base_url_new();
+		echo 'base_url '.base_url_new().'<br>';
+		echo 'local '. $_SERVER['SERVER_NAME'];
 	}
 	
 	public function test() {

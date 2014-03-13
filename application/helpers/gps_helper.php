@@ -38,8 +38,12 @@ function rm_brace($str) {
 }
 
 function base_url_new() {
-	$base_url = substr(base_url(), 0, -1);
-	return $base_url;
+	if($_SERVER['DOCUMENT_ROOT'] == 'techinfo.dnset.com') {
+		$base_url = substr(base_url(), 0, -1);
+		return $base_url;
+	} else {
+		return 'http://192.168.12.250';
+	}
 }
 
 function define_sess($username, $user_id, $full_name) {
