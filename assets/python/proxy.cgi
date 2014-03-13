@@ -15,7 +15,7 @@ import sys, os
 
 # Designed to prevent Open Proxy type stuff.
 
-allowedHosts = ['192.168.12.58:8080']
+allowedHosts = ['192.168.12.250:8080,192.168.12.58:8080,techinfo.dnset.com:8080']
 
 method = os.environ["REQUEST_METHOD"]
 
