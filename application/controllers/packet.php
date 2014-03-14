@@ -46,7 +46,7 @@ class Packet extends CI_Controller {
 	
 	public function test_curl() {
 // 		$url = "http://surabi.dev/packet/check_region_op/-0.449062/116.896477/199";
-		$url = 'http://surabi.dev/location/loc/-6.89931,107.62638';
+		$url = 'http://surabi.dev/location/loc2/-6.89931/107.62638';
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
