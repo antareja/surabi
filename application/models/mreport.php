@@ -25,6 +25,20 @@ class MReport extends CI_Model {
 		$query = $this->db->get('vehicles');
 		return $query->result();
 	}
+	
+	function getAllVehiclesComplete(){
+		$this->db->select("vehicles.name as alias ,hardware_type.name as hw, vehicle_id as unit,
+				company_data.name as company_name, gps_mobile_address as gps, 
+				MAX(create_at) as last_update ");
+		$this->db->join("packet", 'vehicles.gps_mobile_address = packet.mobile_address','inner');
+		$this->db->join("company_data", "vehicles.company_id = company_data.id_company", 'inner');
+		$this->db->join("hardware_type", 'vehicles.hardware_id = hardware_type.hardware_id', 'inner');
+// 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->group_by('vehicles.vehicle_id');
+		$query = $this->db->get('vehicles');
+		//echo $this->db->last_query();
+		return $query->result();
+	}
 
 	function getMobileAddress($vehicle) {
 		$this->db->get("vehicle");

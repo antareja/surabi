@@ -7,7 +7,9 @@
 }
 -->
 </style>
-	<br> <input type="button" onclick="f1.submit()" value="Print">
+	<button type="button" onclick="history.back();">Back</button>
+	<br>
+	<br> <input type="button" onclick="f1.submit()" value="PDF">
 	<div id="header" align="center">
 		<h1>Activity Report</h1>
 </div>
