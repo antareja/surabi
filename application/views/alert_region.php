@@ -62,6 +62,12 @@ var map = new google.maps.Map(document.getElementById("map"), {
     mapTypeId: 'roadmap'
   });
 
+google.maps.event.addListener(map, 'mousemove', function(event) {
+	var latlong=event.latLng.toString().split(",");
+	document.getElementById('txt_lat').innerHTML=latlong[0].substring(1);
+	document.getElementById('txt_long').innerHTML=latlong[1].substring(0,latlong[1].length-1);
+});
+
 
 var myLatlng = new google.maps.LatLng(<?php echo $latlng ;?>);
 
@@ -105,7 +111,7 @@ var boundarydata = [
   var infoWindow = new google.maps.InfoWindow;
 		var point = new google.maps.LatLng(<?php echo $latlng ?>);               
 		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
-			 //alert("<?php echo $region->in_out?> Area");
+			 alert("<?php echo $region->in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert/<?php echo $region->region_id?>/<?php echo $packet_id;?>",
 				 { 
 				//packet_id: <?php echo $packet_id;?>, 
@@ -116,5 +122,9 @@ var boundarydata = [
 		} 		
 </script>
 test<?php echo $lat;?> 
+<br>
+Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
+<br>
+Long :<span id="txt_long"></span><br>
 </body>
 </html>

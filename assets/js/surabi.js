@@ -84,12 +84,12 @@ $('.cek').click(function () {
 
 
 //$(document).ready(my_function);
-
-$(document).ready(function() {
-	$('.cek').attr('checked','checked');
-	$('.cek').each(function(){
-		add_filter(this.id);
-	});
+// if want to set default check list
+//$(document).ready(function() {
+//	$('.cek').attr('checked','checked');
+//	$('.cek').each(function(){
+//		add_filter(this.id);
+//	});
 //	$('.test').each(function(){
 //		alert(this.id);
 //	});
