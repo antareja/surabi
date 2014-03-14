@@ -39,6 +39,21 @@ class Packet extends CI_Controller {
 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
 		return $short_name;
 	}
+	
+	public function test_curl() {
+		$url = "http://surabi.dev/packet/check_region_op/-0.449062/116.896477/199";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1000);
+		$data = curl_exec($ch);
+		curl_close($ch);
+// 		$json = json_decode($data, true);
+		// print_r($json);
+// 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
+		echo $data;
+	}
 
 	public function resv() {
 		$post = $this->input->post();
@@ -62,6 +77,8 @@ class Packet extends CI_Controller {
 				$data['longitude'] = $post['lng'];
 				# Only for google maps
 				// $data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
+				# Test Curl with Ajax
+				$this->test_curl();
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
@@ -175,7 +192,7 @@ class Packet extends CI_Controller {
 			$lat[0]
 			));
 		}
-		print_r($polygon);exit;
+		//print_r($polygon);exit;
 		$data['in_out'] = poly_contains($point, $polygon) ? 'IN' : 'OUT';
 		echo $data['in_out'];
 		$data['in_out'] == $region->in_out ? $this->region_alert() : '';

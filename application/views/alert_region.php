@@ -105,11 +105,11 @@ var boundarydata = [
   var infoWindow = new google.maps.InfoWindow;
 		var point = new google.maps.LatLng(<?php echo $latlng ?>);               
 		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
-			 alert("<?php echo $region->in_out?> Area");
-			$.post( "<?php echo site_url();?>packet/region_alert",
+			 //alert("<?php echo $region->in_out?> Area");
+			$.post( "<?php echo site_url();?>packet/region_alert/<?php echo $region->region_id?>/<?php echo $packet_id;?>",
 				 { 
-				packet_id: <?php echo $packet_id;?>, 
-				region_id: <?php echo $region->region_id?> 
+				//packet_id: <?php echo $packet_id;?>, 
+				//region_id: <?php echo $region->region_id?> 
 				} ) .done(function( data ) {
 					// alert( "Data Loaded: " + data );
 				});
