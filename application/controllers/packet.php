@@ -43,7 +43,7 @@ class Packet extends CI_Controller {
 	public function get_loc(){
 		$data['type'] = 'region';
 		$data['type_id'] = '1';
-		$data['packet_id'] = '111';
+		$data['packet_id'] = '333';
 		$this->db->insert('alert',$data);
 	}
 	
@@ -60,6 +60,7 @@ class Packet extends CI_Controller {
 // 		$json = json_decode($data, true);
 		// print_r($json);
 // 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
+		echo $data;
 		return $data;
 	}
 
