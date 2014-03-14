@@ -113,10 +113,6 @@ var boundarydata = [
 				} ) .done(function( data ) {
 					// alert( "Data Loaded: " + data );
 				});
-//			$.post({ '<?php echo site_url()?>packet/location/<?php echo $latlng;?>'
-// 			{
-// 				}).done(function(data){
-// 				});
 		} 		
 </script>
 test<?php echo $lat;?> 
