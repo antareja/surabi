@@ -93,7 +93,7 @@ $('.cek').click(function () {
 //	$('.test').each(function(){
 //		alert(this.id);
 //	});
-});
+//});
 function add_marker(isi) {
 	isi2 = isi.replace("marker_", "");
 	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
