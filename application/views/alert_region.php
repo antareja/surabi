@@ -110,8 +110,8 @@ var boundarydata = [
   boundaryPolygon.setMap(map);
   var infoWindow = new google.maps.InfoWindow;
 		var point = new google.maps.LatLng(<?php echo $latlng ?>);               
-		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
-			 alert("<?php echo $region->in_out?> Area");
+		if (<?php echo $in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
+			 alert("<?php echo $in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert/<?php echo $region->region_id?>/<?php echo $packet_id;?>",
 				 { 
 				//packet_id: <?php echo $packet_id;?>, 

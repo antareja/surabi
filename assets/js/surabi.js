@@ -76,11 +76,11 @@ function getFormattedDate(date) {
 	var year = date.getFullYear().toString().slice(2);
 	return year + '-' + month + '-' + day;
 }
-$('.cek').click(function () {
-	$('.cek').attr('checked','checked');
-	//var currentId = $(this).attr('id');
-	add_filter(this.id);
-});
+//$('.cek').click(function () {
+//	$('.cek').attr('checked','checked');
+//	//var currentId = $(this).attr('id');
+//	add_filter(this.id);
+//});
 
 
 //$(document).ready(my_function);

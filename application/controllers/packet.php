@@ -204,7 +204,7 @@ class Packet extends CI_Controller {
 			));
 		}
 		//print_r($polygon);exit;
-		$data['in_out'] = poly_contains($point, $polygon) ? 'IN' : 'OUT';
+		$data['in_out'] = poly_contains($point, $polygon) ? 'in' : 'out';
 		echo $data['in_out'];
 		$data['in_out'] == $region->in_out ? $this->region_alert() : '';
 		// print_r($polygon);

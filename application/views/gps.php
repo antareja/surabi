@@ -412,7 +412,7 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			if(dalam)alert("Sampai");
+			if(dalam)alert("Sampai"+data_map['mobile'].nama);
 };
 
 function doNothing() {}
