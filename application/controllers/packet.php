@@ -41,7 +41,10 @@ class Packet extends CI_Controller {
 	}
 	
 	public function get_loc(){
-		// any code
+		$data['type'] = 'region';
+		$data['type_id'] = '1';
+		$data['packet_id'] = '111';
+		$this->db->insert('alert',$data);
 	}
 	
 	public function test_curl() {

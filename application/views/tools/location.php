@@ -12,6 +12,10 @@ jQuery(function($) {
 				if (results[0]) 
 				{
 					$( "div" ).html(results[0]["address_components"][0].short_name);
+					$.post('<?php echo site_url()?>packet/get_loc',{
+
+						}).done(function(data) {
+					});
 				} 
 				else 
 				{
