@@ -76,11 +76,11 @@ function getFormattedDate(date) {
 	var year = date.getFullYear().toString().slice(2);
 	return year + '-' + month + '-' + day;
 }
-$('.cek').click(function () {
-	$('.cek').attr('checked','checked');
-	//var currentId = $(this).attr('id');
-	add_filter(this.id);
-});
+//$('.cek').click(function () {
+//	$('.cek').attr('checked','checked');
+//	//var currentId = $(this).attr('id');
+//	add_filter(this.id);
+//});
 
 
 //$(document).ready(my_function);
@@ -93,7 +93,7 @@ $('.cek').click(function () {
 //	$('.test').each(function(){
 //		alert(this.id);
 //	});
-});
+//});
 function add_marker(isi) {
 	isi2 = isi.replace("marker_", "");
 	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
