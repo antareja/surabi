@@ -56,14 +56,14 @@ google.maps.Polygon.prototype.Contains = function (point) {
 };
 
 var map = new google.maps.Map(document.getElementById("map"), {
-    center: new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lng;?>),
+    center: new google.maps.LatLng(<?php echo $latlng;?>),
     zoom: 12,
     scaleControl:true,
     mapTypeId: 'roadmap'
   });
 
 
-var myLatlng = new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lng;?>);
+var myLatlng = new google.maps.LatLng(<?php echo $latlng ;?>);
 
 var marker = new google.maps.Marker({
     position: myLatlng,
@@ -73,15 +73,15 @@ var marker = new google.maps.Marker({
 
                     <?php $i=0;
 						$i++;
-                    	$latlng = explode(";", $polygon); 
-                    	//$clean_lat = remove_bracket($latlng);
-                    	foreach ($clean_lat as &$array) {
-							$ex_array =  explode(',', $array);
-							$array =  $ex_array[1].','.$ex_array[0];
-// 							foreach($ex_array as &$ex_r) {
-// 								echo $ex_r;
-// 							}	
-						}
+//                     	$latlng = explode(";", $region->latlng); 
+//                     	$clean_lat = remove_bracket($latlng);
+//                     	foreach ($clean_lat as &$array) {
+// 							$ex_array =  explode(',', $array);
+// 							$array =  $ex_array[1].','.$ex_array[0];
+// // 							foreach($ex_array as &$ex_r) {
+// // 								echo $ex_r;
+// // 							}	
+// 						}
                     	//print_r(polygon_reverse($region->latlng));exit?>
                     	var boundaryPolygon;
 var boundarydata = [
@@ -103,16 +103,16 @@ var boundarydata = [
 
   boundaryPolygon.setMap(map);
   var infoWindow = new google.maps.InfoWindow;
-		var point = new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>);               
+		var point = new google.maps.LatLng(<?php echo $latlng ?>);               
 		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
 			 alert("<?php echo $region->in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert",
-// 				 { 
+				 { 
 				packet_id: <?php echo $packet_id;?>, 
 				region_id: <?php echo $region->region_id?> 
-// 				} ) .done(function( data ) {
-// 					// alert( "Data Loaded: " + data );
-// 				});
+				} ) .done(function( data ) {
+					// alert( "Data Loaded: " + data );
+				});
 		} 		
 </script>
 test<?php echo $lat;?> 

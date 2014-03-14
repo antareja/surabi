@@ -28,6 +28,14 @@ class Home extends CI_Controller {
 		$data['user'] = $this->mgps->getUser();
 		$this->load->template('gps', $data);
 	}
+	
+	public function gmaps(){
+		$data['all_vehicle'] = $this->mgps->getDataVehicle();
+		$data['regions'] = $this->mprofile->getAllRegion();
+		$data['pageTitle'] = 'Home';
+		$data['user'] = $this->mgps->getUser();
+		$this->load->template('gps_google', $data);
+	}
 
 	public function demo() {
 		$data['pageTitle'] = 'Demo';
