@@ -19,12 +19,6 @@ class Report extends CI_Controller {
 		$this->activity();
 	}
 
-	public function vehicle() {
-		$data['pageTitle'] = 'Vehicles Report';
-		$data['data_report'] = $this->mreport->getVehicleReport();
-		$this->load->view("report/vehicle", $data);
-	}
-
 	public function employee() {
 		$data['pageTitle'] = 'Employee Report';
 		$data['data_report'] = $this->mreport->getEmployeeReport();

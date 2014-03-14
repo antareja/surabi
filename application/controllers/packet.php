@@ -60,7 +60,8 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
-				$data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
+				# Only for google
+				// $data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
@@ -116,9 +117,10 @@ class Packet extends CI_Controller {
 			$lat = explode(',', rm_brace($latlng));
 			array_push($polygon, array($lat[0],$lat[1]));
 		}
-		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
+		$in_out = poly_contains($point, polygon_reverse($region->latlng)) ? 'in' : 'out';
 		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
-		// echo 'test';
+		echo 'test<br/>';
+		echo $in_out;
 	}
 	
 	
@@ -128,16 +130,44 @@ class Packet extends CI_Controller {
 		$data['packet_id'] = $packet_id;
 		$vehicle_id = $this->mpacket->getVehicle($packet_id);
 		$data['region'] = $this->mpacket->getRegion($vehicle_id);
+		$data['polygon'] = remove_bracket($data['region']->latlng);
 		$region = $data['region'];
 		print_r($region);
 		$latlngs = explode(';', $region->latlng);
 		$point = array($lat,$lng );
 		$polygon = array();
-		foreach ($latlngs as $latlng) {
-			$lat = explode(',', rm_brace($latlng));
+		foreach (remove_bracket($latlngs) as $latlng) {
+			$lat = explode(',', $latlng);
 			array_push($polygon, array(
 					$lat[0],
 					$lat[1] 
+			));
+		}
+		$data['in_out'] = poly_contains($point, $polygon) ? 'IN' : 'OUT';
+		echo $data['in_out'];
+		$data['in_out'] == $region->in_out ? $this->region_alert() : '';
+		// print_r($polygon);
+		// print_r($central_park2);
+		$this->load->view('alert_region', $data);
+	}
+	
+	public function check_region_op($lng,$lat , $packet_id) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		$data['packet_id'] = $packet_id;
+		$vehicle_id = $this->mpacket->getVehicle($packet_id);
+		$data['region'] = $this->mpacket->getRegion($vehicle_id);
+		$data['polygon'] = polygon_reverse($data['region']->latlng);
+		$region = $data['region'];
+		print_r($region);
+		$latlngs = explode(';', $region->latlng);
+		$point = array($lat,$lng );
+		$polygon = array();
+		foreach (remove_bracket($latlngs) as $latlng) {
+			$lat = explode(',', $latlng);
+			array_push($polygon, array(
+			$lat[0],
+			$lat[1]
 			));
 		}
 		$data['in_out'] = poly_contains($point, $polygon) ? 'IN' : 'OUT';

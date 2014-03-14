@@ -56,7 +56,7 @@ google.maps.Polygon.prototype.Contains = function (point) {
 };
 
 var map = new google.maps.Map(document.getElementById("map"), {
-    center: new google.maps.LatLng(-6.915499,107.594301),
+    center: new google.maps.LatLng(<?php echo $lat;?>,<?php echo $lng;?>),
     zoom: 12,
     scaleControl:true,
     mapTypeId: 'roadmap'
@@ -73,11 +73,22 @@ var marker = new google.maps.Marker({
 
                     <?php $i=0;
 						$i++;
-                    	$latlng = explode(";", $region->latlng); ?>
+                    	$latlng = explode(";", $polygon); 
+                    	//$clean_lat = remove_bracket($latlng);
+                    	foreach ($clean_lat as &$array) {
+							$ex_array =  explode(',', $array);
+							$array =  $ex_array[1].','.$ex_array[0];
+// 							foreach($ex_array as &$ex_r) {
+// 								echo $ex_r;
+// 							}	
+						}
+                    	//print_r(polygon_reverse($region->latlng));exit?>
                     	var boundaryPolygon;
 var boundarydata = [
-                    		<?php foreach($latlng as $lats) {?>
-    new google.maps.LatLng(<?php echo rm_brace($lats);?>),
+                    		<?php foreach(polygon_reverse($region->latlng) as $lats) {
+                    		$lnglat = rm_brace($lats);
+                    		//print_r('test'.$lnglat);exit;?>
+    new google.maps.LatLng(<?php echo $lats;?>),
 							<?php } ?>
                   ];
                         boundaryPolygon = new google.maps.Polygon({
@@ -96,12 +107,12 @@ var boundarydata = [
 		if (<?php echo $region->in_out == 'out' ? '!':''?>boundaryPolygon.Contains(point)) {
 			 alert("<?php echo $region->in_out?> Area");
 			$.post( "<?php echo site_url();?>packet/region_alert",
-				 { 
+// 				 { 
 				packet_id: <?php echo $packet_id;?>, 
 				region_id: <?php echo $region->region_id?> 
-				} ) .done(function( data ) {
-					// alert( "Data Loaded: " + data );
-				});
+// 				} ) .done(function( data ) {
+// 					// alert( "Data Loaded: " + data );
+// 				});
 		} 		
 </script>
 test<?php echo $lat;?> 

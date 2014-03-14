@@ -139,12 +139,28 @@ function sum_the_time($times) {
 	return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }
 
+function remove_bracket($array) {
+	foreach ($array as &$string) {
+		$string = str_replace(array("(",")"), '', $string);
+	}
+	return $array;
+}
+
+function polygon_reverse($str) {
+	$latlng = explode(";", $str);
+	$latlng = remove_bracket($latlng);
+	foreach ($latlng as &$array) {
+		$ex_array =  explode(',', $array);
+		$array =  $ex_array[1].','.$ex_array[0];
+	}
+	return $latlng;
+}
 function array_reverse_sub($array) {
 	$index = 0;
 	foreach ($array as $subarray) {
 		if (is_array($subarray)) {
 			$subarray = array_reverse($subarray);
-			$arr = Reverse_Array($subarray);
+			$arr = array_reverse_sub($subarray);
 			$array[$index] = $arr;
 		} else {
 			$array[$index] = $subarray;
