@@ -18,7 +18,7 @@ class Sys_config extends CI_Controller {
 	}
 
 	public function index() {
-		$this->company_data();
+		$this->company();
 	}
 
 	/**

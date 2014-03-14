@@ -2,17 +2,6 @@
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="<?php echo base_url() ?>assets/js/location.js"></script>
-<?php
-// print_r($_POST);
-// print_r($activity);
-// exit();
-if ($this->input->post("html") != "") {
-	$this->load->helper("dompdf_helper");
-	if (! isset($other))
-		$other = "";
-	pdf_create($this->input->post("html"));
-} else {
-	?>
 <div id="isi">
 	<style>
 <!--
@@ -21,6 +10,8 @@ if ($this->input->post("html") != "") {
 }
 -->
 </style>
+	<button type="button" onclick="history.back();">Back</button>
+	<br>
 	<br> <input type="button" onclick="f1.submit()" value="Print">
 	<div id="header" align="center">
 		<h1>Stop/Idling Report</h1>
@@ -79,10 +70,3 @@ if ($this->input->post("html") != "") {
 	?>
 </table>
 </div>
-<form id="f1" name="f1" action="" method="post">
-	<textarea id="html" name="html" style="display: none"></textarea>
-</form>
-<script>html.innerHTML=isi.innerHTML</script>
-<?php
-}
-?>

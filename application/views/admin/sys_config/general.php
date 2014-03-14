@@ -44,7 +44,7 @@
 					<div id="general" class="tab-pane in active">
 						<form role="form" class="form-horizontal"
 							enctype="multipart/form-data"
-							action="<?php echo site_url();?>admin/sys_config/company_data/"
+							action="<?php echo site_url();?>admin/sys_config/company/"
 							method="POST" />
 
 						<div class="form-group">

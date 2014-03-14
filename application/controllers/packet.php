@@ -127,6 +127,7 @@ class Packet extends CI_Controller {
 		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
 		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
 		// echo 'test';
+		return $in_out;
 	}
 
 	
@@ -143,12 +144,12 @@ class Packet extends CI_Controller {
 		$polygon = array();
 		foreach ($latlngs as $latlng) {
 			$lat = explode(',', rm_brace($latlng));
-			array_push($polygon, array($lat[0],$lat[1]));
+			array_push($polygon, array($lat[1],$lat[0]));
 		}
-		$in_out = poly_contains($point, polygon_reverse($region->latlng)) ? 'in' : 'out';
+		$in_out = poly_contains($point, $region->latlng) ? 'in' : 'out';
 		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
-		echo 'test<br/>';
-		echo $in_out;
+		//echo 'test<br/>';
+		return $in_out;
 	}
 	
 	
@@ -192,7 +193,8 @@ class Packet extends CI_Controller {
 		$region = $data['region'];
 		//print_r($region);
 		$latlngs = explode(';', $region->latlng);
-		$point = array($lat,$lng);
+		$point = array($lng,$lat);
+		//print_r($point);exit;
 		$polygon = array();
 		foreach (remove_bracket($latlngs) as $latlng) {
 			$lat = explode(',', $latlng);

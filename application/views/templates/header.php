@@ -93,9 +93,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							<li><a href="<?php echo site_url()?>admin/sys_config"> <i
-<!-- 									class="icon-cog"></i> System Configuration -->
-<!-- 							</a></li> -->
+							
 							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
 									class="icon-briefcase"></i>User</a></li>
 							<li><a
@@ -113,7 +111,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i
 									class="icon-home"></i>Base</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i
-									class="icon-truck"></i> Vehicle</a></li>
+									class="icon-truck"></i> Vehicle </a></li>
 							<li></li>
 						</ul></li>
 					<li class="light-green dropdown-hover"><a
