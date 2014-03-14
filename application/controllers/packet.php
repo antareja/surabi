@@ -53,7 +53,7 @@ class Packet extends CI_Controller {
 		curl_setopt($ch, CURLOPT_NOSIGNAL, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1000);
 		$data = curl_exec($ch);
-// 		curl_close($ch);
+		curl_close($ch);
 // 		$json = json_decode($data, true);
 		// print_r($json);
 // 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
