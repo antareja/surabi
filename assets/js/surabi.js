@@ -70,17 +70,17 @@ jQuery(function($) {
 	// $('.cek').
 });
 
-// jQuery('.form-user').validate({
-// rules : {
-// password : {
-// minlength : 5
-// },
-// re_password : {
-// minlength : 5,
-// equalTo : "#password"
-// }
-// }
-// });
+$('.form-user').validate({
+	rules : {
+		password : {
+			minlength : 5
+		},
+		re_password : {
+			minlength : 5,
+			equalTo : "#password"
+		}
+	}
+});
 $('.btn-user').click(function() {
 	$("#form-user").submit();
 	// console.log($('.form-user').valid());
