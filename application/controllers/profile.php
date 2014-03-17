@@ -56,6 +56,10 @@ class Profile extends CI_Controller {
 			$this->load->template("profile/region_alert", $data);
 		}
 	}
+	
+	public function region_test(){
+		$this->load->view("tools/indonesia.php");
+	}
 
 	public function region_delete($region_id) {
 		$this->mprofile->deleteRegion($region_id);

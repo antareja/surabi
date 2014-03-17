@@ -173,6 +173,14 @@ OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
         this.callback("modify", [this.point.geometry, this.getSketch()]);
         this.drawFeature();
         delete this.redoStack;
+					var marker_layer = new OpenLayers.Layer.Markers( "Markers" );
+					map.addLayer(marker_layer);
+					var lat = lonlat.lat;
+					var lon = lonlat.lon;
+					var size = new OpenLayers.Size(21,25);
+					var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size);
+					marker_layer.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(lon,lat),icon));
+					document.getElementById("div_lonlat").innerHTML+="<input type='text' name='txt_posisi[]' value='"+lon+","+lat+"'><br>";
     },
     
     /**
@@ -420,19 +428,19 @@ OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
      * {Boolean} Allow event propagation
      */
     down: function(evt) {
-        var stopDown = this.stopDown;
+		var stopDown = this.stopDown;
         if(this.freehandMode(evt)) {
             stopDown = true;
             if (this.touch) {
                 this.modifyFeature(evt.xy, !!this.lastUp);
                 OpenLayers.Event.stop(evt);
-            }
+			}
         }
         if (!this.touch && (!this.lastDown ||
                             !this.passesTolerance(this.lastDown, evt.xy,
                                                   this.pixelTolerance))) {
             this.modifyFeature(evt.xy, !!this.lastUp);
-        }
+		}
         this.mouseDown = true;
         this.lastDown = evt.xy;
         this.stoppedDown = stopDown;
@@ -519,7 +527,7 @@ OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
         var index = this.line.geometry.components.length - 1;
         this.line.geometry.removeComponent(this.line.geometry.components[index]);
         this.removePoint();
-        this.finalize();
+        //this.finalize();
     },
   
     /**

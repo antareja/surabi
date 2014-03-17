@@ -28,6 +28,8 @@ if (!isset($_SESSION['gps_username'])) {
 <link href="<?php echo base_url()?>assets/css/font-awesome.min.css"
 	rel="stylesheet">
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
+<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
 <?php if(isset($map_use)) { ?>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

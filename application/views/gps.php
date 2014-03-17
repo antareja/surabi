@@ -1,5 +1,3 @@
-<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
-<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">

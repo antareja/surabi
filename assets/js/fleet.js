@@ -20,6 +20,8 @@ socket.on('notification', function(data) {
 	$("#speed_" + mobile).html(velocity);
 	$("#position_" + mobile).html(tanggal + " " + jam);
 	$("#bearing_" +mobile).html(bearing);
+	$('#location_'+mobile).html(lat + ","+ lng);
+	/*
 	geocoder.geocode({
 		'latLng' : point
 	}, function(results, status) {
@@ -34,6 +36,7 @@ socket.on('notification', function(data) {
 
 		}
 	});
+	*/
 	$("#tr_" + mobile).toggle("pulsate");
 	$("#tr_" + mobile).toggle("pulsate");
 });

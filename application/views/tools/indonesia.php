@@ -1,107 +1,118 @@
-<!-- Basic CSS definitions -->
-<style type="text/css">
-/* General settings */
-body {
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	font-size: small;
-}
-/* Toolbar styles */
-#toolbar {
-	position: relative;
-	padding-bottom: 0.5em;
-	display: none;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>OpenLayers map preview</title>
+        <!-- Import OL CSS, auto import does not work with our minified OL.js build -->
+        <link rel="stylesheet" type="text/css" href="http://192.168.12.250:8080/geoserver/openlayers/theme/default/style.css"/>
+        <!-- Basic CSS definitions -->
+        <style type="text/css">
+            /* General settings */
+            body {
+                font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+                font-size: small;
+            }
+            /* Toolbar styles */
+            #toolbar {
+                position: relative;
+                padding-bottom: 0.5em;
+                display: none;
+            }
+            
+            #toolbar ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            #toolbar ul li {
+                float: left;
+                padding-right: 1em;
+                padding-bottom: 0.5em;
+            }
+            
+            #toolbar ul li a {
+                font-weight: bold;
+                font-size: smaller;
+                vertical-align: middle;
+                color: black;
+                text-decoration: none;
+            }
 
-#toolbar ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
+            #toolbar ul li a:hover {
+                text-decoration: underline;
+            }
+            
+            #toolbar ul li * {
+                vertical-align: middle;
+            }
 
-#toolbar ul li {
-	float: left;
-	padding-right: 1em;
-	padding-bottom: 0.5em;
-}
+            /* The map and the location bar */
+            #map {
+                clear: both;
+                position: relative;
+                width: 909px;
+                height: 330px;
+                border: 1px solid black;
+            }
+            
+            #wrapper {
+                width: 909px;
+            }
+            
+            #location {
+                float: right;
+            }
+            
+            #options {
+                position: absolute;
+                left: 13px;
+                top: 7px;
+                z-index: 3000;
+            }
 
-#toolbar ul li a {
-	font-weight: bold;
-	font-size: smaller;
-	vertical-align: middle;
-	color: black;
-	text-decoration: none;
-}
-
-#toolbar ul li a:hover {
-	text-decoration: underline;
-}
-
-#toolbar ul li * {
-	vertical-align: middle;
-}
-
-/* The map and the location bar */
-#map {
-	clear: both;
-	position: relative;
-	width: 909px;
-	height: 330px;
-	border: 1px solid black;
-}
-
-#wrapper {
-	width: 909px;
-}
-
-#location {
-	float: right;
-}
-
-#options {
-	position: absolute;
-	left: 13px;
-	top: 7px;
-	z-index: 3000;
-}
-
-/* Styles used by the default GetFeatureInfo output, added to make IE happy */
-table.featureInfo,table.featureInfo td,table.featureInfo th {
-	border: 1px solid #ddd;
-	border-collapse: collapse;
-	margin: 0;
-	padding: 0;
-	font-size: 90%;
-	padding: .2em .1em;
-}
-
-table.featureInfo th {
-	padding: .2em .2em;
-	font-weight: bold;
-	background: #eee;
-}
-
-table.featureInfo td {
-	background: #fff;
-}
-
-table.featureInfo tr.odd td {
-	background: #eee;
-}
-
-table.featureInfo caption {
-	text-align: left;
-	font-size: 100%;
-	font-weight: bold;
-	padding: .2em .2em;
-}
-</style>
-<script defer="defer" type="text/javascript">
+            /* Styles used by the default GetFeatureInfo output, added to make IE happy */
+            table.featureInfo, table.featureInfo td, table.featureInfo th {
+                border: 1px solid #ddd;
+                border-collapse: collapse;
+                margin: 0;
+                padding: 0;
+                font-size: 90%;
+                padding: .2em .1em;
+            }
+            
+            table.featureInfo th {
+                padding: .2em .2em;
+                font-weight: bold;
+                background: #eee;
+            }
+            
+            table.featureInfo td {
+                background: #fff;
+            }
+            
+            table.featureInfo tr.odd td {
+                background: #eee;
+            }
+            
+            table.featureInfo caption {
+                text-align: left;
+                font-size: 100%;
+                font-weight: bold;
+                padding: .2em .2em;
+            }
+        </style>
+        <!-- Import OpenLayers, reduced, wms read only version -->
+		<script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+		<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
+		<script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
+        <script defer="defer" type="text/javascript">
             var map;
             var untiled;
             var tiled;
             var pureCoverage = false;
 			var vectors = new OpenLayers.Layer.Vector("poly");
-			var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
+			var geo_url = "http://192.168.12.250:8080/geoserver/tcm/wms" ;
             // pink tile avoidance
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
             // make OL compute scale according to WMS spec
@@ -394,122 +405,9 @@ table.featureInfo caption {
 			
 			
         </script>
-<div class="page-content">
-	<div class="page-header">
-		<h1>
-			Profile <small> <i class="icon-double-angle-right"></i> Region
-			</small>
-		</h1>
-	</div>
-	<!-- /.page-header -->
-	<div class="row">
-		<div class="col-sm-3">
-			<div class="widget-box">
-				<div class="widget-header">
-					<h4 class="smaller">List Region</h4>
-				</div>
-				<div class="widget-body">
-					<div class="widget-main">
-						<p class="muted">
-							<?php
-							foreach ($all_region as $regions) {
-								echo "<p><a href='" . base_url() . "profile/region_alert/" . $regions->region_id . "'>" . $regions->name . "</a></p>";
-							}
-							?>
-						<p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-6">
-
-			<form role="form" class="form-horizontal"
-				enctype="multipart/form-data"
-				action="<?php echo site_url();?>profile/region_alert/" method="POST" />
-
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Name </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="name" name="name"
-						placeholder="Name"
-						value="<?php echo isset($region) ? $region->name : '';?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Description </label>
-				<div class="col-sm-9">
-					<textarea class="form-control" id="description" name="description"
-						placeholder="Description"><?php  echo  isset($region) ? $region->description : '';?></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Expire Time </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="expire_time"
-						name="expire_time" placeholder="expire_time"
-						value="<?php echo isset($region) ? $region->expire_time : '';?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Time Start </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="time_start"
-						name="time_start" placeholder="time_start"
-						value="<?php echo isset($region) ? $region->time_start : '';?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Time End </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="time_end"
-						name="time_end" placeholder="time_end"
-						value="<?php echo isset($region) ? $region->time_end : '';?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> In Out </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="in_out" name="in_out"
-						placeholder="in_out"
-						value="<?php echo isset($region) ? $region->in_out : '';?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Color </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control" id="color" name="color"
-						placeholder="color"
-						value="<?php echo isset($region) ? $region->color : '';?>">
-				</div>
-				<br> <br>
-				<div class="panel-body">
-					<br> * Klik kanan untuk menandai peta <br> * Klik pada penanda peta
-					untuk menghapus penanda <br> * Anda bisa menggeser penanda dengan
-					cara drag penanda
-					<div id="map_canvas_region" style="width: 100%; height: 400px"></div>
-					<div id="div_input"></div>
-				</div>
-			</div>
-			<div class="clearfix form-actions">
-				<div class="col-md-offset-3 col-md-9">
-					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
-					&nbsp; &nbsp;
-					<button class="btn" type="reset">
-						<i class="icon-undo bigger-110"></i> Reset
-					</button>
-				</div>
-			</div>
-				<?php echo isset($region) ? '<input type="hidden" name="region_id" value="'.$region->region_id.'" >' : '';?>
-				<textarea id="tmp_position" style="display: none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
-			</form>
-			<div id="toolbar" style="display: none;">
+    </head>
+    <body onload="init()">
+        <div id="toolbar" style="display: none;">
             <ul>
                 <li>
                     <a>WMS version:</a>
@@ -621,8 +519,5 @@ table.featureInfo caption {
 		<button onclick="del();"></button>
 		<div id="div_lonlat">
 	</div>
-		</div>
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.page-content -->
+    </body>
+</html>

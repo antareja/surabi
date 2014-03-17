@@ -38,7 +38,6 @@
 					for="form-field-1"> Full Name </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="fullname" name="fullname"
-						placeholder="Name"
 						value="<?php echo isset($user) ? $user->fullname : '';?>">
 				</div>
 			</div>
@@ -47,7 +46,6 @@
 					for="form-field-1"> User Name </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="username" name="username"
-						placeholder="Name"
 						value="<?php echo isset($user) ? $user->username : '';?>">
 				</div>
 			</div>
@@ -55,8 +53,7 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Password </label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" id="password" name="password"
-						placeholder="Password">
+					<input type="password" class="form-control" id="password" name="password">
 				</div>
 			</div>
 			<div class="form-group">
