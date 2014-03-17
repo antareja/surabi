@@ -18,7 +18,7 @@ class Sys_config extends CI_Controller {
 	}
 
 	public function index() {
-		$this->company();
+		$this->vendor();
 	}
 
 	/**
@@ -27,8 +27,8 @@ class Sys_config extends CI_Controller {
 	 *        	for 1 company only
 	 *        	
 	 */
-	public function company($id_company = NULL) {
-		$data['pageTitle'] = 'General Company Data';
+	public function vendor($id_company = NULL) {
+		$data['pageTitle'] = 'Vendor Data';
 		$data['all_company'] = $this->msys_config->getAllCompany();
 		$post = $this->input->post();
 		// if add or edit
@@ -42,18 +42,19 @@ class Sys_config extends CI_Controller {
 			// for edit data
 			if ($post['id_company']) {
 				$this->msys_config->editCompany($post['id_company'], $post_data);
+				redirect('admin/sys_config/vendor/'.$post['id_company']);
 				// for add $_POST data
 			} else {
-				$this->msys_config->insertCompanyData($post_data);
+				$id = $this->msys_config->insertCompanyData($post_data);
+				redirect('admin/sys_config/vendor/'.$id);
 			}
-			redirect('admin/sys_config');
 			// for edit or view data only
 		} elseif ($id_company) {
-			$data['users'] = $this->msys_config->getCompany($id_company);
-			$this->load->template("admin/sys_config/general", $data);
+			$data['vendor'] = $this->msys_config->getCompany($id_company);
+			$this->load->template("admin/sys_config/vendor", $data);
 			// for add new data only
 		} else {
-			$this->load->template("admin/sys_config/general", $data);
+			$this->load->template("admin/sys_config/vendor", $data);
 		}
 	}
 
@@ -110,13 +111,14 @@ class Sys_config extends CI_Controller {
 			$post_data['username'] = $post['username'];
 			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['password'] = md5($post['password']);
+			//$post_data['re_password'] = md5($post['re_password']);
 			$post_data['address'] = $post['address'];
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
 			if ($post['user_id']) {
-				$this->muser->updateUser($user_id, $post_data);
-				redirect('admin/sys_config/user/' . $user_id);
+				$this->muser->updateUser($post_data,$post['user_id']);
+				redirect('admin/sys_config/user/' . $post['user_id']);
 			} else {
 				$id = $this->muser->insertUser($post_data);
 				redirect('admin/sys_config/user/' . $id);

@@ -46,10 +46,11 @@ function base_url_new() {
 	}
 }
 
-function define_sess($username, $user_id, $full_name) {
+function define_sess($username, $user_id, $full_name, $status) {
 	$_SESSION['gps_username'] = $username;
 	$_SESSION['gps_user_id'] = $user_id;
 	$_SESSION['gps_full_name'] = $full_name;
+	$_SESSION['gps_status'] = $status;
 	define('USERNAME', $username);
 	define('USER_ID', $user_id);
 	define('FULLNAME', $full_name);

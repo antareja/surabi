@@ -95,12 +95,12 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							
 							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
-									class="icon-briefcase"></i>User</a></li>
+									class="icon-user"></i>Operator</a></li>
 							<li><a
-								href="<?php echo site_url()?>admin/sys_config/company"><i
-									class="icon-briefcase"></i>Company Data</a></li>
+								href="<?php echo site_url()?>admin/sys_config/vendor"><i
+									class="icon-briefcase"></i>Vendor</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i
-									class="icon-briefcase"></i>Driver</a></li>
+									class="icon-user"></i>Driver</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i
 									class="icon-picture"></i>Icon</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i

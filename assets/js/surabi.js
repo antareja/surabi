@@ -65,9 +65,25 @@ jQuery(function($) {
 		$(this).prev().focus();
 	});
 	// $('.cek').removeAttr('checked');
-	//$('.cek').prop('checked', true);
-	
-	//$('.cek').
+	// $('.cek').prop('checked', true);
+
+	// $('.cek').
+});
+
+// jQuery('.form-user').validate({
+// rules : {
+// password : {
+// minlength : 5
+// },
+// re_password : {
+// minlength : 5,
+// equalTo : "#password"
+// }
+// }
+// });
+$('.btn-user').click(function() {
+	$("#form-user").submit();
+	// console.log($('.form-user').valid());
 });
 
 function getFormattedDate(date) {
@@ -76,24 +92,23 @@ function getFormattedDate(date) {
 	var year = date.getFullYear().toString().slice(2);
 	return year + '-' + month + '-' + day;
 }
-//$('.cek').click(function () {
-//	$('.cek').attr('checked','checked');
-//	//var currentId = $(this).attr('id');
-//	add_filter(this.id);
-//});
+// $('.cek').click(function () {
+// $('.cek').attr('checked','checked');
+// //var currentId = $(this).attr('id');
+// add_filter(this.id);
+// });
 
-
-//$(document).ready(my_function);
+// $(document).ready(my_function);
 // if want to set default check list
-//$(document).ready(function() {
-//	$('.cek').attr('checked','checked');
-//	$('.cek').each(function(){
-//		add_filter(this.id);
-//	});
-//	$('.test').each(function(){
-//		alert(this.id);
-//	});
-//});
+// $(document).ready(function() {
+// $('.cek').attr('checked','checked');
+// $('.cek').each(function(){
+// add_filter(this.id);
+// });
+// $('.test').each(function(){
+// alert(this.id);
+// });
+// });
 function add_marker(isi) {
 	isi2 = isi.replace("marker_", "");
 	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
@@ -118,3 +133,4 @@ function remove_filter(isi) {
 	});
 	marker_layer.removeMarker(nama_marker[isi].nama);
 }
+

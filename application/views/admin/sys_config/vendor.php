@@ -1,8 +1,8 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Company Data <small> <i class="icon-double-angle-right"></i> General
-			</small>
+		<small>System Config <i class="icon-double-angle-right"></i></small> 
+		Vendor<?php echo isset($vendor) ? ' : '.$vendor->name : " : Add New"?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -12,7 +12,7 @@
 			<div class="widget-box">
 				<div class="widget-header">
 					<h4 class="smaller">
-						List Company 
+						List Vendor 
 					</h4>
 				</div>
 				<div class="widget-body">
@@ -22,7 +22,7 @@
 						<?php 
 							foreach ($all_company as $companies)
 							{
-								echo "<p><a href='".base_url()."admin/sys_config/company/".$companies->id_company."'>".$companies->name."</a></p>";
+								echo "<p><a href='".base_url()."admin/sys_config/vendor/".$companies->id_company."'>".$companies->name."</a></p>";
 							}
 						?>
 						<p>
@@ -44,7 +44,7 @@
 					<div id="general" class="tab-pane in active">
 						<form role="form" class="form-horizontal"
 							enctype="multipart/form-data"
-							action="<?php echo site_url();?>admin/sys_config/company/"
+							action="<?php echo site_url();?>admin/sys_config/vendor/"
 							method="POST" />
 
 						<div class="form-group">
@@ -53,7 +53,7 @@
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="name" name="name"
 									placeholder="Name"
-									value="<?php echo isset($users) ? $users->name : '';?>">
+									value="<?php echo isset($vendor) ? $vendor->name : '';?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -61,7 +61,7 @@
 								for="form-field-1"> Address </label>
 							<div class="col-sm-9">
 								<textarea class="form-control" id="address" name="address"
-									placeholder="Address"><?php echo isset($users) ? $users->address : '';?></textarea>
+									placeholder="Address"><?php echo isset($vendor) ? $vendor->address : '';?></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -70,7 +70,7 @@
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="phone" name="phone"
 									placeholder="Phone"
-									value="<?php echo isset($users) ? $users->phone : '';?>">
+									value="<?php echo isset($vendor) ? $vendor->phone : '';?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -79,7 +79,7 @@
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="phone2"
 									name="phone2" placeholder="Phone2"
-									value="<?php echo isset($users) ? $users->phone2 : '';?>">
+									value="<?php echo isset($vendor) ? $vendor->phone2 : '';?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -88,7 +88,7 @@
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="fax" name="fax"
 									placeholder="Fax"
-									value="<?php echo isset($users) ? $users->fax : '';?>">
+									value="<?php echo isset($vendor) ? $vendor->fax : '';?>">
 							</div>
 						</div>
 						<div class="clearfix form-actions">
@@ -100,7 +100,7 @@
 								</button>
 							</div>
 						</div>
-						<input type="hidden" name="id_company" value="<?php echo isset($users) ? $users->id_company : '';?>">
+						<input type="hidden" name="id_company" value="<?php echo isset($vendor) ? $vendor->id_company : '';?>">
 						</form>
 					</div>
 

@@ -1,9 +1,8 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Fleet Configuration <small> <i class="icon-double-angle-right"></i>
-				User
-			</small>
+			<small>System Configuration <i class="icon-double-angle-right"></i></small> 
+				Operator  <?php echo isset($user) ? ': '. $user->fullname : ': Add new '?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -12,7 +11,7 @@
 		<div class="col-sm-3">
 			<div class="widget-box">
 				<div class="widget-header">
-					<h4 class="smaller">List User</h4>
+					<h4 class="smaller">List Operator</h4>
 				</div>
 				<div class="widget-body">
 					<div class="widget-main">
@@ -29,7 +28,7 @@
 		</div>
 		<div class="col-sm-6">
 
-			<form role="form" class="form-horizontal"
+			<form role="form" id="form-user" class="form-horizontal form-user"
 				enctype="multipart/form-data"
 				action="<?php echo site_url();?>admin/sys_config/user/"
 				method="POST" />
@@ -57,7 +56,15 @@
 					for="form-field-1"> Password </label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password" name="password"
-						placeholder="Name">
+						placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-1"> ReType Password </label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control" id="re_password" name="re_password"
+						placeholder="Password">
 				</div>
 			</div>
 <!-- 			<div class="form-group"> -->
@@ -112,6 +119,10 @@
 				<div class="col-md-offset-3 col-md-9">
 					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
 					&nbsp; &nbsp;
+					<button class="btn btn-info btn-user" type="button">
+						<i class="icon-ok bigger-110"></i>
+						Submit
+					</button>
 					<button class="btn" type="reset">
 						<i class="icon-undo bigger-110"></i> Reset
 					</button>

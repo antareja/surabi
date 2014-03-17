@@ -59,7 +59,7 @@
 					</select>
 				</div>
 			</div>
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Hardware Type </label>
 				<div class="col-sm-9">
@@ -70,7 +70,7 @@
 						<?php } ?>
 					</select>
 				</div>
-			</div> -->
+			</div> 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Base</label>
