@@ -76,7 +76,6 @@ $('.form-user').validate({
 			minlength : 5
 		},
 		re_password : {
-			minlength : 5,
 			equalTo : "#password"
 		}
 	}

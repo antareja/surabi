@@ -117,8 +117,6 @@
 			</div>
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
-					&nbsp; &nbsp;
 					<button class="btn btn-info btn-user" type="button">
 						<i class="icon-ok bigger-110"></i>
 						Submit
