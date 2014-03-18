@@ -35,6 +35,13 @@ class MPacket extends CI_Model {
 		return $query;
 	}
 	
+	function getReplayData($mobile_address,$tanggal) {
+		$this->db->order_by("create_at", "ASC");
+		$this->db->where("mobile_address", $mobile_address);
+		$this->db->like("create_at", $tanggal);
+		return $this->db->get("packet")->result();
+	}
+	
 	function getAllRegion() {
 		$query = $this->db->get('region_alert');
 		return $query->result();

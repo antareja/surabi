@@ -26,4 +26,23 @@ class Replay extends CI_Controller {
 		$this->load->template('replay',$data);
 	}
 	
+	public function replay2() {
+		$this->load->model('admin/msys_config');
+		$this->msys_config = new MSys_config();
+		$data['pageTitle'] = "Replay Module";
+		$post = $this->input->post();
+		if($post)
+		{
+			$mobile_address=$this->input->post("gps_mobile_address");
+			$tanggal=$this->input->post("tanggal");
+			$tanggal=date("Y-m-d", strtotime($tanggal));
+			$data['data_replay'] = $this->mpacket->getReplayData($mobile_address,$tanggal);
+		}
+		else
+		{
+			$data['allvehicle'] = $this->msys_config->getAllVehicle();
+		}
+		$this->load->template('replay2',$data);
+	}
+	
 }
