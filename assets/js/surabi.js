@@ -68,7 +68,11 @@ jQuery(function($) {
 	// $('.cek').prop('checked', true);
 
 	// $('.cek').
+	
+
 });
+
+
 
 $('.form-user').validate({
 	rules : {
@@ -133,3 +137,14 @@ function remove_filter(isi) {
 	marker_layer.removeMarker(nama_marker[isi].nama);
 }
 
+
+$(document).ready(function() {
+$('#company_id').change(function() {
+	var company = $(this).val();
+	$.post('../get_admin', 
+		{company_id : company})
+			.done(function(data) {
+				$('#admin_id').html(data);
+	});
+});
+});

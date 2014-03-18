@@ -18,7 +18,7 @@
 						<p class="muted">
 						<?php
 						foreach ($all_user as $users) {
-							echo "<p><a href='" . site_url() . "admin/sys_config/user/" . $users->user_id . "'>" . $users->username . "</a></p>";
+							echo "<p><a href='" . site_url() . "admin/sys_config/user/".$level. '/' . $users->user_id . "'>" . $users->username . "</a></p>";
 						}
 						?>
 						<p>
@@ -30,7 +30,7 @@
 
 			<form role="form" id="form-user" class="form-horizontal form-user"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>admin/sys_config/user/"
+				action="<?php echo $action;?>"
 				method="POST" />
 
 			<div class="form-group">
@@ -64,16 +64,27 @@
 						placeholder="Password">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> Vendor </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="company_id" id="company_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($companies as $company) { ?>
+						<option value="<?php  echo $company->id_company?>"
+						<?php if(isset($user)) {
+							echo $company->id_company == $user->company_id ? 'selected':'';
+						}?>><?php echo $company->name?></option>
+						<?php  }?>
+					</select>
+				</div>
+			</div>
 <!-- 			<div class="form-group"> -->
 <!-- 				<label class="col-sm-3 control-label no-padding-right" -->
-<!-- 					for="form-field-select-2"> Vehicle Use </label> -->
+<!-- 					for="form-field-select-2"> Admin Vendor</label> -->
 <!-- 				<div class="col-sm-9"> -->
-<!-- 					<select class="form-control" id="form-field-select-2" -->
-<!-- 						data-placeholder="Choose a Vehicle user" name="vehicle_id"> -->
+<!-- 					<select class="form-control" id="admin_id" name="admin_id"> -->
 <!-- 						<option value="">&nbsp;</option> -->
-						<?php // foreach($vehicles as $vehicle) {?>
-						<option value="<?php // echo $vehicle->vehicle_id ?>"><?php // echo $vehicle->name?></option>
-						<?php // }?>
 <!-- 					</select> -->
 <!-- 				</div> -->
 <!-- 			</div> -->

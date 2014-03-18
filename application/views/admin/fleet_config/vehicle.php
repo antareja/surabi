@@ -45,6 +45,21 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> Vendor </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="company_id" id="company_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($companies as $company) { ?>
+						<option value="<?php  echo $company->id_company?>"
+						<?php if(isset($user)) {
+							echo $company->id_company == $user->company_id ? 'selected':'';
+						}?>><?php echo $company->name?></option>
+						<?php  }?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> GPS ID</label>
 				<div class="col-sm-9">
 					<select class="form-control" name="mobile_address" id="form-field-select-2"
@@ -103,6 +118,7 @@
 					</select>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Alert Profile</label>

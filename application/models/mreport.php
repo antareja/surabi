@@ -18,7 +18,7 @@ class MReport extends CI_Model {
 	
 	function getByOperator() {
 		if($_SESSION['gps_status'] == 'operator') {
-			return  ','. array('user_id'=> $_SESSION['gps_user_id']);
+			return array('user_id'=> $_SESSION['gps_user_id']);
 		} else {
 			return FALSE;
 		}
@@ -30,8 +30,9 @@ class MReport extends CI_Model {
 	}
 
 	function getAllVehicles() {
-		$userid = $this->getByOperator();
-		$query = $this->db->get_where('vehicles');
+// 		$userid = $this->getByOperator() ? $this->getByOperator() : '' ;
+// 		print_r($userid);exit;
+		$query = $this->db->get('vehicles');
 		return $query->result();
 	}
 	

@@ -101,9 +101,17 @@ class Sys_config extends CI_Controller {
 		}
 	}
 	
-	public function user($user_id = NULL) {
+	/**
+	 * @param string $user_id
+	 * for 
+	 */
+	public function user($level,$user_id = NULL) {
 		$data['pageTitle'] = 'user';
-		$data['all_user'] = $this->muser->getAlluser();
+		$data['action'] = site_url().'admin/sys_config/user/'.$level;
+		$data['level'] = $level;
+		$data['all_user'] = $level == 'operator' ? $this->muser->getAllUser() : $this->muser->getAllAdminVendor(); 
+		//$data['admin'] = $this->muser->getAllAdmin();
+		$data['companies'] = $this->muser->getAllCompany();
 		// 		$data['vehicles'] = $this->muser->getAllVehicle();
 		$post = $this->input->post();
 		if ($post) {
@@ -111,17 +119,20 @@ class Sys_config extends CI_Controller {
 			$post_data['username'] = $post['username'];
 			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['password'] = md5($post['password']);
-			//$post_data['re_password'] = md5($post['re_password']);
 			$post_data['address'] = $post['address'];
+			$post_data['company_id'] = $post['company_id'];
+			$post_data['admin_id'] = $_SESSION['user_id'];
+			$post_data['level'] = $level =='operator'?'operator':'admin_vendor';
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
 			if ($post['user_id']) {
+				!empty($post['password']) ? $post_data['password'] = md5($post['password']) : '';
 				$this->muser->updateUser($post_data,$post['user_id']);
-				redirect('admin/sys_config/user/' . $post['user_id']);
+				redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
 			} else {
 				$id = $this->muser->insertUser($post_data);
-				redirect('admin/sys_config/user/' . $id);
+				redirect('admin/sys_config/user/'.$level.'/' . $id);
 			}
 		} elseif ($user_id) {
 			// 			die($user_id);
@@ -132,8 +143,19 @@ class Sys_config extends CI_Controller {
 		}
 	}
 	
+	public function get_admin(){
+// 		echo '<option>test</option>';
+		$post = $this->input->post();
+		$company_id = $post['company_id'];
+		$admins = $this->muser->getAllAdmin($company_id);
+		foreach($admins as $admin) {
+			echo '<option value"'.$admin->user_id.'">'.$admin->fullname.'</option>';
+		}
+	}
+	
 	public function driver($driver_id = NULL) {
 		$data['pageTitle'] = 'driver';
+		
 		$data['all_driver'] = $this->msys_config->getAllDriver();
 		$data['vehicles'] = $this->msys_config->getAllVehicle();
 		$post = $this->input->post();

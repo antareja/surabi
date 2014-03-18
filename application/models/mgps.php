@@ -34,4 +34,8 @@ class MGps extends CI_Model {
 		$query=$this->db->get();
 		return $query->result();
 	}
+	
+	function getVehicleByUser(){
+		$this->db->get('vehicles');
+	}
 }	

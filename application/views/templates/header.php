@@ -27,7 +27,8 @@ if (!isset($_SESSION['gps_username'])) {
 	rel="stylesheet">
 <link href="<?php echo base_url()?>assets/css/font-awesome.min.css"
 	rel="stylesheet">
-<script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/jquery-1.11.0.min.js"></script>
+</script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
 <?php if(isset($map_use)) { ?>
@@ -98,8 +99,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							
-							<li><a href="<?php echo site_url()?>admin/sys_config/user"><i
-									class="icon-user"></i>Operator</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/user/operator"><i
+									class="icon-user"></i>Create Operator</a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/user/admin"><i
+									class="icon-user"></i>Create Admin</a></li>
 							<li><a
 								href="<?php echo site_url()?>admin/sys_config/vendor"><i
 									class="icon-briefcase"></i>Vendor</a></li>
