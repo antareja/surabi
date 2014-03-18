@@ -39,7 +39,6 @@
 					for="form-field-1"> Name</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="name" name="name"
-						placeholder="Name"
 						value="<?php echo isset($vehicle) ? $vehicle->name : '';?>">
 				</div>
 			</div>
@@ -51,8 +50,8 @@
 						<option value="">&nbsp;</option>
 						<?php foreach($companies as $company) { ?>
 						<option value="<?php  echo $company->id_company?>"
-						<?php if(isset($user)) {
-							echo $company->id_company == $user->company_id ? 'selected':'';
+						<?php if(isset($vehicle)) {
+							echo $company->id_company == $vehicle->company_id ? 'selected':'';
 						}?>><?php echo $company->name?></option>
 						<?php  }?>
 					</select>
@@ -64,6 +63,7 @@
 				<div class="col-sm-9">
 					<select class="form-control" name="mobile_address" id="form-field-select-2"
 						data-placeholder="Choose a Vehicle">
+						<option value="">&nbsp;</option>
 						<?php foreach ($all_mobile as $mobile) { ?>
 						<option value="<?php echo $mobile->mobile_address?>" 
 							<?php 
@@ -76,13 +76,29 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> User Assign</label>
+				<div class="col-sm-9">
+					<select class="form-control" name="user_id" id="user_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($users as $user) { ?>
+						<option value="<?php  echo $user->user_id?>"
+						<?php if(isset($vehicle)) {
+							echo $user->user_id == $vehicle->user_id ? 'selected':'';
+						}?>><?php echo $user->fullname?></option>
+						<?php  }?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Hardware Type </label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Vehicle">
-						<?php foreach ($hardwares as $hardware) { ?>
-						<option value="<?php echo $hardware->hardware_id?>"><?php echo $hardware->name?></option>
-						<?php } ?>
+						<option value="1">RV7</option>
+						<?php // foreach ($hardwares as $hardware) { ?>
+						<option value="<?php // echo $hardware->hardware_id?>"><?php // echo $hardware->name?></option>
+						<?php // } ?>
 					</select>
 				</div>
 			</div> 
@@ -92,6 +108,7 @@
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Vehicle" name="base_id">
+						<option value="">&nbsp;</option>
 						<?php foreach ($bases as $base) { ?>
 						<option value="<?php echo $base->base_id?>"
 							<?php 
@@ -109,6 +126,7 @@
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Icon" name="icon_id">
 						<?php foreach ($icons as $icon) { ?>
+						<option value="">&nbsp;</option>
 						<option value="<?php echo $icon->icon_id?>"
 							<?php 
 							if (isset($vehicle)) {
@@ -124,8 +142,15 @@
 					for="form-field-select-2"> Alert Profile</label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
-						data-placeholder="Choose a Icon">
+						data-placeholder="Choose a Region" name="region_id">
 						<option value=""></option>
+						<?php foreach ($regions as $region) { ?>
+						<option value="<?php echo $region->region_id?>"
+							<?php 
+							if (isset($vehicle)) {
+							echo $region->region_id == $vehicle->region_id ? 'selected':'';
+							}?>><?php echo $region->name?></option>
+						<?php } ?>
 					</select>
 				</div>
 			</div> 

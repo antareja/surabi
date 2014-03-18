@@ -28,47 +28,81 @@ class MFleet_config extends CI_Model {
 		));
 		return $query->row();
 	}
-	
-	function getAllBase(){
+
+	function getAllCompany() {
+		$query = $this->db->get('company_data');
+		return $query->result();
+	}
+
+	function getAllBase() {
 		$query = $this->db->get("base");
 		return $query->result();
 	}
-	
-	function getAllIcon(){
+
+	function getAllIcon() {
 		$query = $this->db->get("icon");
 		return $query->result();
 	}
-	
-	function getAllHardware(){
+
+	function getAllHardware() {
 		$query = $this->db->get("hardware_type");
 		return $query->result();
 	}
-	
-	function getAllVehicles(){
-		$query = $this->db->get("vehicles");
+
+	function getAllUserByAdmin($admin_id) {
+		$query = $this->db->get_where('user', array(
+				'admin_id' => $admin_id 
+		));
+		return $query->result();
+	}
+
+	function getRegion() {
+		$query = $this->db->get('region_alert');
 		return $query->result();
 	}
 	
-	function getAllMobileAddress(){
+	function getSpeed(){
+		$query = $this->db->get('speed_alert');
+		return $query;
+	}
+	
+	function getAllUser() {
+		$query = $this->db->get('user');
+		return $query->result();
+	}
+
+	function getAllVehicles() {
+		$query = $this->db->get("vehicles");
+		return $query->result();
+	}
+
+	function getAllVehiclesByAdminVendor() {
+		$query = $this->db->get_where("vehicles",array('company_id' =>$_SESSION['gps_company_id']));
+		return $query->result();
+	}
+	
+	function getAllMobileAddress() {
 		$this->db->group_by('mobile_address');
 		$this->db->select("mobile_address");
 		$query = $this->db->get("packet");
 		return $query->result();
 	}
-	
-	function getVehicle($vehicle_id){
-		$query = $this->db->get_where("vehicles",array("vehicle_id"=>$vehicle_id));
+
+	function getVehicle($vehicle_id) {
+		$query = $this->db->get_where("vehicles", array(
+				"vehicle_id" => $vehicle_id 
+		));
 		return $query->row();
 	}
-	
-	function insertVehicle($data){
-		$this->db->insert('vehicles',$data);
+
+	function insertVehicle($data) {
+		$this->db->insert('vehicles', $data);
 		return $this->db->insert_id();
 	}
-	
-	function updateVehicle($data, $vehicle_id){
-		return $this->db->update("vehicles",$data,array("vehicle_id"=>$vehicle_id));	
+
+	function updateVehicle($data, $vehicle_id) {
+		return $this->db->update("vehicles", $data, array(
+				"vehicle_id" => $vehicle_id 
+		));
 	}
-	
-	
 }	

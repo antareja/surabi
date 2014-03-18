@@ -109,7 +109,15 @@ class Sys_config extends CI_Controller {
 		$data['pageTitle'] = 'user';
 		$data['action'] = site_url().'admin/sys_config/user/'.$level;
 		$data['level'] = $level;
-		$data['all_user'] = $level == 'operator' ? $this->muser->getAllUser() : $this->muser->getAllAdminVendor(); 
+// 		echo $_SESSION['gps_level'];exit;
+		if($_SESSION['gps_level'] == 'admin_vendor') {
+			$data['all_user'] = $this->muser->getAllOperatorByAdmin();
+// 			print_r($data['all_user']);
+		} elseif ($_SESSION['gps_level'] == 'admin') {
+			$data['all_user'] = $this->muser->getAllUser(); 
+		}
+		
+		
 		//$data['admin'] = $this->muser->getAllAdmin();
 		$data['companies'] = $this->muser->getAllCompany();
 		// 		$data['vehicles'] = $this->muser->getAllVehicle();
@@ -120,8 +128,8 @@ class Sys_config extends CI_Controller {
 			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['password'] = md5($post['password']);
 			$post_data['address'] = $post['address'];
-			$post_data['company_id'] = $post['company_id'];
-			$post_data['admin_id'] = $_SESSION['user_id'];
+			$post_data['company_id'] = $_SESSION['gps_company_id'];
+			$post_data['admin_id'] = $_SESSION['gps_user_id'];
 			$post_data['level'] = $level =='operator'?'operator':'admin_vendor';
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];

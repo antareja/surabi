@@ -37,6 +37,11 @@ class Muser extends CI_Model {
 		return $query->result();
 	}
 	
+	function getAllOperatorByAdmin() {
+		$query = $this->db->get_where('user', array('level' => 'operator', 'admin_id'=>$_SESSION['gps_user_id']));
+		return $query->result();
+	}
+	
 	function getAllAdminVendor() {
 		$query = $this->db->get_where('user', array('level' => 'admin_vendor'));
 		return $query->result();

@@ -32,7 +32,8 @@ class Login extends CI_Controller {
 				$login = $this->muser->login($post['username'], $post['password']);
 				if ($login !== FALSE) {
 					//print_r($login);
-					define_sess($login->username, $login->user_id, $login->fullname, $login->level);
+					define_sess($login->username, $login->user_id, $login->fullname, $login->level,
+					$login->company_id);
 					//print_r($_SESSION);exit;
 					previous_url();
 				} else {
