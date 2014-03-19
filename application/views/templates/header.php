@@ -101,8 +101,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/operator"><i
 									class="icon-user"></i>Create Operator</a></li>
+							<?php if($_SESSION['gps_level'] == 'admin') {?>
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/admin"><i
 									class="icon-user"></i>Create Admin</a></li>
+							<?php } ?>		
 							<li><a
 								href="<?php echo site_url()?>admin/sys_config/vendor"><i
 									class="icon-briefcase"></i>Vendor</a></li>
