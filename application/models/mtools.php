@@ -10,4 +10,9 @@ class Mtools extends CI_Model {
 		$this->db->insert("user", $data);
 		return $this->db->insert_id();
 	}
+	
+	function insertVehicle($data){
+		$this->db->insert("vehicles",$data);
+		return $this->db->insert_id();
+	}
 }

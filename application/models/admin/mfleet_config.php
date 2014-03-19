@@ -86,7 +86,7 @@ class MFleet_config extends CI_Model {
 	}
 
 	function getAllVehicleUser(){
-		$this->db->join("user", "vehicles.user_id = user.user_id", "inner");
+		$this->db->join("user", "vehicles.user_id = user.user_id", "left");
 		$query = $this->db->get("vehicles");
 		return $query->result();
 	}

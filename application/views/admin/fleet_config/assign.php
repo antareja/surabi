@@ -4,15 +4,24 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="table-header">Results for "Vehicle & User Assignment"</div>
-
+			<div class="table-header">Assign To User:
+			<select name="user_id" id="user_id">
+			<option>&nbsp;</option>
+			<?php foreach($users as $user) {?>
+				<option value="<?php echo $user->user_id;?>"><?php echo $user->fullname?></option>
+			<?php } ?>
+			</select>
+			<button class="btn btn-sm btn-success" id="assign" type="button">
+					<i class="icon-ok bigger-110"></i>Assign
+			</button>
+			</div>
 			<div class="table-responsive">
 				<table id="sample-table-2"
 					class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
+							<span class="lbl"></span>
 							</label></th>
 							<th>Vehicle</th>
 							<th>User</th>
@@ -26,8 +35,9 @@
 					<tbody>
 						<?php  foreach ($vehicles as $vehicle) {?>
 						<tr id="tr_<?php echo $vehicle->gps_mobile_address?>">
-							<td class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
+							<td class="center"><label>
+							<input type="checkbox" name="assign" id="<?php echo $vehicle->vehicle_id?>" class="ace" />
+							<span class="lbl"></span>
 							</label></td>
 							<td><a href="#"><?php echo $vehicle->name?></a></td>
 							<td id="speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $vehicle->fullname?></td>

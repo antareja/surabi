@@ -148,3 +148,18 @@ $('#company_id').change(function() {
 	});
 });
 });
+
+$('#assign').click(function() {
+	var boxes = $('input[name=assign]:checked');
+	var veh_id = [];
+	var user_id = $('#user_id option:selected').val();
+	$(boxes).each(function(){
+		//alert($(this.id);
+		veh_id.push(this.id);
+		$.post('../')
+		console.log(veh_id);
+	    //do stuff here with this
+	});
+	//alert(veh_id);
+	//alert(user_id);
+});

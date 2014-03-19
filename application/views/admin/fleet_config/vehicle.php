@@ -93,12 +93,12 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Driver Assign</label>
 				<div class="col-sm-9">
-					<select class="form-control" name="user_id" id="user_id">
+					<select class="form-control" name="driver_id" id="driver_id">
 						<option value="">&nbsp;</option>
 						<?php foreach($drivers as $driver) { ?>
-						<option value="<?php  echo $driver->user_id?>"
+						<option value="<?php  echo $driver->driver_id?>"
 						<?php if(isset($vehicle)) {
-							echo $driver->user_id == $vehicle->driver_id ? 'selected':'';
+							echo $driver->driver_id == $vehicle->driver_id ? 'selected':'';
 						}?>><?php echo $driver->name?></option>
 						<?php  }?>
 					</select>

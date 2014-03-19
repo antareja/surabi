@@ -44,6 +44,20 @@ class Tools extends CI_Controller {
 			echo 'Success = '.$id.'<br/>';
 		}
 	}
+	
+	public function create_vehicle(){
+		$name = 'HoulTrackA';
+		for($i=2;$i<10;$i++){
+			$data['name'] = $name.$i;
+			$data['gps_mobile_address'] = '0000000000000000000000052'.$i;
+			$data['hardware_id'] = 3;
+			$data['base_id'] = 5;
+// 			$data['driver_id'] = 1;
+// 			$data['user_id'] = 12;
+			$data['company_id'] = 3;
+			$this->mtools->insertVehicle($data);
+		}
+	}
 
 	public function loc($lat) {
 		$location = explode(',', $lat);
