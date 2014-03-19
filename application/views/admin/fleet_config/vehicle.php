@@ -91,6 +91,21 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> Driver Assign</label>
+				<div class="col-sm-9">
+					<select class="form-control" name="user_id" id="user_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($drivers as $driver) { ?>
+						<option value="<?php  echo $driver->user_id?>"
+						<?php if(isset($vehicle)) {
+							echo $driver->user_id == $vehicle->driver_id ? 'selected':'';
+						}?>><?php echo $driver->name?></option>
+						<?php  }?>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Hardware Type </label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
