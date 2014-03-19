@@ -25,6 +25,49 @@ Long :<span id="txt_long"></span><br>
 <!-- <div id="nodelist"> -->
 <!--             <em>Click on the map to get feature info</em> -->
 <!--         </div> -->
+<div class="row">
+		<div class="col-xs-12">
+			<div class="table-header">Results for "Latest Vehicle Fleet Status"</div>
+
+			<div class="table-responsive">
+				<table id="sample-table-2"
+					class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="center"><label> <input type="checkbox" class="ace" />
+									<span class="lbl"></span>
+							</label></th>
+							<th>Vehicle</th>
+							<th>Speed</th>
+							<th class="hidden-480">Location</th>
+
+							<th><i class="icon-time bigger-110 hidden-480"></i>Position At</th>
+							<th class="hidden-480">Status</th>
+
+							<th>Bearing</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<?php  foreach ($vehicles as $vehicle) {?>
+						<tr id="tr_<?php echo $vehicle->gps_mobile_address?>">
+							<td class="center"><label> <input type="checkbox" class="ace" />
+									<span class="lbl"></span>
+							</label></td>
+							<td><a href="#"><?php echo $vehicle->name?></a></td>
+							<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"></td>
+							<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480"></td>
+							<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"></td>
+							<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
+							<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"></td>
+						</tr>
+						<?php }?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
 <?php
 /*
 ------------------------------------js------------------------------------------------------
@@ -273,6 +316,7 @@ foreach($all_vehicle as $vehicle)
 				var pixel=map.getPixelFromLonLat(point2);
 					
 				//document.getElementById('nodelist').innerHTML = "Loading... please wait...";
+                /*
                 var params = {
                     REQUEST: "GetFeatureInfo",
                     EXCEPTIONS: "application/vnd.ogc.se_xml",
@@ -310,8 +354,9 @@ foreach($all_vehicle as $vehicle)
                         params.featureid = map.layers[0].params.FEATUREID;
                     }
                     OpenLayers.loadURL(geo_url, params, this, setHTML, setHTML);
-					
-				marker_layer.setZIndex( 1001 ); 
+					*/
+				marker_layer.setZIndex( 1001 );
+				setHTML(""); 
 			}
 		}
   });
@@ -319,8 +364,8 @@ foreach($all_vehicle as $vehicle)
 
 function setHTML(response)
 {
+				/*
 				response2=eval("(" + response.responseText + ")");
-				$("#nodelist").html(response.responseText);
 				var provinsi = "";
                 var jalan =  "";
                 var jalan_tambang = "";
@@ -351,7 +396,8 @@ function setHTML(response)
 					}
 					provinsi=provinsi.replace(/"/g,"");
 					var lokasi=jalan_tambang+jalan+provinsi;
-				
+				*/
+					var lokasi=lat+","+lng;
 				popupContentHTML="<b>";
 				popupContentHTML+="<table>";
 				popupContentHTML+="<tr>";
@@ -411,6 +457,14 @@ function setHTML(response)
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
 			if(dalam)alert("Sampai"+data_map['mobile'].nama);
+//-----------------------------------udpate fleet------------------------------------------
+			$("#fleet_speed_" + data_map["mobile"]).html(data_map["velocity"]);
+			$("#fleet_position_" + data_map["mobile"]).html(data_map["tanggal"] + " " + data_map["jam"]);
+			$("#fleet_bearing_" +data_map["mobile"]).html(data_map["bearing"]);
+			$('#fleet_location_'+data_map["mobile"]).html(data_map["lng"]+ ","+ data_map["lat"]);
+			$("#tr_" + data_map["mobile"]).toggle("pulsate");
+			$("#tr_" + data_map["mobile"]).toggle("pulsate");
+//-----------------------------------------------------------------------------------------
 };
 
 function doNothing() {}

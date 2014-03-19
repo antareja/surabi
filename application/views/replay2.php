@@ -28,6 +28,8 @@ var array_waktu = {
 			velocity: '<?php echo $replay->velocity?>',
 			bearing: '<?php echo $replay->bearing?>',
 			location: '<?php echo $replay->location?>',
+			icon_id: '<?php echo $replay->icon_id?>',
+			image_type: '<?php echo $replay->image_type?>',
 		},
 		<?php
 		$x++;
@@ -133,7 +135,7 @@ var array_waktu = {
         var options = document.getElementById("options");
         
 	size = new OpenLayers.Size(21,25);
-	icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size);
+	icon = new OpenLayers.Icon("<?php echo base_url()?>assets/uploads/icon_"+array_waktu["1"].icon_id+"."+array_waktu["1"].image_type, size);
 //------------------------------deklarasi awal------------------------------------	
 	point=new OpenLayers.LonLat(array_waktu["1"].lng,array_waktu["1"].lat);	
 	$("#span_jam").html(array_waktu["1"].jam);
@@ -178,7 +180,6 @@ var array_waktu = {
 			marker=new OpenLayers.Marker(point,icon);
 			marker_layer.addMarker(marker);
 //------------------------------update lokasi------------------------------------	
-			point=new OpenLayers.LonLat(array_waktu["1"].lng,array_waktu["1"].lat);	
 			$("#span_jam").html(array_waktu[ke].jam);
 			$("#span_location").html("("+array_waktu[ke].lng+","+array_waktu["1"].lat+")");
 			$("#span_velocity").html(array_waktu[ke].velocity);
@@ -186,7 +187,7 @@ var array_waktu = {
 //---------------------------------------------------------------------------------
 			if(ke=="<?php echo count($data_replay)?>")
 			{
-				$("#stop").click();
+				clearInterval(myVar);
 			}
 	}
 	
@@ -212,6 +213,16 @@ var array_waktu = {
 		jam="<?php echo explode(":", $jam_awal)[0]?>";
 		var waktu=jam+":"+menit+":"+detik;
 		document.getElementById("jam").innerHTML=waktu;
+
+		point=new OpenLayers.LonLat(array_waktu["1"].lng,array_waktu["1"].lat);	
+		$("#span_jam").html(array_waktu["1"].jam);
+		$("#span_location").html("("+array_waktu["1"].lng+","+array_waktu["1"].lat+")");
+		$("#span_velocity").html(array_waktu["1"].velocity);
+		$("#span_bearing").html(array_waktu["1"].bearing);
+		
+		marker_layer.removeMarker(marker);
+		marker=new OpenLayers.Marker(point,icon);
+		marker_layer.addMarker(marker);
 	}
 	
 	function start(id_button)

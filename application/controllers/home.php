@@ -15,6 +15,8 @@ class Home extends CI_Controller {
 		$this->load->model('mprofile');
 		$this->mgps = new MGps();
 		$this->mprofile = new MProfile();
+		$this->load->model('mfleet');
+		$this->mfleet = new MFleet();
 	}
 
 	public function index() {
@@ -26,6 +28,7 @@ class Home extends CI_Controller {
 		$data['regions'] = $this->mprofile->getAllRegion();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
+		$data['vehicles'] = $this->mfleet->getVehicle();
 		$this->load->template('gps', $data);
 	}
 	

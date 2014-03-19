@@ -16,7 +16,7 @@ class Replay extends CI_Controller {
 	}
 
 	public function index() {
-		$this->replay();
+		$this->replay2();
 	}
 	
 	public function replay() {

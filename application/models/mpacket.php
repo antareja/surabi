@@ -39,6 +39,8 @@ class MPacket extends CI_Model {
 		$this->db->order_by("create_at", "ASC");
 		$this->db->where("mobile_address", $mobile_address);
 		$this->db->like("create_at", $tanggal);
+		$this->db->join("vehicles","gps_mobile_address=mobile_address");
+		$this->db->join("icon","vehicles.icon_id=icon.icon_id");
 		return $this->db->get("packet")->result();
 	}
 	
