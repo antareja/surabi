@@ -1,6 +1,6 @@
 <div class="page-content">
 	<div class="page-header">
-		<h1>Fleet State Module</h1>
+		<h1>Vehicle & User Assignment</h1>
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
@@ -30,11 +30,11 @@
 									<span class="lbl"></span>
 							</label></td>
 							<td><a href="#"><?php echo $vehicle->name?></a></td>
-							<td id="speed_<?php echo $vehicle->gps_mobile_address?>">45</td>
-							<td id="location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480">Near Bandung</td>
+							<td id="speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $vehicle->fullname?></td>
+							<td id="location_<?php echo $vehicle->gps_mobile_address?>"><?php echo $vehicle->gps_mobile_address?></td>
+							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Location</td>
 							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Feb 12 10:45:23</td>
 							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span></td>
-							<td id="bearing_<?php echo $vehicle->gps_mobile_address?>">N (98)</td>
 						</tr>
 						<?php }?>
 					</tbody>

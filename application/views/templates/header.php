@@ -122,7 +122,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i
 									class="icon-truck"></i> Vehicle </a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/assign"><i
-									class="icon-truck"></i> Assignment </a></li>
+									class="icon-truck"></i>Vehicle Assign </a></li>
 							<li></li>
 						</ul></li>
 					<li class="light-green dropdown-hover"><a
