@@ -117,10 +117,30 @@ function add_marker(isi) {
 	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
 	var point2 = tampung_posisi[isi].posisi;
 	nama_marker[isi].nama = new OpenLayers.Marker(point2, icon2);
+	if(popup_marker["popup_marker_"+isi2].popup=="")
+	{
+		markerClick = function (evt) {
+            if (this.popup == null) {
+                this.popup = this.createPopup(this.closeBox);
+                map.addPopup(this.popup);
+                this.popup.show();
+            } else {
+                this.popup.toggle();
+            }
+            currentPopup = this.popup;
+            OpenLayers.Event.stop(evt);
+        };
+		var popupClass = AutoSizeAnchored;
+		popupContentHTML=generate_popup(last_position["posisi_"+isi2].nama,last_position["posisi_"+isi2].location,last_position["posisi_"+isi2].latitude,last_position["posisi_"+isi2].longitude,last_position["posisi_"+isi2].tanggal,last_position["posisi_"+isi2].jam,last_position["posisi_"+isi2].speed);
+		popup_marker["popup_marker_"+isi2].popup = new OpenLayers.Feature(marker_layer, new OpenLayers.LonLat(last_position["posisi_"+isi2].longitude, last_position["posisi_"+isi2].latitude));
+		popup_marker["popup_marker_"+isi2].popup.closeBox = true;
+        popup_marker["popup_marker_"+isi2].popup.popupClass = popupClass;
+        popup_marker["popup_marker_"+isi2].popup.data.popupContentHTML = popupContentHTML;
+	}
 	nama_marker[isi].nama.events.register("mouseover",
 			popup_marker["popup_marker_" + isi2].popup, markerClick);
+	cek_marker.push(isi);
 	marker_layer.addMarker(nama_marker[isi].nama);
-
 }
 
 function add_filter(isi) {
@@ -132,6 +152,9 @@ function add_filter(isi) {
 
 function remove_filter(isi) {
 	filter = jQuery.grep(filter, function(value) {
+		return value != isi;
+	});
+	cek_marker = jQuery.grep(cek_marker, function(value) {
 		return value != isi;
 	});
 	marker_layer.removeMarker(nama_marker[isi].nama);
