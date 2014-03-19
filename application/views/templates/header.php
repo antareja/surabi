@@ -119,6 +119,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 									class="icon-home"></i>Base</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i
 									class="icon-truck"></i> Vehicle </a></li>
+							<li><a href="<?php echo site_url()?>admin/fleet_config/assign"><i
+									class="icon-truck"></i> Assignment </a></li>
 							<li></li>
 						</ul></li>
 					<li class="light-green dropdown-hover"><a

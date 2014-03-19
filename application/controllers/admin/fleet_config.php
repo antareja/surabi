@@ -121,6 +121,8 @@ class Fleet_config extends CI_Controller {
 	 * User & Vehicle Assignment
 	 */
 	public function assign() {
-		
+		$data['pageTitle'] = "Assigmnet Vehicle & User";
+		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
+		$this->load->template('admin/fleet_config/assign',$data);
 	}
 }
