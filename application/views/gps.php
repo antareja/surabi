@@ -1,3 +1,10 @@
+<?php 
+$data_last_position;
+foreach ($last_position as $position)
+{
+	$data_last_position[$position->gps_mobile_address]=$position;
+}
+?>
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">
@@ -55,13 +62,13 @@ Long :<span id="txt_long"></span><br>
 									<span class="lbl"></span>
 							</label></td>
 							<td><a href="#"><?php echo $vehicle->name?></a></td>
-							<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"></td>
-							<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480"></td>
-							<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"></td>
+							<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
+							<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
+							<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
 							<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
-							<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"></td>
+							<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
 						</tr>
-						<?php }?>
+						<?php }	?>
 					</tbody>
 				</table>
 			</div>
@@ -79,13 +86,60 @@ var tampung_posisi = {
 <?php 
 	foreach($all_vehicle as $vehicle)
 	{
+		if(array_key_exists($vehicle->gps_mobile_address, $data_last_position))
+		{
+			$posisi="new OpenLayers.LonLat(".$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude.")";
+		}
+		else 
+		{
+			$posisi="''";
+		}
 		echo "marker_".$vehicle->gps_mobile_address.": { \n";
-		echo "posisi: '', \n";
+		echo "posisi: $posisi, \n";
 		echo "html: '', \n";
 		echo "}, \n";
 	}
 ?>
 };
+var last_position= {
+		<?php 
+			foreach($all_vehicle as $vehicle)
+			{
+				if(array_key_exists($vehicle->gps_mobile_address, $data_last_position))
+				{
+					$nama=$data_last_position[$vehicle->gps_mobile_address]->name;
+					$latitude=$data_last_position[$vehicle->gps_mobile_address]->latitude;
+					$longitude=$data_last_position[$vehicle->gps_mobile_address]->longitude;
+					$location=$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude;
+					$speed=$data_last_position[$vehicle->gps_mobile_address]->velocity;
+					$bearing=$data_last_position[$vehicle->gps_mobile_address]->bearing;
+					$tanggal=explode(" ",$data_last_position[$vehicle->gps_mobile_address]->create_at)[0];
+					$jam=explode(" ",$data_last_position[$vehicle->gps_mobile_address]->create_at)[1];
+				}
+				else 
+				{
+					$nama="";
+					$latitude="";
+					$longitude="";
+					$location="";
+					$speed="";
+					$bearing="";
+					$tanggal="";
+					$jam="";
+				}
+				echo "posisi_".$vehicle->gps_mobile_address.": { \n";
+				echo "nama: '$nama', \n";
+				echo "latitude: '$latitude', \n";
+				echo "longitude: '$longitude', \n";
+				echo "location: '$location', \n";
+				echo "speed: '$speed', \n";
+				echo "bearing: '$bearing', \n";
+				echo "tanggal: '$tanggal', \n";
+				echo "jam: '$jam', \n";
+				echo "}, \n";
+			}
+		?>
+		};
 var filter = [];
 var cek_marker = [];
 var marker_array = [];
@@ -302,11 +356,17 @@ foreach($all_vehicle as $vehicle)
 			name = data_map["system"];
 			lat = data_map["lat"];
 			lng = data_map["lng"];
-		
+
+			//-----------------------------------udpate fleet------------------------------------------
+			$("#fleet_speed_" + data_map["mobile"]).html(data_map["velocity"]);
+			$("#fleet_position_" + data_map["mobile"]).html(data_map["tanggal"] + " " + data_map["jam"]);
+			$("#fleet_bearing_" +data_map["mobile"]).html(data_map["bearing"]);
+			$('#fleet_location_'+data_map["mobile"]).html(data_map["lng"]+ ","+ data_map["lat"]);
+			$("#tr_" + data_map["mobile"]).toggle("pulsate");
+			$("#tr_" + data_map["mobile"]).toggle("pulsate");
+			//-----------------------------------------------------------------------------------------
+			
 			marker_id='marker_' + data_map["mobile"];
-			var ada=jQuery.inArray( marker_id, filter );
-			if(ada>=0)
-			{
 				if(jQuery.inArray( marker_id, cek_marker )>=0)
 				{
 					marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
@@ -357,7 +417,6 @@ foreach($all_vehicle as $vehicle)
 					*/
 				marker_layer.setZIndex( 1001 );
 				setHTML(""); 
-			}
 		}
   });
 
@@ -398,34 +457,7 @@ function setHTML(response)
 					var lokasi=jalan_tambang+jalan+provinsi;
 				*/
 					var lokasi=lat+","+lng;
-				popupContentHTML="<b>";
-				popupContentHTML+="<table>";
-				popupContentHTML+="<tr>";
-				popupContentHTML+="		<td>Name</td>";
-				popupContentHTML+="		<td>&nbsp;:</td>";
-				popupContentHTML+="		<td>  &nbsp;&nbsp;"+nama_mobil["nama_mobil_"+data_map["mobile"]].nama+"</td>";
-				popupContentHTML+="</tr>";
-				popupContentHTML+="<tr>";
-				popupContentHTML+="		<td>Location</td>";
-				popupContentHTML+="		<td>&nbsp;:</td>";
-				popupContentHTML+="		<td>&nbsp;&nbsp;"+lokasi+"</td>";
-				popupContentHTML+="</tr>";
-				popupContentHTML+="<tr>";
-				popupContentHTML+="		<td>Position</td>";
-				popupContentHTML+="		<td>&nbsp;:</td>";
-				popupContentHTML+="		<td> &nbsp;&nbsp;"+lat+","+lng+"</td>";
-				popupContentHTML+="</tr>";
-				popupContentHTML+="		<td>Time</td>";
-				popupContentHTML+="		<td>&nbsp;:</td>";
-				popupContentHTML+="		<td> &nbsp;&nbsp;" + data_map["tanggal"] + " " + data_map["jam"]+"</td>";
-				popupContentHTML+="<tr>";
-				popupContentHTML+="<tr>";
-				popupContentHTML+="		<td>Speed</td>";
-				popupContentHTML+="		<td>&nbsp;:</td>";
-				popupContentHTML+="		<td> &nbsp;&nbsp;" + data_map["velocity"] + "km/h</td>";
-				popupContentHTML+="</tr>";
-				popupContentHTML+="</table>";
-				popupContentHTML+="</b>";
+				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
 				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
 			
 			var point=new OpenLayers.LonLat(lng,lat);
@@ -450,26 +482,53 @@ function setHTML(response)
                 OpenLayers.Event.stop(evt);
             };
             nama_marker["marker_"+data_map["mobile"]].nama.events.register("mouseover", popup_marker["popup_marker_"+data_map["mobile"]].popup, markerClick);
-			
-			marker_layer.addMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+            var ada=jQuery.inArray( marker_id, filter );
+			if(ada>=0)
+			{
+				marker_layer.addMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+			}
 			var point_marker=new OpenLayers.Geometry.Point(lng,lat);
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
 			if(dalam)alert("Sampai"+data_map['mobile'].nama);
-//-----------------------------------udpate fleet------------------------------------------
-			$("#fleet_speed_" + data_map["mobile"]).html(data_map["velocity"]);
-			$("#fleet_position_" + data_map["mobile"]).html(data_map["tanggal"] + " " + data_map["jam"]);
-			$("#fleet_bearing_" +data_map["mobile"]).html(data_map["bearing"]);
-			$('#fleet_location_'+data_map["mobile"]).html(data_map["lng"]+ ","+ data_map["lat"]);
-			$("#tr_" + data_map["mobile"]).toggle("pulsate");
-			$("#tr_" + data_map["mobile"]).toggle("pulsate");
-//-----------------------------------------------------------------------------------------
 };
 
 function doNothing() {}
 
-
+function generate_popup(nama_mobil_popup,lokasi_popup,lat_popup,lng_popup,tanggal_popup,jam_popup,velocity_popup)
+{
+	var popupContentHTML2="";
+	popupContentHTML2="<b>";
+	popupContentHTML2+="<table>";
+	popupContentHTML2+="<tr>";
+	popupContentHTML2+="		<td>Name</td>";
+	popupContentHTML2+="		<td>&nbsp;:</td>";
+	popupContentHTML2+="		<td>  &nbsp;&nbsp;"+nama_mobil_popup+"</td>";
+	popupContentHTML2+="</tr>";
+	popupContentHTML2+="<tr>";
+	popupContentHTML2+="		<td>Location</td>";
+	popupContentHTML2+="		<td>&nbsp;:</td>";
+	popupContentHTML2+="		<td>&nbsp;&nbsp;"+lokasi_popup+"</td>";
+	popupContentHTML2+="</tr>";
+	popupContentHTML2+="<tr>";
+	popupContentHTML2+="		<td>Position</td>";
+	popupContentHTML2+="		<td>&nbsp;:</td>";
+	popupContentHTML2+="		<td> &nbsp;&nbsp;"+lat_popup+","+lng_popup+"</td>";
+	popupContentHTML2+="</tr>";
+	popupContentHTML2+="		<td>Time</td>";
+	popupContentHTML2+="		<td>&nbsp;:</td>";
+	popupContentHTML2+="		<td> &nbsp;&nbsp;" + tanggal_popup + " " + jam_popup+"</td>";
+	popupContentHTML2+="<tr>";
+	popupContentHTML2+="<tr>";
+	popupContentHTML2+="		<td>Speed</td>";
+	popupContentHTML2+="		<td>&nbsp;:</td>";
+	popupContentHTML2+="		<td> &nbsp;&nbsp;" + velocity_popup + "km/h</td>";
+	popupContentHTML2+="</tr>";
+	popupContentHTML2+="</table>";
+	popupContentHTML2+="</b>";
+	return popupContentHTML2;
+}
 
 
 //]]>

@@ -29,6 +29,7 @@ class Home extends CI_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
+		$data['last_position'] = $this->mgps->getLastPosition();
 		$this->load->template('gps', $data);
 	}
 	
