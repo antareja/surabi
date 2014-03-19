@@ -60,6 +60,7 @@ class Fleet_config extends CI_Controller {
 		$data['pageTitle'] = 'Vehicle';
 		$data['hardwares'] = $this->mfleet_config->getAllHardware();
 		$data['companies'] = $this->mfleet_config->getAllCompany();
+		$data['drivers'] = $this->mfleet_config->getAllDriver();
 		if ($_SESSION['gps_level'] == 'admin') {
 			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
 			$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
@@ -122,7 +123,7 @@ class Fleet_config extends CI_Controller {
 	 */
 	public function assign() {
 		$data['pageTitle'] = "Assigmnet Vehicle & User";
-		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
+		$data['vehicles'] = $this->mfleet_config->getAllVehicleUser();
 		$this->load->template('admin/fleet_config/assign',$data);
 	}
 }

@@ -70,12 +70,27 @@ class MFleet_config extends CI_Model {
 		$query = $this->db->get('user');
 		return $query->result();
 	}
+	
+	function getAllDriver(){
+		if($_SESSION['gps_level'] == 'admin') {
+			$query = $this->db->get('driver');
+		} else {
+			$query = $this->db->get_where('driver', array('company_id'=>$_SESSION['gps_company_id']));
+		}
+		return $query->result();
+	}
 
 	function getAllVehicles() {
 		$query = $this->db->get("vehicles");
 		return $query->result();
 	}
 
+	function getAllVehicleUser(){
+		$this->db->join("user", "vehicles.user_id = user.user_id", "inner");
+		$query = $this->db->get("vehicles");
+		return $query->result();
+	}
+	
 	function getAllVehiclesByAdminVendor() {
 		$query = $this->db->get_where("vehicles",array('company_id' =>$_SESSION['gps_company_id']));
 		return $query->result();

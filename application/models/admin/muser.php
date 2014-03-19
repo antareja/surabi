@@ -28,11 +28,15 @@ class Muser extends CI_Model {
 	}
 
 	function getAllUser(){
+		$this->db->select("*,  company_data.name as company_name");
+		$this->db->join("company_data", "company_data.id_company = user.company_id", 'inner');
 		$query = $this->db->get('user');
 		return $query->result();
 	}
 	
 	function getAllAdmin() {
+		$this->db->select("*, company_data.name as company_name");
+		$this->db->join("company_data", "company_data.id_company = user.company_id", 'inner');
 		$query = $this->db->get_where('user', array('level' => 'admin'));
 		return $query->result();
 	}
@@ -43,6 +47,8 @@ class Muser extends CI_Model {
 	}
 	
 	function getAllAdminVendor() {
+		$this->db->join("company_data", "company_data.id_company = user.company_id", 'inner');
+		$this->db->select("*, company_data.name as company_name");
 		$query = $this->db->get_where('user', array('level' => 'admin_vendor'));
 		return $query->result();
 	}

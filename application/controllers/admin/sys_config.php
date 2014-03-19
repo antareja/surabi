@@ -106,17 +106,17 @@ class Sys_config extends CI_Controller {
 	 * for 
 	 */
 	public function user($level,$user_id = NULL) {
-		$data['pageTitle'] = 'user';
-		$data['action'] = site_url().'admin/sys_config/user/'.$level;
+		$data['pageTitle'] = 'User Management';
 		$data['level'] = $level;
 // 		echo $_SESSION['gps_level'];exit;
 		if($_SESSION['gps_level'] == 'admin_vendor') {
 			$data['all_user'] = $this->muser->getAllOperatorByAdmin();
 // 			print_r($data['all_user']);
-		} elseif ($_SESSION['gps_level'] == 'admin') {
+		} elseif ($_SESSION['gps_level'] == 'admin' && $level == 'operator') {
 			$data['all_user'] = $this->muser->getAllUser(); 
+		} elseif ($_SESSION['gps_level'] == 'admin' && $level == 'admin') {
+			$data['all_user'] = $this->muser->getAllAdminVendor(); 
 		}
-		
 		
 		//$data['admin'] = $this->muser->getAllAdmin();
 		$data['companies'] = $this->muser->getAllCompany();
@@ -135,7 +135,13 @@ class Sys_config extends CI_Controller {
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
 			if ($post['user_id']) {
-				!empty($post['password']) ? $post_data['password'] = md5($post['password']) : '';
+				if(!empty($post['password'])) {
+					$post_data['password'] = md5($post['password']) ;
+				} else {
+					unset($post_data['password']);
+					unset($post['password']);
+				}
+				//print_r($post);exit;
 				$this->muser->updateUser($post_data,$post['user_id']);
 				redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
 			} else {

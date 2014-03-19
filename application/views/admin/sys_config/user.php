@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>
 			<small>System Configuration <i class="icon-double-angle-right"></i></small> 
-				Operator  <?php echo isset($user) ? ': '. $user->fullname : ': Add new '?>
+				<?php echo ucfirst($level);?>  <?php echo isset($user) ? ': '. $user->fullname : ': Add new '?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -11,14 +11,18 @@
 		<div class="col-sm-3">
 			<div class="widget-box">
 				<div class="widget-header">
-					<h4 class="smaller">List Operator</h4>
+					<h4 class="smaller">List <?php echo ucfirst($level);?></h4>
 				</div>
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
 						<?php
 						foreach ($all_user as $users) {
-							echo "<p><a href='" . site_url() . "admin/sys_config/user/".$level. '/' . $users->user_id . "'>" . $users->username . "</a></p>";
+							echo "<p><a href='" . site_url() . "admin/sys_config/user/".$level. '/' . $users->user_id . "'>" . $users->username . "</a>";
+							if ($_SESSION['gps_level'] == 'admin') {
+								echo ' : '. $users->company_name;
+							}
+							echo "</p>";
 						}
 						?>
 						<p>
@@ -30,7 +34,7 @@
 
 			<form role="form" id="form-user" class="form-horizontal form-user"
 				enctype="multipart/form-data"
-				action="<?php echo $action;?>"
+				action="<?php echo site_url().'admin/sys_config/user/'.$level;?>"
 				method="POST" />
 
 			<div class="form-group">
@@ -60,8 +64,7 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> ReType Password </label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" id="re_password" name="re_password"
-						placeholder="Password">
+					<input type="password" class="form-control" id="re_password" name="re_password">
 				</div>
 			</div>
 			<?php if($_SESSION['gps_level'] == 'admin') {?>
@@ -103,7 +106,6 @@
 					for="form-field-1"> Phone </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="phone" name="phone"
-						placeholder="Phone"
 						value="<?php echo isset($user) ? $user->phone : '';?>">
 				</div>
 			</div>
@@ -112,7 +114,6 @@
 					for="form-field-1"> Phone2 </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="phone2" name="phone2"
-						placeholder="Phone2"
 						value="<?php echo isset($user) ? $user->phone2 : '';?>">
 				</div>
 			</div>
@@ -121,7 +122,6 @@
 					for="form-field-1"> Email </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="email" name="email"
-						placeholder="Email"
 						value="<?php echo isset($user) ? $user->email : '';?>">
 				</div>
 			</div>
@@ -136,7 +136,6 @@
 					</button>
 				</div>
 			</div>
-			
 				<?php echo isset($user) ? '<input type="hidden" name="user_id" value="'.$user->user_id.'" >' : '';?>
 			</form>
 		</div>
