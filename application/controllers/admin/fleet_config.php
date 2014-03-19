@@ -12,7 +12,9 @@ class Fleet_config extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('admin/mfleet_config');
+		$this->load->model('admin/muser');
 		$this->mfleet_config = new MFleet_config();
+		$this->muser = new MUser();
 	}
 
 	public function index() {
@@ -57,9 +59,18 @@ class Fleet_config extends CI_Controller {
 	public function vehicle($vehicle_id = NULL) {
 		$data['pageTitle'] = 'Vehicle';
 		$data['hardwares'] = $this->mfleet_config->getAllHardware();
+		$data['companies'] = $this->mfleet_config->getAllCompany();
+		if ($_SESSION['gps_level'] == 'admin') {
+			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
+			$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
+		} elseif($_SESSION['gps_level'] == 'admin_vendor' ) {
+			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
+			$data['all_vehicle'] = $this->mfleet_config->getAllVehiclesByAdminVendor();
+		}
 		$data['bases'] = $this->mfleet_config->getAllBase();
 		$data['icons'] = $this->mfleet_config->getAllIcon();
-		$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
+		$data['regions'] = $this->mfleet_config->getRegion();
+		$data['speeds'] = $this->mfleet_config->getSpeed();
 		$data['all_mobile'] = $this->mfleet_config->getAllMobileAddress();
 		$post = $this->input->post();
 		if ($post) {
@@ -70,6 +81,7 @@ class Fleet_config extends CI_Controller {
 			$post_data['base_id'] = $post['base_id'];
 			$post_data['icon_id'] = $post['icon_id'];
 			$post_data['gps_mobile_address'] = $post['mobile_address'];
+			$post_data['user_id'] = $post['user_id'];
 			// $post_data['status_alert_profile'] = $post['status_alert_profile'];
 			// for edit data
 			if (isset($post['vehicle_id'])) {

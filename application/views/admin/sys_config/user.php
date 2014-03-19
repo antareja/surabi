@@ -64,6 +64,7 @@
 						placeholder="Password">
 				</div>
 			</div>
+			<?php if($_SESSION['gps_level'] == 'admin') {?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Vendor </label>
@@ -79,6 +80,7 @@
 					</select>
 				</div>
 			</div>
+			<?php } ?>
 <!-- 			<div class="form-group"> -->
 <!-- 				<label class="col-sm-3 control-label no-padding-right" -->
 <!-- 					for="form-field-select-2"> Admin Vendor</label> -->

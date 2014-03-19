@@ -7,12 +7,12 @@ if (! defined('BASEPATH'))
  * @author haidar
  *        
  */
-class Location extends CI_Controller {
+class Tools extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		// $this->load->model('mfleet');
-		// $this->mfleet = new MFleet();
+		$this->load->model('mtools');
+		$this->mtools = new MTools();
 	}
 
 	public function index() {
@@ -21,6 +21,28 @@ class Location extends CI_Controller {
 
 	public function test() {
 		echo 'haidar';
+		for($i=0;$i<10;$i++) {
+			echo $i;
+		}
+	}
+	
+	public function create_user(){
+		$vendor = 'vendorA';
+		echo $vendor;
+		for($i=1;$i<10;$i++) {
+			$data['username'] = $vendor.$i;
+			$data['password'] = md5('testing');
+			$data['email'] = 'testing@testing.com';
+			$data['phone'] = '1234567';
+			$data['phone2'] = '1234567';
+			$data['address'] = $vendor;
+			$data['fullname'] = $vendor;
+			$data['level'] = 'operator';
+			$data['admin_id'] = 8;
+			$data['company_id'] = 3;
+			$id = $this->mtools->insertUser($data);
+			echo 'Success = '.$id.'<br/>';
+		}
 	}
 
 	public function loc($lat) {
