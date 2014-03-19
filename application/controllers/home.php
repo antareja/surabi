@@ -30,6 +30,7 @@ class Home extends CI_Controller {
 			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
 		} elseif ($_SESSION['gps_level'] == 'admin') {
 			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin();
+// 			$data['vehicles'] = $this->mgps->getDataVehicle();
 		}
 		$data['regions'] = $this->mprofile->getAllRegion();
 		$data['pageTitle'] = 'Home';

@@ -84,7 +84,7 @@ Long :<span id="txt_long"></span><br>
 //<![CDATA[
 var tampung_posisi = {
 <?php 
-	foreach($all_vehicle as $vehicle)
+	foreach($vehicles as $vehicle)
 	{
 		if(array_key_exists($vehicle->gps_mobile_address, $data_last_position))
 		{
@@ -103,7 +103,7 @@ var tampung_posisi = {
 };
 var last_position= {
 		<?php 
-			foreach($all_vehicle as $vehicle)
+			foreach($vehicles as $vehicle)
 			{
 				if(array_key_exists($vehicle->gps_mobile_address, $data_last_position))
 				{
@@ -158,7 +158,7 @@ var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
 
 var popup_marker = {
 <?php 
-foreach($all_vehicle as $vehicle)
+foreach($vehicles as $vehicle)
 {
   echo "popup_marker_".$vehicle->gps_mobile_address.": { \n";
   echo "popup: '' \n";
@@ -169,7 +169,7 @@ foreach($all_vehicle as $vehicle)
 
 var customIcons = {
 <?php 
-foreach($all_vehicle as $vehicle)
+foreach($vehicles as $vehicle)
 {
   echo "icon_mobil_".$vehicle->gps_mobile_address.": { \n";
   echo "icon: '".base_url()."assets/uploads/icon_".$vehicle->icon_id.".".$vehicle->image_type."' \n";
@@ -180,7 +180,7 @@ foreach($all_vehicle as $vehicle)
 
 var nama_mobil = {
 <?php 
-	foreach($all_vehicle as $vehicle)
+	foreach($vehicles as $vehicle)
 	{
 		echo "nama_mobil_".$vehicle->gps_mobile_address.": { \n";
 		echo "nama: '".$vehicle->name."' \n";
@@ -191,7 +191,7 @@ var nama_mobil = {
 
 var nama_marker = {
 <?php 
-foreach($all_vehicle as $vehicle)
+foreach($vehicles as $vehicle)
 {
 		echo "marker_".$vehicle->gps_mobile_address.": { \n";
 		echo "nama: ''";
@@ -491,7 +491,7 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			if(dalam)alert("Sampai"+data_map['mobile'].nama);
+			if(dalam)alert("Sampai"+data_map['mobile']);
 };
 
 function doNothing() {}
