@@ -1,4 +1,3 @@
-<script src="http://localhost:8000/socket.io/socket.io.js"></script>
 <div class="page-content">
 	<div class="page-header">
 		<h1>Fleet State Module</h1>

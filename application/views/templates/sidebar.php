@@ -40,10 +40,7 @@
 
 						<ul class="submenu">
 							<?php 
-							$this->load->model('mfleet');
-							$this->mfleet = new MFleet();
-							$vehicle = $this->mfleet->getVehicle();
-							foreach ($vehicle as $vec) {
+							foreach ($vehicles as $vec) {
 							?>
 								<li>
 								<div class="checkbox">
