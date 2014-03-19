@@ -175,11 +175,17 @@ $('#company_id').change(function() {
 $('#assign').click(function() {
 	var boxes = $('input[name=assign]:checked');
 	var veh_id = [];
-	var user_id = $('#user_id option:selected').val();
+	var user = $('#user_id option:selected').val();
+	var fullname = $( "#user_id option:selected" ).text();
 	$(boxes).each(function(){
 		//alert($(this.id);
-		veh_id.push(this.id);
-		$.post('../')
+		vehicle_id = this.id;
+		veh_id.push(vehicle_id);
+		$("#vehicle_" + this.id).html(fullname);
+		$.post('vehicle_assign', {vehicle : veh_id, user_id : user})
+		.done(function(data)  {
+			$('#result').html(data);
+		});
 		console.log(veh_id);
 	    //do stuff here with this
 	});

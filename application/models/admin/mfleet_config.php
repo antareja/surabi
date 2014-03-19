@@ -85,14 +85,26 @@ class MFleet_config extends CI_Model {
 		return $query->result();
 	}
 
-	function getAllVehicleUser(){
-		$this->db->join("user", "vehicles.user_id = user.user_id", "left");
-		$query = $this->db->get("vehicles");
+	
+	function getAllVehicleUser($user_id){
+		$this->db->select("vehicles.name as name,gps_mobile_address,image_name,vehicles.icon_id,image_type");
+		$this->db->join("icon","vehicles.icon_id=icon.icon_id", 'LEFT');
+		$query=$this->db->get_where("vehicles", array('user_id' =>$user_id));
 		return $query->result();
 	}
 	
-	function getAllVehiclesByAdminVendor() {
-		$query = $this->db->get_where("vehicles",array('company_id' =>$_SESSION['gps_company_id']));
+	function getAllVehicleAdminVendor($company_id){
+		$this->db->select("vehicles.name as name,gps_mobile_address,image_name,vehicles.icon_id,image_type");
+		$this->db->join("icon","vehicles.icon_id=icon.icon_id", 'LEFT');
+		$query=$this->db->get_where("vehicles", array('company_id' =>$company_id));
+// 		echo $this->db->last_query();
+		return $query->result();
+	}
+	
+	function getAllVehicleAdmin(){
+		$this->db->select("vehicles.name as name,gps_mobile_address,image_name,vehicles.icon_id,image_type");
+		$this->db->join("icon","vehicles.icon_id=icon.icon_id" , 'LEFT');
+		$query=$this->db->get("vehicles");
 		return $query->result();
 	}
 	
@@ -110,6 +122,10 @@ class MFleet_config extends CI_Model {
 		return $query->row();
 	}
 
+	function updateVehicleUser($data,$vehicle_id) {
+		return $this->db->update("vehicles", $data, array('vehicle_id' => $vehicle_id));
+	}
+	
 	function insertVehicle($data) {
 		$this->db->insert('vehicles', $data);
 		return $this->db->insert_id();

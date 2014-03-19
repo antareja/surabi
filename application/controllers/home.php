@@ -24,11 +24,16 @@ class Home extends CI_Controller {
 	}
 
 	public function home() {
-		$data['all_vehicle'] = $this->mgps->getDataVehicle();
+		if($_SESSION['gps_level'] == 'operator') {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin') {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin();
+		}
 		$data['regions'] = $this->mprofile->getAllRegion();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
-		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
 		$data['last_position'] = $this->mgps->getLastPosition();
 		$this->load->template('gps', $data);
 	}

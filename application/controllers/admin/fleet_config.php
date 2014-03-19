@@ -135,8 +135,10 @@ class Fleet_config extends CI_Controller {
 	
 	public function vehicle_assign(){
 		$post = $this->input->post();
-		$post_data['vehicle'] = $post['vehicle'];
-		$post_data['user_id'] = $post['user_id'];
-		print_r($post_data);exit;
+		foreach($post['vehicle'] as $vehicle_id) {
+			$data['user_id'] = $post['user_id'];
+			$this->mfleet_config->updateVehicleUser($data, $vehicle_id);
+		}
+// 		print_r($post_data);exit;
 	}
 }

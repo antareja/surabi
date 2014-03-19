@@ -27,13 +27,6 @@ class MGps extends CI_Model {
 		return $query->row();
 	}
 	
-	function getDataVehicle(){
-		$this->db->select("vehicles.name,gps_mobile_address,image_name,vehicles.icon_id,image_type");
-		$this->db->from("vehicles");
-		$this->db->join("icon","vehicles.icon_id=icon.icon_id");
-		$query=$this->db->get();
-		return $query->result();
-	}
 	
 	function getVehicleByUser(){
 		$this->db->get('vehicles');

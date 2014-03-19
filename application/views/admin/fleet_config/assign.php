@@ -14,6 +14,7 @@
 			<button class="btn btn-sm btn-success" id="assign" type="button">
 					<i class="icon-ok bigger-110"></i>Assign
 			</button>
+			<div id="result"></div>
 			</div>
 			<div class="table-responsive">
 				<table id="sample-table-2"
@@ -40,7 +41,7 @@
 							<span class="lbl"></span>
 							</label></td>
 							<td><a href="#"><?php echo $vehicle->name?></a></td>
-							<td id="speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $vehicle->fullname?></td>
+							<td id="vehicle_<?php echo $vehicle->vehicle_id?>"><?php echo $vehicle->fullname?></td>
 							<td id="location_<?php echo $vehicle->gps_mobile_address?>"><?php echo $vehicle->gps_mobile_address?></td>
 							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Location</td>
 							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Feb 12 10:45:23</td>
