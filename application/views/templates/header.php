@@ -1,3 +1,4 @@
+
 <?php
 if (!isset($_SESSION['gps_username'])) {
 	print_r($_SESSION);
@@ -93,21 +94,21 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 			<div class="navbar-header pull-right" role="navigation">
 				<ul class="nav ace-nav">
+					<?php if($_SESSION['gps_level'] != 'operator') {?>
 					<li class="grey dropdown-hover"><a class="" href="#"> <i
 							class="icon-gears"></i> Admin <i class="icon-caret-down"></i>
 					</a>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-							
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/operator"><i
 									class="icon-user"></i>Create Operator</a></li>
 							<?php if($_SESSION['gps_level'] == 'admin') {?>
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/admin"><i
 									class="icon-user"></i>Create Admin</a></li>
-							<?php } ?>		
 							<li><a
 								href="<?php echo site_url()?>admin/sys_config/vendor"><i
 									class="icon-briefcase"></i>Vendor</a></li>
+							<?php }?>		
 							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i
 									class="icon-user"></i>Driver</a></li>
 							<li><a href="<?php echo site_url()?>admin/sys_config/icon"><i
@@ -125,6 +126,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 									class="icon-truck"></i>Vehicle Assign </a></li>
 							<li></li>
 						</ul></li>
+					<?php } ?>	
 					<li class="light-green dropdown-hover"><a
 						href="<?php echo site_url()?>admin/fleet_config/fleet"> <i class="icon-tasks"></i>
 							Fleet State
