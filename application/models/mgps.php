@@ -39,7 +39,22 @@ class MGps extends CI_Model {
 		$this->db->get('vehicles');
 	}
 	
-	function getLastPosition(){
+	function getLastPosition() {
+		$sql = "SELECT gps_mobile_address, name, latitude, longitude, create_at, velocity, bearing FROM tcm_packet p
+				RIGHT JOIN tcm_vehicles v on p.mobile_address = v.gps_mobile_address
+				WHERE id_packet in (SELECT MAX(id_packet) FROM tcm_packet GROUP BY mobile_address)
+				OR v.gps_mobile_address NOT in ( SELECT mobile_address FROM tcm_packet GROUP BY mobile_address)
+				ORDER BY create_at DESC;";
+		//echo $sql;exit;
+		$query = $this->db->query($sql);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+	
+	function getLastPosition_old(){
 		$sql = "SELECT
 	gps_mobile_address AS gps_mobile_address,name,
 	(

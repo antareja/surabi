@@ -89,6 +89,7 @@ class MFleet_config extends CI_Model {
 	function getAllVehicleUser($user_id){
 		$this->db->select("vehicles.name,user_id,gps_mobile_address,image_name,vehicles.icon_id,image_type");
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id", 'inner');
+		$this->db->order_by("vehicle_id", "asc");
 		$query=$this->db->get_where("vehicles", array('user_id' =>$user_id));
 		return $query->result();
 	}
@@ -97,8 +98,9 @@ class MFleet_config extends CI_Model {
 		$this->db->select("vehicles.name,vehicle_id,vehicles.user_id,fullname,gps_mobile_address,image_name,vehicles.icon_id,image_type");
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id", 'inner');
 		$this->db->join('user', "vehicles.user_id = user.user_id", "left");
+		$this->db->order_by("vehicle_id", "asc");
 		$query=$this->db->get_where("vehicles", array('vehicles.company_id' =>$company_id));
-// 		echo $this->db->last_query();
+		//echo $this->db->last_query();exit;
 		return $query->result();
 	}
 	
@@ -106,6 +108,7 @@ class MFleet_config extends CI_Model {
 		$this->db->select("vehicles.name,vehicle_id,vehicles.user_id,fullname,gps_mobile_address,image_name,vehicles.icon_id,image_type");
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id" , 'inner');
 		$this->db->join('user', "vehicles.user_id = user.user_id", "left");
+		$this->db->order_by("vehicle_id", "asc");
 		$query=$this->db->get("vehicles");
 // 		echo $this->db->last_query();exit;
 		return $query->result();
