@@ -86,7 +86,7 @@ var tampung_posisi = {
 <?php 
 	foreach($vehicles as $vehicle)
 	{
-		if($data_last_position[$vehicle->gps_mobile_address]->latitude)
+		if($data_last_position[$vehicle->gps_mobile_address]->latitude!="")
 		{
 			$posisi="new OpenLayers.LonLat(".$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude.")";
 		}
@@ -105,7 +105,7 @@ var last_position= {
 		<?php 
 			foreach($vehicles as $vehicle)
 			{
-				if($data_last_position[$vehicle->gps_mobile_address]->latitude)
+				if($data_last_position[$vehicle->gps_mobile_address]->latitude!="")
 				{
 					$nama=$data_last_position[$vehicle->gps_mobile_address]->name;
 					$latitude=$data_last_position[$vehicle->gps_mobile_address]->latitude;
