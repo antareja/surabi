@@ -27,12 +27,13 @@ class Profile extends CI_Controller {
 			$post_data['name'] = $post['name'];
 			$post_data['description'] = $post['description'];
 			$post_data['user_id'] = user_id_sess();
-			$post_data['latlng'] = implode(";", $post['txt_posisi']);
+			$post_data['latlng'] = implode(';',$post['txt_posisi']);
 			$post_data['expire_time'] = $post['expire_time'];
 			$post_data['time_start'] = $post['time_start'];
 			$post_data['time_end'] = $post['time_end'];
 			$post_data['in_out'] = $post['in_out'];
 			$post_data['color'] = $post['color'];
+// 			print_r($post);exit;
 			if (isset($post['region_id'])) {
 				$this->mprofile->updateRegion($post_data, $post['region_id']);
 				redirect('profile/region_alert/' . $post['region_id']);

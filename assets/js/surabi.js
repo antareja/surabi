@@ -1,3 +1,4 @@
+
 jQuery(function($) {
 	$('#id-input-file-1 , #id-input-file-2').ace_file_input({
 		no_file : 'No File ...',
@@ -84,10 +85,28 @@ $('.form-user').validate({
 		}
 	}
 });
+// For User Form
 $('.btn-user').click(function() {
 	$("#form-user").submit();
 	// console.log($('.form-user').valid());
 });
+
+// For Region Alert Form 
+$('.btn-region').click(function() {
+	var position = [];
+	var poly;
+	$('input[name^="txt_posisi"]').each(function() {
+		poly = $(this).val();
+		polygon = poly.replace(",",";");
+		position.push(polygon);
+		//console.log($(this).val());
+	    //alert($(this).val());
+	});
+	$('#tmp_position').val(position);
+	console.log($('#tmp_position').val());
+	$("#form-region").submit();
+});
+
 
 function getFormattedDate(date) {
 	var day = date.getDate();
