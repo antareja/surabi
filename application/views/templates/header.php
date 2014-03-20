@@ -162,14 +162,14 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>report/employee/"> <i
 									class="icon-user"></i> Employee Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/activity_form/"> <i
+							<li><a href="<?php echo site_url()?>report/form/activity/"> <i
 									class="icon-user"></i> Activity Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/alert_form"> <i class="icon-cog"></i> Alerts Report
+							<li><a href="<?php echo site_url()?>report/form/alert"> <i class="icon-cog"></i> Alerts Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/speed_form"> <i class="icon-cog"></i> Speed Report
+							<li><a href="<?php echo site_url()?>report/form/speed"> <i class="icon-cog"></i> Speed Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/stop_form"> <i class="icon-cog"></i> Stop/Idling Report
+							<li><a href="<?php echo site_url()?>report/form/stop"> <i class="icon-cog"></i> Stop/Idling Report
 							</a></li>
 							<li></li>
 						</ul></li>
