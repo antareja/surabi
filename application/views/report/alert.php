@@ -14,10 +14,7 @@ if ($this->input->post("html") != "") {
 }
 -->
 </style>
-	<button type="button" onclick="history.back();">Back</button>
-	<br> 
-	<br> 
-	<input type="button" onclick="f1.submit()" value="Print">
+	<img onclick="f1.submit()" src="<?php base_url()?>/assets/img/pdf.png" style="cursor:pointer">
 	<div id="header" align="center">
 		<h1>Alert Report</h1>
 	</div>

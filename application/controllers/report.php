@@ -22,13 +22,13 @@ class Report extends CI_Controller {
 	public function employee() {
 		$data['pageTitle'] = 'Employee Report';
 		$data['data_report'] = $this->mreport->getEmployeeReport();
-		$this->load->view("report/employee", $data);
+		$this->load->template("report/employee", $data);
 	}
 	
 	public function vehicle() {
 		$data['pageTitle'] = 'Vehicle Report';
 		$data['vehicles'] = $this->mreport->getAllVehiclesComplete();
-		$this->load->view("report/vehicle",$data);
+		$this->load->template("report/vehicle",$data);
 	}
 
 	public function activity_form() {
@@ -46,7 +46,7 @@ class Report extends CI_Controller {
 			$end = date("Y-m-d", strtotime($post['end']));
 			$data['activity'] = $this->mreport->getActivityReport($begin, $end, empty($post['vehicle']) ? '' : $post['vehicle']);
 		}
-		$html = $this->load->view("report/activity", $data);
+		$html = $this->load->template("report/activity", $data);
 		$html = $this->output->get_output();
 		// Load library
 		$this->load->library('dompdf_gen');
@@ -59,7 +59,7 @@ class Report extends CI_Controller {
 	}
 
 	public function activity_demo() {
-		$html = $this->load->view('report/activity_demo');
+		$html = $this->load->template('report/activity_demo');
 		$html = $this->output->get_output();
 		// Load library
 		$this->load->library('dompdf_gen');
@@ -86,7 +86,7 @@ class Report extends CI_Controller {
 			$end = date("Y-m-d", strtotime($post['end']));
 			$data['stop'] = $this->mreport->getStopReportGroup($begin, $end, $post['vehicle']);
 		}
-		$html = $this->load->view("report/stop", $data);
+		$html = $this->load->template("report/stop", $data);
 		// $html = $this->output->get_output();
 		// // Load library
 		// $this->load->library('dompdf_gen');
@@ -113,7 +113,7 @@ class Report extends CI_Controller {
 			$end = date("Y-m-d", strtotime($post['end']));
 			$data['alert'] = $this->mreport->getAlertReport($begin, $end, $post['vehicle']);
 		}
-		$this->load->view("report/alert", $data);
+		$this->load->template("report/alert", $data);
 	}
 
 	public function alert_form() {
@@ -137,6 +137,6 @@ class Report extends CI_Controller {
 			$end = date("Y-m-d", strtotime($post['end']));
 			$data['speed'] = $this->mreport->getSpeedReport($begin, $end, $post['vehicle']);
 		}
-		$html = $this->load->view("report/speed", $data);
+		$html = $this->load->template("report/speed", $data);
 	}
 }

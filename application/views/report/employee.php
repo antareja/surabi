@@ -17,8 +17,7 @@ else
 }
 -->
 </style>
-<br>
-<input type="button" onclick="f1.submit()" value="Print">
+<img onclick="f1.submit()" src="<?php base_url()?>/assets/img/pdf.png" style="cursor:pointer">
 <div id="header" align="center">
 <h1>Employees Report</h1>
 <?php
