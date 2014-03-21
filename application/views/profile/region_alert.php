@@ -108,7 +108,10 @@ table.featureInfo caption {
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
             // make OL compute scale according to WMS spec
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
-        
+
+
+            	
+            
             function init(){
                 // if this is just a coverage or a group of them, disable a few items,
                 // and default to jpeg format
@@ -169,6 +172,40 @@ table.featureInfo caption {
                        yx : {'EPSG:4326' : true}
                     } 
                 );
+
+             // Set Polygon
+                <?php if(isset($region)) {?>
+                var sitePoints = [];
+    					var siteStyle = 
+    					{
+    						strokeColor:"yellow", 
+    						strokeOpacity:"0.5",
+    						fillColor:"blue",
+    						fillOpacity:"0",
+    						// strokeWidth:3
+    					};
+
+    				var coordinates=[<?php echo string_to_bracket($region->latlng);?>];
+    				
+    				var epsg4326 = new OpenLayers.Projection("EPSG:4326");
+    				for (var i=0;i<coordinates.length;i++) {
+    					var point = new OpenLayers.Geometry.Point(coordinates[i][0], coordinates[i][1]);
+    					// transform from WGS 1984 to Spherical Mercator
+    					point.transform(epsg4326, map.getProjectionObject());
+    					sitePoints.push(point);
+    				}
+    				sitePoints.push(sitePoints[0]);
+    				
+    				var vectors = new OpenLayers.Layer.Vector("poly");
+    				
+    				
+    				
+    				var linearRing = new OpenLayers.Geometry.LinearRing(sitePoints);
+    				var poly = new OpenLayers.Geometry.Polygon([linearRing]);
+    				var polygonFeature = new OpenLayers.Feature.Vector(poly, null, siteStyle);
+    				map.addLayer(vectors);
+    				vectors.addFeatures([polygonFeature]);
+    			<?php }?>
         
                 map.addLayers([untiled, tiled]);
 
@@ -421,6 +458,9 @@ table.featureInfo caption {
 						
 						
 						
+						
+						
+						
 						<p>
 					
 					</div>
@@ -512,8 +552,7 @@ table.featureInfo caption {
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
 					<button class="btn btn-info btn-region" type="button">
-						<i class="icon-ok bigger-110"></i>
-						Submit
+						<i class="icon-ok bigger-110"></i> Submit
 					</button>
 					<button class="btn" type="reset">
 						<i class="icon-undo bigger-110"></i> Reset

@@ -26,6 +26,17 @@ function to_pg_array($set) {
 	return '{' . implode(",", $result) . '}'; // format
 }
 
+function string_to_bracket($str) {
+	$array = array();
+	$new_str = explode(';', $str);
+	foreach($new_str as $new) {
+		$new2 = str_replace(',','","', $new);
+		array_push($array, '["' . $new2 . '"]');
+	}
+	$last_str = implode(',',$array);
+	return $last_str;
+}
+
 function pg_to_php($array) {
 	$str = str_replace('"', '', $array);
 	$last = substr($array, 1, - 1); // remove curly brace

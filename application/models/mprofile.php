@@ -68,7 +68,15 @@ class MProfile extends CI_Model {
 	}
 
 	function getAllRegion() {
+		if($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->join('user', 'region_alert.user_id = user.user_id', 'inner');
+			$this->db->where('region_alert.user_id', $_SESSION['gps_user_id']);
+		} elseif($_SESSION['gps_level'] == 'operator') {
+			$this->db->join('user', 'region_alert.user_id = user.admin_id', 'inner');
+			$this->db->where('');
+		}
 		$query = $this->db->get('region_alert');
+		//echo $this->db->last_query();
 		return $query->result();
 	}
 

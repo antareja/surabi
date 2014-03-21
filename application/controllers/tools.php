@@ -21,9 +21,9 @@ class Tools extends CI_Controller {
 
 	public function test() {
 		echo 'haidar';
-		for($i=0;$i<10;$i++) {
-			echo $i;
-		}
+		$str = '116.70342341822,-0.49924192863678;116.74180488647,-0.58595561617035;117.10429653108,-0.51487882311005;117.09150270833,-0.4096851693808';
+		$new = string_to_bracket($str);
+		echo $new;
 	}
 	
 	public function create_user(){

@@ -320,14 +320,15 @@ foreach($vehicles as $vehicle)
 				var sitePoints = [];
 					var siteStyle = 
 					{
-						strokeColor:"red", 
+						strokeColor:"yellow", 
 						strokeOpacity:"0.5",
 						fillColor:"blue",
 						fillOpacity:"0",
 						// strokeWidth:3
 					};
-				var coordinates=[["116.870785","-0.427776"],["116.866665","-0.489572"],["116.924686","-0.495409"],["116.927776","-0.424686"]];
-				
+				<?php foreach($regions as $region) {?>	
+				var coordinates=[<?php echo string_to_bracket($region->latlng);?>];
+				<?php } ?>
 				var epsg4326 = new OpenLayers.Projection("EPSG:4326");
 				for (var i=0;i<coordinates.length;i++) {
 					var point = new OpenLayers.Geometry.Point(coordinates[i][0], coordinates[i][1]);
