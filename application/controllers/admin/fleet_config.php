@@ -115,7 +115,13 @@ class Fleet_config extends CI_Controller {
 	 */
 	public function fleet() {
 		$data['pageTitle'] = "Fleet State Modul";
-		$data['vehicles'] = $this->mfleet_config->getAllVehicles();
+		if($_SESSION['gps_level'] == 'admin_vendor' ) {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
+		} elseif($_SESSION['gps_level'] == 'operator') {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id']);
+		} else {
+			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin();
+		}
 		$this->load->template('fleet',$data);
 	}
 	

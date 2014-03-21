@@ -138,12 +138,15 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						class="dropdown-toggle" href="<?php echo site_url()?>"> <i class="icon-globe"></i> Map <i
 							class="icon-caret-down"></i>
 					</a>
+						<?php if($_SESSION['gps_level'] != 'operator') { ?>
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>profile/region_alert"> <i
 									class="icon-cog"></i> Create Region
 							</a></li>
-						</ul></li>
+						</ul>
+						<?php } ?>
+						</li>
 					<!-- 					<li class="blue"><a href="#"> <i class="icon-comments"></i> -->
 					<!-- 					Messaging </a></li> -->
 					<li class="light-purple dropdown-hover"><a
