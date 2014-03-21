@@ -27,8 +27,9 @@ class Replay extends CI_Controller {
 	}
 	
 	public function replay2() {
-		$this->load->model('admin/msys_config');
-		$this->msys_config = new MSys_config();
+		$show = 'only';
+		$this->load->model('admin/mfleet_config');
+		$this->mfleet_config = new MFleet_config();
 		$data['pageTitle'] = "Replay Module";
 		$post = $this->input->post();
 		if($post)
@@ -40,7 +41,14 @@ class Replay extends CI_Controller {
 		}
 		else
 		{
-			$data['allvehicle'] = $this->msys_config->getAllVehicle();
+			if($_SESSION['gps_level'] == 'operator') {
+				$data['allvehicle'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id'], $show);
+			} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+				$data['allvehicle'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id'], $show);
+			} elseif ($_SESSION['gps_level'] == 'admin') {
+				$data['allvehicle'] = $this->mfleet_config->getAllVehicleAdmin($show);
+				// 			$data['vehicles'] = $this->mgps->getDataVehicle();
+			}
 		}
 		$this->load->template('replay2',$data);
 	}

@@ -59,7 +59,7 @@ class Report extends CI_Controller {
 		));
 
 	}
-
+	/*
 	public function activity_demo() {
 		$html = $this->load->template('report/activity_demo');
 		$html = $this->output->get_output();
@@ -95,7 +95,7 @@ class Report extends CI_Controller {
 		}
 		$html = $this->load->view("report/speed", $data);
 	}
-	
+	*/
 	public function stop() {
 		$data['pageTitle'] = 'Stop Idling Report';
 		$post = $this->input->post();
