@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css"
+	href="http://192.168.12.250:8080/geoserver/openlayers/theme/default/style.css" />
 <!-- Basic CSS definitions -->
 <style type="text/css">
 /* General settings */
@@ -178,7 +180,7 @@ table.featureInfo caption {
                 map.addControl(new OpenLayers.Control.Scale($('scale')));
                 map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
                 map.zoomToExtent(bounds);
-                
+                map.setCenter(new OpenLayers.LonLat('116.890', '-0.457'), 7 )
                 // wire up the option button
                 var options = document.getElementById("options");
                 options.onclick = toggleControlPanel;
@@ -392,7 +394,7 @@ table.featureInfo caption {
                 untiled.mergeNewParams(params);
             }
 			
-			
+            window.onload=init;
         </script>
 <div class="page-content">
 	<div class="page-header">
@@ -416,7 +418,11 @@ table.featureInfo caption {
 								echo "<p><a href='" . base_url() . "profile/region_alert/" . $regions->region_id . "'>" . $regions->name . "</a></p>";
 							}
 							?>
+						
+						
+						
 						<p>
+					
 					</div>
 				</div>
 			</div>
@@ -424,7 +430,7 @@ table.featureInfo caption {
 		<div class="col-sm-6">
 
 			<form role="form" class="form-horizontal"
-				enctype="multipart/form-data"
+				enctype="multipart/form-data" id="form-region"
 				action="<?php echo site_url();?>profile/region_alert/" method="POST" />
 
 			<div class="form-group">
@@ -490,17 +496,25 @@ table.featureInfo caption {
 				</div>
 				<br> <br>
 				<div class="panel-body">
-					<br> * Klik kanan untuk menandai peta <br> * Klik pada penanda peta
+					<br> * Klik kanan untuk menandai peta <br> * shift + Klik Kanan
 					untuk menghapus penanda <br> * Anda bisa menggeser penanda dengan
 					cara drag penanda
-					<div id="map_canvas_region" style="width: 100%; height: 400px"></div>
-					<div id="div_input"></div>
+					<div id="map">
+						<img id="options" title="Toggle options toolbar"
+							src="http://192.168.12.250:8080/geoserver/options.png" />
+					</div>
+					<div id="nodelist">
+						<em>Click on the map to get feature info</em>
+					</div>
+					<div id="div_lonlat"></div>
 				</div>
 			</div>
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
-					&nbsp; &nbsp;
+					<button class="btn btn-info btn-region" type="button">
+						<i class="icon-ok bigger-110"></i>
+						Submit
+					</button>
 					<button class="btn" type="reset">
 						<i class="icon-undo bigger-110"></i> Reset
 					</button>
@@ -509,118 +523,6 @@ table.featureInfo caption {
 				<?php echo isset($region) ? '<input type="hidden" name="region_id" value="'.$region->region_id.'" >' : '';?>
 				<textarea id="tmp_position" style="display: none"><?php echo isset($region) ? $region->latlng : '';?></textarea>
 			</form>
-			<div id="toolbar" style="display: none;">
-            <ul>
-                <li>
-                    <a>WMS version:</a>
-                    <select id="wmsVersionSelector" onchange="setWMSVersion(value)">
-                        <option value="1.1.1">1.1.1</option>
-                        <option value="1.3.0">1.3.0</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Tiling:</a>
-                    <select id="tilingModeSelector" onchange="setTileMode(value)">
-                        <option value="untiled">Single tile</option>
-                        <option value="tiled">Tiled</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Transition effect:</a>
-                    <select id="transitionEffectSelector" onchange="setTransitionMode(value)">
-                        <option value="">None</option>
-                        <option value="resize">Resize</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Antialias:</a>
-                    <select id="antialiasSelector" onchange="setAntialiasMode(value)">
-                        <option value="full">Full</option>
-                        <option value="text">Text only</option>
-                        <option value="none">Disabled</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Format:</a>
-                    <select id="imageFormatSelector" onchange="setImageFormat(value)">
-                        <option value="image/png">PNG 24bit</option>
-                        <option value="image/png8">PNG 8bit</option>
-                        <option value="image/gif">GIF</option>
-                        <option id="jpeg" value="image/jpeg">JPEG</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Styles:</a>
-                    <select id="imageFormatSelector" onchange="setStyle(value)">
-                        <option value="">Default</option>
-                    </select>
-                </li>
-                <!-- Commented out for the moment, some code needs to be extended in 
-                     order to list the available palettes
-                <li>
-                    <a>Palette:</a>
-                    <select id="paletteSelector" onchange="setPalette(value)">
-                        <option value="">None</option>
-                        <option value="safe">Web safe</option>
-                    </select>
-                </li>
-                -->
-                <li>
-                    <a>Width/Height:</a>
-                    <select id="widthSelector" onchange="setWidth(value)">
-                        <!--
-                        These values come from a statistics of the viewable area given a certain screen area
-                        (but have been adapted a litte, simplified numbers, added some resolutions for wide screen)
-                        You can find them here: http://www.evolt.org/article/Real_World_Browser_Size_Stats_Part_II/20/2297/
-                        --><option value="auto">Auto</option>
-                        <option value="600">600</option>
-                        <option value="750">750</option>
-                        <option value="950">950</option>
-                        <option value="1000">1000</option>
-                        <option value="1200">1200</option>
-                        <option value="1400">1400</option>
-                        <option value="1600">1600</option>
-                        <option value="1900">1900</option>
-                    </select>
-                    <select id="heigthSelector" onchange="setHeight(value)">
-                        <option value="auto">Auto</option>
-                        <option value="300">300</option>
-                        <option value="400">400</option>
-                        <option value="500">500</option>
-                        <option value="600">600</option>
-                        <option value="700">700</option>
-                        <option value="800">800</option>
-                        <option value="900">900</option>
-                        <option value="1000">1000</option>
-                    </select>
-                </li>
-                <li>
-                    <a>Filter:</a>
-                    <select id="filterType">
-                        <option value="cql">CQL</option>
-                        <option value="ogc">OGC</option>
-                        <option value="fid">FeatureID</option>
-                    </select>
-                    <input type="text" size="80" id="filter"/>
-                    <img id="updateFilterButton" src="http://192.168.12.250:8080/geoserver/openlayers/img/east-mini.png" onClick="updateFilter()" title="Apply filter"/>
-                    <img id="resetFilterButton" src="http://192.168.12.250:8080/geoserver/openlayers/img/cancel.png" onClick="resetFilter()" title="Reset filter"/>
-                </li>
-            </ul>
-        </div>
-        <div id="map">
-            <img id="options" title="Toggle options toolbar" src="http://192.168.12.250:8080/geoserver/options.png"/>
-        </div>
-        <div id="wrapper">
-            <div id="location">location</div>
-            <div id="scale">
-            </div>
-        </div>
-        <div id="nodelist">
-            <em>Click on the map to get feature info</em>
-        </div>
-		<button onclick="del();"></button>
-		<div id="div_lonlat">
-	</div>
 		</div>
 	</div>
 	<!-- /.col-lg-12 -->

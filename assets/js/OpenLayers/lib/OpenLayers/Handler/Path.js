@@ -180,7 +180,7 @@ OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
 					var size = new OpenLayers.Size(21,25);
 					var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size);
 					marker_layer.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(lon,lat),icon));
-					document.getElementById("div_lonlat").innerHTML+="<input type='text' name='txt_posisi[]' value='"+lon+","+lat+"'><br>";
+					document.getElementById("div_lonlat").innerHTML+="<input type='text' id='txt_posisi' name='txt_posisi[]' value='"+lon+","+lat+"'><br>";
     },
     
     /**

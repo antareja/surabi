@@ -29,7 +29,6 @@ if (!isset($_SESSION['gps_username'])) {
 <link href="<?php echo base_url()?>assets/css/font-awesome.min.css"
 	rel="stylesheet">
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
-</script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
 <?php if(isset($map_use)) { ?>
@@ -136,7 +135,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
 					<!-- 					Job Module</a></li> -->
 					<li class="green dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map <i
+						class="dropdown-toggle" href="<?php echo site_url()?>"> <i class="icon-globe"></i> Map <i
 							class="icon-caret-down"></i>
 					</a>
 						<ul
@@ -162,14 +161,14 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>report/employee/"> <i
 									class="icon-user"></i> Employee Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/activity_form/"> <i
+							<li><a href="<?php echo site_url()?>report/form/activity/"> <i
 									class="icon-user"></i> Activity Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/alert_form"> <i class="icon-cog"></i> Alerts Report
+							<li><a href="<?php echo site_url()?>report/form/alert"> <i class="icon-cog"></i> Alerts Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/speed_form"> <i class="icon-cog"></i> Speed Report
+							<li><a href="<?php echo site_url()?>report/form/speed"> <i class="icon-cog"></i> Speed Report
 							</a></li>
-							<li><a href="<?php echo site_url()?>report/stop_form"> <i class="icon-cog"></i> Stop/Idling Report
+							<li><a href="<?php echo site_url()?>report/form/stop"> <i class="icon-cog"></i> Stop/Idling Report
 							</a></li>
 							<li></li>
 						</ul></li>

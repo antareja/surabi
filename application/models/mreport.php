@@ -32,6 +32,11 @@ class MReport extends CI_Model {
 	function getAllVehicles() {
 // 		$userid = $this->getByOperator() ? $this->getByOperator() : '' ;
 // 		print_r($userid);exit;
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
 		$query = $this->db->get('vehicles');
 		return $query->result();
 	}
@@ -40,13 +45,16 @@ class MReport extends CI_Model {
 		$this->db->select("vehicles.name as alias ,hardware_type.name as hw, vehicle_id as unit,
 				company_data.name as company_name, gps_mobile_address as gps, 
 				MAX(create_at) as last_update ");
-		$this->db->join("packet", 'vehicles.gps_mobile_address = packet.mobile_address','inner');
+		$this->db->join("packet", 'vehicles.gps_mobile_address = packet.mobile_address','left');
 		$this->db->join("company_data", "vehicles.company_id = company_data.id_company", 'inner');
-		$this->db->join("hardware_type", 'vehicles.hardware_id = hardware_type.hardware_id', 'inner');
-// 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->join("hardware_type", 'vehicles.hardware_id = hardware_type.hardware_id', 'left');
 		$this->db->group_by('vehicles.vehicle_id');
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
 		$query = $this->db->get('vehicles');
-		//echo $this->db->last_query();
 		return $query->result();
 	}
 
@@ -60,10 +68,15 @@ class MReport extends CI_Model {
 		if ($vehicles != '') {
 			$this->db->where_in('vehicle_id', $vehicles);
 		}
-// 		$query = $this->db->get_where('packet', array(
-// 				'create_at >=' => $begin . ' 09:00',
-// 				'create_at <=' => $end . ' 23:00' 
-// 		));
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
+		$query = $this->db->get_where('packet', array(
+				'create_at >=' => $begin . ' 09:00',
+				'create_at <=' => $end . ' 23:00' 
+		));
 		//echo $this->db->last_query();exit;
 		return $query;
 	}
@@ -74,10 +87,15 @@ class MReport extends CI_Model {
 		if ($vehicles != '') {
 			$this->db->where_in('vehicle_id', $vehicles);
 		}
-// 		$query = $this->db->get_where('packet' , array(
-// 			'create_at >=' => $begin . ' 09:00',
-// 			'create_at <=' => $end . ' 23:00'
-// 		));
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
+		$query = $this->db->get_where('packet' , array(
+			'create_at >=' => $begin . ' 09:00',
+			'create_at <=' => $end . ' 23:00'
+		));
 		return $query->result();
 	}
 	
@@ -89,6 +107,11 @@ class MReport extends CI_Model {
 		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id');
 		if ($vehicle != '') {
 			$this->db->where_in('vehicles.vehicle_id', $vehicle);
+		}
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
 		}
 		$query = $this->db->get_where('alert' , array(
 				'alert.create_at >=' => $begin . ' 09:00',
@@ -104,21 +127,30 @@ class MReport extends CI_Model {
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->where_in('vehicle_id', $vehicles);
 		$this->db->order_by('DATE(create_at), mobile_address','DESC');
-// 		$query = $this->db->get_where('packet', array(
-// 				'create_at >=' => $begin . ' 08:00',
-// 				'create_at <=' => $end . ' 23:00'
-// 		));
-		//echo $this->db->last_query();
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
+		$query = $this->db->get_where('packet', array(
+				'create_at >=' => $begin . ' 08:00',
+				'create_at <=' => $end . ' 23:00'
+		));
 		return $query;
 	}
 	
 	function getStopReport($begin,$end, $lat, $lng , $mobile_address) {
-// 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->select('TIMEDIFF(MAX(time),MIN(time)) AS duration,vehicle.name, time, mobile_address, latitude,longitude, location', false);
-// 		$query = $this->db->get_where('packet', array(
-// 				'create_at >=' => $begin . $this->getWorkingHour()->start_working_hour,
-// 				'create_at <=' => $end . $this->getWorkingHour()->end_working_hour
-// 		));
+		if($_SESSION['gps_level'] == 'operator') {
+			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
+		}
+		$query = $this->db->get_where('packet', array(
+				'create_at >=' => $begin . $this->getWorkingHour()->start_working_hour,
+				'create_at <=' => $end . $this->getWorkingHour()->end_working_hour
+		));
 		$this->db->where_in('mobile_address', $mobile_address);
 		$this->db->last_query();
 		return $query;
