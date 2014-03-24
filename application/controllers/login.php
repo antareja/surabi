@@ -31,13 +31,13 @@ class Login extends CI_Controller {
 			try {
 				$login = $this->muser->login($post['username'], $post['password']);
 				if ($login !== FALSE) {
-					//print_r($login);
-					define_sess($login->username, $login->user_id, $login->fullname, $login->level,
-					$login->company_id);
-					//print_r($_SESSION);exit;
+					// print_r($login);
+					$user_login = $this->muser->user_login($login->user_id);
+					define_sess($login->username, $login->user_id, $login->fullname, $login->level, $login->company_id);
+					// print_r($_SESSION);exit;
 					previous_url();
 				} else {
-					//throw new Exception("Username Or Password is invalid");
+					// throw new Exception("Username Or Password is invalid");
 					$msg = "Username Or Password is invalid";
 					$this->login($msg);
 				}
@@ -46,9 +46,10 @@ class Login extends CI_Controller {
 			}
 		}
 	}
-	
-	public function logout(){
-		 session_destroy();
-		 redirect('login');
+
+	public function logout() {
+		$this->muser->user_logout($_SESSION['gps_user_id']);
+		session_destroy();
+		redirect('login');
 	}
 }

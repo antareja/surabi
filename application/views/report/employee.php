@@ -39,7 +39,7 @@ else $class="ganjil";
 	<td><?php echo $row->email?></td>
 	<td><?php echo $row->username?></td>
 	<td><?php echo $row->level?></td>
-	<td><?php //echo $row["last_login"]?></td>
+	<td><?php echo $row->login?></td>
 </tr>	
 <?php
 $x++;

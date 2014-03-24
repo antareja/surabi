@@ -25,10 +25,12 @@ class MReport extends CI_Model {
 	}
 
 	function getEmployeeReport() {
+		$this->db->select('*, user.user_id user_id, MAX(login)');
 		if($_SESSION['gps_level'] == 'admin_vendor') {
 			$this->db->where('user.admin_id', $_SESSION['gps_user_id']);
 		} 
-		$this->db->join('user_log', 'user_log.user_id = user.user_id', 'inner');
+		$this->db->join('user_log', 'user_log.user_id = user.user_id', 'left');
+		$this->db->group_by('user.user_id');
 		$query = $this->db->get('user');
 // 		echo $this->db->last_query();exit;
 		return $query->result();
