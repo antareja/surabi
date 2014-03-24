@@ -326,8 +326,7 @@ foreach($vehicles as $vehicle)
 						fillOpacity:"0",
 						// strokeWidth:3
 					};
-				<?php //foreach($regions as $region) {
-				if (!empty($region)) {?>	
+				<?php //foreach($regions as $region) {?>	
 				var coordinates=[<?php echo string_to_bracket($region->latlng);?>];
 				<?php //} ?>
 				var epsg4326 = new OpenLayers.Projection("EPSG:4326");
@@ -348,7 +347,7 @@ foreach($vehicles as $vehicle)
 				var polygonFeature = new OpenLayers.Feature.Vector(poly, null, siteStyle);
 				map.addLayer(vectors);
 				vectors.addFeatures([polygonFeature]);
-				<?php } ?>
+
     var socket = io.connect('<?php echo base_url_new()?>:8000');
     // on message received we print all the data inside the #container div
     socket.on('notification', function (data) {
@@ -493,9 +492,7 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			<?php if(!empty($region)) { ?>
-			if(<?php echo $region->in_out == 'out'? '!':''?>dalam)alert("Sampai <?php echo $region->in_out?>"+data_map['mobile']);
-			<?php }?>
+			if(dalam)alert("Sampai"+data_map['mobile']);
 };
 
 function doNothing() {}
