@@ -18,6 +18,7 @@
  * Inherits from:
  *  - <OpenLayers.Handler.Point>
  */
+var currentLocation = window.location;
 OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
     
     /**
@@ -178,7 +179,7 @@ OpenLayers.Handler.Path = OpenLayers.Class(OpenLayers.Handler.Point, {
 					var lat = lonlat.lat;
 					var lon = lonlat.lon;
 					var size = new OpenLayers.Size(21,25);
-					var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png', size);
+					var icon = new OpenLayers.Icon("http://" + document.domain + '/assets/images/marker.png', size);
 					marker_layer.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(lon,lat),icon));
 					document.getElementById("div_lonlat").innerHTML+="<input type='text' id='txt_posisi' name='txt_posisi[]' value='"+lon+","+lat+"'><br>";
     },

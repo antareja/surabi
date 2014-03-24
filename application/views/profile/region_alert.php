@@ -495,35 +495,42 @@ table.featureInfo caption {
 					for="form-field-1"> Expire Time </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="expire_time"
-						name="expire_time" placeholder="expire_time"
+						name="expire_time" placeholder="0 if unlimited"
 						value="<?php echo isset($region) ? $region->expire_time : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Time Start </label>
+					for="form-field-1"> Work Hour Start </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="time_start"
-						name="time_start" placeholder="time_start"
+						name="time_start" 
+						
 						value="<?php echo isset($region) ? $region->time_start : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Time End </label>
+					for="form-field-1"> Work Hour End </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="time_end"
-						name="time_end" placeholder="time_end"
+						name="time_end" 
 						value="<?php echo isset($region) ? $region->time_end : '';?>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> In Out </label>
+					for="form-field-1"> Inside / Outside </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="in_out" name="in_out"
-						placeholder="in_out"
-						value="<?php echo isset($region) ? $region->in_out : '';?>">
+					<select class="form-control" id="in_out" name="in_out">
+					<option>&nbsp;</option>
+					<option value="in" <?php if(isset($region)) {
+						echo $region->in_out == "in" ? 'selected':'';
+					}?>>Inside</option>
+					<option value="out" <?php if(isset($region)) {
+						echo $region->in_out == "out" ? 'selected':'';
+					}?>>Outside</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -536,9 +543,8 @@ table.featureInfo caption {
 				</div>
 				<br> <br>
 				<div class="panel-body">
-					<br> * Klik kanan untuk menandai peta <br> * shift + Klik Kanan
-					untuk menghapus penanda <br> * Anda bisa menggeser penanda dengan
-					cara drag penanda
+					<br> * Klik untuk menandai peta 
+					<br> * Double pada titik terakhir 
 					<div id="map">
 						<img id="options" title="Toggle options toolbar"
 							src="http://192.168.12.250:8080/geoserver/options.png" />

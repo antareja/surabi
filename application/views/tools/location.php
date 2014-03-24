@@ -2,6 +2,8 @@
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
+var currentLocation = window.location;
+alert(document.domain);
 jQuery(function($) {
 	  var geocoder = new google.maps.Geocoder();
 	  var point = new google.maps.LatLng(<?php echo $lat?>, <?php echo $lng?>);

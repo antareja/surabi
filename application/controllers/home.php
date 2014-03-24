@@ -33,7 +33,7 @@ class Home extends CI_Controller {
 			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin($show);
 // 			$data['vehicles'] = $this->mgps->getDataVehicle();
 		}
-		$data['regions'] = $this->mprofile->getAllRegion();
+		$data['region'] = $this->mprofile->getOneRegion();
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$data['last_position'] = $this->mgps->getLastPosition();
