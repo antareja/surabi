@@ -161,9 +161,11 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>report/vehicle/"> <i
 									class="icon-truck"></i> Vehicles Report
 							</a></li>
+							<?php if($_SESSION['gps_level'] != 'operator') {?>
 							<li><a href="<?php echo site_url()?>report/employee/"> <i
 									class="icon-user"></i> Employee Report
 							</a></li>
+							<?php } ?>
 							<li><a href="<?php echo site_url()?>report/form/activity/"> <i
 									class="icon-user"></i> Activity Report
 							</a></li>

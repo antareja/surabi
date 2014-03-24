@@ -26,18 +26,18 @@ class Report extends CI_Controller {
 		$this->load->template("report/form", $data);
 	}
 
-	public function employee() {
-		$data['pageTitle'] = 'Employee Report';
-		$data['data_report'] = $this->mreport->getEmployeeReport();
-		$this->load->template("report/employee", $data);
-	}
-
 	public function vehicle() {
 		$data['pageTitle'] = 'Vehicle Report';
 		$data['vehicles'] = $this->mreport->getAllVehiclesComplete();
 		$this->load->template("report/vehicle", $data);
 	}
-
+	
+	public function employee() {
+		$data['pageTitle'] = 'Employee Report';
+		$data['employee'] = $this->mreport->getEmployeeReport();
+		$this->load->template("report/employee", $data);
+	}
+	
 	public function activity() {
 		$data['pageTitle'] = 'Activity Report';
 		$post = $this->input->post();
@@ -55,8 +55,32 @@ class Report extends CI_Controller {
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
 		$this->dompdf->stream("activity.pdf", array(
-				'Attachment' => 0 
+				'Attachment' => 0
 		));
+	}
+	
+	public function alert() {
+		$data['pageTitle'] = 'Alert Report';
+		$post = $this->input->post();
+		if (isset($post['begin'])) {
+			// print_r($post);exit;
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$data['alert'] = $this->mreport->getAlertReport($begin, $end, $post['vehicle']);
+		}
+		$this->load->template("report/alert", $data);
+	}
+	
+	public function speed() {
+		$data['pageTitle'] = 'Speed Report';
+		$post = $this->input->post();
+		if (isset($post['begin'])) {
+			// print_r($post);exit;
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$data['speed'] = $this->mreport->getSpeedReport($begin, $end, $post['vehicle']);
+		}
+		$html = $this->load->template("report/speed", $data);
 	}
 
 	public function stop() {
@@ -78,6 +102,14 @@ class Report extends CI_Controller {
 		// $this->dompdf->stream("activity.pdf",array('Attachment'=>0));
 	}
 
+	public function test() {
+		$vehicle = 'haidar, rizki, arief';
+		$array = array(
+				$vehicle 
+		);
+		print_r($array);
+	}
+
 	public function activity_demo() {
 		$html = $this->load->view('report/activity_demo');
 		$html = $this->output->get_output();
@@ -87,39 +119,8 @@ class Report extends CI_Controller {
 		$this->dompdf->load_html($html);
 		$this->dompdf->render();
 		$this->dompdf->stream("activity.pdf", array(
-				'Attachment' => 0 
+				'Attachment' => 0
 		));
 	}
-
-	public function test() {
-		$vehicle = 'haidar, rizki, arief';
-		$array = array(
-				$vehicle 
-		);
-		print_r($array);
-	}
-
-	public function alert() {
-		$data['pageTitle'] = 'Alert Report';
-		$post = $this->input->post();
-		if (isset($post['begin'])) {
-			// print_r($post);exit;
-			$begin = date("Y-m-d", strtotime($post['begin']));
-			$end = date("Y-m-d", strtotime($post['end']));
-			$data['alert'] = $this->mreport->getAlertReport($begin, $end, $post['vehicle']);
-		}
-		$this->load->template("report/alert", $data);
-	}
-
-	public function speed() {
-		$data['pageTitle'] = 'Speed Report';
-		$post = $this->input->post();
-		if (isset($post['begin'])) {
-			// print_r($post);exit;
-			$begin = date("Y-m-d", strtotime($post['begin']));
-			$end = date("Y-m-d", strtotime($post['end']));
-			$data['speed'] = $this->mreport->getSpeedReport($begin, $end, $post['vehicle']);
-		}
-		$html = $this->load->template("report/speed", $data);
-	}
+	
 }
