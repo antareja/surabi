@@ -182,3 +182,7 @@ function array_reverse_sub($array) {
 	}
 	return $array;
 }
+
+function add_td($row) {
+	return '<td>'.$row.'</td>';
+}

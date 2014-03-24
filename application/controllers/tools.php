@@ -91,4 +91,13 @@ class Tools extends CI_Controller {
 		$output = curl_exec($ch);
 		echo $output;
 	}
+	
+	public function array_td(){
+		$array = array('nama1','nama2','nama3','nama4');
+		foreach($array as &$row) {
+			$row = '<td>'.$row.'</td>';
+		}
+		print_r($array);
+		
+	}
 }

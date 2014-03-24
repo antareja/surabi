@@ -1,8 +1,8 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Activity Report<small> <i class="icon-double-angle-right"></i>
-				Activity Form
+			<?php echo $pageTitle;?><small> <i class="icon-double-angle-right"></i>
+				Form
 			</small>
 		</h1>
 	</div>
