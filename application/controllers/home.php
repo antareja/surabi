@@ -34,6 +34,7 @@ class Home extends CI_Controller {
 // 			$data['vehicles'] = $this->mgps->getDataVehicle();
 		}
 		$data['region'] = $this->mprofile->getOneRegion();
+// 		print_r($data['region']);exit;
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$data['last_position'] = $this->mgps->getLastPosition();

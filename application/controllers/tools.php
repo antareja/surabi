@@ -27,7 +27,7 @@ class Tools extends CI_Controller {
 	}
 	
 	public function create_user(){
-		$vendor = 'vendorA';
+		$vendor = 'vendorB';
 		echo $vendor;
 		for($i=1;$i<10;$i++) {
 			$data['username'] = $vendor.$i;
@@ -38,8 +38,8 @@ class Tools extends CI_Controller {
 			$data['address'] = $vendor;
 			$data['fullname'] = $vendor;
 			$data['level'] = 'operator';
-			$data['admin_id'] = 8;
-			$data['company_id'] = 3;
+			$data['admin_id'] = 7;
+			$data['company_id'] = 2;
 			$id = $this->mtools->insertUser($data);
 			echo 'Success = '.$id.'<br/>';
 		}
