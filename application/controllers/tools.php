@@ -93,6 +93,7 @@ class Tools extends CI_Controller {
 	}
 	
 	public function array_td(){
+// 		echo FCPATH;exit;
 		$array = array('nama1','nama2','nama3','nama4');
 		foreach($array as &$row) {
 			$row = '<td>'.$row.'</td>';

@@ -91,6 +91,13 @@ $('.btn-user').click(function() {
 	// console.log($('.form-user').valid());
 });
 
+$('.btn-view').click(function() {
+	$("#form-report").submit();
+});
+$('.btn-pdf').click(function() {
+	$("input[name=pdf]").val('pdf');
+	$("#form-report").submit();
+});
 // For Region Alert Form 
 $('.btn-region').click(function() {
 	var position = [];

@@ -2,7 +2,7 @@
  * 
  */
 var socket = io.connect('http://192.168.12.250:8000');
-var geocoder = new google.maps.Geocoder();
+// var geocoder = new google.maps.Geocoder();
 // on message received we print all the data inside the #container div
 socket.on('notification', function(data) {
 	var data_map = data.data;

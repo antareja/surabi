@@ -84,12 +84,12 @@ class MReport extends CI_Model {
 				'create_at >=' => $begin . ' 09:00',
 				'create_at <=' => $end . ' 23:00' 
 		));
-		//echo $this->db->last_query();exit;
+// 		echo $this->db->last_query();exit;
 		return $query;
 	}
 	
 	function getSpeedReport($begin, $end, $vehicles) {
-		$this->db->select('vehicles.name, velocity, create_at, location, bearing');
+		$this->db->select('vehicles.name, velocity, create_at, location, bearing, latitude, longitude');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		if ($vehicles != '') {
 			$this->db->where_in('vehicle_id', $vehicles);
