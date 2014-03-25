@@ -84,12 +84,12 @@ class MReport extends CI_Model {
 				'create_at >=' => $begin . ' 09:00',
 				'create_at <=' => $end . ' 23:00' 
 		));
-		//echo $this->db->last_query();exit;
+// 		echo $this->db->last_query();exit;
 		return $query;
 	}
 	
 	function getSpeedReport($begin, $end, $vehicles) {
-		$this->db->select('vehicles.name, velocity, create_at, location, bearing');
+		$this->db->select('vehicles.name, velocity, create_at, location, bearing, latitude, longitude');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		if ($vehicles != '') {
 			$this->db->where_in('vehicle_id', $vehicles);
@@ -108,14 +108,14 @@ class MReport extends CI_Model {
 	
 	function getAlertReport($begin, $end, $vehicle) {
 		$this->db->select('vehicles.name, driver.name as driver_name,  
-				alert.type, velocity, packet.create_at as create_at, location, bearing');
-		$this->db->join('packet', 'alert.packet_id = packet.id_packet');
-		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
-		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id');
+				alert.type, velocity, alert.create_at as create_at, latitude, longitude,  location, bearing');
+		$this->db->join('packet', 'alert.packet_id = packet.id_packet','inner');
+		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address','inner');
+		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id','left');
 		if ($vehicle != '') {
 			$this->db->where_in('vehicles.vehicle_id', $vehicle);
 		}
-		if($_SESSION['gps_level'] == 'operator') {
+		if($_SESSION['gps_level'] == 'operator') {	
 			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
 		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
 			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
@@ -124,6 +124,7 @@ class MReport extends CI_Model {
 				'alert.create_at >=' => $begin . ' 09:00',
 				'alert.create_at <=' => $end . ' 23:00'
 		));
+// 		echo $this->db->last_query();exit;
 		return $query->result();
 	}
 	
