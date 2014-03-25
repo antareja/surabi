@@ -240,7 +240,7 @@ class Report extends CI_Controller {
 		exit();
 	}
 
-	public function activity_demo() {
-		$html = $this->load->view('report/activity_demo');
-	}
+// 	public function activity_demo() {
+// 		$html = $this->load->view('report/activity_demo');
+// 	}
 }
