@@ -5,7 +5,8 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="table-responsive">
-				<table border="0" width="100%">
+				<table id="sample-table-3" class="table table-striped table-bordered table-hover">
+				<tbody>
 					<tr>
 						<td rowspan="6" style="vertical-align: top">Foto</td>
 						<td width="7%">User</td>
@@ -37,12 +38,12 @@
 						<td>:</td>
 						<td><?php echo $data_user[0]->phone?></td>
 					</tr>
+					</tbody>
 				</table>
 				<br>
 				<div class="table-header">Login History</div>
 				<div class="table-responsive">
-				<table id="sample-table-2"
-					class="table table-striped table-bordered table-hover">
+				<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th class="center"><label> <input type="checkbox" class="ace" />
