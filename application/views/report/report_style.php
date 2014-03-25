@@ -2,11 +2,12 @@
 	<div class="page-header">
 		<h1><?php echo $pageTitle;?></h1>
 	</div>
-	<form action="<?php echo site_url()?>report/<?php echo $this->uri->segment(2)?>/pdf" method="POST" >
+	<form action="<?php echo site_url()?>report/<?php echo $this->uri->segment(2)?>/pdf" id="pdf_report" target="_blank" method="POST" >
 		<input type="hidden" name="begin" value="<?php echo isset($begin) ? $begin : ''?>">
 		<input type="hidden" name="end" value="<?php echo isset($end) ? $end : ''?>">
 		<input type="hidden" name="vehicle" value="<?php echo isset($vehicle) ? $vehicle : ''?>">
-	<h4><input type="submit" value="PDF" >  <img onclick="f1.submit()" src="<?php base_url()?>/assets/img/pdf.png"
+		<input type="hidden" name="pdf" value="1">
+	<h4>View PDF : <img onclick="pdf_report.submit()" src="<?php base_url()?>/assets/img/pdf.png"
 		style="cursor: pointer"></h4>
 	</form>
 	<div class="row">

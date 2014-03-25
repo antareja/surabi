@@ -94,9 +94,10 @@ class Report extends CI_Controller {
 			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
-			// $data['begin'] = $begin;
-			// $data['end'] = $end;
-			$data['vehicle'] = implode(',', $post['vehicle']);
+			$data['begin'] = $begin;
+			$data['end'] = $end;
+			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
+			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
 			$data['headers'] = array(
 					'Vehicle',
 					'Event Time',
@@ -106,7 +107,7 @@ class Report extends CI_Controller {
 					'Latitude',
 					'Longitude' 
 			);
-			$activity = $this->mreport->getActivityReport($begin, $end, empty($post['vehicle']) ? '' : $post['vehicle']);
+			$activity = $this->mreport->getActivityReport($begin, $end, $vehicle);
 			$x = 1;
 			$activities = array();
 			foreach ($activity->result() as $row) {
@@ -133,6 +134,10 @@ class Report extends CI_Controller {
 			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
+			$data['begin'] = $begin;
+			$data['end'] = $end;
+			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
+			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
 			$data['headers'] = array(
 					'Vehicle',
 					'Event Time',
@@ -142,7 +147,7 @@ class Report extends CI_Controller {
 					'Longitude',
 					'Description' 
 			);
-			$alert = $this->mreport->getAlertReport($begin, $end, $post['vehicle']);
+			$alert = $this->mreport->getAlertReport($begin, $end, $vehicle);
 			$x = 1;
 			$alerts = array();
 			foreach ($alert as $row) {
@@ -176,7 +181,11 @@ class Report extends CI_Controller {
 			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
-			$speed = $this->mreport->getSpeedReport($begin, $end, $post['vehicle']);
+			$data['begin'] = $begin;
+			$data['end'] = $end;
+			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
+			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
+			$speed = $this->mreport->getSpeedReport($begin, $end, $vehicle);
 			$x = 1;
 			$speeds = array();
 			foreach ($speed as $row) {
@@ -203,9 +212,15 @@ class Report extends CI_Controller {
 			// print_r($post);exit;
 			$begin = date("Y-m-d", strtotime($post['begin']));
 			$end = date("Y-m-d", strtotime($post['end']));
-			$data['stop'] = $this->mreport->getStopReportGroup($begin, $end, $post['vehicle']);
+			$data['begin'] = $begin;
+			$data['end'] = $end;
+			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
+			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
+			$data['stop'] = $this->mreport->getStopReportGroup($begin, $end, $vehicle);
 		}
 		if (empty($post['pdf'])) {
+			$data['pdf'] = 'View PDF : <img onclick="pdf_report.submit()" src="'.base_url().'/assets/img/pdf.png"
+		style="cursor: pointer">';
 			$this->load->template("report/stop", $data);
 		} else {
 			$this->pdf($data,'stop');
@@ -225,7 +240,7 @@ class Report extends CI_Controller {
 		exit();
 	}
 
-	public function activity_demo() {
-		$html = $this->load->view('report/activity_demo');
-	}
+// 	public function activity_demo() {
+// 		$html = $this->load->view('report/activity_demo');
+// 	}
 }
