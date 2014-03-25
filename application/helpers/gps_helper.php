@@ -136,6 +136,11 @@ function prev_url() {
 	return $_SERVER['HTTP_REFERER'];
 }
 
+// dua angka sebelum koma  / 60 + angka yg tidak disertakan
+function get_coordinate($coor){
+	return $coor;
+}
+
 function sum_the_time($times) {
 	$seconds = 0;
 	foreach ($times as $time) {

@@ -1,3 +1,58 @@
+<script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
+<script>
+
+		function toSeconds( time ) {
+		    var parts = time.split(':');
+		    return (+parts[0]) * 60 * 60 + (+parts[1]) * 60 + (+parts[2]); 
+		}
+		
+		function toHHMMSS(sec) {
+		    var sec_num = parseInt(sec, 10); // don't forget the second parm
+		    var hours   = Math.floor(sec_num / 3600);
+		    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+		    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+		
+		    if (hours   < 10) {hours   = "0"+hours;}
+		    if (minutes < 10) {minutes = "0"+minutes;}
+		    if (seconds < 10) {seconds = "0"+seconds;}
+		    var time    = hours+':'+minutes+':'+seconds;
+		    return time;
+		}
+		
+		function calculateSum(id) {
+			var sum = 0;
+			$(".duration"+id).each(function() {
+		
+				var value = $(this).text();
+				// add only if the value is number
+				if (!isNaN(value) && value.length != 0) {
+					sum += parseFloat(value);
+				}
+			});
+		
+			$('.result'+id).text(sum);
+		};
+		<?php 
+
+		$vehicle_id = '';
+		$i = 1;
+		foreach ($stop->result() as $row) {
+		$i++;
+
+		if ($vehicle_id != $row->vehicle_id) {
+			$vehicle_id = $row->vehicle_id;
+		?>
+		$(document).ready(function(){
+		    var total = 0;
+		    $('.duration<?php echo $row->vehicle_id?>').each(function(){
+		        total += toSeconds( $(this).text() );
+		    });
+		    
+		    $('.result<?php echo $row->vehicle_id?>').text( toHHMMSS(total) );
+		    
+		})
+		<?php }} ?>
+		</script>
 <style>
 .ganjil {
 	background-color: #999999
@@ -28,7 +83,10 @@ $x = 1;
 $vehicle_name = '';
 $daily_total = array();
 $total = array();
-foreach ($stop->result() as $row) {
+foreach ($stop->result() as $row) { ?>
+
+
+<?php 
 	$x ++;
 	if ($x % 2 == 0)
 		$class = "genap";
@@ -43,11 +101,11 @@ foreach ($stop->result() as $row) {
 				) 
 		);
 		?>
-		<tr style="background-color: #666666">
+				<tr style="background-color: #666666">
 		<td colspan="5"><?php echo $vehicle_name?></td>
 	</tr>
 	<tr>
-		<td colspan="5">Total Stop Duration</td>
+		<td colspan="5" align="right" class="result<?php echo $row->vehicle_id?>">Total Stop Duration</td>
 	</tr>
 		<?php
 	} else {
@@ -61,7 +119,7 @@ foreach ($stop->result() as $row) {
 		<td><?php echo $row->start_time ?></td>
 		<td><?php echo $row->end_time ?></td>
 		<td><?php echo $row->location ?></td>
-		<td class="duration"><?php echo $row->duration ?></td>
+		<td class="duration<?php echo $row->vehicle_id;?>"><?php echo $row->duration;//$x; ?></td>
 	</tr>	
 	<?php
 }

@@ -130,7 +130,7 @@ class MReport extends CI_Model {
 	
 	function getStopReportGroup($begin, $end,$vehicles) {
 		$this->db->group_by('latitude, longitude, mobile_address,DATE(create_at)');
-		$this->db->select('vehicles.name, MIN(time) start_time, MAX(time) end_time, mobile_address, latitude,longitude
+		$this->db->select('vehicles.name, vehicles.vehicle_id, MIN(time) start_time, MAX(time) end_time, mobile_address, latitude,longitude
 				, location,TIMEDIFF(MAX(time),MIN(time)) AS duration, MAX(DATE(create_at)) date');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->where_in('vehicle_id', $vehicles);
