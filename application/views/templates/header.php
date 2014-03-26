@@ -188,7 +188,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="#"> <i class="icon-cog"></i> Settings
 							</a></li>
-							<li><a href="#"> <i class="icon-user"></i> Profile
+							<li><a href="<?php echo base_url()?>profile_user"> <i class="icon-user"></i> Profile
 							</a></li>
 							<li class="divider"></li>
 							<li><a href="<?php echo site_url()?>login/logout"> <i class="icon-off"></i> Logout
