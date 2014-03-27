@@ -144,9 +144,10 @@ function get_coordinate($coor){
 function sum_the_time($times) {
 	$seconds = 0;
 	foreach ($times as $time) {
-		list($hour, $minute) = explode(':', $time);
+		list($hour, $minute, $second) = explode(':', $time);
 		$seconds += $hour * 3600;
 		$seconds += $minute * 60;
+		$seconds += $second;
 		// $seconds += $second;
 	}
 	$hours = floor($seconds / 3600);
