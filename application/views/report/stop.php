@@ -89,8 +89,10 @@ $x = 1;
 $vehicle_name = '';
 $daily_total = array();
 $total = array();
+$sum = 0;
 foreach ($stop->result() as $row) { 
 	$x ++;
+// 	$sum += sum_the_time($row[])
 	if ($x % 2 == 0)
 		$class = "genap";
 	else
@@ -108,15 +110,17 @@ foreach ($stop->result() as $row) {
 		<td colspan="5"><?php echo $vehicle_name?></td>
 	</tr>
 	<tr>
-		<td colspan="5">Total Stop Duration <span class="test"></span>: <span class="result<?php echo $row->vehicle_id?>"></span></td>
+		<td colspan="5">Total Stop Duration <span class="test"></span>: <span class="result<?php echo $row->vehicle_id?>">
+		</span><span> php: <?php echo $_SESSION[$row->name];?></span></td>
 	</tr>
 		<?php
 	} else {
 		array_push($daily_total[$row->name], $row->duration);
 	}
 	$total[$row->name] = sum_the_time($daily_total[$row->name]);
+	$_SESSION[$row->name] = $total[$row->name];
 // 	echo 'total'.$row->name .$total[$row->name];
-	print_r($total);
+// 	print_r($total);
 	?>		
 		<tr class="<?php echo $class?>">
 		<td><?php echo $row->date ?></td>

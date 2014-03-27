@@ -26,6 +26,12 @@ class Tools extends CI_Controller {
 		echo $new;
 	}
 	
+	public function sum() {
+		$time = array('09:30:40','03:40:40', '02:50:30');
+		$sum = sum_the_time($time);
+		echo $sum;
+	}
+	
 	public function create_user(){
 		$vendor = 'vendorB';
 		echo $vendor;
