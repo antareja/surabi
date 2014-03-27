@@ -54,7 +54,6 @@ function calculateSum(id) {
 		    });
 		    
 		    $('.result<?php echo $row->vehicle_id?>').text( toHHMMSS(total) );
-		    $('.test').text('hai');
 		})
 		<?php }} ?>
 		</script>
@@ -110,9 +109,9 @@ foreach ($stop->result() as $row) {
 		<td colspan="5"><?php echo $vehicle_name?></td>
 	</tr>
 	<tr>
-		<td colspan="5">Total Stop Duration <span class="test"></span>: 
+		<td colspan="5">Total Stop Duration : 
 			<!-- <span class="result<?php echo $row->vehicle_id?>"></span> -->
-			<span> php: <?php echo $_SESSION[$row->name];?></span>
+			<span><?php echo $_SESSION[$row->name];?></span>
 		</td>
 	</tr>
 		<?php
