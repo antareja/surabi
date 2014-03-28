@@ -497,7 +497,8 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			if(dalam)alert("Sampai"+data_map['mobile']);
+			if(<?php echo $region->in_out == 'out' ? '!' : ''?>dalam)
+				alert(<?php echo $region->in_out =='out' ? '"Keluar"' : 'Sampai'?>+data_map['mobile']);
             }
 };
 
