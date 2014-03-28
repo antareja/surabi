@@ -87,7 +87,7 @@ class Packet extends CI_Controller {
 				# Only for google maps
 				// $data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
 				# Test Curl with Ajax
-				$data['full_packet'] = $this->test_curl();
+// 				$data['full_packet'] = $this->test_curl();
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
@@ -117,16 +117,21 @@ class Packet extends CI_Controller {
 		$vehicle_id = $this->mpacket->getVehicle($packet_id);
 		$data['region'] = $this->mpacket->getRegion($vehicle_id);
 		$region = $data['region'];
-		$latlngs = explode(';', $region->latlng);
-		$point = array($lng,$lat);
+		$lnglats = explode(';', $region->latlng);
+		//print_r($lnglats);exit;
+		$point = array($lat,$lng);
 		$polygon = array();
-		foreach ($latlngs as $latlng) {
-			$lat = explode(',', rm_brace($latlng));
-			array_push($polygon, array($lat[1],$lat[0]));
+		foreach ($lnglats as $lnglat) {
+// 			echo $lnglat.'<br/>';
+			$lng = explode(',', $lnglat);
+			array_push($polygon, array($lng[1],$lng[0]));
 		}
-		$in_out = poly_contains($point, $region->latlng) ? 'in' : 'out';
+// 		print_r($polygon);exit;
+		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
+// 		print_r($polygon);exit;
 		$in_out == $region->in_out ? $this->region_alert($region->region_id, $packet_id) : '';
-		//echo 'test<br/>';
+// 		echo 'test<br/>';
+// 		echo $in_out;
 		return $in_out;
 	}
 	
