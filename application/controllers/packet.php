@@ -102,7 +102,7 @@ class Packet extends CI_Controller {
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
 			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
-				$this->check_point_op($post['lat'], $post['lng'], $insert_id);
+				$this->check_point_op($post['lng'], $post['lat'], $insert_id);
 			}
 			// test Region
 			// $this->test_region();
