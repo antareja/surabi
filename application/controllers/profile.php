@@ -30,7 +30,7 @@ class Profile extends CI_Controller {
 			if (!empty($post['txt_posisi'])) {
 				$post_data['latlng'] = implode(';',$post['txt_posisi']);
 			}
-			$post_data['expire_time'] = $post['expire_time'];
+			$post_data['expire_time'] = $post['expire_time'] == 0 ? '000:00:00' : $post['expire_time'];
 			$post_data['time_start'] = $post['time_start'];
 			$post_data['time_end'] = $post['time_end'];
 			$post_data['in_out'] = $post['in_out'];

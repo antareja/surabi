@@ -326,9 +326,9 @@ foreach($vehicles as $vehicle)
 						fillOpacity:"0",
 						// strokeWidth:3
 					};
-				<?php //foreach($regions as $region) {?>	
+				<?php if($region) {?>	
 				var coordinates=[<?php echo string_to_bracket($region->latlng);?>];
-				<?php //} ?>
+				<?php } ?>
 				var epsg4326 = new OpenLayers.Projection("EPSG:4326");
 				for (var i=0;i<coordinates.length;i++) {
 					var point = new OpenLayers.Geometry.Point(coordinates[i][0], coordinates[i][1]);
@@ -497,8 +497,10 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
+			<?php if($region) {?>
 			if(<?php echo $region->in_out == 'out' ? '!' : ''?>dalam)
 				alert(<?php echo $region->in_out =='out' ? '"Keluar"' : 'Sampai'?>+data_map['mobile']);
+			<?php } ?>
             }
 };
 

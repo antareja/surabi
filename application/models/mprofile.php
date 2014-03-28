@@ -99,6 +99,9 @@ class MProfile extends CI_Model {
 		$this->db->limit('1','0');
 		$query = $this->db->get('region_alert');
 // 		echo $this->db->last_query();exit;
-		return $query->row();
+		if($query->num_rows() > 0) {
+			return $query->row();
+		} 
+		return false;
 	}
 }
