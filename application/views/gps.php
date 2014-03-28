@@ -308,8 +308,8 @@ foreach($vehicles as $vehicle)
                 map.setCenter(new OpenLayers.LonLat('116.890', '-0.457'), 7 )
 				map.events.register("mousemove", map, function(e) {
 					var position = map.getLonLatFromPixel(e.xy);
-					OpenLayers.Util.getElement("txt_lat").innerHTML = position.lat.toFixed(3);
-					OpenLayers.Util.getElement("txt_long").innerHTML = position.lon.toFixed(3);
+					OpenLayers.Util.getElement("txt_lat").innerHTML = position.lat;
+					OpenLayers.Util.getElement("txt_long").innerHTML = position.lon;
 
 				});
 				
@@ -377,7 +377,7 @@ foreach($vehicles as $vehicle)
 				var pixel=map.getPixelFromLonLat(point2);
 					
 				//document.getElementById('nodelist').innerHTML = "Loading... please wait...";
-                /*
+                
                 var params = {
                     REQUEST: "GetFeatureInfo",
                     EXCEPTIONS: "application/vnd.ogc.se_xml",
@@ -415,7 +415,7 @@ foreach($vehicles as $vehicle)
                         params.featureid = map.layers[0].params.FEATUREID;
                     }
                     OpenLayers.loadURL(geo_url, params, this, setHTML, setHTML);
-					*/
+					
 				marker_layer.setZIndex( 1001 );
 				setHTML(""); 
 		}
@@ -424,7 +424,7 @@ foreach($vehicles as $vehicle)
 
 function setHTML(response)
 {
-				/*
+				
 				response2=eval("(" + response.responseText + ")");
 				var provinsi = "";
                 var jalan =  "";
@@ -456,8 +456,8 @@ function setHTML(response)
 					}
 					provinsi=provinsi.replace(/"/g,"");
 					var lokasi=jalan_tambang+jalan+provinsi;
-				*/
-					var lokasi=lat+","+lng;
+				
+					//var lokasi=lat+","+lng;
 				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
 				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
 			

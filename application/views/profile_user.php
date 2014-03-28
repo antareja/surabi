@@ -46,9 +46,6 @@
 				<table id="sample-table-2" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
-							<th class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></th>
 							<th>Login</th>
 							<th>Logout</th>
 						</tr>
@@ -57,9 +54,6 @@
 					<tbody>
 						<?php  foreach ($data_history as $history) {?>
 						<tr>
-							<td class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></td>
 							<td><?php echo $history->login?></td>
 							<td><?php echo $history->logout?></td>
 						</tr>
