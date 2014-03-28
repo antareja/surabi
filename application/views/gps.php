@@ -153,7 +153,7 @@ var lat = "";
 var lng = "";
 var marker_id="";
 var markerClick="";
-
+var response2="";
 var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
 
 var popup_marker = {
@@ -368,10 +368,8 @@ foreach($vehicles as $vehicle)
 			//-----------------------------------------------------------------------------------------
 			
 			marker_id='marker_' + data_map["mobile"];
-				if(jQuery.inArray( marker_id, cek_marker )>=0)
-				{
-					marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
-				}
+				marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+				
 			
 				var point2=new OpenLayers.LonLat(lng,lat);
 				var pixel=map.getPixelFromLonLat(point2);
@@ -424,11 +422,17 @@ foreach($vehicles as $vehicle)
 
 function setHTML(response)
 {
-				
 				response2=eval("(" + response.responseText + ")");
 				var provinsi = "";
                 var jalan =  "";
                 var jalan_tambang = "";
+                if (typeof response2 === 'undefined') 
+                {
+                }
+                else
+                {
+                    // variable is undefined
+                
 					provinsi = JSON.stringify(response2.features[0].properties.PROV);
 					if(response2.features.length>1)
 					{
@@ -455,6 +459,7 @@ function setHTML(response)
 						jalan_tambang+="&nbsp;";
 					}
 					provinsi=provinsi.replace(/"/g,"");
+                
 					var lokasi=jalan_tambang+jalan+provinsi;
 				
 					//var lokasi=lat+","+lng;
@@ -493,6 +498,7 @@ function setHTML(response)
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
 			if(dalam)alert("Sampai"+data_map['mobile']);
+            }
 };
 
 function doNothing() {}
