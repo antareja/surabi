@@ -29,11 +29,11 @@ function to_pg_array($set) {
 function string_to_bracket($str) {
 	$array = array();
 	$new_str = explode(';', $str);
-	foreach($new_str as $new) {
-		$new2 = str_replace(',','","', $new);
+	foreach ($new_str as $new) {
+		$new2 = str_replace(',', '","', $new);
 		array_push($array, '["' . $new2 . '"]');
 	}
-	$last_str = implode(',',$array);
+	$last_str = implode(',', $array);
 	return $last_str;
 }
 
@@ -49,8 +49,8 @@ function rm_brace($str) {
 }
 
 function base_url_new() {
-	if($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
-		$base_url = substr(base_url(), 0, -1);
+	if ($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
+		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
 		return 'http://192.168.12.250';
@@ -135,9 +135,8 @@ function poly_contains_op($point, $polygon) {
 function prev_url() {
 	return $_SERVER['HTTP_REFERER'];
 }
-
-// dua angka sebelum koma  / 60 + angka yg tidak disertakan
-function get_coordinate($coor){
+// dua angka sebelum koma / 60 + angka yg tidak disertakan
+function get_coordinate($coor) {
 	return $coor;
 }
 
@@ -158,22 +157,55 @@ function sum_the_time($times) {
 	return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }
 
+function convertGeoToPixel($lon,$lat) {
+
+	global $mapWidth, $mapHeight, $mapLonLeft, $mapLonDelta, $mapLatBottom, $mapLatBottomDegree;
+
+// 	$lon=117.00507;
+// 	$lat=-0.45760;
+	
+	$mapWidth = 512;
+	$mapHeight = 424;
+	
+	$mapLonLeft =  $lon-0.00033;
+	$mapLonRight = $lon+0.00033;
+	$mapLonDelta = $mapLonRight - $mapLonLeft;
+	
+	$mapLatUp = $lat+0.00028;
+	$mapLatBottom = $lat-0.00028;
+	$mapLatBottomDegree = $mapLatBottom * M_PI / 180;
+	$x = ($lon - $mapLonLeft) * ($mapWidth / $mapLonDelta);
+	$lat = $lat * M_PI / 180;
+	$worldMapWidth = (($mapWidth / $mapLonDelta) * 360) / (2 * M_PI);
+	$mapOffsetY = ($worldMapWidth / 2 * log((1 + sin($mapLatBottomDegree)) / (1 - sin($mapLatBottomDegree))));
+	$y = $mapHeight - (($worldMapWidth / 2 * log((1 + sin($lat)) / (1 - sin($lat)))) - $mapOffsetY);
+	return array(
+			$x,
+			$y 
+	);
+}
+
 function remove_bracket($array) {
 	foreach ($array as &$string) {
-		$string = str_replace(array("(",")"), '', $string);
+		$string = str_replace(array(
+				"(",
+				")" 
+		), '', $string);
 	}
 	return $array;
 }
 
 function polygon_reverse($str) {
+	
 	$latlng = explode(";", $str);
 	$latlng = remove_bracket($latlng);
 	foreach ($latlng as &$array) {
-		$ex_array =  explode(',', $array);
-		$array =  $ex_array[1].','.$ex_array[0];
+		$ex_array = explode(',', $array);
+		$array = $ex_array[1] . ',' . $ex_array[0];
 	}
 	return $latlng;
 }
+
 function array_reverse_sub($array) {
 	$index = 0;
 	foreach ($array as $subarray) {
@@ -190,5 +222,5 @@ function array_reverse_sub($array) {
 }
 
 function add_td($row) {
-	return '<td>'.$row.'</td>';
+	return '<td>' . $row . '</td>';
 }
