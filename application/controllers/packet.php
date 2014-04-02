@@ -13,92 +13,15 @@ class Packet extends CI_Controller {
 	public $mapHeight = 424;
 	protected $lat;
 	protected $lon;
-	protected $mapLonLeft;
-	protected $mapLonRight;
-	protected $mapLonDelta;
-	protected $mapLatUp;
-	protected $mapLatBottom;
-	protected $mapLatBottomDegree;
 	
 	function __construct() {
 		parent::__construct();
 		$this->load->model('mpacket');
 		$this->mpacket = new MPacket();
-// 		$this->lat = $lat;
-// 		$this->lon = $lon;
-// 		$this->mapLonLeft = $this->lon - 0.00033;
-// 		$this->mapLonRight = $this->getLon() + 0.00033;
-// 		$this->mapLonDelta = $this->mapLonRight - $this->mapLonLeft;
-// 		$this->mapLatUp = $this->getLat() + 0.00028;
-// 		$this->mapLatBottom = $this->getLat() - 0.00028;
-// 		$this->mapLatBottomDegree = $this->mapLatBottom * M_PI / 180;
 	}
 
 	public function index() {
 		$this->resv();
-	}
-	
-	public function setLat($lat){
-		$this->lat = $lat;
-	}
-
-	public function setLon($lon){
-		$this->lon = $lon;
-	}
-	
-	public function setMapLonLeft() {
-		$this->mapLonLeft = $this->getLon() -  0.00033;
-	}
-	
-	public function setMapLonRight(){
-		$this->mapLonRight = $this->getLon() + 0.00033;
-	}
-	
-	public function setMapLonDelta() {
-		$this->mapLonDelta = $this->getMapLonRight() - $this->getMapLonRight();
-	}
-	
-	public function setMapLatUp(){
-		$this->mapLatUp = $this->getLat() + 0.00028; 
-	}
-	
-	public function setMapLatBottom(){
-		$this->mapLatBottom = $this->getLat() - 0.00028;
-	}
-	
-	public function setMapLatBottomDegree(){
-		$this->mapLatBottomDegree = $this->getMapLatBottom * M_PI / 180;
-	}
-	public function getLat(){
-		return $this->lat;
-	}
-	
-	public function getLon(){
-		return $this->lon;
-	}
-	
-	public function getMapLonLeft(){
-		return $this->mapLonLeft;
-	}
-	
-	public function getMapLonRight(){
-		return $this->mapLonRight;
-	}
-	
-	public function getMapLonDelta(){
-		return $this->mapLonDelta;
-	}
-	
-	public function getMapLatUp(){
-		return $this->mapLatUp;
-	}
-	
-	public function getMapLatBottom(){
-		return $this->mapLatBottom;
-	}
-	
-	public function getMapLatBottomDegree(){
-		return $this->mapLatBottomDegree;
 	}
 	
 	public function test() {
@@ -122,21 +45,19 @@ class Packet extends CI_Controller {
 		return $short_name;
 	}
 
-	function convertGeoToPixel() {
-		$x = ($this->getLon() - $this->getMapLonLeft()) * ($this->mapWidth / $this->getMapLonDelta);
-		$this->setLat($this->getLat() * M_PI / 180);
-		$worldMapWidth = (($this->mapWidth / $this->getMapLonDelta) * 360) / (2 * M_PI);
-		$mapOffsetY = ($worldMapWidth / 2 * log((1 + sin($this->getMapLatBottomDegree)) / (1 - sin($this->getMapLatBottomDegree))));
-		$y = $this->mapHeight - (($worldMapWidth / 2 * log((1 + sin($this->getLat())) / (1 - sin($this->getLat())))) - $mapOffsetY);
-		return array(
-				$x,
-				$y 
-		);
-	}
+// 	function convertGeoToPixel() {
+// 		$x = ($this->getLon() - $this->getMapLonLeft()) * ($this->mapWidth / $this->getMapLonDelta);
+// 		$this->setLat($this->getLat() * M_PI / 180);
+// 		$worldMapWidth = (($this->mapWidth / $this->getMapLonDelta) * 360) / (2 * M_PI);
+// 		$mapOffsetY = ($worldMapWidth / 2 * log((1 + sin($this->getMapLatBottomDegree)) / (1 - sin($this->getMapLatBottomDegree))));
+// 		$y = $this->mapHeight - (($worldMapWidth / 2 * log((1 + sin($this->getLat())) / (1 - sin($this->getLat())))) - $mapOffsetY);
+// 		return array(
+// 				$x,
+// 				$y 
+// 		);
+// 	}
 
 	public function location_op($lon, $lat) {
-		$lng = $this->setLon($lon);
-		$lat = $this->setLat($lat);
 		$mapLonLeft =  $lon-0.00033;
 		$mapLonRight = $lon+0.00033;
 		$mapLonDelta = $mapLonRight - $mapLonLeft;
@@ -144,15 +65,6 @@ class Packet extends CI_Controller {
 		$mapLatUp = $lat+0.00028;
 		$mapLatBottom = $lat-0.00028;
 		$mapLatBottomDegree = $mapLatBottom * M_PI / 180;
-// 		$this->setLat($lat);
-// 		$this->setLon($lon);
-// 		$this->setMapLonLeft();
-// 		$this->setMapLonRight();
-// 		$this->setMapLonDelta();
-// 		$this->setMapLatUp();
-// 		$this->setMapLatBottom();
-// 		$this->setMapLatBottomDegree();
-// 		echo $this->getMapLonLeft();
 
 		$mapWidth = 512;
 		$mapHeight = 424;
