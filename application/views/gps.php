@@ -155,7 +155,7 @@ var marker_id="";
 var markerClick="";
 var response2="";
 var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
-
+var lokasi="";
 var popup_marker = {
 <?php 
 foreach($vehicles as $vehicle)
@@ -375,7 +375,7 @@ foreach($vehicles as $vehicle)
 				var pixel=map.getPixelFromLonLat(point2);
 					
 				//document.getElementById('nodelist').innerHTML = "Loading... please wait...";
-                
+                /*
                 var params = {
                     REQUEST: "GetFeatureInfo",
                     EXCEPTIONS: "application/vnd.ogc.se_xml",
@@ -413,7 +413,7 @@ foreach($vehicles as $vehicle)
                         params.featureid = map.layers[0].params.FEATUREID;
                     }
                     OpenLayers.loadURL(geo_url, params, this, setHTML, setHTML);
-					
+				*/	
 				marker_layer.setZIndex( 1001 );
 				setHTML(""); 
 		}
@@ -422,6 +422,7 @@ foreach($vehicles as $vehicle)
 
 function setHTML(response)
 {
+				/*
 				response2=eval("(" + response.responseText + ")");
 				var provinsi = "";
                 var jalan =  "";
@@ -461,8 +462,13 @@ function setHTML(response)
 					provinsi=provinsi.replace(/"/g,"");
                 
 					var lokasi=jalan_tambang+jalan+provinsi;
-				
-					//var lokasi=lat+","+lng;
+					*/
+					$.ajax({
+					    'url' : '<?php echo base_url()."packet/location_op/"?>'+lng+'/'+lat,
+					    'type' : 'POST', //the way you want to send data to your URL
+					    'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
+					    	lokasi=data;
+					    	
 				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
 				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
 			
@@ -501,7 +507,8 @@ function setHTML(response)
 			if(<?php echo $region->in_out == 'out' ? '!' : ''?>dalam)
 				alert(<?php echo $region->in_out =='out' ? '"Keluar"' : 'Sampai'?>+data_map['mobile']);
 			<?php } ?>
-            }
+					    }
+					});
 };
 
 function doNothing() {}
