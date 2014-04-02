@@ -140,8 +140,8 @@ class Report extends CI_Controller {
 			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
 			$data['headers'] = array(
 					'Vehicle',
-					'Event Time',
-					'Location',
+					'Driver',
+					'Date',
 					'type',
 					'Latitude',
 					'Longitude',

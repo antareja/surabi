@@ -24,15 +24,15 @@ class Home extends CI_Controller {
 	}
 
 	public function home() {
-		$show = 'only';
-		if($_SESSION['gps_level'] == 'operator') {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id'], $show);
-		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id'], $show);
-		} elseif ($_SESSION['gps_level'] == 'admin') {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin($show);
-// 			$data['vehicles'] = $this->mgps->getDataVehicle();
-		}
+// 		$show = 'only';
+// 		if($_SESSION['gps_level'] == 'operator') {
+// 			$data['vehicles'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id']);
+// 		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
+// 			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
+// 		} elseif ($_SESSION['gps_level'] == 'admin') {
+// // 			$data['vehicles'] = $this->mgps->getDataVehicle();
+// 		}
+		$data['vehicles'] = $this->mfleet_config->getAllVehicle();
 		$data['region'] = $this->mprofile->getOneRegion();
 // 		print_r($data['region']);exit;
 		$data['pageTitle'] = 'Home';
