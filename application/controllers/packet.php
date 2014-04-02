@@ -136,7 +136,7 @@ class Packet extends CI_Controller {
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
 				// Only for google maps
-				// $data['location'] = $this->location($post['lat'] . ',' . $post['lng']);
+				$data['location'] = $this->location_op($post['lng'] . ',' . $post['lat']);
 				// Test Curl with Ajax
 				// $data['full_packet'] = $this->test_curl();
 				$data['velocity'] = $post['velocity'];

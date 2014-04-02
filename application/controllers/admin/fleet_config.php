@@ -40,10 +40,10 @@ class Fleet_config extends CI_Controller {
 			$post_data['email'] = $post['email'];
 			if ($post['id_base']) {
 				$this->mfleet_config->editBase($base_id, $post_data);
-				redirect('admin/fleet_config/'.$base_id);
+				redirect('admin/fleet_config/' . $base_id);
 			} else {
 				$id = $this->mfleet_config->insertBase($post_data);
-				redirect('admin/fleet_config/'.$id);
+				redirect('admin/fleet_config/' . $id);
 			}
 		} elseif ($base_id) {
 			$data['base'] = $this->mfleet_config->getBase($base_id);
@@ -52,9 +52,10 @@ class Fleet_config extends CI_Controller {
 			$this->load->template("admin/fleet_config/base", $data);
 		}
 	}
-	
+
 	/**
-	 * @param string $vehicle_id
+	 *
+	 * @param string $vehicle_id        	
 	 */
 	public function vehicle($vehicle_id = NULL) {
 		$data['pageTitle'] = 'Vehicle';
@@ -63,11 +64,10 @@ class Fleet_config extends CI_Controller {
 		$data['drivers'] = $this->mfleet_config->getAllDriver();
 		if ($_SESSION['gps_level'] == 'admin') {
 			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
-			$data['all_vehicle'] = $this->mfleet_config->getAllVehicles();
-		} elseif($_SESSION['gps_level'] == 'admin_vendor' ) {
+		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
 			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
-			$data['all_vehicle'] = $this->mfleet_config->getAllVehiclesByAdminVendor();
 		}
+		$data['all_vehicle'] = $this->mfleet_config->getAllVehicle();
 		$data['bases'] = $this->mfleet_config->getAllBase();
 		$data['icons'] = $this->mfleet_config->getAllIcon();
 		$data['regions'] = $this->mfleet_config->getRegion();
@@ -98,7 +98,7 @@ class Fleet_config extends CI_Controller {
 		} elseif ($vehicle_id) {
 			$data['vehicle'] = $this->mfleet_config->getVehicle($vehicle_id);
 			// check if id exists
-			if(isset($data['vehicle']->vehicle_id)){
+			if (isset($data['vehicle']->vehicle_id)) {
 				$this->load->template("admin/fleet_config/vehicle", $data);
 			} else {
 				unset($data['vehicle']);
@@ -109,43 +109,36 @@ class Fleet_config extends CI_Controller {
 			$this->load->template("admin/fleet_config/vehicle", $data);
 		}
 	}
-	
+
 	/**
 	 * Fleet Table Show
 	 */
 	public function fleet() {
 		$data['pageTitle'] = "Fleet State Modul";
-		if($_SESSION['gps_level'] == 'admin_vendor' ) {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
-		} elseif($_SESSION['gps_level'] == 'operator') {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleUser($_SESSION['gps_user_id']);
-		} else {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin();
-		}
-		$this->load->template('fleet',$data);
+		$data['vehicles'] = $this->mfleet_config->getAllVehicle();
+		$this->load->template('fleet', $data);
 	}
-	
+
 	/**
 	 * User & Vehicle Assignment
 	 */
 	public function assign() {
 		$data['pageTitle'] = "Assigmnet Vehicle & User";
-		if($_SESSION['gps_level'] == 'admin_vendor' ) {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdminVendor($_SESSION['gps_company_id']);
+		if ($_SESSION['gps_level'] == 'admin_vendor') {
 			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
 		} else {
-			$data['vehicles'] = $this->mfleet_config->getAllVehicleAdmin();
 			$data['users'] = $this->mfleet_config->getAllUser();
 		}
-		$this->load->template('admin/fleet_config/assign',$data);
+		$data['vehicles'] = $this->mfleet_config->getAllVehicle();
+		$this->load->template('admin/fleet_config/assign', $data);
 	}
-	
-	public function vehicle_assign(){
+
+	public function vehicle_assign() {
 		$post = $this->input->post();
-		foreach($post['vehicle'] as $vehicle_id) {
+		foreach ($post['vehicle'] as $vehicle_id) {
 			$data['user_id'] = $post['user_id'];
 			$this->mfleet_config->updateVehicleUser($data, $vehicle_id);
 		}
-// 		print_r($post_data);exit;
+		// print_r($post_data);exit;
 	}
 }
