@@ -40,7 +40,9 @@ class Packet extends CI_Controller {
 		$data = curl_exec($ch);
 		// curl_close($ch);
 		$json = json_decode($data, true);
+		echo '<pre>';
 		print_r($json);
+		echo '</pre>';
 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
 		return $short_name;
 	}

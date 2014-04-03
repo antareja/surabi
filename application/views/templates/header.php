@@ -144,6 +144,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>profile/region_alert"> <i
 									class="icon-cog"></i> Create Region
 							</a></li>
+							<li><a href="<?php echo site_url()?>profile/speed_alert"> <i
+									class="icon-cog"></i> Speed Alert
+							</a></li>
+							<li></li>
 						</ul>
 						<?php } ?>
 						</li>

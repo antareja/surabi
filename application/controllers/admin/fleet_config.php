@@ -141,4 +141,27 @@ class Fleet_config extends CI_Controller {
 		}
 		// print_r($post_data);exit;
 	}
+	
+	/**
+	 * Set Status Vehicle
+	 */
+	public function status_vehicle() {
+		$data['pageTitle'] = "Status Vehicle";
+		if ($_SESSION['gps_level'] == 'admin_vendor') {
+			$data['users'] = $this->mfleet_config->getAllUserByAdmin($_SESSION['gps_user_id']);
+		} else {
+			$data['users'] = $this->mfleet_config->getAllUser();
+		}
+		$data['vehicles'] = $this->mfleet_config->getAllVehicle();
+		$this->load->template('admin/fleet_config/assign', $data);
+	}
+	
+	public function set_status() {
+		$post = $this->input->post();
+		foreach ($post['vehicle'] as $vehicle_id) {
+			$data['user_id'] = $post['user_id'];
+			$this->mfleet_config->updateVehicleUser($data, $vehicle_id);
+		}
+		// print_r($post_data);exit;
+	}
 }
