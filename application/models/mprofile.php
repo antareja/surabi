@@ -88,12 +88,14 @@ class MProfile extends CI_Model {
 	}
 	
 	function getOneRegion() {
-		if($_SESSION['gps_level'] == 'admin_vendor') {
-			$this->db->join('user', 'region_alert.user_id = user.user_id', 'inner');
-			$this->db->where('region_alert.user_id', $_SESSION['gps_user_id']);
-		} elseif($_SESSION['gps_level'] == 'operator') {
-			$this->db->join('user', 'region_alert.user_id = user.admin_id', 'inner');
-			$this->db->where('user.user_id', $_SESSION['gps_user_id'] );
+		if(isset($_SESSION['gps_level'])) {
+			if($_SESSION['gps_level'] == 'admin_vendor') {
+				$this->db->join('user', 'region_alert.user_id = user.user_id', 'inner');
+				$this->db->where('region_alert.user_id', $_SESSION['gps_user_id']);
+			} elseif($_SESSION['gps_level'] == 'operator') {
+				$this->db->join('user', 'region_alert.user_id = user.admin_id', 'inner');
+				$this->db->where('user.user_id', $_SESSION['gps_user_id'] );
+			}
 		}
 		$this->db->order_by('region_id', "desc");
 		$this->db->limit('1','0');
