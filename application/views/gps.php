@@ -503,10 +503,11 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			<?php if($region) {?>
-			if(<?php echo $region->in_out == 'out' ? '!' : ''?>dalam)
-				alert(<?php echo $region->in_out =='out' ? '"Keluar"' : 'Sampai'?>+data_map['mobile']);
-			<?php } ?>
+			<?php # Alert change into popup
+				/* if($region) {
+					echo 'if('; $region->in_out == 'out' ? '!' : ''; echo 'dalam)'; 
+				 	echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
+			      	} */?>
 					    }
 					});
 };
