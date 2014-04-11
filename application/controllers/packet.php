@@ -80,6 +80,9 @@ class Packet extends CI_Controller {
 		));
 		$output = curl_exec($ch);
 		$output = json_decode($output);
+// 		echo '<pre>';
+// 		print_r($output);
+// 		echo '</pre>';
 		$jalan = "";
 		$provinsi = "";
 		if (isset($output->features[3]->properties->NAME)) {

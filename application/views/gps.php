@@ -154,7 +154,7 @@ var lng = "";
 var marker_id="";
 var markerClick="";
 var response2="";
-var geo_url = "<?php echo base_url_new()?>:8080/geoserver/tcm/wms" ;
+var geo_url = "http://localhost:8080/geoserver/tcm/wms" ;
 var lokasi="";
 var popup_marker = {
 <?php 
