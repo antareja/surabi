@@ -504,10 +504,14 @@ function setHTML(response)
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
 			<?php # Alert change into popup
-				/* if($region) {
-					echo 'if('; $region->in_out == 'out' ? '!' : ''; echo 'dalam)'; 
-				 	echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
-			      	} */?>
+				 if($region) {
+					echo 'if('; $region->in_out == 'out' ? '!' : ''; echo 'dalam)'; ?>
+					var alertNotif = $('#notif').text();
+					var totalAlert = parseInt(alertNotif) + 1;
+					alert(totalAlert);
+					$('#notif').replaceWith(totalAlert);
+				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
+			     <?php } ?>
 					    }
 					});
 };

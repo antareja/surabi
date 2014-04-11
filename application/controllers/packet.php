@@ -327,4 +327,28 @@ class Packet extends CI_Controller {
 		$this->mpacket->insertPacket($data);
 		echo 'test';
 	}
+	
+	public function notify_node() {
+		$ch = curl_init();
+	
+		curl_setopt($ch, CURLOPT_URL, 'http://192.168.12.250');
+	
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+		curl_setopt($ch, CURLOPT_PORT, 8000);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+	
+		curl_setopt($ch, CURLOPT_POST, true);
+	
+		$foo  = 'hellow world';
+
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $foo);
+	
+		curl_exec($ch);
+		curl_close($ch);
+	}
+
+	public function get_notif(){
+		$this->load->view('tools/node');
+	}
 }
