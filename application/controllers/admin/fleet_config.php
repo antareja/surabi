@@ -82,8 +82,8 @@ class Fleet_config extends CI_Controller {
 			$post_data['base_id'] = $post['base_id'];
 			$post_data['icon_id'] = $post['icon_id'];
 			$post_data['gps_mobile_address'] = $post['mobile_address'];
-			$post_data['user_id'] = $post['user_id'];
-			$post_data['driver_id'] = $post['driver_id'];
+			$post_data['user_id'] = null_int($post['user_id']);
+			$post_data['driver_id'] = null_int($post['driver_id']);
 			// $post_data['status_alert_profile'] = $post['status_alert_profile'];
 			// for edit data
 			if (isset($post['vehicle_id'])) {

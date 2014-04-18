@@ -122,7 +122,7 @@
 					for="form-field-select-2"> Base</label>
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
-						data-placeholder="Choose a Vehicle" name="base_id">
+						data-placeholder="Choose a Vehicle" name="base_id" required>
 						<option value="">&nbsp;</option>
 						<?php foreach ($bases as $base) { ?>
 						<option value="<?php echo $base->base_id?>"
@@ -162,7 +162,7 @@
 						<?php foreach ($regions as $region) { ?>
 						<option value="<?php echo $region->region_id?>"
 							<?php 
-							if (isset($vehicle)) {
+							if (isset($vehicle->region_id)) {
 							echo $region->region_id == $vehicle->region_id ? 'selected':'';
 							}?>><?php echo $region->name?></option>
 						<?php } ?>

@@ -10,6 +10,10 @@ function upload_to($input_name, $name) {
 	}
 }
 
+function null_int($int) {
+	return isset($int) ? 0 : $int;
+}
+
 function to_pg_array($set) {
 	settype($set, 'array'); // can be called with a scalar or array
 	$result = array();
@@ -53,7 +57,7 @@ function base_url_new() {
 		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
-		return 'http://192.168.12.250';
+		return 'http://localhost';
 	}
 }
 

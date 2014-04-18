@@ -183,8 +183,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						</ul></li>
 					<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<span id="notifs">8</span>
 								<i class="icon-bell-alt icon-animated-bell"></i>
-								<span id="notif">8</span>
 								<span class="badge badge-important"></span>
 							</a>
 
@@ -228,7 +228,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						</li>
 					<li class="light-blue"><a data-toggle="dropdown" href="#"
 						class="dropdown-toggle"> <img class="nav-user-photo"
-							src="assets/avatars/user.jpg" alt="<?php echo $_SESSION['gps_username']?>'s Photo" /> <span
+							src="<?php echo base_url()?>assets/avatars/user.jpg" alt="<?php echo $_SESSION['gps_username']?>'s Photo" /> <span
 							class="user-info"> <small>Welcome,</small> <?php echo $_SESSION['gps_username']?>
 						</span> <i class="icon-caret-down"></i>
 					</a>

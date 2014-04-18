@@ -506,10 +506,11 @@ function setHTML(response)
 			<?php # Alert change into popup
 				 if($region) {
 					echo 'if('; $region->in_out == 'out' ? '!' : ''; echo 'dalam)'; ?>
-					var alertNotif = $('#notif').text();
-					var totalAlert = parseInt(alertNotif) + 1;
-					alert(totalAlert);
-					$('#notif').replaceWith(totalAlert);
+					var alertNotif = parseInt($('#notifs').text()) || 0;
+					var one = 1;
+					var totalAlert = alertNotif + one;
+					$('#notifs').replaceWith('Alert');
+// 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
 			     <?php } ?>
 					    }

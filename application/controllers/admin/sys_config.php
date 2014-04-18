@@ -83,8 +83,8 @@ class Sys_config extends CI_Controller {
 			// for edit data
 			if (isset($post['icon_id'])) {
 				$this->msys_config->editIcon($post_data, $post['icon_id']);
-				upload_to('icon', 'icon_' . $post_data['icon'] . '.' . $ext);
-				redirect('admin/sys_config/icon/' . $icon_id);
+				upload_to('icon', 'icon_' . $post['icon_id'] . '.' . $ext);
+				redirect('admin/sys_config/icon/' . $post['icon_id']);
 			} else {
 				// for add $_POST data
 				$id = $this->msys_config->insertIcon($post_data);

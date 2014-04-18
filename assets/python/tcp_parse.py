@@ -4,7 +4,7 @@ import socket
 import urllib
 import urllib2
 
-HOST = '192.168.12.250'  # The remote host
+HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
 url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
 
@@ -24,7 +24,7 @@ while True:
         base_ip = line[32:47]
         packet_number = line[47:50]
         base_modem_channel = line[50:51]
-        url = "http://192.168.12.250:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
+        url = "http://localhost:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
         value = {"source" : source , "system" : system, "mobile" : mobile, "base_ip" : base_ip, "packet_number" : packet_number , "base_modem_channel" : base_modem_channel}
         # input change
         if packet_number == '072' :
