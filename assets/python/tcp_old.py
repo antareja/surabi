@@ -4,7 +4,7 @@ import socket
 import urllib
 import urllib2
 
-HOST = '192.168.12.250'    # The remote host
+HOST = '172.27.191.36'    # The remote host
 PORT = 15000              # The same port as used by the server
 
 url = 'http://surabi.dev/packet'
