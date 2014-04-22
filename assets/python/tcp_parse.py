@@ -8,6 +8,8 @@ HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
 url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
 
+# Convert NMEA to regular Latitude Longitude
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 s.send('Hello, world')
@@ -95,5 +97,8 @@ while True:
                     raise
             # print(response.read())
             urllib2.urlopen(url)
+        elif packet_number == '103' :
+            print '103 Packet Number'
+                
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)
 s.close()
