@@ -125,4 +125,12 @@ class Tools extends CI_Controller {
 		$data['lng'] = $resultLng;
 		$this->load->view('tools/nmea_convert',$data);
 	}
+	
+	/**
+	 * Convert from fleet control packet data
+	 */
+	public function nmea_conv_fleet(){
+		$query = $this->mtools->convert_nmea_fleet();
+		echo 'success';
+	}
 }
