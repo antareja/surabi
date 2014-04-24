@@ -61,7 +61,7 @@ function base_url_new() {
 		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
-		return 'http://localhost';
+		return 'http://172.26.200.5';
 	}
 }
 
