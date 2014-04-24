@@ -140,9 +140,10 @@
 				<div class="col-sm-9">
 					<select class="form-control" id="form-field-select-2"
 						data-placeholder="Choose a Icon" name="icon_id">
-						<?php foreach ($icons as $icon) { ?>
 						<option value="">&nbsp;</option>
+						<?php foreach ($icons as $icon) { ?>
 						<option value="<?php echo $icon->icon_id?>"
+						style="background:url(<?php echo base_url().'assets/uploads/icon_'.$icon->icon_id.'.'.$icon->image_type;?>) left no-repeat; "
 							<?php 
 							if (isset($vehicle)) {
 							echo $icon->icon_id == $vehicle->icon_id ? 'selected':'';
