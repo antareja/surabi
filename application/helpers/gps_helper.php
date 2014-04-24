@@ -61,7 +61,7 @@ function base_url_new() {
 		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
-		return 'http://localhost';
+		return $this->config->item('base_url_new');;
 	}
 }
 
