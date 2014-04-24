@@ -30,6 +30,8 @@ class Home extends CI_Controller {
 		$data['pageTitle'] = 'Home';
 		$data['user'] = $this->mgps->getUser();
 		$data['last_position'] = $this->mgps->getLastPosition();
+		$content_data['user'] = "admin";
+		$data['dashboard'] = $this->load->view('block/dashboard_admin', $content_data, true);
 		$this->load->template('gps', $data);
 	}
 	

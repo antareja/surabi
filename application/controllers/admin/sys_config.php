@@ -59,7 +59,7 @@ class Sys_config extends CI_Controller {
 	}
 
 	/**
-	 *
+	 * Icon for vehicle
 	 * @param number $icon_id        	
 	 *
 	 */
@@ -84,6 +84,7 @@ class Sys_config extends CI_Controller {
 			if (isset($post['icon_id'])) {
 				$this->msys_config->editIcon($post_data, $post['icon_id']);
 				upload_to('icon', 'icon_' . $post['icon_id'] . '.' . $ext);
+				//print_r($post);exit;
 				redirect('admin/sys_config/icon/' . $post['icon_id']);
 			} else {
 				// for add $_POST data
