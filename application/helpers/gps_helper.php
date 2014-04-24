@@ -1,6 +1,21 @@
 <?php
 @session_start();
 
+
+/**
+ * @return string
+ * for nodejs, geoserver use only , change return localhost if in local
+ */
+function base_url_new() {
+	$ci= &get_instance();
+	if ($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
+		$base_url = substr(base_url(), 0, - 1);
+		return $base_url;
+	} else {
+		return $ci->config->item('base_url_new');;
+	}
+}
+
 function parse_packet($packet) {
 }
 
@@ -52,18 +67,6 @@ function rm_brace($str) {
 	return $last;
 }
 
-/**
- * @return string
- * for nodejs, geoserver use only , change return localhost if in local
- */
-function base_url_new() {
-	if ($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
-		$base_url = substr(base_url(), 0, - 1);
-		return $base_url;
-	} else {
-		return $this->config->item('base_url_new');;
-	}
-}
 
 function define_sess($username, $user_id, $full_name, $level, $company_id) {
 	$_SESSION['gps_username'] = $username;
