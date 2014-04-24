@@ -1,7 +1,7 @@
 def printme( str ):
    ("This prints a passed string into this function")
    print (str)
-   return
+   return
 # Convert NMEA Lat
 def convLat(lat):
     return str((float(lat) / 60))
