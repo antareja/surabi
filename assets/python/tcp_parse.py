@@ -6,7 +6,28 @@ import urllib2
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
-url_parse = 'http://172.26.200.5/packet'  # Parse Packet Data to php and insert to database
+url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
+
+# Convert NMEA to regular Latitude Longitude
+def convLat(lat):
+    return str((float(lat) / 60))
+
+def convLng(lng):
+    firstLng = str(lng)[:3]
+    secLng = str(lng)[3:]
+    secSixty = float(secLng) / 60
+    resultLng = float(firstLng) + float(secSixty) 
+    return str(resultLng)
+
+def convLatLng(lat,lng):
+    resultLat = (lat / 60)
+    firstLng = str(lng)[:3]
+    secLng = str(lng)[3:]
+    secSixty = float(secLng) / 60
+    resultLng = float(firstLng) + float(secSixty) 
+    resultLatLng = str(resultLat) + ", " + str(resultLng)
+    return str(resultLatLng)
+
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
@@ -53,8 +74,8 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
             print jam
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + lat + "&lng=" + lng + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : lat , "lng" : lng , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
+            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
             values = dict(value.items() + value2.items())
             parse_data = urllib.urlencode(values)
             req = urllib2.Request(url_parse, parse_data)
@@ -81,8 +102,8 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             print jam
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + lat + "&lng=" + lng + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : lat , "lng" : lng , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
+            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
             values = dict(value.items() + value2.items())
             parse_data = urllib.urlencode(values)
             req = urllib2.Request(url_parse, parse_data)
@@ -95,5 +116,8 @@ while True:
                     raise
             # print(response.read())
             urllib2.urlopen(url)
+        elif packet_number == '103' :
+            print '103 Packet Number'
+                
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)
 s.close()

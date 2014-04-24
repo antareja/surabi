@@ -107,4 +107,30 @@ class Tools extends CI_Controller {
 		print_r($array);
 		
 	}
+	
+	public function nmea_conv($lat,$lng){
+		$data['pageTitle'] = 'GPS NMEA Converter';
+		# example 0019.15266 , 11551.34587
+		$firstLat = substr($lat,0,2);
+		$secLat = substr($lat,2);
+		$latPerSixty = $secLat / 60;
+		$resultLat = -1 * abs($firstLat + $latPerSixty);
+
+		$firstLng = substr($lng,0,3);
+		$secLng = substr($lng,3);
+		$lngPerSixty = $secLng / 60;
+		$resultLng = $firstLng + $lngPerSixty;
+// 		echo $resultLat;die();
+		$data['lat'] = $resultLat;
+		$data['lng'] = $resultLng;
+		$this->load->view('tools/nmea_convert',$data);
+	}
+	
+	/**
+	 * Convert from fleet control packet data
+	 */
+	public function nmea_conv_fleet(){
+		$query = $this->mtools->convert_nmea_fleet();
+		echo 'success';
+	}
 }

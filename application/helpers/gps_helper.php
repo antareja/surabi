@@ -57,7 +57,7 @@ function base_url_new() {
 		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
-		return 'http://172.26.200.5';
+		return 'http://localhost';
 	}
 }
 
@@ -161,22 +161,17 @@ function sum_the_time($times) {
 	return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }
 
-function convertGeoToPixel($lon,$lat) {
-
+function convertGeoToPixel($lon, $lat) {
 	global $mapWidth, $mapHeight, $mapLonLeft, $mapLonDelta, $mapLatBottom, $mapLatBottomDegree;
-
-// 	$lon=117.00507;
-// 	$lat=-0.45760;
-	
+	// $lon=117.00507;
+	// $lat=-0.45760;
 	$mapWidth = 512;
 	$mapHeight = 424;
-	
-	$mapLonLeft =  $lon-0.00033;
-	$mapLonRight = $lon+0.00033;
+	$mapLonLeft = $lon - 0.00033;
+	$mapLonRight = $lon + 0.00033;
 	$mapLonDelta = $mapLonRight - $mapLonLeft;
-	
-	$mapLatUp = $lat+0.00028;
-	$mapLatBottom = $lat-0.00028;
+	$mapLatUp = $lat + 0.00028;
+	$mapLatBottom = $lat - 0.00028;
 	$mapLatBottomDegree = $mapLatBottom * M_PI / 180;
 	$x = ($lon - $mapLonLeft) * ($mapWidth / $mapLonDelta);
 	$lat = $lat * M_PI / 180;
@@ -200,7 +195,6 @@ function remove_bracket($array) {
 }
 
 function polygon_reverse($str) {
-	
 	$latlng = explode(";", $str);
 	$latlng = remove_bracket($latlng);
 	foreach ($latlng as &$array) {
@@ -227,4 +221,17 @@ function array_reverse_sub($array) {
 
 function add_td($row) {
 	return '<td>' . $row . '</td>';
+}
+
+function nmea_conv($lat, $lng) {
+	$firstLat = substr($lat, 0, 2);
+	$secLat = substr($lat, 2);
+	$latPerSixty = $secLat / 60;
+	$resultLat = - 1 * abs($firstLat + $latPerSixty);
+	$firstLng = substr($lng, 0, 3);
+	$secLng = substr($lng, 3);
+	$lngPerSixty = $secLng / 60;
+	$resultLng = $firstLng + $lngPerSixty;
+	// echo $resultLat;die();
+	return $resultLat . ',' . $resultLng;
 }
