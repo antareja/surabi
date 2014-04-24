@@ -23,7 +23,7 @@
 						<?php 
 							foreach ($all_icon as $icons)
 							{
-								echo "<p><img src='".base_url()."assets/uploads/icon_".$icons->icon_id.".".$icons->image_type."'/>".$icons->name."</p>";
+								echo '<p><a href="'.site_url().'admin/sys_config/icon/'.$icons->icon_id.'"><img src="'.base_url().'assets/uploads/icon_'.$icons->icon_id.'.'.$icons->image_type.'"/>'.$icons->name.'</a></p>';
 							}
 						?>
 						<p>
@@ -75,8 +75,7 @@
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Icon File Name</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="phone" name="phone"
-						placeholder="Phone"
+					<input type="text" class="form-control" id="icon_name"
 						value="<?php echo isset($icon) ? $icon->image_name : '';?>">
 				</div>
 			</div>
