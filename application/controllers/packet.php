@@ -26,7 +26,10 @@ class Packet extends CI_Controller {
 	
 	public function test() {
 		$post = $this->input->post();
+		echo 'this is post';
+		echo '<pre>';
 		print_r($post);
+		echo '<pre>';
 	}
 
 	public function location($lat) {
@@ -320,6 +323,7 @@ class Packet extends CI_Controller {
 
 	public function parse() {
 		$packet = '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04';
+		echo $packet;
 	}
 
 	public function test_post() {

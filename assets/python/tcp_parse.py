@@ -6,7 +6,7 @@ import urllib2
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
-url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
+url_parse = 'http://tcmgps.com/packet'  # Parse Packet Data to php and insert to database
 
 # Convert NMEA to regular Latitude Longitude
 def convLat(lat):
