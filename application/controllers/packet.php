@@ -26,7 +26,7 @@ class Packet extends CI_Controller {
 	
 	public function test() {
 		$post = $this->input->post();
-		echo 'this is post';
+		echo 'this is post'. base_url_new();
 		echo '<pre>';
 		print_r($post);
 		echo '<pre>';
