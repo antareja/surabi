@@ -89,7 +89,7 @@ Long :
 						<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
 						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"
 							class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
-						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
+						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->create_at?></td>
 						<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
 						<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
 					</tr>

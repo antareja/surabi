@@ -62,7 +62,7 @@
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
-											<h4 class="header blue lighter bigger">
+											<h4 class="header <?php echo $msg == '' ? 'blue lighter bigger' : 'red bigger'?>">
 												<i class="icon-coffee green"></i>
 												<?php echo $msg == '' ?  'Please Enter Your Information' : $msg ;?>
 											</h4>
