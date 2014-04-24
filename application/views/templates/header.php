@@ -180,7 +180,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						</ul></li>
 					<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<span class="badge badge-important"><span id="notifs">8</span></span>
+								<span class="badge badge-important"><span id="notifs">29</span></span>
 								<i class="icon-bell-alt icon-animated-bell"></i>
 								
 							</a>
@@ -188,15 +188,15 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="icon-warning-sign"></i>
-									<span class="notif2">8</span> Notifications
+									<span class="notif2">29</span> Notifications
 								</li>
 
 								<li>
 									<a href="#">
 										<div class="clearfix">
 											<span class="pull-left">
-												<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
-												New Region Alert
+												<i class="btn btn-xs no-hover btn-info icon-comment"></i>
+												New Message
 											</span>
 											<span class="pull-right badge badge-info">+12</span>
 										</div>
@@ -207,14 +207,26 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 									<a href="#">
 										<div class="clearfix">
 											<span class="pull-left">
-												<i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
+												<i class="btn btn-xs no-hover btn-danger icon-fighter-jet"></i>
 												New Speed Alert
 											</span>
-											<span class="pull-right badge badge-success">+8</span>
+											<span class="pull-right badge badge-danger">+9</span>
 										</div>
 									</a>
 								</li>
-
+								
+								<li>
+									<a href="#">
+										<div class="clearfix">
+											<span class="pull-left">
+												<i class="btn btn-xs no-hover btn-warning icon-road"></i>
+												New GeoFench Alert
+											</span>
+											<span class="pull-right badge badge-warning">+8</span>
+										</div>
+									</a>
+								</li>
+								
 								<li>
 									<a href="#">
 										See all notifications

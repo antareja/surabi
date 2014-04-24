@@ -26,7 +26,7 @@ foreach ($last_position as $position)
 
 				<i class="icon-ok green"></i> Welcome to <strong class="green"> GPS
 					Tracking <small>(v2.1)</small>
-				</strong> , Fleet Management GPS control
+				</strong> , GPS Fleet Management. Collecting Delivery Information in Real-Time
 			</div>
 			<?php echo $dashboard; # load view dashboard?> 
 			<div class="hr hr15 hr-dotted"></div>
@@ -528,13 +528,13 @@ function setHTML(response)
 			cek_marker.push(marker_id);
 			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
-			<?php # Alert change into popup
+			<?php # Alert change into notif on top header but not fix yet still dummy
 				 if($region) {
 					echo 'if('; $region->in_out == 'out' ? '!' : ''; echo 'dalam)'; ?>
 					var alertNotif = parseInt($('#notifs').text()) || 0;
 					var one = 1;
 					var totalAlert = alertNotif + one;
-					$('#notifs').replaceWith('Alert');
+					$('#notifs').replaceWith('29');
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
 			     <?php } ?>

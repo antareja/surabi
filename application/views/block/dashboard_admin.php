@@ -8,8 +8,8 @@
 			</div>
 
 			<div class="infobox-data">
-				<span class="infobox-data-number">32</span>
-				<div class="infobox-content">message + 2 reviews</div>
+				<span class="infobox-data-number">12</span>
+				<div class="infobox-content">Message + 2 reviews</div>
 			</div>
 			<div class="stat stat-success">8%</div>
 		</div>
@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="infobox-data">
-				<span class="infobox-data-number">11</span>
+				<span class="infobox-data-number">9</span>
 				<div class="infobox-content">Speed Alert</div>
 			</div>
 
@@ -101,14 +101,14 @@
 			</div>
 		</div>
 
-		<div class="infobox infobox-blue infobox-small infobox-dark">
-			<div class="infobox-chart">
-				<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
+		<div class="infobox infobox-red infobox-small infobox-dark">
+			<div class="infobox-icon">
+				<i class="icon-warning-sign"></i>
 			</div>
 
 			<div class="infobox-data">
-				<div class="infobox-content">Earnings</div>
-				<div class="infobox-content">$32,000</div>
+				<div class="infobox-content">Alert</div>
+				<div class="infobox-content">17</div>
 			</div>
 		</div>
 
