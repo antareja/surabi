@@ -14,7 +14,7 @@ html,body,#map-canvas {
 }
 </style>
 <script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 <script>
 function initialize() {
   var myLatlng = new google.maps.LatLng(<?php echo $lat.','.$lng?>);
@@ -74,6 +74,56 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+// Server Jumbo
+var p1 = new google.maps.LatLng(-0.5794216666666667,115.70552);
+
+// office IT adong 
+//var p2 = new google.maps.LatLng(-0.576131666666666, 115.71075666666667);
+
+// last detect area to mess bunyut
+//var p2 = new google.maps.LatLng(-0.5124583333333333,115.71324666666666);
+
+
+var p2 = new google.maps.LatLng(-0.5761116666666666,115.71077333333334);
+
+
+alert(calcDistance(p1, p2));
+
+//calculates distance between two points in km's
+function calcDistance(p1, p2){
+  return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+}
+// var rad = function(x) {
+// 	  return x * Math.PI / 180;
+// 	};
+
+// 	var getDistance = function (p1, p2) {
+// 	  var R = 6378137; // Earth’s mean radius in meter
+// 	  var dLat = rad(p2.lat() - p1.lat());
+// 	  var dLong = rad(p2.lng() - p1.lng());
+// 	  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+// 	    Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+// 	    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+// 	  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+// 	  var d = R * c;
+// 	  return d; // returns the distance in meter
+// 	};
+
+// 	function calcDistance(p1, p2) {
+// 		  var R = 6378137; // Earth’s mean radius in meter
+// 		  var dLat = rad(p2.lat() - p1.lat());
+// 		  var dLong = rad(p2.lng() - p1.lng());
+// 		  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+// 		    Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+// 		    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+// 		  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+// 		  var d = R * c;
+// 		  return d; // returns the distance in meter
+// 		};
+// 	var distance =  calcDistance('-0.5794216666666667,115.70552', '-0.576131666666666, 115.71075666666667');
+// 	alert(distance);
 </script>
 </head>
 <body>
