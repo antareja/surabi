@@ -6,10 +6,31 @@ foreach ($last_position as $position)
 }
 ?>
 <div class="page-content">
+	<div class="page-header">
+		<h1>
+			Dashboard <small> <i class="icon-double-angle-right"></i> overview
+				&amp; stats
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+
+	<!-- load view Dashboard -->
 	<div class="row">
 		<div class="col-xs-12">
 			<!-- <h1 class="page-header">Dashboard</h1> -->
-			<br>
+			<div class="alert alert-block alert-success">
+				<button type="button" class="close" data-dismiss="alert">
+					<i class="icon-remove"></i>
+				</button>
+
+				<i class="icon-ok green"></i> Welcome to <strong class="green"> GPS
+					Tracking <small>(v2.1)</small>
+				</strong> , Fleet Management GPS control
+			</div>
+			<?php echo $dashboard; # load view dashboard?> 
+			<div class="hr hr15 hr-dotted"></div>
+			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Maps</h3>
@@ -25,56 +46,60 @@ foreach ($last_position as $position)
 </div>
 <!-- /.page-content -->
 
-<div id="map_canvas" style="width:100%; height:80%"></div>
-Lat &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>
+<div id="map_canvas" style="width: 100%; height: 80%"></div>
+Lat &nbsp;&nbsp;&nbsp;:
+<span id="txt_lat"></span>
 <br>
-Long :<span id="txt_long"></span><br>
+Long :
+<span id="txt_long"></span>
+<br>
 <!-- <div id="nodelist"> -->
 <!--             <em>Click on the map to get feature info</em> -->
 <!--         </div> -->
 <div class="row">
-		<div class="col-xs-12">
-			<div class="table-header">Results for "Latest Vehicle Fleet Status"</div>
+	<div class="col-xs-12">
+		<div class="table-header">Results for "Latest Vehicle Fleet Status"</div>
 
-			<div class="table-responsive">
-				<table id="sample-table-2"
-					class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></th>
-							<th>Vehicle</th>
-							<th>Speed</th>
-							<th class="hidden-480">Location</th>
+		<div class="table-responsive">
+			<table id="sample-table-2"
+				class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center"><label> <input type="checkbox" class="ace" /> <span
+								class="lbl"></span>
+						</label></th>
+						<th>Vehicle</th>
+						<th>Speed</th>
+						<th class="hidden-480">Location</th>
 
-							<th><i class="icon-time bigger-110 hidden-480"></i>Position At</th>
-							<th class="hidden-480">Status</th>
+						<th><i class="icon-time bigger-110 hidden-480"></i>Position At</th>
+						<th class="hidden-480">Status</th>
 
-							<th>Bearing</th>
-						</tr>
-					</thead>
+						<th>Bearing</th>
+					</tr>
+				</thead>
 
-					<tbody>
+				<tbody>
 						<?php  foreach ($vehicles as $vehicle) {?>
 						<tr id="tr_<?php echo $vehicle->gps_mobile_address?>">
-							<td class="center"><label> <input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-							</label></td>
-							<td><a href="#"><?php echo $vehicle->name?></a></td>
-							<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
-							<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
-							<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
-							<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
-							<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
-						</tr>
+						<td class="center"><label> <input type="checkbox" class="ace" /> <span
+								class="lbl"></span>
+						</label></td>
+						<td><a href="#"><?php echo $vehicle->name?></a></td>
+						<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
+						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"
+							class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
+						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
+						<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
+						<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
+					</tr>
 						<?php }	?>
 					</tbody>
-				</table>
-			</div>
+			</table>
 		</div>
-		<!-- /.col-lg-12 -->
 	</div>
+	<!-- /.col-lg-12 -->
+</div>
 <?php
 /*
 ------------------------------------js------------------------------------------------------
@@ -553,8 +578,5 @@ function generate_popup(nama_mobil_popup,lokasi_popup,lat_popup,lng_popup,tangga
 	return popupContentHTML2;
 }
 
-
 //]]>
-
-
 </script>

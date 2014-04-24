@@ -43,12 +43,12 @@
 							foreach ($vehicles as $vec) {
 							?>
 								<li>
-								<div class="checkbox">
-									 <label>
-								     <input class="ace cek" type="checkbox" name="car" id="marker_<?php echo $vec->gps_mobile_address?>" onclick="if(this.checked)add_filter(this.id);else remove_filter(this.id);"/> 
-									 <span class="lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>"><?php echo $vec->name;?></span>
-									 </label>
-								</div>
+									<div class="checkbox">
+										 <input class="ace cek" type="checkbox" name="car" id="marker_<?php echo $vec->gps_mobile_address?>" onclick="if(this.checked)add_filter(this.id);else remove_filter(this.id);"/> 
+										 <span class="lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>">
+										 <img alt="" width="20" src="<?php echo base_url()."assets/uploads/icon_".$vec->icon_id.".".$vec->image_type?>">
+										 <?php echo $vec->name;?></span>
+									</div>
 								</li>
 							<?php } ?>
 						</ul></li>

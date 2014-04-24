@@ -47,12 +47,9 @@ if (!isset($_SESSION['gps_username'])) {
 	href="<?php echo base_url()?>assets/css/ace-fonts.css" />
 
 <!-- ace styles -->
-<link rel="stylesheet"
-	href="<?php echo base_url()?>assets/css/ace.min.css" />
-<link rel="stylesheet"
-	href="<?php echo base_url()?>assets/css/ace-rtl.min.css" />
-<link rel="stylesheet"
-	href="<?php echo base_url()?>assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-skins.min.css" />
 
 <!--[if lte IE 8]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-ie.min.css" />
@@ -183,9 +180,9 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						</ul></li>
 					<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<span id="notifs">8</span>
+								<span class="badge badge-important"><span id="notifs">8</span></span>
 								<i class="icon-bell-alt icon-animated-bell"></i>
-								<span class="badge badge-important"></span>
+								
 							</a>
 
 							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
