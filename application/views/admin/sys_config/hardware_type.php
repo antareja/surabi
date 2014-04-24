@@ -23,7 +23,7 @@
 						<?php 
 							foreach ($all_hardware as $hardwares)
 							{
-								echo "<p><a href='".base_url()."admin/sys_config/hardware/".$hardwares->hardware_id."'>".$hardwares->name."</a></p>";
+								echo "<p><a href='".site_url()."admin/sys_config/hardware/".$hardwares->hardware_id."'>".$hardwares->name."</a></p>";
 							}
 						?>
 						<p>
