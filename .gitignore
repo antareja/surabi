@@ -1,6 +1,6 @@
 .DS_Store
 #ignore this configuration if not working add this "git rm -r  --cached ." "git add ." "git commit -m 'fixed'"
-#application/config/database.php
+application/config/database.php
 #application/config/config.php
 old/*
 application/db/*
