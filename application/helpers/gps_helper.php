@@ -54,14 +54,14 @@ function rm_brace($str) {
 
 /**
  * @return string
- * for server TCM use only , change return localhost if in local
+ * for nodejs, geoserver use only , change return localhost if in local
  */
 function base_url_new() {
 	if ($_SERVER['SERVER_NAME'] == 'techinfo.dnset.com') {
 		$base_url = substr(base_url(), 0, - 1);
 		return $base_url;
 	} else {
-		return 'http://172.26.200.5';
+		return 'http://localhost';
 	}
 }
 
