@@ -150,13 +150,16 @@ class Sys_config extends CI_Controller {
 					unset($post_data['password']);
 					unset($post['password']);
 				}
-				//print_r($post);exit;
-				$this->muser->updateUser($post_data,$post['user_id']);
-				redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
+				print_r($post);
+				$sql = $this->muser->updateUser($post_data,$post['user_id']);
+				echo 'masuk Update';
+				//echo $sql;exit;
+				//redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
 			// for insert only
 			} else {
-				$id = $this->muser->insertUser($post_data);
-				redirect('admin/sys_config/user/'.$level.'/' . $id);
+				echo 'masuk Insert';
+// 				$id = $this->muser->insertUser($post_data);
+				//redirect('admin/sys_config/user/'.$level.'/' . $id);
 			}
 		} elseif ($user_id) {
 			// 			die($user_id);

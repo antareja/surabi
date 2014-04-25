@@ -13,13 +13,15 @@ class Muser extends CI_Model {
 
 	function insertUser($data) {
 		$this->db->insert("user", $data);
+		echo 'masuk Insert';
 		return $this->db->insert_id();
 	}
 
 	function updateUser($data, $user_id) {
-		return $this->db->update('user', $data, array(
+		 $this->db->update('user', $data, array(
 				'user_id' => $user_id 
 		));
+		return $this->db->last_query();
 	}
 
 	function getAllCompany() {
