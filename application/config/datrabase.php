@@ -52,6 +52,7 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 //$db['default']['hostname'] = 'HAIDAR\HAIDARSQLEXPRESS';
 $db['default']['username'] = 'root';
+//server only
 $db['default']['password'] = 'TcM9p$';
 //$db['default']['password'] = '@t3ch1nfo';
 $db['default']['database'] = 'gps_tracker';
