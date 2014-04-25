@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>
 		<small>System Config <i class="icon-double-angle-right"></i></small> 
-		Vendor<?php echo isset($vendor) ? ' : '.$vendor->name : " : Add New"?>
+		Vendor<?php echo isset($vendor) ? ' : '.$vendor->name .' &nbsp;<button onclick="location.href=\''.site_url().'admin/sys_config/vendor\'" class="btn btn-sm btn-primary">Add New</button>' : " : Add New"?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -52,7 +52,6 @@
 								for="form-field-1"> Name </label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="name" name="name"
-									placeholder="Name"
 									value="<?php echo isset($vendor) ? $vendor->name : '';?>">
 							</div>
 						</div>
@@ -60,8 +59,7 @@
 							<label class="col-sm-3 control-label no-padding-right"
 								for="form-field-1"> Address </label>
 							<div class="col-sm-9">
-								<textarea class="form-control" id="address" name="address"
-									placeholder="Address"><?php echo isset($vendor) ? $vendor->address : '';?></textarea>
+								<textarea class="form-control" id="address" name="address"><?php echo isset($vendor) ? $vendor->address : '';?></textarea>
 							</div>
 						</div>
 						<div class="form-group">
@@ -78,8 +76,16 @@
 								for="form-field-1"> Phone2 </label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="phone2"
-									name="phone2" placeholder="Phone2"
+									name="phone2"
 									value="<?php echo isset($vendor) ? $vendor->phone2 : '';?>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right"
+								for="form-field-1"> E-mail </label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="email" name="email"
+									value="<?php echo isset($vendor) ? $vendor->email : '';?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -87,7 +93,6 @@
 								for="form-field-1"> Fax </label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="fax" name="fax"
-									placeholder="Fax"
 									value="<?php echo isset($vendor) ? $vendor->fax : '';?>">
 							</div>
 						</div>

@@ -25,6 +25,7 @@ class MSys_config extends CI_Model {
 
 	function insertCompanyData($data) {
 		$this->db->insert("company_data", $data);
+		return $this->db->insert_id();
 	}
 
 	function editCompany($id_company, $data) {

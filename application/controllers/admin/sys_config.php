@@ -22,9 +22,9 @@ class Sys_config extends CI_Controller {
 	}
 
 	/**
-	 *
+	 * for client vendor or contractor
 	 * @param number $id_company
-	 *        	for 1 company only
+	 *     
 	 *        	
 	 */
 	public function vendor($id_company = NULL) {
@@ -38,6 +38,7 @@ class Sys_config extends CI_Controller {
 			$post_data['address'] = $post['address'];
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];
+			$post_data['email'] = $post['email'];
 			$post_data['fax'] = $post['fax'];
 			// for edit data
 			if ($post['id_company']) {
@@ -104,7 +105,7 @@ class Sys_config extends CI_Controller {
 	
 	/**
 	 * @param string $user_id
-	 * for 
+	 * for User Managment operator, admin_vendor , admin
 	 */
 	public function user($level,$user_id = NULL) {
 		$data['pageTitle'] = 'User Management';
@@ -129,12 +130,19 @@ class Sys_config extends CI_Controller {
 			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['password'] = md5($post['password']);
 			$post_data['address'] = $post['address'];
-			$post_data['company_id'] = $_SESSION['gps_company_id'];
-			$post_data['admin_id'] = $_SESSION['gps_user_id'];
+			if ($_SESSION['gps_level'] == 'admin_vendor') {
+				$post_data['company_id'] = $_SESSION['gps_company_id'];
+				$post_data['admin_id'] = $_SESSION['gps_user_id'];
+			} elseif ($_SESSION['gps_level'] == 'admin') {
+				$post_data['company_id'] = $post['company_id'];
+				// Create Dropdown Chain and get Admin ID form company iD
+// 				$post_data['admin_id'] = $_SESSION['gps_user_id'];
+			}
 			$post_data['level'] = $level =='operator'?'operator':'admin_vendor';
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
+			// for update user
 			if ($post['user_id']) {
 				if(!empty($post['password'])) {
 					$post_data['password'] = md5($post['password']) ;
@@ -145,6 +153,7 @@ class Sys_config extends CI_Controller {
 				//print_r($post);exit;
 				$this->muser->updateUser($post_data,$post['user_id']);
 				redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
+			// for insert only
 			} else {
 				$id = $this->muser->insertUser($post_data);
 				redirect('admin/sys_config/user/'.$level.'/' . $id);

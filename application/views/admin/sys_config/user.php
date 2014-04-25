@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>
 			<small>System Configuration <i class="icon-double-angle-right"></i></small> 
-				<?php echo ucfirst($level);?>  <?php echo isset($user) ? ': '. $user->fullname : ': Add new '?>
+				<?php echo ucfirst($level);?>  <?php echo isset($user) ? ': '. $user->fullname . '&nbsp;<button onclick="location.href=\''.site_url().'admin/sys_config/user/'.$level.'\'" class="btn btn-sm btn-primary">Add New</button>' : ': Add new '?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -83,7 +83,7 @@
 					</select>
 				</div>
 			</div>
-			<?php } ?>
+			<?php } // TODO:create Dropdown Chain Here ?>
 <!-- 			<div class="form-group"> -->
 <!-- 				<label class="col-sm-3 control-label no-padding-right" -->
 <!-- 					for="form-field-select-2"> Admin Vendor</label> -->

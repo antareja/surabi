@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css"
-	href="http://192.168.12.250:8080/geoserver/openlayers/theme/default/style.css" />
+	href="<?php echo base_url_new();?>:8080/geoserver/openlayers/theme/default/style.css" />
 <!-- Basic CSS definitions -->
 <style type="text/css">
 /* General settings */
@@ -547,7 +547,7 @@ table.featureInfo caption {
 					<br> * Double pada titik terakhir 
 					<div id="map">
 						<img id="options" title="Toggle options toolbar"
-							src="http://192.168.12.250:8080/geoserver/options.png" />
+							src="<?php echo base_url_new();?>:8080/geoserver/options.png" />
 					</div>
 					<div id="nodelist">
 						<em>Click on the map to get feature info</em>
