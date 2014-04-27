@@ -1,8 +1,9 @@
 
 # Echo client program
 import socket
-import urllib
-import urllib2
+import pymysql
+from urllib.request import Request, urlopen
+from urllib import parse,error
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
@@ -34,10 +35,10 @@ def convLatLng(lat,lng):
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
-s.send('Hello, world')
+s.send(b'Hello, world')
 while True:
  listen = s.recv(1024)
- line = repr(listen)
+ line = repr(listen.decode('utf-8', 'ignore'))
  if line:
     line = line.replace("'", "")
     if len(line) < 120 :
@@ -49,22 +50,23 @@ while True:
         packet_number = line[47:50]
         base_modem_channel = line[50:51]
         url = "http://localhost:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
-        value = {"source" : source , "system" : system, "mobile" : mobile, "base_ip" : base_ip, "packet_number" : packet_number , "base_modem_channel" : base_modem_channel}
+        value = {"full_packet" : line , "source" : source , "system" : system, "mobile" : mobile, "base_ip" : base_ip, "packet_number" : packet_number , "base_modem_channel" : base_modem_channel}
         # input change
         if packet_number == '072' :
-            print '072 Packet Number'
+            print("072 Packet Number")
             input = line[55]
             state = line[56]
             url = url + "&input=" + input + "&state=" + state
-            value2 = {"input" : input , "state" : state}
-            values = dict(value.items() + value2.items())
-            parse_data = urllib.urlencode(values)
-            req = urllib2.Request(url_parse, parse_data)
-            urllib2.urlopen(req)
-            urllib2.urlopen(url)
+            value.update({"input" : input , "state=" : state})
+            parse_data = parse.urlencode(value)
+            try:
+                urlopen(url_parse, parse_data.encode('utf-8'))
+                urlopen(url)
+            except error.URLError as e: print("URL Error:",e.reason , url)
+            except error.HTTPError as e: print("HTTP Error:",e.code , url)
         # gps status with position    
         elif packet_number == '104' :
-            print '104 Packet Number'
+            print("104 Packet Number")
             status = line[55:58]
             offset = line[58:63]
             numeric = line[63:72]
@@ -76,23 +78,18 @@ while True:
                 tanggal = '0' + tanggal
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
-            print jam
+            print(jam)
             url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
-            values = dict(value.items() + value2.items())
-            parse_data = urllib.urlencode(values)
-            req = urllib2.Request(url_parse, parse_data)
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            parse_data = parse.urlencode(value)
             try:
-                urllib2.urlopen(req)
-            except urllib2.HTTPError, err:
-                if err.code == 404:
-                    print 'error'
-                else:
-                    raise    
-            urllib2.urlopen(url)
+                urlopen(url_parse, parse_data.encode('utf-8'))
+                urlopen(url)
+            except error.URLError as e: print("URL Error:",e.reason , url)
+            except error.HTTPError as e: print("HTTP Error:",e.code , url)
         # gps status with position
         elif packet_number == '100' :
-            print '100 Packet Number'
+            print("100 Packet Number")
             status = line[55:58]
             offset = line[58:63]
             numeric = line[63:72]
@@ -103,24 +100,18 @@ while True:
             if len(tanggal) < 6 :
                 tanggal = '0' + tanggal
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
-            print jam
+            print(jam)
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
             url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value2 = {"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop}
-            values = dict(value.items() + value2.items())
-            parse_data = urllib.urlencode(values)
-            req = urllib2.Request(url_parse, parse_data)
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            parse_data = parse.urlencode(value)
             try:
-                urllib2.urlopen(req)
-            except urllib2.HTTPError, err:
-                if err.code == 404:
-                    print 'error'
-                else:
-                    raise
+                urlopen(url_parse, parse_data.encode('utf-8'))
+                urlopen(url)
+            except error.URLError as e: print("URL Error:",e.reason , url)
             # print(response.read())
-            urllib2.urlopen(url)
         elif packet_number == '103' :
-            print '103 Packet Number'
+            print("103 Packet Number")
                 
      # print(source+system+mobile+base_ip+packet_number+base_modem_channel+status+offset+numeric)
 s.close()
