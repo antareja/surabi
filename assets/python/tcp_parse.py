@@ -30,6 +30,8 @@ def convLatLng(lat,lng):
 
 # Convert Knots to KMH
 
+# Get Data from SQL 
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 s.send('Hello, world')

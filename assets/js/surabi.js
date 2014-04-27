@@ -197,8 +197,6 @@ function remove_filter(isi) {
 }
 
 
-
-
 $('#assign').click(function() {
 	var boxes = $('input[name=assign]:checked');
 	var veh_id = [];

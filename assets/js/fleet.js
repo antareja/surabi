@@ -1,7 +1,6 @@
 /**
- * 
+ * Connect to socket for realtime data
  */
-var socket = io.connect('http://192.168.12.250:8000');
 // var geocoder = new google.maps.Geocoder();
 // on message received we print all the data inside the #container div
 socket.on('notification', function(data) {
@@ -14,7 +13,7 @@ socket.on('notification', function(data) {
 	var mobile = data_map["mobile"];
 	var velocity = data_map["velocity"];
 	var bearing = data_map["bearing"];
-	var point = new google.maps.LatLng(lat, lng);
+	//var point = new google.maps.LatLng(lat, lng);
 	var color = $("#tr_" + mobile).css("color");
 	// $("#tr_"+mobile).css({backgroundColor: 'yellow'});
 	$("#speed_" + mobile).html(velocity);

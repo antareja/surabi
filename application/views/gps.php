@@ -373,8 +373,7 @@ foreach($vehicles as $vehicle)
 				map.addLayer(vectors);
 				vectors.addFeatures([polygonFeature]);
 
-    var socket = io.connect('<?php echo base_url_new()?>:8000');
-    // on message received we print all the data inside the #container div
+    // on message received we print all the data inside Fleet Table the #container div
     socket.on('notification', function (data) {
 		data_map=data.data;
 		if(data_map["packet_number"]=="104" || data_map["packet_number"]=="100")
@@ -546,9 +545,9 @@ function setHTML(response)
 function regionAlert() {
 	$.gritter.add({
 		// (string | mandatory) the heading of the notification
-		title: 'This is a notice without an image!',
+		title: 'Region Alert',
 		// (string | mandatory) the text inside the notification
-		text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="orange">magnis dis parturient</a> montes, nascetur ridiculus mus.',
+		text: 'Mobile A keluar Area<a href="#" class="orange">magnis dis parturient</a>',
 		class_name: 'gritter-success' + ' gritter-light'
 	});
 

@@ -66,14 +66,15 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 </style>
 </head>
 <body>
+<script type="text/javascript">
+	var $path_assets = "assets";
+	var site_url = '<?php echo site_url()?>';
+	var socket = io.connect('<?php echo base_url_new()?>:8000');
+	try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+</script>
 
 	<div class="navbar navbar-default" id="navbar">
-		<script type="text/javascript">
-				var $path_assets = "assets";
-				var site_url = '<?php echo site_url()?>';
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
 
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
