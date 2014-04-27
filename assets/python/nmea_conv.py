@@ -3,6 +3,7 @@ def printme( str ):
    print (str)
    return
 # Convert NMEA Lat
+# Convert NMEA to regular Latitude Longitude
 def convLat(lat):
     return str((float(lat) / 60))
 
@@ -11,7 +12,7 @@ def convLng(lng):
     secLng = str(lng)[3:]
     secSixty = float(secLng) / 60
     resultLng = float(firstLng) + float(secSixty) 
-    return resultLng
+    return str(resultLng)
 
 def convLatLng(lat,lng):
     resultLat = (lat / 60)
@@ -22,7 +23,18 @@ def convLatLng(lat,lng):
     resultLatLng = str(resultLat) + ", " + str(resultLng)
     return str(resultLatLng)
 
+# Convert Knots to KMH
 
-print (convLat(-0.458245))
-print (convLng(11542.6468))
-print (convLatLng(-34.5673, 11542.6468))
+
+if __name__ == '__main__':
+    # test1.py executed as script
+    # do something
+    lat = -0.458245
+    lng = 11542.6468
+    convLat(lat)
+    convLng(lng)
+    convLatLng(lat,lng)
+
+#print (convLat(-0.458245))
+#print (convLng(11542.6468))
+#print (convLatLng(-34.5673, 11542.6468))

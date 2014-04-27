@@ -4,32 +4,12 @@ import socket
 import pymysql
 from urllib.request import Request, urlopen
 from urllib import parse,error
+import nmea_conv
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
 url_parse = 'http://tcmgps.com/packet'  # Parse Packet Data to php and insert to database
 
-# Convert NMEA to regular Latitude Longitude
-def convLat(lat):
-    return str((float(lat) / 60))
-
-def convLng(lng):
-    firstLng = str(lng)[:3]
-    secLng = str(lng)[3:]
-    secSixty = float(secLng) / 60
-    resultLng = float(firstLng) + float(secSixty) 
-    return str(resultLng)
-
-def convLatLng(lat,lng):
-    resultLat = (lat / 60)
-    firstLng = str(lng)[:3]
-    secLng = str(lng)[3:]
-    secSixty = float(secLng) / 60
-    resultLng = float(firstLng) + float(secSixty) 
-    resultLatLng = str(resultLat) + ", " + str(resultLng)
-    return str(resultLatLng)
-
-# Convert Knots to KMH
 
 # Get Data from SQL 
 

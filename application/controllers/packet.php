@@ -21,7 +21,7 @@ class Packet extends CI_Controller {
 	}
 
 	public function index() {
-		$this->resv();
+		$this->recv();
 	}
 	
 	public function test() {
@@ -31,6 +31,53 @@ class Packet extends CI_Controller {
 		print_r($post);
 		echo '<pre>';
 	}
+	
+
+	public function recv() {
+		$post = $this->input->post();
+		if ($post) {
+			// print_r($post);
+			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
+			$data['full_packet'] = $post['full_packet'];
+			$data['source_type'] = $post['source'];
+			// $data['create_at'] = date("Y-m-d H:i:s.m"); # for ms sql only
+			$data['system_id'] = $post['system'];
+			$data['mobile_address'] = $post['mobile'];
+			$data['base_ip_address'] = $post['base_ip'];
+			$data['base_modem_channel_address'] = $post['base_modem_channel'];
+			if ($post['packet_number'] == '104' || $post['packet_number'] == '100') {
+				$data['packet_number'] = $post['packet_number'];
+				$data['status_key'] = $post['status'];
+				$data['minutes_offset'] = $post['offset'];
+				$data['numerics'] = $post['numeric'];
+				$data['time'] = $post['jam'];
+				$data['latitude'] = $post['lat'];
+				$data['longitude'] = $post['lng'];
+				// Only for google maps
+				$data['location'] = $this->location_op($post['lng'] . ',' . $post['lat']);
+				// Test Curl with Ajax
+				// $data['full_packet'] = $this->test_curl();
+				$data['velocity'] = $post['velocity'];
+				$data['bearing'] = $post['bearing'];
+				$data['date'] = $post['tanggal'];
+				$data['satellite'] = $post['satelite'];
+				$data['hdop'] = $post['hdop'];
+			} elseif ($post['packet_number'] == '072') {
+				$data['input'] = $post['input'];
+				$data['state'] = $post['state'];
+			}
+			$insert_id = $this->mpacket->insertPacket($data);
+			// check Speed if exceed
+			$this->check_speed($data['velocity'], $insert_id);
+			// check Region
+			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
+				$this->check_point_op($post['lng'], $post['lat'], $insert_id);
+			}
+			// test Region
+			// $this->test_region();
+		}
+	}
+	
 
 	public function location($lat) {
 		$location = explode(',', $lat);
@@ -121,51 +168,6 @@ class Packet extends CI_Controller {
 		// $short_name = $json['results'][0]['address_components'][0]['short_name'];
 		echo $data;
 		return $data;
-	}
-
-	public function resv() {
-		$post = $this->input->post();
-		if ($post) {
-			// print_r($post);
-			// '\x02G000000000000000000000000521192.168.012.250100*\x03103025,-6.915009,107.600255,0.00,0,40214,8,1.02\x04'
-			// $data['full_packet'] = $post['full_packet'];
-			$data['source_type'] = $post['source'];
-			// $data['create_at'] = date("Y-m-d H:i:s.m"); # for ms sql only
-			$data['system_id'] = $post['system'];
-			$data['mobile_address'] = $post['mobile'];
-			$data['base_ip_address'] = $post['base_ip'];
-			$data['base_modem_channel_address'] = $post['base_modem_channel'];
-			if ($post['packet_number'] == '104' || $post['packet_number'] == '100') {
-				$data['packet_number'] = $post['packet_number'];
-				$data['status_key'] = $post['status'];
-				$data['minutes_offset'] = $post['offset'];
-				$data['numerics'] = $post['numeric'];
-				$data['time'] = $post['jam'];
-				$data['latitude'] = $post['lat'];
-				$data['longitude'] = $post['lng'];
-				// Only for google maps
-				$data['location'] = $this->location_op($post['lng'] . ',' . $post['lat']);
-				// Test Curl with Ajax
-				// $data['full_packet'] = $this->test_curl();
-				$data['velocity'] = $post['velocity'];
-				$data['bearing'] = $post['bearing'];
-				$data['date'] = $post['tanggal'];
-				$data['satellite'] = $post['satelite'];
-				$data['hdop'] = $post['hdop'];
-			} elseif ($post['packet_number'] == '072') {
-				$data['input'] = $post['input'];
-				$data['state'] = $post['state'];
-			}
-			$insert_id = $this->mpacket->insertPacket($data);
-			// check Speed if exceed
-			$this->check_speed($data['velocity'], $insert_id);
-			// check Region
-			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
-				$this->check_point_op($post['lng'], $post['lat'], $insert_id);
-			}
-			// test Region
-			// $this->test_region();
-		}
 	}
 
 	public function check_point_op($lng, $lat, $packet_id) {
