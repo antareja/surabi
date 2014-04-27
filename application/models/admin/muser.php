@@ -13,7 +13,6 @@ class Muser extends CI_Model {
 
 	function insertUser($data) {
 		$this->db->insert("user", $data);
-		echo 'masuk Insert';
 		return $this->db->insert_id();
 	}
 
@@ -32,6 +31,7 @@ class Muser extends CI_Model {
 	function getAllUser() {
 		$this->db->select("*,  company_data.name as company_name");
 		$this->db->join("company_data", "company_data.id_company = user.company_id", 'inner');
+		$this->db->order_by("user_id", "desc");
 		$query = $this->db->get('user');
 		return $query->result();
 	}
@@ -80,6 +80,14 @@ class Muser extends CI_Model {
 				'user_id' => $user_id 
 		));
 		// echo $this->db->last_query();
+		return $query->row();
+	}
+	
+	function getCompanyByUser($user_id) {
+		$this->db->join('company_data', 'user.company_id = company_data.id_company', "inner");
+		$query = $this->db->get_where('user', array(
+				"user_id" => $user_id
+		));
 		return $query->row();
 	}
 

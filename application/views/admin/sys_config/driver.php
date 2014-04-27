@@ -43,6 +43,23 @@
 						value="<?php echo isset($driver) ? $driver->name : '';?>">
 				</div>
 			</div>
+			<?php if($_SESSION['gps_level'] == 'admin') {?>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> Vendor </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="company_id" id="company_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($companies as $company) { ?>
+						<option value="<?php  echo $company->id_company?>"
+						<?php if(isset($driver)) {
+							echo $company->id_company == $driver->company_id ? 'selected':'';
+						}?>><?php echo $company->name?></option>
+						<?php  }?>
+					</select>
+				</div>
+			</div>
+			<?php } // TODO:create Dropdown Chain Here ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Vehicle Use </label>

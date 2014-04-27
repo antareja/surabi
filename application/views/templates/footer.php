@@ -34,6 +34,7 @@
 	<script src="<?php echo base_url() ?>assets/js/jquery.ui.touch-punch.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/jquery.easy-pie-chart.min.js"></script>
+	<script src="<?php echo base_url() ?>assets/js/jquery.gritter.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/jquery.sparkline.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/flot/jquery.flot.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/flot/jquery.flot.pie.min.js"></script>

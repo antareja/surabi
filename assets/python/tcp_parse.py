@@ -28,6 +28,7 @@ def convLatLng(lat,lng):
     resultLatLng = str(resultLat) + ", " + str(resultLng)
     return str(resultLatLng)
 
+# Convert Knots to KMH
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))

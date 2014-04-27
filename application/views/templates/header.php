@@ -1,4 +1,3 @@
-
 <?php
 if (!isset($_SESSION['gps_username'])) {
 	print_r($_SESSION);
@@ -22,29 +21,25 @@ if (!isset($_SESSION['gps_username'])) {
 <title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
 
 <!-- Bootstrap core CSS -->
-<link href="<?php echo base_url()?>assets/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="<?php echo base_url()?>assets/css/datepicker.css"
-	rel="stylesheet">
-<link href="<?php echo base_url()?>assets/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/datepicker.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/css/font-awesome.min.css" rel="stylesheet">
 <script src="<?php echo base_url() ?>assets/js/jquery-2.1.0.min.js"></script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/OpenLayers.js" type="text/javascript"></script>
 <script src="<?php echo base_url()."assets/js/"?>OpenLayers/lib/deprecated.js" type="text/javascript"></script>
 <?php if(isset($map_use)) { ?>
-<script type="text/javascript"
-	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<?php } ?>	
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<?php } ?>
 <script src="<?php echo base_url_new()?>:8000/socket.io/socket.io.js"></script>
 <!--[if IE 7]>
 	<link rel="stylesheet" href="<?php echo base_url()?>assets/css/font-awesome-ie7.min.css" />
 <![endif]-->
 
 <!-- page specific plugin styles -->
-
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery.gritter.css" />
+	
 <!-- fonts -->
-<link rel="stylesheet"
-	href="<?php echo base_url()?>assets/css/ace-fonts.css" />
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-fonts.css" />
 
 <!-- ace styles -->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace.min.css" />
@@ -74,7 +69,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 	<div class="navbar navbar-default" id="navbar">
 		<script type="text/javascript">
+				var $path_assets = "assets";
+				var site_url = '<?php echo site_url()?>';
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
 
 		<div class="navbar-container" id="navbar-container">
@@ -97,10 +95,10 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						<ul
 							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/operator"><i
-									class="icon-user"></i>Create Operator</a></li>
+									class="icon-user"></i>Operator</a></li>
 							<?php if($_SESSION['gps_level'] == 'admin') {?>
 							<li><a href="<?php echo site_url()?>admin/sys_config/user/admin"><i
-									class="icon-user"></i>Create Admin</a></li>
+									class="icon-user"></i>Admin</a></li>
 							<li><a
 								href="<?php echo site_url()?>admin/sys_config/vendor"><i
 									class="icon-briefcase"></i>Vendor</a></li>
@@ -261,9 +259,6 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 
 	<div class="main-container" id="main-container">
-		<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
 
 		<div class="main-container-inner">
 			<a class="menu-toggler" id="menu-toggler" href="#"> <span

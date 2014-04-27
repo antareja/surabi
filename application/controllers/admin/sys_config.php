@@ -110,6 +110,7 @@ class Sys_config extends CI_Controller {
 	public function user($level,$user_id = NULL) {
 		$data['pageTitle'] = 'User Management';
 		$data['level'] = $level;
+		$data['action'] = site_url().'admin/sys_config/user/'.$level.'/'.$user_id;
 // 		echo $_SESSION['gps_level'];exit;
 		if($_SESSION['gps_level'] == 'admin_vendor') {
 			$data['all_user'] = $this->muser->getAllOperatorByAdmin();
@@ -122,48 +123,53 @@ class Sys_config extends CI_Controller {
 		
 		//$data['admin'] = $this->muser->getAllAdmin();
 		$data['companies'] = $this->muser->getAllCompany();
-		// 		$data['vehicles'] = $this->muser->getAllVehicle();
+		
+		//$data['vehicles'] = $this->muser->getAllVehicle();
 		$post = $this->input->post();
+// 		print_r($post);exit;
 		if ($post) {
 			$post_data['fullname'] = $post['fullname'];
 			$post_data['username'] = $post['username'];
-			// 			$post_data['vehicle_id'] = $post['vehicle_id'];
+			// $post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['password'] = md5($post['password']);
 			$post_data['address'] = $post['address'];
 			if ($_SESSION['gps_level'] == 'admin_vendor') {
 				$post_data['company_id'] = $_SESSION['gps_company_id'];
 				$post_data['admin_id'] = $_SESSION['gps_user_id'];
-			} elseif ($_SESSION['gps_level'] == 'admin') {
+			} elseif ($_SESSION['gps_level'] == 'admin' && $level=='operator') {
 				$post_data['company_id'] = $post['company_id'];
 				// Create Dropdown Chain and get Admin ID form company iD
-// 				$post_data['admin_id'] = $_SESSION['gps_user_id'];
+				// $post_data['admin_id'] = $_SESSION['gps_user_id'];
 			}
-			$post_data['level'] = $level =='operator'?'operator':'admin_vendor';
+			// Bugs found heres $level
+			$post_data['level'] = $level == 'operator' ? 'operator' : 'admin_vendor';
 			$post_data['phone'] = $post['phone'];
 			$post_data['phone2'] = $post['phone2'];
 			$post_data['email'] = $post['email'];
 			// for update user
-			if ($post['user_id']) {
-				if(!empty($post['password'])) {
-					$post_data['password'] = md5($post['password']) ;
+			if (!empty($user_id)) {
+				if (! empty($post['password'])) {
+					$post_data['password'] = md5($post['password']);
 				} else {
 					unset($post_data['password']);
 					unset($post['password']);
 				}
 				print_r($post);
-				$sql = $this->muser->updateUser($post_data,$post['user_id']);
+				$sql = $this->muser->updateUser($post_data, $post['user_id']);
 				echo 'masuk Update';
-				//echo $sql;exit;
-				//redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
-			// for insert only
-			} else {
-				echo 'masuk Insert';
-// 				$id = $this->muser->insertUser($post_data);
-				//redirect('admin/sys_config/user/'.$level.'/' . $id);
+				// echo $sql;exit;
+				redirect('admin/sys_config/user/'.$level.'/' . $post['user_id']);
+				// for insert only
+			} elseif(empty($post['user_id'])) {
+// 				die('masuk Insert');
+				$id = $this->muser->insertUser($post_data);
+				$this->output->enable_profiler(TRUE);
+				redirect('admin/sys_config/user/'.$level.'/' . $id);
 			}
 		} elseif ($user_id) {
-			// 			die($user_id);
+			//die($user_id);
 			$data['user'] = $this->muser->getUser($user_id);
+			$data['vendor'] = $this->muser->getCompanyByUser($user_id);
 			$this->load->template("admin/sys_config/user", $data);
 		} else {
 			$this->load->template("admin/sys_config/user", $data);
@@ -173,8 +179,7 @@ class Sys_config extends CI_Controller {
 	public function get_admin(){
 // 		echo '<option>test</option>';
 		$post = $this->input->post();
-		$company_id = $post['company_id'];
-		$admins = $this->muser->getAllAdmin($company_id);
+		$admins = $this->muser->getAllAdminCompany($post['company_id']);
 		foreach($admins as $admin) {
 			echo '<option value"'.$admin->user_id.'">'.$admin->fullname.'</option>';
 		}
@@ -182,13 +187,15 @@ class Sys_config extends CI_Controller {
 	
 	public function driver($driver_id = NULL) {
 		$data['pageTitle'] = 'driver';
-		
 		$data['all_driver'] = $this->msys_config->getAllDriver();
+		$data['companies'] = $this->muser->getAllCompany();
+		//TODO: get vehicle where choosen dropdown company_id
 		$data['vehicles'] = $this->msys_config->getAllVehicle();
 		$post = $this->input->post();
 		//print_r($post);exit;
 		if ($post) {
 			$post_data['name'] = $post['name'];
+			$post_data['company_id'] = $post['company_id'];
 			$post_data['vehicle_id'] = $post['vehicle_id'];
 			$post_data['description'] = $post['description'];
 			$post_data['address'] = $post['address'];

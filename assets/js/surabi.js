@@ -85,6 +85,16 @@ $('.form-user').validate({
 		}
 	}
 });
+// get admin vendor chain 
+$('#company_id').change(function() {
+	var company = $(this).val();
+	$.post(site_url + 'admin/sys_config/get_admin', 
+		{company_id : company})
+			.done(function(data) {
+				$('#admin_id').html(data);
+	});
+});
+
 // For User Form
 $('.btn-user').click(function() {
 	$("#form-user").submit();
@@ -187,16 +197,7 @@ function remove_filter(isi) {
 }
 
 
-$(document).ready(function() {
-$('#company_id').change(function() {
-	var company = $(this).val();
-	$.post('../get_admin', 
-		{company_id : company})
-			.done(function(data) {
-				$('#admin_id').html(data);
-	});
-});
-});
+
 
 $('#assign').click(function() {
 	var boxes = $('input[name=assign]:checked');

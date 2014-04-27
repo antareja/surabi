@@ -79,6 +79,7 @@ class Fleet_config extends CI_Controller {
 			print_r($post);
 			// Upload file image
 			$post_data['name'] = $post['name'];
+			$post_data['company_id'] = $post['company_id'];
 			$post_data['base_id'] = $post['base_id'];
 			$post_data['icon_id'] = $post['icon_id'];
 			$post_data['gps_mobile_address'] = $post['mobile_address'];
