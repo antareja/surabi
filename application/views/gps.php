@@ -534,6 +534,7 @@ function setHTML(response)
 					var alertNotif = parseInt($('#notifs').text()) || 0;
 					var one = 1;
 					var totalAlert = alertNotif + one;
+					gritterAlert(<?php echo $region->in_out;?>);
 					$('#notifs').replaceWith('29');
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
@@ -541,6 +542,18 @@ function setHTML(response)
 					    }
 					});
 };
+
+function regionAlert() {
+	$.gritter.add({
+		// (string | mandatory) the heading of the notification
+		title: 'This is a notice without an image!',
+		// (string | mandatory) the text inside the notification
+		text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="orange">magnis dis parturient</a> montes, nascetur ridiculus mus.',
+		class_name: 'gritter-success' + ' gritter-light'
+	});
+
+	return false;
+}
 
 function doNothing() {}
 
