@@ -52,9 +52,6 @@
 						}
 						?>
 						
-								
-								
-								
 						
 						
 						<p>
@@ -102,12 +99,13 @@
 						name="re_password">
 				</div>
 			</div>
-			<?php if($_SESSION['gps_level'] == 'admin' && $level == 'operator') {?>
+			<?php if($_SESSION['gps_level'] == 'admin' && empty($user)) {?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-select-2"> Vendor </label>
 				<div class="col-sm-9">
-					<select class="form-control" name="company_id" id="company_id">
+					<select class="form-control" name="company_id" id="company_id"
+						required="required">
 						<option value="">&nbsp;</option>
 						<?php foreach($companies as $company) { ?>
 						<option value="<?php  echo $company->id_company?>"
@@ -129,13 +127,13 @@
 					</select>
 				</div>
 			</div>
-			<?php } else { ?>
+			<?php } elseif($level == 'admin' && isset($user)) { ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
 					for="form-field-1"> Vendor </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" disabled="disabled"
-						value="<?php echo isset($user) ? $vendor->name : '';?>">
+						value="<?php echo isset($vendor->name) ? $vendor->name: '';?>">
 				</div>
 			</div>
 			<?php } ?>
@@ -176,9 +174,10 @@
 					<button class="btn btn-info btn-user" type="button">
 						<i class="icon-ok bigger-110"></i> Submit
 					</button>
-					<!-- 					<button class="btn" type="reset"> -->
-					<!-- 						<i class="icon-undo bigger-110"></i> Reset -->
-					<!-- 					</button> -->
+					
+					<button id="btn-delete-user" class="btn btn-danger" type="reset">
+						<i class="icon-trash bigger-110"></i> Delete User
+					</button>
 				</div>
 			</div>
 				<?php echo isset($user) ? '<input type="hidden" name="user_id" value="'.$user->user_id.'" >' : '';?>
@@ -188,7 +187,15 @@
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
-<script>
-
-</script>
 <!-- /.page-content -->
+<div id="dialog-confirm" class="hide">
+	<div id="confirm-deleted" class="alert alert-info bigger-110"><?php echo $user->fullname?> will be
+		permanently deleted and cannot be recovered.</div>
+
+	<div class="space-6"></div>
+
+	<p class="bigger-110 bolder center grey">
+		<i class="icon-hand-right blue bigger-120"></i> Are you sure?
+	</p>
+</div>
+<!-- #dialog-confirm -->

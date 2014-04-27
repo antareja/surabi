@@ -136,7 +136,7 @@ class Sys_config extends CI_Controller {
 			if ($_SESSION['gps_level'] == 'admin_vendor') {
 				$post_data['company_id'] = $_SESSION['gps_company_id'];
 				$post_data['admin_id'] = $_SESSION['gps_user_id'];
-			} elseif ($_SESSION['gps_level'] == 'admin' && $level=='operator') {
+			} elseif ($_SESSION['gps_level'] == 'admin') {
 				$post_data['company_id'] = $post['company_id'];
 				// Create Dropdown Chain and get Admin ID form company iD
 				// $post_data['admin_id'] = $_SESSION['gps_user_id'];
@@ -173,6 +173,18 @@ class Sys_config extends CI_Controller {
 			$this->load->template("admin/sys_config/user", $data);
 		} else {
 			$this->load->template("admin/sys_config/user", $data);
+		}
+	}
+	
+	/**
+	 * Delete user confirm by update deleted field
+	 * @param unknown $user_id
+	 */
+	public function delete_user() {
+		$post = $this->input->post();
+		$user_id = $post['user_id'];
+		if($this->muser->deleteUser($user_id)) {
+			echo 'data deleted';
 		}
 	}
 	

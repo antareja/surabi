@@ -68,12 +68,13 @@ function rm_brace($str) {
 }
 
 
-function define_sess($username, $user_id, $full_name, $level, $company_id) {
+function define_sess($username, $user_id, $full_name, $level, $company_id,$company_name) {
 	$_SESSION['gps_username'] = $username;
 	$_SESSION['gps_user_id'] = $user_id;
 	$_SESSION['gps_full_name'] = $full_name;
 	$_SESSION['gps_level'] = $level;
 	$_SESSION['gps_company_id'] = $company_id;
+	$_SESSION['gps_company_name'] = $company_name;
 	define('USERNAME', $username);
 	define('USER_ID', $user_id);
 	define('FULLNAME', $full_name);

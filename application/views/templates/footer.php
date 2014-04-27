@@ -50,6 +50,8 @@
 	<script src="<?php echo base_url()?>assets/js/ace-extra.min.js"></script>
     <!-- page specific plugin scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
+    
+	<script src="<?php echo base_url() ?>assets/js/jquery-ui-1.10.3.full.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/surabi.js"></script>
     <script src="<?php echo base_url() ?>assets/js/jquery_animated_color.js"></script>
     <!-- Maps Google -->	

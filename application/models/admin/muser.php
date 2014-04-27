@@ -92,6 +92,8 @@ class Muser extends CI_Model {
 	}
 
 	function login($username, $password) {
+		$this->db->select('username, user_id, fullname, level, user.company_id, company_data.name');
+		$this->db->join('company_data', 'company_data.id_company = user.company_id', 'inner');
 		$query = $this->db->get_where('user', array(
 				'username' => $username,
 				'password' => md5($password) 
@@ -130,5 +132,14 @@ class Muser extends CI_Model {
 		));
 		$this->db->last_query();
 		return $query->row();
+	}
+	
+	/**
+	 * Delete User but still in database
+	 * @param unknown $user_id
+	 */
+	function deleteUser($user_id){
+		$data['deleted'] = 1;
+		return $this->db->update('user', $data, array('user_id' => $user_id));
 	}
 }

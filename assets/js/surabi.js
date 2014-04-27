@@ -101,6 +101,54 @@ $('.btn-user').click(function() {
 	// console.log($('.form-user').valid());
 });
 
+// User Delete
+$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+	_title: function(title) {
+		var $title = this.options.title || '&nbsp;'
+		if( ("title_html" in this.options) && this.options.title_html == true )
+			title.html($title);
+		else title.text($title);
+	}
+}));
+
+jQuery(function($) {
+	$( "#btn-delete-user" ).on('click', function(e) {
+		e.preventDefault();
+		var user = $("input[name=user_id]").val();
+		
+	
+		$( "#dialog-confirm" ).removeClass('hide').dialog({
+			resizable: false,
+			modal: true,
+			title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i>Delete User?</h4></div>",
+			title_html: true,
+			buttons: [
+				{
+					html: "<i class='icon-trash bigger-110'></i>&nbsp; Delete user",
+					"class" : "btn btn-danger btn-xs",
+					click: function() {
+						$.post(site_url + 'admin/sys_config/delete_user/'+ user, 
+								{user_id : user})
+									.done(function(data) {
+										$('#confirm-deleted').html(data);
+						});
+						$( this ).dialog( "close" );
+					}
+				}
+				,
+				{
+					html: "<i class='icon-remove bigger-110'></i>&nbsp; Cancel",
+					"class" : "btn btn-xs",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		});
+	});
+});
+
+
 $('.btn-view').click(function() {
 	$("#form-report").submit();
 });

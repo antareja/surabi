@@ -37,6 +37,7 @@ if (!isset($_SESSION['gps_username'])) {
 
 <!-- page specific plugin styles -->
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery.gritter.css" />
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/jquery-ui-1.10.3.full.min.css" />
 	
 <!-- fonts -->
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/ace-fonts.css" />
