@@ -111,14 +111,6 @@ class Fleet_config extends CI_Controller {
 		}
 	}
 
-	/**
-	 * Fleet Table Show
-	 */
-	public function fleet() {
-		$data['pageTitle'] = "Fleet State Modul";
-		$data['vehicles'] = $this->mfleet_config->getAllVehicle();
-		$this->load->template('fleet', $data);
-	}
 
 	/**
 	 * User & Vehicle Assignment
