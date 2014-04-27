@@ -18,7 +18,7 @@ if (!isset($_SESSION['gps_username'])) {
 <link rel="shortcut icon"
 	href="<?php echo base_url()?>assets/ico/favicon.png">
 
-<title>GPS Tracking <?php echo (isset($pageTitle)) ? $pageTitle : ''; ?></title>
+<title><?php echo (isset($pageTitle)) ? $pageTitle : ''; ?> GPS Fleet and Vehicle Tracking Systems</title>
 
 <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +82,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img
 						width="30"
 						src="<?php echo base_url()?>assets/images/logo-small.png"> <i
-						class="icon-leaf"></i> GPS Tracking Apps </small>
+						class="icon-leaf"></i> GPS Fleet Tracking Solutions</small>
 				</a>
 				<!-- /.brand -->
 			</div>

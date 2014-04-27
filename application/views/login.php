@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Login Page - GPS Tracking Admin</title>
+		<title><?php echo $pageTitle?> Page - GPS Fleet Tracking Solutions </title>
 
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +51,7 @@
 								<h1>
 									<i class="icon-globe green"></i>
 									<span class="red">GPS</span>
-									<span class="white">Tracking</span>
+									<span class="white">Fleet Tracking</span>
 								</h1>
 								<h4 class="blue">&copy; Trubaindo Coal Mining</h4>
 							</div>
