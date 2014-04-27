@@ -1,0 +1,9 @@
+ECHO Starting NodeJS ...
+start node C:\nginx\html\surabi\assets\nodejs\server.js
+ECHO Starting FleetControl ...
+start C:\Users\haidar\Desktop\FleetControl.exe
+timeout /t 10
+ECHO Starting Python ... 
+start C:\Python27\python.exe C:\nginx\html\surabi\assets\python\tcp_parse.py
+ECHO Starting GeoServer
+start  /d "C:\GeoServer 2.5\bin\" startup.bat
