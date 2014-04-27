@@ -8,7 +8,7 @@
 			<select name="user_id" id="user_id">
 			<option>&nbsp;</option>
 			<?php foreach($users as $user) {?>
-				<option value="<?php echo $user->user_id;?>"><?php echo $user->fullname?></option>
+				<option value="<?php echo $user->user_id;?>"><?php echo $user->fullname?>: <?php echo $user->name?></option>
 			<?php } ?>
 			</select>
 			<button class="btn btn-sm btn-success" id="assign" type="button">

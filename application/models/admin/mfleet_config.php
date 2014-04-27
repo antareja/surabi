@@ -55,7 +55,7 @@ class MFleet_config extends CI_Model {
 		));
 		return $query->result();
 	}
-
+	
 	function getRegion() {
 		$query = $this->db->get('region_alert');
 		return $query->result();
@@ -67,6 +67,13 @@ class MFleet_config extends CI_Model {
 	}
 	
 	function getAllUser() {
+		$query = $this->db->get('user');
+		return $query->result();
+	}
+	
+	function getAllUserVendorName() {
+		$this->db->select('user_id,fullname, username, name');
+		$this->db->join('company_data', 'company_data.id_company = user.company_id', 'inner');
 		$query = $this->db->get('user');
 		return $query->result();
 	}
