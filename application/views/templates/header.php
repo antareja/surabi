@@ -123,16 +123,20 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li></li>
 						</ul></li>
 					<?php } ?>	
-					<li class="light-green dropdown-hover"><a
-						href="<?php echo site_url()?>fleet"> <i class="icon-tasks"></i>
-							Fleet State
-					</a></li>
+					<li class="light-green dropdown-hover"><a href="#"> <i class="icon-tasks"></i>
+							Fleet State<i class="icon-caret-down"></i>
+					</a>
+						<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="<?php echo site_url()?>fleet">All Vehilce</a></li>
+							<li><a>Specific Vehicle</a></li>
+						</ul>
+					</li>
 					<!-- 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i>  -->
 					<!-- 					I/O Grid</a></li> -->
 					<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
 					<!-- 					Job Module</a></li> -->
 					<li class="green dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="<?php echo site_url()?>"> <i class="icon-globe"></i> Map <i
+						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map <i
 							class="icon-caret-down"></i>
 					</a>
 						<?php if($_SESSION['gps_level'] != 'operator') { ?>
