@@ -32,6 +32,8 @@ function initialize() {
 		document.getElementById('latlong').innerHTML = event.latLng.lat() + ', ' + event.latLng.lng();
 	});
 
+
+  // click location and get lat lng
   google.maps.event.addListener(map,'click',function(event) {
 		document.getElementById('latlongclicked').value = event.latLng.lat() + ', ' + event.latLng.lng()
 	})
@@ -63,6 +65,7 @@ function initialize() {
       map: map
     });
 
+    // click location and get lat lng
     google.maps.event.addListener(marker, 'click', (function(marker, i) {
       return function() {
         infowindow.setContent(locations[i][0]);

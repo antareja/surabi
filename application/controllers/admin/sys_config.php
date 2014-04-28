@@ -270,4 +270,5 @@ class Sys_config extends CI_Controller {
 			$this->load->template("admin/sys_config/hardware_type", $data);
 		}
 	}
+	
 }

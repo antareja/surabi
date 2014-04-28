@@ -330,7 +330,9 @@ foreach($vehicles as $vehicle)
                 map.addControl(new OpenLayers.Control.Scale($('scale')));
                 map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
                 map.zoomToExtent(bounds);
+                // center location
                 map.setCenter(new OpenLayers.LonLat('116.890', '-0.457'), 7 )
+                // Mouse hover to show lat lng
 				map.events.register("mousemove", map, function(e) {
 					var position = map.getLonLatFromPixel(e.xy);
 					OpenLayers.Util.getElement("txt_lat").innerHTML = position.lat;
