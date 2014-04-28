@@ -2,24 +2,20 @@
 if(isset($data_replay))
 {
 ?>
-<style type="text/css">
-</style>
 <script type="text/javascript">
 var array_waktu = {
 		<?php
-		$x=1;
-		foreach($data_replay as $replay)
-		{
-			$jam_replay=explode(".", $replay->create_at)[0];
-			$date = DateTime::createFromFormat('Y-m-d H:i:s', $jam_replay);
-			if($x==1)
-			{
-				$jam_awal=$date->format('H:i:s');
-			}
-			if($x==count($data_replay))
-			{
-				$jam_akhir=$date->format('H:i:s');
-			}
+	$x = 1;
+	foreach ($data_replay as $replay) {
+// 		print_r($replay);exit;
+		$jam_replay = explode(".", $replay->create_at)[0];
+		$date = DateTime::createFromFormat('Y-m-d H:i:s', $jam_replay);
+		if ($x == 1) {
+			$jam_awal = $date->format('H:i:s');
+		}
+		if ($x == count($data_replay)) {
+			$jam_akhir = $date->format('H:i:s');
+		}
 		?>
 "<?php echo $x?>": { 
 			jam: '<?php echo $date->format('H:i:s')?>', 
@@ -32,9 +28,9 @@ var array_waktu = {
 			image_type: '<?php echo $replay->image_type?>',
 		},
 		<?php
-		$x++;
-		}
-		?>
+		$x ++;
+	}
+	?>
 	};
 
 	var ke=1;
@@ -266,36 +262,35 @@ var array_waktu = {
 	}
 	window.onload = Init;
   </script>
-  <style>
-			.resume
-			{
-				width:32px;
-				height:32px;
-				background:url('<?php base_url()?>/assets/img/resume.png');
-			}
-			.start
-			{
-				width:32px;
-				height:32px;
-				background:url('<?php base_url()?>/assets/img/play.png');
-			}
-			.pause
-			{
-				width:32px;
-				height:32px;
-				background:url('<?php base_url()?>/assets/img/pause.png');
-			}
-			.stop
-			{
-				width:32px;
-				height:32px;
-				background:url('<?php base_url()?>/assets/img/stop.png');
-			}
-		</style>
-<?php 
+<style>
+.resume {
+	width: 32px;
+	height: 32px;
+	background: url('<?php base_url()?>/assets/img/resume.png');
 }
-?>		
-  <div class="page-content">
+
+.start {
+	width: 32px;
+	height: 32px;
+	background: url('<?php base_url()?>/assets/img/play.png');
+}
+
+.pause {
+	width: 32px;
+	height: 32px;
+	background: url('<?php base_url()?>/assets/img/pause.png');
+}
+
+.stop {
+	width: 32px;
+	height: 32px;
+	background: url('<?php base_url()?>/assets/img/stop.png');
+}
+</style>
+<?php
+}
+?>
+<div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">
 <?php 
@@ -303,10 +298,9 @@ if(!isset($data_replay))
 {
 ?>
 <br>
-<form role="form" class="form-horizontal"
+			<form role="form" class="form-horizontal"
 				enctype="multipart/form-data"
-				action="<?php echo site_url();?>replay/replay2"
-				method="POST" />
+				action="<?php echo site_url();?>replay/replay2" method="POST" />
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
@@ -325,8 +319,8 @@ if(!isset($data_replay))
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right"
-					for="tanggal"> Tanggal </label>
+				<label class="col-sm-3 control-label no-padding-right" for="tanggal">
+					Tanggal </label>
 				<div class="col-sm-9">
 					<input type="text" name="tanggal" id="date-picker" value="">
 				</div>
@@ -346,39 +340,41 @@ if(!isset($data_replay))
 if(isset($data_replay))
 {
 ?>
-	<input type="button" id="stop" onclick="stop()" class="stop" value=""/>
-	<input type="button" id="start_pause" onclick="start(this.id)" class="start" value=""/>
-	<input type="button" id="slower" onclick="slower()" value="<<"/>
-	<input type="button" id="faster" onclick="faster()" value=">>"/>
-	<input type="button" id="normal" onclick="normal()" value="Reset"/>
-	<p id="jam" style="display:none"></p>
-	<div id="map" style="width:80%; height:300px"></div>
-	<div>
-		<table>
-		<tr>
-			<td>Jam</td>
-			<td> : </td>
-			<td><span id="span_jam"></span></td>
-		</tr>
-		<tr>
-			<td>Location</td>
-			<td> : </td>
-			<td><span id="span_location"></span></td>
-		</tr>
-		<tr>
-			<td>Velocity</td>
-			<td> : </td>
-			<td><span id="span_velocity"></span></td>
-		</tr>
-		<tr>
-			<td>Bearing</td>
-			<td> : </td>
-			<td><span id="span_bearing"></span></td>
-		</tr>
-		</table>
-	</div>
+	<input type="button" id="stop" onclick="stop()" class="stop" value="" />
+			<input type="button" id="start_pause" onclick="start(this.id)"
+				class="start" value="" /> <input type="button" id="slower"
+				onclick="slower()" value="<<"/>
+	<input   type="button" id="faster"
+				onclick="faster()" value=">>" /> <input type="button" id="normal"
+				onclick="normal()" value="Reset" />
+			<p id="jam" style="display: none"></p>
+			<div id="map" style="width: 80%; height: 300px"></div>
+			<div>
+				<table>
+					<tr>
+						<td>Jam</td>
+						<td>:</td>
+						<td><span id="span_jam"></span></td>
+					</tr>
+					<tr>
+						<td>Location</td>
+						<td>:</td>
+						<td><span id="span_location"></span></td>
+					</tr>
+					<tr>
+						<td>Velocity</td>
+						<td>:</td>
+						<td><span id="span_velocity"></span></td>
+					</tr>
+					<tr>
+						<td>Bearing</td>
+						<td>:</td>
+						<td><span id="span_bearing"></span></td>
+					</tr>
+				</table>
+			</div>
 <?php 
 }?>
 </div>
-</div>
+	</div>
 </div>
