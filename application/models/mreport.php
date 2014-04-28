@@ -51,7 +51,7 @@ class MReport extends CI_Model {
 	function getAllVehiclesComplete(){
 		$this->db->select("vehicles.name as alias ,hardware_type.name as hw, vehicle_id as unit,
 				company_data.name as company_name, gps_mobile_address as gps, 
-				MAX(create_at) as last_update ");
+				MAX({PRE}packet.create_at) as last_update ");
 		$this->db->join("packet", 'vehicles.gps_mobile_address = packet.mobile_address','left');
 		$this->db->join("company_data", "vehicles.company_id = company_data.id_company", 'inner');
 		$this->db->join("hardware_type", 'vehicles.hardware_id = hardware_type.hardware_id', 'left');
