@@ -1,3 +1,4 @@
+var iconSizeVehicle;
 
 jQuery(function($) {
 	$('#id-input-file-1 , #id-input-file-2').ace_file_input({
@@ -198,7 +199,8 @@ function getFormattedDate(date) {
 // });
 function add_marker(isi) {
 	isi2 = isi.replace("marker_", "");
-	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon);
+	iconSizeVehicle = new OpenLayers.Size(40,25);
+	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon, iconSizeVehicle, null);
 	var point2 = tampung_posisi[isi].posisi;
 	nama_marker[isi].nama = new OpenLayers.Marker(point2, icon2);
 	if(popup_marker["popup_marker_"+isi2].popup=="")

@@ -238,8 +238,8 @@ foreach($vehicles as $vehicle)
 }
 ?>
 };
-
-			OpenLayers.ProxyHost = "<?php echo base_url()?>assets/python/proxy.cgi?url=";
+		//OpenLayers.Proxy not use
+		//OpenLayers.ProxyHost = "<?php echo base_url()?>assets/python/proxy.cgi?url=";
             var map;
             var untiled;
             var tiled;
@@ -527,7 +527,7 @@ function setHTML(response)
 					    	lokasi=data;
 					    	
 				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
-				iconSize = new OpenLayers.Size(50,50);
+				iconSize = new OpenLayers.Size(40,25);
 				// Get Vehicle Icon here .. but cannot resize  
 				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon,iconSize,null);
 			
