@@ -25,12 +25,14 @@ class MReport extends CI_Model {
 	}
 
 	function getEmployeeReport() {
-		$this->db->select('*, user.user_id user_id, MAX(login)');
+		$this->db->select('user.*, user.user_id user_id, MAX(login) as login');
 		if($_SESSION['gps_level'] == 'admin_vendor') {
 			$this->db->where('user.admin_id', $_SESSION['gps_user_id']);
 		} 
 		$this->db->join('user_log', 'user_log.user_id = user.user_id', 'left');
+		# unsopported PostGres
 		$this->db->group_by('user.user_id');
+		$this->db->order_by('user.user_id','desc');
 		$query = $this->db->get('user');
 // 		echo $this->db->last_query();exit;
 		return $query->result();
@@ -49,8 +51,8 @@ class MReport extends CI_Model {
 	}
 	
 	function getAllVehiclesComplete(){
-		$this->db->select("vehicles.name as alias ,hardware_type.name as hw, vehicle_id as unit,
-				company_data.name as company_name, gps_mobile_address as gps, 
+		$this->db->select("MAX({PRE}vehicles.name) as alias ,MAX({PRE}hardware_type.name) as hw, vehicle_id as unit,
+				MAX({PRE}company_data.name) as company_name, gps_mobile_address as gps, 
 				MAX({PRE}packet.create_at) as last_update ");
 		$this->db->join("packet", 'vehicles.gps_mobile_address = packet.mobile_address','left');
 		$this->db->join("company_data", "vehicles.company_id = company_data.id_company", 'inner');
