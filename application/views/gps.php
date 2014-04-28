@@ -47,12 +47,9 @@ foreach ($last_position as $position)
 <!-- /.page-content -->
 
 <div id="map_canvas" style="width: 100%; height: 80%"></div>
-Lat &nbsp;&nbsp;&nbsp;:
-<span id="txt_lat"></span>
+Lat Lng &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>, &nbsp; <span id="txt_long"></span>
 <br>
-Long :
-<span id="txt_long"></span>
-<br>
+Lat Lng &nbsp;&nbsp;&nbsp;: <span id="click_lat"></span>, &nbsp; <span id="click_lng"></span>
 <!-- <div id="nodelist"> -->
 <!--             <em>Click on the map to get feature info</em> -->
 <!--         </div> -->
@@ -337,8 +334,14 @@ foreach($vehicles as $vehicle)
 					var position = map.getLonLatFromPixel(e.xy);
 					OpenLayers.Util.getElement("txt_lat").innerHTML = position.lat;
 					OpenLayers.Util.getElement("txt_long").innerHTML = position.lon;
-
 				});
+				// Click to show lat lng
+				map.events.register("click", map , function(e){
+					var position = map.getLonLatFromPixel(e.xy);
+					OpenLayers.Util.getElement("click_lat").innerHTML = position.lat;
+					OpenLayers.Util.getElement("click_lng").innerHTML = position.lon;
+				});
+						
 				
 				var marker_layer = new OpenLayers.Layer.Markers( "Markers" );
 				map.addLayer(marker_layer);
