@@ -59,8 +59,8 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
             print(jam)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
@@ -82,8 +82,8 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             print(jam)
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + convLat(lat) + "&lng=" + convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : convLat(lat) , "lng" : convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))

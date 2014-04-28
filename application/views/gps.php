@@ -26,11 +26,12 @@ foreach ($last_position as $position)
 
 				<i class="icon-ok green"></i> Welcome to <strong class="green"> GPS
 					Tracking <small>(v2.1)</small>
-				</strong> , GPS Fleet Management. Collecting Delivery Information in Real-Time
+				</strong> , GPS Fleet Management. Collecting Delivery Information in
+				Real-Time
 			</div>
 			<?php echo $dashboard; # load view dashboard?> 
 			<div class="hr hr15 hr-dotted"></div>
-			
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Maps</h3>
@@ -46,10 +47,25 @@ foreach ($last_position as $position)
 </div>
 <!-- /.page-content -->
 
-<div id="map_canvas" style="width: 100%; height: 80%"></div>
-Lat Lng &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>, &nbsp; <span id="txt_long"></span>
-<br>
-Lat Lng &nbsp;&nbsp;&nbsp;: <span id="click_lat"></span>, &nbsp; <span id="click_lng"></span>
+<div class="row">
+	<div class="col-xs-12">
+		<div id="map_canvas" style="width: 100%; height: 80%"></div>
+		<div>
+			<p>
+				Lat Lng &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>, &nbsp; <span
+					id="txt_long"></span>
+			
+			
+			<p>
+			
+			
+			<p>
+				Click Lat Lng &nbsp;&nbsp;&nbsp;: <span id="click_lat"></span>,
+				&nbsp; <span id="click_lng"></span>
+			</p>
+		</div>
+	</div>
+</div>
 <!-- <div id="nodelist"> -->
 <!--             <em>Click on the map to get feature info</em> -->
 <!--         </div> -->
@@ -168,6 +184,7 @@ var marker_array = [];
 var z=1;
 var markers={};
 var marker="";
+var iconSize;
 var popupContentHTML="";
 var data_map="";
 var name = "";
@@ -326,9 +343,20 @@ foreach($vehicles as $vehicle)
                 map.addControl(new OpenLayers.Control.Navigation());
                 map.addControl(new OpenLayers.Control.Scale($('scale')));
                 map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
+
+
+    			//--------------------------------samplee from openlayer marker size
+//     			var markers = new OpenLayers.Layer.Markers( "Markers" );
+//                 map.addLayer(markers);
+//                 iconSize = new OpenLayers.Size(50, 45);
+                //icon = new OpenLayers.Icon('<?php //echo base_url()?>assets/images/marker.png',iconSize, null);
+//                 markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(115.748856, -0.486716), icon));
+                //--------------------------------samplee from openlayer marker size
+    			
+                
                 map.zoomToExtent(bounds);
                 // center location
-                map.setCenter(new OpenLayers.LonLat('116.890', '-0.457'), 7 )
+                map.setCenter(new OpenLayers.LonLat(115.748856, -0.486716), 7 )
                 // Mouse hover to show lat lng
 				map.events.register("mousemove", map, function(e) {
 					var position = map.getLonLatFromPixel(e.xy);
@@ -345,7 +373,7 @@ foreach($vehicles as $vehicle)
 				
 				var marker_layer = new OpenLayers.Layer.Markers( "Markers" );
 				map.addLayer(marker_layer);
-				var size = new OpenLayers.Size(21,25);
+				var size = new OpenLayers.Size(60,75);
 				
 				var sitePoints = [];
 					var siteStyle = 
@@ -499,7 +527,9 @@ function setHTML(response)
 					    	lokasi=data;
 					    	
 				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
-				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon);
+				iconSize = new OpenLayers.Size(50,50);
+				// Get Vehicle Icon here .. but cannot resize  
+				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon,iconSize,null);
 			
 			var point=new OpenLayers.LonLat(lng,lat);
 			nama_marker["marker_"+data_map["mobile"]].nama=new OpenLayers.Marker(point,icon);
