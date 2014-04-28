@@ -386,7 +386,7 @@ foreach($vehicles as $vehicle)
 					};
 				<?php if($region) {?>	
 				var coordinates=[<?php echo string_to_bracket($region->latlng);?>];
-				<?php } ?>
+				
 				var epsg4326 = new OpenLayers.Projection("EPSG:4326");
 				for (var i=0;i<coordinates.length;i++) {
 					var point = new OpenLayers.Geometry.Point(coordinates[i][0], coordinates[i][1]);
@@ -405,7 +405,7 @@ foreach($vehicles as $vehicle)
 				var polygonFeature = new OpenLayers.Feature.Vector(poly, null, siteStyle);
 				map.addLayer(vectors);
 				vectors.addFeatures([polygonFeature]);
-
+				<?php } ?>
     // on message received we print all the data inside Fleet Table the #container div
     socket.on('notification', function (data) {
 		data_map=data.data;
@@ -568,7 +568,7 @@ function setHTML(response)
 					var alertNotif = parseInt($('#notifs').text()) || 0;
 					var one = 1;
 					var totalAlert = alertNotif + one;
-					gritterAlert(<?php echo $region->in_out;?>);
+					regionAlert('<?php echo $region->in_out;?>');
 					$('#notifs').replaceWith('29');
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
@@ -577,10 +577,10 @@ function setHTML(response)
 					});
 };
 
-function regionAlert() {
+function regionAlert(in_out) {
 	$.gritter.add({
 		// (string | mandatory) the heading of the notification
-		title: 'Region Alert',
+		title: 'Region Alert ' + in_out,
 		// (string | mandatory) the text inside the notification
 		text: 'Mobile A keluar Area<a href="#" class="orange">magnis dis parturient</a>',
 		class_name: 'gritter-success' + ' gritter-light'
