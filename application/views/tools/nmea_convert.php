@@ -15,7 +15,40 @@ html,body,#map-canvas {
 </style>
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+<script src="<?php echo base_url()?>assets/js/OpenLayers/OpenLayers.js"></script>
 <script>
+var lat1 = -6.910232;
+var lng1 = 107.65427;
+var lat2 = -6.910879;
+var lng2 = 107.654235;
+
+var point1 = new OpenLayers.Geometry.Point(lat1,lng1);
+var point2 = new OpenLayers.Geometry.Point(lat2,lng2);
+
+var line = new OpenLayers.Geometry.LineString([point1, point2]);
+
+var Mercator = new OpenLayers.Projection("EPSG:900913");
+var Geographic = new OpenLayers.Projection("EPSG:4326");
+alert('OpernLayers '+line.getGeodesicLength(Geographic));
+
+
+
+
+//Server Jumbo
+var p1 = new google.maps.LatLng(lat1,lng1);
+
+// office IT adong 
+//var p2 = new google.maps.LatLng(-0.576131666666666, 115.71075666666667);
+
+// last detect area to mess bunyut
+//var p2 = new google.maps.LatLng(-0.5124583333333333,115.71324666666666);
+
+
+var p2 = new google.maps.LatLng(lat2,lng2);
+
+
+alert('GoogleMaps '+calcDistance(p1, p2));
+
 function initialize() {
   var myLatlng = new google.maps.LatLng(<?php echo $lat.','.$lng?>);
   var mapOptions = {
@@ -79,24 +112,11 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-// Server Jumbo
-var p1 = new google.maps.LatLng(-0.5794216666666667,115.70552);
 
-// office IT adong 
-//var p2 = new google.maps.LatLng(-0.576131666666666, 115.71075666666667);
-
-// last detect area to mess bunyut
-//var p2 = new google.maps.LatLng(-0.5124583333333333,115.71324666666666);
-
-
-var p2 = new google.maps.LatLng(-0.5761116666666666,115.71077333333334);
-
-
-alert(calcDistance(p1, p2));
 
 //calculates distance between two points in km's
 function calcDistance(p1, p2){
-  return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+  return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) ).toFixed(2);
 }
 // var rad = function(x) {
 // 	  return x * Math.PI / 180;
