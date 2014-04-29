@@ -13,8 +13,7 @@ html,body,#map-canvas {
 	height: 400px;
 }
 </style>
-<script
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 <script src="<?php echo base_url()?>assets/js/OpenLayers/OpenLayers.js"></script>
 <script>
 var lat1 = -0.47171315382621;
@@ -78,16 +77,9 @@ function initialize() {
 //   });
 
 	var locations = [
-	                 ['Default', <?php echo $lat.','.$lng?>, 1],
-	                 ['MessRoom5a', <?php echo nmea_conv('0019.31791','11551.38884')?>, 2],
-	                 ['MessRoom5b', <?php echo nmea_conv('0019.31810','11551.38892')?>, 3],
-	                 ['MessRoom5c', <?php echo nmea_conv('0019.31829','11551.38898')?>, 4],
-	                 ['MessRoom5d', <?php echo nmea_conv('0019.31839','11551.38907')?>, 5],
-	                 ['MessRoom5e', <?php echo nmea_conv('0019.31858','11551.38933')?>, 6],
-// 	                 ['MessRoom5', -0.321965,115.85650283333, 2],
-// 	                 ['MessRoom52', -0.32197633333333,115.85648883333, 3],
-	                 ['Bunyut Shelter', -0.320576,115.849947, 7],
-	                 ['Bunyut Repeater', -0.319228333333333,115.022428333333, 8]
+	             	<?php foreach($distance as $dis) {?>
+	                 [<?php echo "'".$dis->label . '\' , '. $dis->lat.','.$dis->lng?>, 1],
+	                 <?php } ?>
 	               ];
 	var infowindow = new google.maps.InfoWindow();
 	var marker, i;

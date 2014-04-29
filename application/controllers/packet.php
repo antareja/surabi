@@ -80,8 +80,11 @@ class Packet extends CI_Controller {
 	
 
 	public function location_pg($lng,$lat) {
-		$data['distance'] = $this->mpacket->getLocationDistance($lng, $lat);
-		$this->load->view('mtools/distance',$data);
+		$data['pageTitle'] = 'location distance postgis';
+		$data['lng'] = $lng;
+		$data['lat'] = $lat; 
+		$data['distance'] = $this->mpacket->getAllLocationDistance($lng, $lat);
+		$this->load->view('tools/distance',$data);
 	}
 	
 	public function location($lat) {
