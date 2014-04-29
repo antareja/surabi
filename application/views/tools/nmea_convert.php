@@ -17,10 +17,10 @@ html,body,#map-canvas {
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 <script src="<?php echo base_url()?>assets/js/OpenLayers/OpenLayers.js"></script>
 <script>
-var lat1 = -6.910232;
-var lng1 = 107.65427;
-var lat2 = -6.910879;
-var lng2 = 107.654235;
+var lat1 = -0.47171315382621;
+var lng1 = 115.72020039136;
+var lat2 = -0.47175;
+var lng2 = 115.72;
 
 var point1 = new OpenLayers.Geometry.Point(lat1,lng1);
 var point2 = new OpenLayers.Geometry.Point(lat2,lng2);

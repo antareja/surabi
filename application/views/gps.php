@@ -52,16 +52,16 @@ foreach ($last_position as $position)
 		<div id="map_canvas" style="width: 100%; height: 80%"></div>
 		<div>
 			<p>
-				Lat Lng &nbsp;&nbsp;&nbsp;: <span id="txt_lat"></span>, &nbsp; <span
-					id="txt_long"></span>
+				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span
+					id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
 			
 			
 			<p>
 			
 			
 			<p>
-				Click Lat Lng &nbsp;&nbsp;&nbsp;: <span id="click_lat"></span>,
-				&nbsp; <span id="click_lng"></span>
+				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>,
+				&nbsp; <span id="click_lat"></span>
 			</p>
 		</div>
 	</div>
