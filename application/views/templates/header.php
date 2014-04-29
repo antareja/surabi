@@ -129,6 +129,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 						<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 							<li><a href="<?php echo site_url()?>fleet">All Vehilce</a></li>
 							<li><a>Specific Vehicle</a></li>
+							<li><a>Vehicle Timeline</a></li>
 						</ul>
 					</li>
 					<!-- 					<li class="light-blue2 dropdown-hover"><a href="#"> <i class="icon-download-alt"></i>  -->
