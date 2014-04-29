@@ -131,11 +131,15 @@ class MReport extends CI_Model {
 	}
 	
 	function getStopReportGroup($begin, $end,$vehicles) {
-		$this->db->group_by('latitude, longitude, mobile_address,DATE(create_at)');
+// 		$postgres = 'EXTRACT(EPOCH FROM (MAX(create_at::time) - MIN(create_at::time)))/3600 AS duration';
+		$postgres = 'MAX(create_at::time) - MIN(create_at::time) AS duration,';
+		$mysql = 'TIMEDIFF(MAX(time),MIN(time)) AS duration';
 		$this->db->select('vehicles.name, vehicles.vehicle_id, MIN(time) start_time, MAX(time) end_time, mobile_address, latitude,longitude
-				, location,TIMEDIFF(MAX(time),MIN(time)) AS duration, MAX(DATE(create_at)) date');
+				, MAX(location) as location , '.$postgres.', MAX(DATE(create_at)) date');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->where_in('vehicle_id', $vehicles);
+		$this->db->where('velocity','0.0');
+		$this->db->group_by('latitude, longitude, mobile_address,DATE(create_at), vehicles.name, vehicles.vehicle_id');
 		$this->db->order_by('DATE(create_at), mobile_address','DESC');
 		if($_SESSION['gps_level'] == 'operator') {
 			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
@@ -143,9 +147,10 @@ class MReport extends CI_Model {
 			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
 		}
 		$query = $this->db->get_where('packet', array(
-				'create_at >=' => $begin . ' 08:00',
-				'create_at <=' => $end . ' 23:00'
+				'DATE(create_at) >=' => $begin ,
+				'DATE(create_at) <=' => $end 
 		));
+// 		echo $this->db->last_query();exit;
 		return $query;
 	}
 	
