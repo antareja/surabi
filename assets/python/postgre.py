@@ -1,25 +1,26 @@
-import pymysql
-from urllib.request import Request, urlopen
-from urllib import parse,error
-import nmea_conv
-
-conn = pymysql.connect(host='127.0.0.1', user='root', passwd='root', db='gps_tracker')
-cur = conn.cursor()
-cur.execute("SELECT username, email FROM tcm_user")
-print(cur.description)
-for row in cur:
-    username = row[0]
-    print(str(username))
-cur.close()
-conn.close()
-url = "http://surabi.dev/packet/test"
-x = {'spam': 1, 'eggs': 2, 'bacon': 0}
-x.update({'name': 'haidar'})
-params = parse.urlencode(x)
-try:
-    f = urlopen(url, params.encode('utf-8'))
-    print(f.read())
-except error.URLError as e: print("URL Error:",e.reason , url)
-except error.HTTPError as e: print("HTTP Error:",e.code , url)
-
-print (nmea_conv.convLatLng(-34.5673, 11542.6468))
+#!/usr/bin/python
+import psycopg2
+import sys
+ 
+def main():
+    #Define our connection string
+    conn_string ="host='localhost' dbname='pg_gps_tracker' user='postgres' password='root'"
+ 
+    # print the connection string we will use to connect
+    print("Connecting to database\n    ->%s") # % (conn_string)
+ 
+    # get a connection, if a connect cannot be made an exception will be raised here
+    conn = psycopg2.connect(conn_string)
+ 
+    # conn.cursor will return a cursor object, you can use this cursor to perform queries
+    cur = conn.cursor()
+    print("Connected!\n")
+    
+    cur.execute("SELECT username from tcm_user")
+    rows = cur.fetchall()
+    print("\nShow me the databases:\n")
+    for row in rows:
+        print (row[0])
+ 
+if __name__ == "__main__":
+    main()

@@ -53,6 +53,7 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
+				$data['location'] = $post['location'].'-'.$post['distance'];
 				// Only for google maps
 				$data['location'] = $this->location_op($post['lng'] . ',' . $post['lat']);
 				// Test Curl with Ajax

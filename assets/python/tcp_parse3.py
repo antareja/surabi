@@ -5,6 +5,8 @@ import pymysql
 from urllib.request import Request, urlopen
 from urllib import parse,error
 import nmea_conv
+import time
+import distance
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
@@ -59,8 +61,10 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
             print(jam)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            
+            d = distance.main(lat,lng)
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label'] + "&distance" + d['distance']
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : d['distance']})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
@@ -82,8 +86,9 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             print(jam)
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop})
+            d = distance.main(lat,lng)
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label'] + "&distance" + d['distance']
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : d['distance']})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))

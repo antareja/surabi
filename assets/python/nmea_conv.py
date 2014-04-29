@@ -15,7 +15,7 @@ def convLng(lng):
     return str(resultLng)
 
 def convLatLng(lat,lng):
-    resultLat = (lat / 60)
+    resultLat = (float(lat) / 60)
     firstLng = str(lng)[:3]
     secLng = str(lng)[3:]
     secSixty = float(secLng) / 60
@@ -29,8 +29,8 @@ def convLatLng(lat,lng):
 if __name__ == '__main__':
     # test1.py executed as script
     # do something
-    lat = -0.458245
-    lng = 11542.6468
+    #lat = -0.458245
+    #lng = 11542.6468
     convLat(lat)
     convLng(lng)
     convLatLng(lat,lng)
