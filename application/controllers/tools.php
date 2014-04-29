@@ -133,4 +133,45 @@ class Tools extends CI_Controller {
 		$query = $this->mtools->convert_nmea_fleet();
 		echo 'success';
 	}
+	
+	public function conv_xy(){
+		$this->load->library('gPoint');
+		$data['gPoint'] = new gPoint();
+// 		$gPoint->setLongLat(-121.85831, 37.42104);
+
+// 		echo "I live at: "; $gPoint->printLatLong(); echo "<br>";
+		$data['mtools'] = $this->mtools;
+// 		$gPoint->convertLLtoTM();
+// 		echo "Which in a UTM projection is: "; $gPoint->printUTM(); echo "<br>";
+		$data['xyRoad'] = $this->mtools->getAllXYroad();
+//		foreach ($data['xyRoad'] as $xy) {
+// 			$gPoint->setUTM( $xy->x, $xy->y, "50");
+// 			$gPoint->convertTMtoLL();
+// 			echo $gPoint->Long();
+// 			echo $gPoint->Lat();
+// 			$gPoint->printLatLong();
+// 			echo "Location $xy->label: "; $gPoint->long; echo "<br>";
+//		}
+		$this->load->view('tools/conv_xy',$data);
+	}
+	
+	public function update_lat_lng($lat, $lng, $road_id){
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		echo $lat;
+		//return $this->mtools->updateLatLngRoad($data, $road_id);
+	}
+	
+	public function progress(){
+// 		$total = 10;
+// 		// Loop through process
+// 		for($i=1; $i<=$total; $i++){
+// 			// Calculate the percentation
+// 			$percent = intval($i/$total * 100)."%";
+// 			echo $percent. ' -'. $i;
+// 			sleep(20);
+// 			echo str_repeat(' ',1024*64);
+// 		}
+		$this->load->view('tools/progress');
+	}
 }
