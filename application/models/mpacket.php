@@ -47,6 +47,23 @@ class MPacket extends CI_Model {
 		return $query->result();
 	}
 	
+	/**
+	 * Work on Postgres Postgis only
+	 * @param POINT $lng
+	 * @param POINT $lat
+	 */
+	function getLocationDistance($lng,$lat) {
+		$sql = "SELECT label, CHAR_LENGTH(label),lng,lat, ST_Distance(geog_def, poi) AS distance_m
+				FROM tcm_road,
+				  (select ST_MakePoint(115.71834017841,   -0.49391354590863)::geography as poi) as poi
+				WHERE ST_DWithin(geog_def, poi, 100000)
+				AND CHAR_LENGTH(label) >=6
+				ORDER BY ST_Distance(geog_def, poi)
+				LIMIT 1;";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	
 	function getAllRegion() {
 		$query = $this->db->get('region_alert');
 		return $query->result();

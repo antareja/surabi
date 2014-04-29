@@ -79,6 +79,11 @@ class Packet extends CI_Controller {
 	}
 	
 
+	public function location_pg($lng,$lat) {
+		$data['distance'] = $this->mpacket->getLocationDistance($lng, $lat);
+		$this->load->view('mtools/distance',$data);
+	}
+	
 	public function location($lat) {
 		$location = explode(',', $lat);
 		$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" . $lat . "&sensor=false&language=id";
