@@ -118,12 +118,9 @@ var tampung_posisi = {
 <?php 
 	foreach($vehicles as $vehicle)
 	{
-		if($data_last_position[$vehicle->gps_mobile_address]->latitude!="")
-		{
-			$posisi= '"'.$data_last_position[$vehicle->gps_mobile_address]->location." jarak ".$data_last_position[$vehicle->gps_mobile_address]->distance.' meter"';
-		}
-		else 
-		{
+		if($data_last_position[$vehicle->gps_mobile_address]->location!="") {
+			$posisi="new OpenLayers.LonLat(".$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude.")";
+		} else  {
 			$posisi="''";
 		}
 		echo "marker_".$vehicle->gps_mobile_address.": { \n";
@@ -513,15 +510,13 @@ function setHTML(response)
 					provinsi=provinsi.replace(/"/g,"");
                 
 					var lokasi=jalan_tambang+jalan+provinsi;
-					
+					*/
 					$.ajax({
 					    'url' : '<?php //echo base_url()."packet/location_op/"?>'+lng+'/'+lat,
 					    'type' : 'POST', //the way you want to send data to your URL
 					    'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
 					    	lokasi=data;
-					    }
-					});
-					*/    	
+					    	
 				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,data_map["location"]+ " jarak "+ data_map["distance"] + "m",lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
 				iconSize = new OpenLayers.Size(40,25);
 				// Get Vehicle Icon here .. but cannot resize  
@@ -569,6 +564,8 @@ function setHTML(response)
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
 			     <?php } ?>
+			      }
+					});
 };
 
 function regionAlert(in_out) {
@@ -618,6 +615,5 @@ function generate_popup(nama_mobil_popup,lokasi_popup,lat_popup,lng_popup,tangga
 	popupContentHTML2+="</b>";
 	return popupContentHTML2;
 }
-
 //]]>
 </script>
