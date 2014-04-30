@@ -116,6 +116,7 @@ foreach ($last_position as $position)
 //<![CDATA[
 var tampung_posisi = {
 <?php 
+	// for markers icon
 	foreach($vehicles as $vehicle)
 	{
 		if($data_last_position[$vehicle->gps_mobile_address]->location!="") {
@@ -177,7 +178,7 @@ var markers={};
 var marker="";
 var iconSize;
 var popupContentHTML="";
-var data_map="";
+var data_nodejs="";
 var name = "";
 var lat = "";
 var lng = "";
@@ -399,28 +400,28 @@ foreach($vehicles as $vehicle)
 				<?php } ?>
     // on message received we print all the data inside Fleet Table the #container div
     socket.on('notification', function (data) {
-		data_map=data.data;
-		if(data_map["packet_number"]=="104" || data_map["packet_number"]=="100")
+		data_nodejs=data.data;
+		if(data_nodejs["packet_number"]=="104" || data_nodejs["packet_number"]=="100")
 		{
-			name = data_map["system"];
-			lat = data_map["lat"];
-			lng = data_map["lng"];
+			name = data_nodejs["system"];
+			lat = data_nodejs["lat"];
+			lng = data_nodejs["lng"];
 
 			//-----------------------------------udpate fleet------------------------------------------
-			$("#fleet_speed_" + data_map["mobile"]).html(data_map["velocity"]);
-			$("#fleet_position_" + data_map["mobile"]).html(data_map["tanggal"] + " " + data_map["jam"]);
-			$("#fleet_bearing_" +data_map["mobile"]).html(data_map["bearing"]);
-			$('#fleet_location_'+data_map["mobile"]).html(data_map["location"] + " jarak "+ data_map["distance"] + " m");
-			$("#tr_" + data_map["mobile"]).toggle("pulsate");
-			$("#tr_" + data_map["mobile"]).toggle("pulsate");
+			$("#fleet_speed_" + data_nodejs["mobile"]).html(data_nodejs["velocity"]);
+			$("#fleet_position_" + data_nodejs["mobile"]).html(data_nodejs["tanggal"] + " " + data_nodejs["jam"]);
+			$("#fleet_bearing_" +data_nodejs["mobile"]).html(data_nodejs["bearing"]);
+			$('#fleet_location_'+data_nodejs["mobile"]).html(data_nodejs["location"] + " jarak "+ data_nodejs["distance"] + " m");
+			$("#tr_" + data_nodejs["mobile"]).toggle("pulsate");
+			$("#tr_" + data_nodejs["mobile"]).toggle("pulsate");
 			//-----------------------------------------------------------------------------------------
 			
-			marker_id='marker_' + data_map["mobile"];
-				marker_layer.removeMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+			marker_id='marker_' + data_nodejs["mobile"];
+			marker_layer.removeMarker(nama_marker["marker_"+data_nodejs["mobile"]].nama);
 				
 			
-				var point2=new OpenLayers.LonLat(lng,lat);
-				var pixel=map.getPixelFromLonLat(point2);
+		var point2=new OpenLayers.LonLat(lng,lat);
+		var pixel=map.getPixelFromLonLat(point2);
 					
 				//document.getElementById('nodelist').innerHTML = "Loading... please wait...";
                 /*
@@ -510,28 +511,32 @@ function setHTML(response)
 					provinsi=provinsi.replace(/"/g,"");
                 
 					var lokasi=jalan_tambang+jalan+provinsi;
-					*/
+					// using nodejs get directly from python
 					$.ajax({
 					    'url' : '<?php //echo base_url()."packet/location_op/"?>'+lng+'/'+lat,
 					    'type' : 'POST', //the way you want to send data to your URL
 					    'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
 					    	lokasi=data;
-					    	
-				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,data_map["location"]+ " jarak "+ data_map["distance"] + "m",lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
-				iconSize = new OpenLayers.Size(40,25);
-				// Get Vehicle Icon here .. but cannot resize  
-				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon,iconSize,null);
+					      }
+					});
+					*/    	
+			popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_nodejs["mobile"]].nama,data_nodejs["location"]+ " jarak "+ data_nodejs["distance"] + "m",lat,lng,data_nodejs["tanggal"],data_nodejs["jam"],data_nodejs["velocity"]);
+			// get from latest position from db
+			// alert(last_position['posisi_00000000000000000000000001'].nama);
+			iconSize = new OpenLayers.Size(40,25);
+			// Get Vehicle Icon here .. but cannot resize  
+			var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_nodejs["mobile"]].icon,iconSize,null);
 			
 			var point=new OpenLayers.LonLat(lng,lat);
-			nama_marker["marker_"+data_map["mobile"]].nama=new OpenLayers.Marker(point,icon);
+			nama_marker["marker_"+data_nodejs["mobile"]].nama=new OpenLayers.Marker(point,icon);
 			
 			ll = new OpenLayers.LonLat(-35,20);
             var popupClass = AutoSizeAnchored;
             
-			popup_marker["popup_marker_"+data_map["mobile"]].popup = new OpenLayers.Feature(marker_layer, point); 
-            popup_marker["popup_marker_"+data_map["mobile"]].popup.closeBox = true;
-            popup_marker["popup_marker_"+data_map["mobile"]].popup.popupClass = popupClass;
-            popup_marker["popup_marker_"+data_map["mobile"]].popup.data.popupContentHTML = popupContentHTML;
+			popup_marker["popup_marker_"+data_nodejs["mobile"]].popup = new OpenLayers.Feature(marker_layer, point); 
+            popup_marker["popup_marker_"+data_nodejs["mobile"]].popup.closeBox = true;
+            popup_marker["popup_marker_"+data_nodejs["mobile"]].popup.popupClass = popupClass;
+            popup_marker["popup_marker_"+data_nodejs["mobile"]].popup.data.popupContentHTML = popupContentHTML;
             markerClick = function (evt) {
                 if (this.popup == null) {
                     this.popup = this.createPopup(this.closeBox);
@@ -543,15 +548,15 @@ function setHTML(response)
                 currentPopup = this.popup;
                 OpenLayers.Event.stop(evt);
             };
-            nama_marker["marker_"+data_map["mobile"]].nama.events.register("mouseover", popup_marker["popup_marker_"+data_map["mobile"]].popup, markerClick);
+            nama_marker["marker_"+data_nodejs["mobile"]].nama.events.register("mouseover", popup_marker["popup_marker_"+data_nodejs["mobile"]].popup, markerClick);
             var ada=jQuery.inArray( marker_id, filter );
 			if(ada>=0)
 			{
-				marker_layer.addMarker(nama_marker["marker_"+data_map["mobile"]].nama);
+				marker_layer.addMarker(nama_marker["marker_"+data_nodejs["mobile"]].nama);
 			}
 			var point_marker=new OpenLayers.Geometry.Point(lng,lat);
 			cek_marker.push(marker_id);
-			tampung_posisi["marker_"+data_map["mobile"]].posisi=point;
+			tampung_posisi["marker_"+data_nodejs["mobile"]].posisi=point;
 			var dalam=poly.containsPoint(point_marker);
 			<?php # Alert change into notif on top header but not fix yet still dummy
 				 if($region) {
@@ -562,12 +567,12 @@ function setHTML(response)
 					regionAlert('<?php echo $region->in_out;?>');
 					$('#notifs').replaceWith('29');
 // 					alert($('#notifs').text());
-				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
+				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_nodejs['mobile']);";
 			     <?php } ?>
-			      }
-					});
-};
 
+}
+
+// get data directly from nodejs , processing alert by python
 function regionAlert(in_out) {
 	$.gritter.add({
 		// (string | mandatory) the heading of the notification
