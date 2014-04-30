@@ -1,4 +1,3 @@
-
 # Echo client program
 import socket
 import pymysql
@@ -7,17 +6,22 @@ from urllib import parse,error
 import nmea_conv
 import time
 import distance
+import sys
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
 url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
 
-
+url = "http://localhost:8000/?%s"
+#parse_test = parse.urlencode({'spam': 1, 'eggs': 2, 'bacon': 0})
+#sys.exit(0)
 # Get Data from SQL 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
 s.send(b'Hello, world')
+# test using dict
+
 while True:
  listen = s.recv(1024)
  line = repr(listen.decode('utf-8', 'ignore'))
@@ -31,7 +35,7 @@ while True:
         base_ip = line[32:47]
         packet_number = line[47:50]
         base_modem_channel = line[50:51]
-        url = "http://localhost:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
+        #url = "http://localhost:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
         value = {"full_packet" : line , "source" : source , "system" : system, "mobile" : mobile, "base_ip" : base_ip, "packet_number" : packet_number , "base_modem_channel" : base_modem_channel}
         # input change
         if packet_number == '072' :
@@ -43,7 +47,7 @@ while True:
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
-                urlopen(url)
+                urlopen(url % parse_data.encode('utf-8'))
             except error.URLError as e: print("URL Error:",e.read() , url)
             except error.HTTPError as e: print("HTTP Error:",e.read() , url)
         # gps status with position    
@@ -70,15 +74,16 @@ while True:
             lng = nmea_conv.convLng(lng_nmea)
             print("lat,lng",lat,lng)
             d = distance.main(lat,lng)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location=" + d['label']  + "&distance=" + str(d['distance'])
+            #url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location=" + d['label']  + "&distance=" + str(d['distance'])
             value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat_nmea" : lat_nmea , "lng_nmea" : lng_nmea ,"lat" : lat , "lng" : lng , "knots" : knots , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : str(d['distance'])})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
             except error.URLError as e: print("URL Error:",e.read() , url_parse)
             except error.HTTPError as e: print("HTTP Error:",e.read() , url_parse)
+            # send GET method to nodejs
             try:
-                urlopen(url)
+                urlopen(url % parse_data.encode('utf-8'))
             except error.URLError as e: print("URL Error:",e.read() , url)
             except error.HTTPError as e: print("HTTP Error:",e.read() , url)
         # gps status with position
@@ -105,15 +110,18 @@ while True:
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
             print("test",lat,lng)
             d = distance.main(lat,lng)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label']  + "&distance=" + str(d['distance'])
+            #url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label']  + "&distance=" + str(d['distance'])
+            #print(url)
+            #sys.exit(0)
             value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : lat , "lng" : lng , "knots" : knots ,"velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : str(d['distance'])})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
             except error.URLError as e: print("URL Error:",e.read() , url_parse)
             except error.HTTPError as e: print("HTTP Error:",e.read() , url_parse)
+            # send GET method to nodejs
             try:
-                urlopen(url)
+                urlopen(url % parse_data.encode('utf-8'))
             except error.URLError as e: print("URL Error:",e.read() , url)
             except error.HTTPError as e: print("HTTP Error:",e.read() , url)
             # print(response.read())

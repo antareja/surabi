@@ -5,7 +5,17 @@ import distance
 import time
 import re
 import sys
-# ,   
+from urllib.request import Request, urlopen
+import urllib.parse
+
+url = "http://localhost:8000/?%s"
+params = urllib.parse.urlencode({'spam': 1, 'eggs': 2, 'bacon': 0})
+try:
+    urlopen(url % params)
+except error.URLError as e: print("URL Error:",e.read() , url)
+except error.HTTPError as e: print("HTTP Error:",e.read() , url)
+
+sys.exit(0)
 lng = 115.719
 lat = -0.493033   
 
