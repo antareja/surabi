@@ -6,7 +6,7 @@ import urllib2
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
-url_parse = 'http://tcmgps.com/packet'  # Parse Packet Data to php and insert to database
+url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
 
 # Convert NMEA to regular Latitude Longitude
 def convLat(lat):
@@ -85,10 +85,8 @@ while True:
             try:
                 urllib2.urlopen(req)
             except urllib2.HTTPError, err:
-                if err.code == 404:
-                    print 'error'
-                else:
-                    raise    
+                error_message = err.read()
+                print error_message   
             urllib2.urlopen(url)
         # gps status with position
         elif packet_number == '100' :
@@ -113,10 +111,8 @@ while True:
             try:
                 urllib2.urlopen(req)
             except urllib2.HTTPError, err:
-                if err.code == 404:
-                    print 'error'
-                else:
-                    raise
+                error_message = err.read()
+                print error_message   
             # print(response.read())
             urllib2.urlopen(url)
         elif packet_number == '103' :

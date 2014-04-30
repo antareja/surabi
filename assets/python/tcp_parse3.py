@@ -10,7 +10,7 @@ import distance
 
 HOST = 'localhost'  # The remote host
 PORT = 15000  # The same port as used by the server
-url_parse = 'http://tcmgps.com/packet'  # Parse Packet Data to php and insert to database
+url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
 
 
 # Get Data from SQL 
@@ -44,8 +44,8 @@ while True:
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
                 urlopen(url)
-            except error.URLError as e: print("URL Error:",e.reason , url)
-            except error.HTTPError as e: print("HTTP Error:",e.code , url)
+            except error.URLError as e: print("URL Error:",e.read() , url)
+            except error.HTTPError as e: print("HTTP Error:",e.read() , url)
         # gps status with position    
         elif packet_number == '104' :
             print("104 Packet Number")
@@ -61,16 +61,26 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
             print(jam)
-            
+            print("type lat",type(lat))
+            lat_nmea = lat
+            lng_nmea = lng
+            #knots to kmh
+            knots = velocity
+            lat = nmea_conv.convLat(lat_nmea)
+            lng = nmea_conv.convLng(lng_nmea)
+            print("lat,lng",lat,lng)
             d = distance.main(lat,lng)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label'] + "&distance" + d['distance']
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : d['distance']})
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location=" + d['label']  + "&distance=" + str(d['distance'])
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat_nmea" : lat_nmea , "lng_nmea" : lng_nmea ,"lat" : lat , "lng" : lng , "knots" : knots , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : str(d['distance'])})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
+            except error.URLError as e: print("URL Error:",e.read() , url_parse)
+            except error.HTTPError as e: print("HTTP Error:",e.read() , url_parse)
+            try:
                 urlopen(url)
-            except error.URLError as e: print("URL Error:",e.reason , url)
-            except error.HTTPError as e: print("HTTP Error:",e.code , url)
+            except error.URLError as e: print("URL Error:",e.read() , url)
+            except error.HTTPError as e: print("HTTP Error:",e.read() , url)
         # gps status with position
         elif packet_number == '100' :
             print("100 Packet Number")
@@ -85,15 +95,27 @@ while True:
                 tanggal = '0' + tanggal
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             print(jam)
+            lat_nmea = lat
+            lng_nmea = lng
+            #knots to kmh
+            knots = velocity
+            lat = nmea_conv.convLat(lat_nmea)
+            lng = nmea_conv.convLng(lng_nmea)
+            
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
+            print("test",lat,lng)
             d = distance.main(lat,lng)
-            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat=" + nmea_conv.convLat(lat) + "&lng=" + nmea_conv.convLng(lng) + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label'] + "&distance" + d['distance']
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : nmea_conv.convLat(lat) , "lng" : nmea_conv.convLng(lng) , "velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : d['distance']})
+            url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label']  + "&distance=" + str(d['distance'])
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , "lat" : lat , "lng" : lng , "knots" : knots ,"velocity" : velocity , "bearing" : bearing , "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, "location" : d['label'], "distance" : str(d['distance'])})
             parse_data = parse.urlencode(value)
             try:
                 urlopen(url_parse, parse_data.encode('utf-8'))
+            except error.URLError as e: print("URL Error:",e.read() , url_parse)
+            except error.HTTPError as e: print("HTTP Error:",e.read() , url_parse)
+            try:
                 urlopen(url)
-            except error.URLError as e: print("URL Error:",e.reason , url)
+            except error.URLError as e: print("URL Error:",e.read() , url)
+            except error.HTTPError as e: print("HTTP Error:",e.read() , url)
             # print(response.read())
         elif packet_number == '103' :
             print("103 Packet Number")

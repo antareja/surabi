@@ -53,9 +53,13 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
-				$data['location'] = $post['location'].'-'.$post['distance'];
-				// Only for google maps
-				$data['location'] = $this->location_op($post['lng'] . ',' . $post['lat']);
+				$data['latitude_nmea'] = $post['lat_nmea'];
+				$data['longitude_nmea'] = $post['lng_nmea'];
+				$data['knots'] = $post['knots'];
+				
+				if (isset($post['location'])) {
+					$location = $post['location'].'-'.$post['distance'];
+				}
 				// Test Curl with Ajax
 				// $data['full_packet'] = $this->test_curl();
 				$data['velocity'] = $post['velocity'];
@@ -72,7 +76,7 @@ class Packet extends CI_Controller {
 			$this->check_speed($data['velocity'], $insert_id);
 			// check Region
 			if ($post['packet_number'] == '104' || $post['packet_number'] == '100' && isset($insert_id)) {
-				$this->check_point_op($post['lng'], $post['lat'], $insert_id);
+// 				$this->check_point_op($post['lng'], $post['lat'], $insert_id);
 			}
 			// test Region
 			// $this->test_region();

@@ -8,7 +8,7 @@ application/third_party/mpdf/qrcode/*
 old/*
 application/db/*
 admin/*
-logs/*
+assets/logs/*
 php_errors.log
 
 application/cache/*
