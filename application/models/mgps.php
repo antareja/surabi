@@ -40,7 +40,7 @@ class MGps extends CI_Model {
 	}
 	
 	function getLastPosition() {
-		$sql = "SELECT gps_mobile_address, name, latitude, longitude, create_at, velocity, bearing FROM tcm_packet p
+		$sql = "SELECT gps_mobile_address, name, latitude, longitude,location, distance, create_at, velocity, bearing FROM tcm_packet p
 				RIGHT JOIN tcm_vehicles v on p.mobile_address = v.gps_mobile_address
 				WHERE id_packet in (SELECT MAX(id_packet) FROM tcm_packet GROUP BY mobile_address)
 				OR v.gps_mobile_address NOT in ( SELECT mobile_address FROM tcm_packet GROUP BY mobile_address)

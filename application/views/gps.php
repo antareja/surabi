@@ -52,16 +52,10 @@ foreach ($last_position as $position)
 		<div id="map_canvas" style="width: 100%; height: 80%"></div>
 		<div>
 			<p>
-				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span
-					id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
-			
-			
+				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
 			<p>
-			
-			
 			<p>
-				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>,
-				&nbsp; <span id="click_lat"></span>
+				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span>
 			</p>
 		</div>
 	</div>
@@ -101,7 +95,7 @@ foreach ($last_position as $position)
 						<td><a href="#"><?php echo $vehicle->name?></a></td>
 						<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
 						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"
-							class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->longitude?>,<?php echo $data_last_position[$vehicle->gps_mobile_address]->latitude?></td>
+							class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->location?> jarak <?php echo $data_last_position[$vehicle->gps_mobile_address]->distance?> m</td>
 						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->create_at?></td>
 						<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
 						<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
@@ -126,7 +120,7 @@ var tampung_posisi = {
 	{
 		if($data_last_position[$vehicle->gps_mobile_address]->latitude!="")
 		{
-			$posisi="new OpenLayers.LonLat(".$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude.")";
+			$posisi= '"'.$data_last_position[$vehicle->gps_mobile_address]->location." jarak ".$data_last_position[$vehicle->gps_mobile_address]->distance.' meter"';
 		}
 		else 
 		{
@@ -148,7 +142,7 @@ var last_position= {
 					$nama=$data_last_position[$vehicle->gps_mobile_address]->name;
 					$latitude=$data_last_position[$vehicle->gps_mobile_address]->latitude;
 					$longitude=$data_last_position[$vehicle->gps_mobile_address]->longitude;
-					$location=$data_last_position[$vehicle->gps_mobile_address]->longitude.",".$data_last_position[$vehicle->gps_mobile_address]->latitude;
+					$location=$data_last_position[$vehicle->gps_mobile_address]->location." jarak ".$data_last_position[$vehicle->gps_mobile_address]->distance. ' m';
 					$speed=$data_last_position[$vehicle->gps_mobile_address]->velocity;
 					$bearing=$data_last_position[$vehicle->gps_mobile_address]->bearing;
 					$tanggal=explode(" ",$data_last_position[$vehicle->gps_mobile_address]->create_at)[0];
@@ -419,7 +413,7 @@ foreach($vehicles as $vehicle)
 			$("#fleet_speed_" + data_map["mobile"]).html(data_map["velocity"]);
 			$("#fleet_position_" + data_map["mobile"]).html(data_map["tanggal"] + " " + data_map["jam"]);
 			$("#fleet_bearing_" +data_map["mobile"]).html(data_map["bearing"]);
-			$('#fleet_location_'+data_map["mobile"]).html(data_map["lng"]+ ","+ data_map["lat"]);
+			$('#fleet_location_'+data_map["mobile"]).html(data_map["location"] + " jarak "+ data_map["distance"] + " m");
 			$("#tr_" + data_map["mobile"]).toggle("pulsate");
 			$("#tr_" + data_map["mobile"]).toggle("pulsate");
 			//-----------------------------------------------------------------------------------------
@@ -519,14 +513,16 @@ function setHTML(response)
 					provinsi=provinsi.replace(/"/g,"");
                 
 					var lokasi=jalan_tambang+jalan+provinsi;
-					*/
+					
 					$.ajax({
-					    'url' : '<?php echo base_url()."packet/location_op/"?>'+lng+'/'+lat,
+					    'url' : '<?php //echo base_url()."packet/location_op/"?>'+lng+'/'+lat,
 					    'type' : 'POST', //the way you want to send data to your URL
 					    'success' : function(data){ //probably this request will return anything, it'll be put in var "data"
 					    	lokasi=data;
-					    	
-				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,lokasi,lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
+					    }
+					});
+					*/    	
+				popupContentHTML=generate_popup(nama_mobil["nama_mobil_"+data_map["mobile"]].nama,data_map["location"]+ " jarak "+ data_map["distance"] + "m",lat,lng,data_map["tanggal"],data_map["jam"],data_map["velocity"]);
 				iconSize = new OpenLayers.Size(40,25);
 				// Get Vehicle Icon here .. but cannot resize  
 				var icon=new OpenLayers.Icon(customIcons["icon_mobil_"+data_map["mobile"]].icon,iconSize,null);
@@ -573,8 +569,6 @@ function setHTML(response)
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_map['mobile']);";
 			     <?php } ?>
-					    }
-					});
 };
 
 function regionAlert(in_out) {

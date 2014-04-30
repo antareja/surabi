@@ -53,12 +53,13 @@ class Packet extends CI_Controller {
 				$data['time'] = $post['jam'];
 				$data['latitude'] = $post['lat'];
 				$data['longitude'] = $post['lng'];
-				$data['latitude_nmea'] = $post['lat_nmea'];
-				$data['longitude_nmea'] = $post['lng_nmea'];
+				$data['lat_nmea'] = $post['lat_nmea'];
+				$data['lng_nmea'] = $post['lng_nmea'];
 				$data['knots'] = $post['knots'];
-				
+				//$data['road_id'] = $post['road_id'];
 				if (isset($post['location'])) {
-					$location = $post['location'].'-'.$post['distance'];
+					$data['distance'] = $post['distance'];
+					$data['location'] = $post['location'];
 				}
 				// Test Curl with Ajax
 				// $data['full_packet'] = $this->test_curl();

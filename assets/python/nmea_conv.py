@@ -1,7 +1,3 @@
-def printme( str ):
-   ("This prints a passed string into this function")
-   print (str)
-   return
 # Convert NMEA Lat
 # Convert NMEA to regular Latitude Longitude
 def convLat(lat):
@@ -23,6 +19,9 @@ def convLatLng(lat,lng):
     resultLatLng = str(resultLat) + ", " + str(resultLng)
     return str(resultLatLng)
 
+def convKnots(knots):
+    return knots
+
 # Convert Knots to KMH
 
 
@@ -34,7 +33,4 @@ if __name__ == '__main__':
     convLat(lat)
     convLng(lng)
     convLatLng(lat,lng)
-
-#print (convLat(-0.458245))
-#print (convLng(11542.6468))
-#print (convLatLng(-34.5673, 11542.6468))
+    convKnots(knots)

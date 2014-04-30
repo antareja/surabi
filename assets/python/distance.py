@@ -39,7 +39,7 @@ def main(lat, lng):
             # convert label STA or - to KM
             km = label.main(row[0]);
             print("\nGet Closest Distance:", km['km'])
-            return {'label': str(km['km']), 'distance' :row[2]}
+            return {'label': str(km['km']), 'distance' :str(row[2])}
  
 if __name__ == "__main__":
     main(lat, lng)
