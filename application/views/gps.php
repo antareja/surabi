@@ -347,7 +347,7 @@ foreach($vehicles as $vehicle)
                 
                 map.zoomToExtent(bounds);
                 // center location
-                map.setCenter(new OpenLayers.LonLat(115.748856, -0.486716), 7 )
+                map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 7 )
                 // Mouse hover to show lat lng
 				map.events.register("mousemove", map, function(e) {
 					var position = map.getLonLatFromPixel(e.xy);

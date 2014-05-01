@@ -70,6 +70,8 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 <script type="text/javascript">
 	var $path_assets = "assets";
 	var site_url = '<?php echo site_url()?>';
+	var centerLng = 115.748856;
+	var centerLat = -0.486716; 
 	var socket = io.connect('<?php echo base_url_new()?>:8000');
 	try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 	try{ace.settings.check('main-container' , 'fixed')}catch(e){}

@@ -26,7 +26,7 @@ function upload_to($input_name, $name) {
 }
 
 function null_int($int) {
-	return isset($int) ? 0 : $int;
+	return isset($int) ? $int : 0;
 }
 
 function to_pg_array($set) {

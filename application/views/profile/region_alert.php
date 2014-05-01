@@ -217,7 +217,7 @@ table.featureInfo caption {
                 map.addControl(new OpenLayers.Control.Scale($('scale')));
                 map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
                 map.zoomToExtent(bounds);
-                map.setCenter(new OpenLayers.LonLat('116.890', '-0.457'), 7 )
+                map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 7 )
                 // wire up the option button
                 var options = document.getElementById("options");
                 options.onclick = toggleControlPanel;
