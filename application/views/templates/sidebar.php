@@ -49,7 +49,7 @@
 											 <span class="lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>">
 											 <img alt="" width="20" src="<?php echo base_url()."assets/uploads/icon_".$vec->icon_id.".".$vec->image_type?>">
 											 <?php echo $vec->name;?>
-											 <img alt="" src="<?php base_url()?>assets/images/sort_asc_disabled.png">
+											 <img alt="" src="<?php echo base_url()?>assets/images/sort_asc_disabled.png">
 											 </span>
 										</label>
 									</div>
