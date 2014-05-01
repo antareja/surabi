@@ -174,4 +174,19 @@ class Tools extends CI_Controller {
 // 		}
 		$this->load->view('tools/progress');
 	}
+	
+	public function mail(){
+		$this->load->library('email');
+		$this->email->from('haidar@tcmgps.com', 'Haidar Testing');
+		$this->email->to('fiterland_k@banpuindo.co.id');
+// 		$this->email->to('haidar@techinfo.co.id');
+// 		$this->email->cc('coder5@ymail.com');
+// 		$this->email->bcc('haidar.mukmin@gmail.com');
+		
+		$this->email->subject('Email Test using codeigniter');
+		$this->email->message('Testing the email class using codeigniter.');
+		$this->email->send();
+		
+		echo $this->email->print_debugger();
+	}
 }
