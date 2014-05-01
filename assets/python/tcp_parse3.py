@@ -36,7 +36,9 @@ while True:
         packet_number = line[47:50]
         base_modem_channel = line[50:51]
         #url = "http://localhost:8000/?source=" + source + "&system=" + system + "&mobile=" + mobile + "&base_ip=" + base_ip + "&packet_number=" + packet_number + "&base_modem_channel=" + base_modem_channel;
-        value = {"full_packet" : line , "source" : source , "system" : system, "mobile" : mobile, "base_ip" : base_ip, "packet_number" : packet_number , "base_modem_channel" : base_modem_channel}
+        value = {"full_packet" : line , "source" : source , "system" : system, "mobile" : mobile, 
+                 "base_ip" : base_ip, "packet_number" : packet_number , "active" : "active",
+                 "base_modem_channel" : base_modem_channel }
         # input change
         if packet_number == '072' :
             print("072 Packet Number")
@@ -65,7 +67,6 @@ while True:
             jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
             tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
             print(jam)
-            print("type lat",type(lat))
             lat_nmea = lat
             lng_nmea = lng
             #knots to kmh

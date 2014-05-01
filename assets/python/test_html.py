@@ -1,3 +1,4 @@
+#!/Python33/python
 import nmea_conv
 import label
 import distance
@@ -7,6 +8,14 @@ import sys
 from urllib.request import Request, urlopen
 import urllib.parse
 
+print("Content-Type: text/html")
+print ()
+print ("""
+    <TITLE>CGI script ! Python</TITLE>
+    <H1>This is my first CGI script</H1>
+    Hello, world!
+"""
+)
 
 #url = "http://localhost:8000/?%s"
 #params = urllib.parse.urlencode({'spam': 1, 'eggs': 2, 'bacon': 0})
@@ -30,6 +39,8 @@ time.sleep(0.5)
 val = {"lat": lat, "distance" : d['distance'], "lng" : lng}
 re.sub(r'\W+', '', d['label'])
 print('get label is=',d['label'])
-sys.exit(0)
+#sys.exit(0)
 print("type", type(d['label']), type(d['distance']))
 print(str(d['label']), d['distance'], val['distance'])
+
+print("<p>KM is =", d['label'],"</p>")

@@ -3,9 +3,9 @@ import psycopg2
 import sys
 import time
 import label
-start_time = time.time()
  
 def main(lat, lng):
+    start_time = time.time()
     #Define our connection string
     conn_string ="host='localhost' dbname='pg_gps_tracker' user='postgres' password='root'"
  

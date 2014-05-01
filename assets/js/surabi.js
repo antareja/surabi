@@ -232,32 +232,6 @@ function add_marker(isi) {
 	cek_marker.push(isi);
 	marker_layer.addMarker(nama_marker[isi].nama);
 	map.addLayer(marker_layer);
-	selectControl = new OpenLayers.Control.SelectFeature(marker_layer,
-		    {
-		        onSelect: onPopupFeatureSelect,
-		        onUnselect: onPopupFeatureUnselect 
-		    });
-		    map.addControl(selectControl);
-		    selectControl.activate();
-}
-
-function onPopupClose(evt) {
-    selectControl.unselect(selectedFeature);
-}
-function onPopupFeatureSelect(feature) {
-    selectedFeature = feature;
-    popup = new OpenLayers.Popup.FramedCloud("chicken",
-        feature.geometry.getBounds().getCenterLonLat(),
-        null, feature.name, null, true, onPopupClose);
-    popup.panMapIfOutOfView = true;
-    popup.autoSize = true;
-    feature.popup = popup;
-    map.addPopup(popup);
-}
-function onPopupFeatureUnselect(feature) {
-    map.removePopup(feature.popup);
-    feature.popup.destroy();
-    feature.popup = null;
 }
 
 function add_filter(isi) {

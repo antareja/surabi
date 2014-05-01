@@ -54,9 +54,9 @@ foreach ($last_position as $position)
 			<p>
 				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
 			<p>
-<!-- 			<p> -->
-<!-- 				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span> -->
-<!-- 			</p> -->
+			<p>
+				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span>
+			</p>
 		</div>
 	</div>
 </div>
@@ -94,10 +94,9 @@ foreach ($last_position as $position)
 						</label></td>
 						<td><a href="#"><?php echo $vehicle->name?></a></td>
 						<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
-						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"
-							class="hidden-480"><?php echo $data_last_position[$vehicle->gps_mobile_address]->location?> jarak <?php echo $data_last_position[$vehicle->gps_mobile_address]->distance?> m</td>
+						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->location?> jarak <?php echo $data_last_position[$vehicle->gps_mobile_address]->distance?> m</td>
 						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->create_at?></td>
-						<td class="hidden-480"><span class="label label-sm label-warning"></span></td>
+						<td id="fleet_status_<?php echo $vehicle->gps_mobile_address?>"><span class="label label-sm label-warning">Expiring</span></td>
 						<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
 					</tr>
 						<?php }	?>
@@ -411,6 +410,7 @@ foreach($vehicles as $vehicle)
 			$("#fleet_speed_" + data_nodejs["mobile"]).html(data_nodejs["velocity"]);
 			$("#fleet_position_" + data_nodejs["mobile"]).html(data_nodejs["tanggal"] + " " + data_nodejs["jam"]);
 			$("#fleet_bearing_" +data_nodejs["mobile"]).html(data_nodejs["bearing"]);
+			$("#fleet_status_" +data_nodejs["mobile"]).html('<span class="label label-sm label-success">'+data_nodejs["active"]+'</span>');
 			$('#fleet_location_'+data_nodejs["mobile"]).html(data_nodejs["location"] + " jarak "+ data_nodejs["distance"] + " m");
 			$("#tr_" + data_nodejs["mobile"]).toggle("pulsate");
 			$("#tr_" + data_nodejs["mobile"]).toggle("pulsate");

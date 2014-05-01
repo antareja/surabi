@@ -178,7 +178,8 @@ class Tools extends CI_Controller {
 	public function mail(){
 		$this->load->library('email');
 		$this->email->from('haidar@tcmgps.com', 'Haidar Testing');
-		$this->email->to('fiterland_k@banpuindo.co.id');
+		$this->email->to('haidar.mukmin@gmail.com');
+// 		$this->email->to('fiterlan_k@banpuindo.co.id');
 // 		$this->email->to('haidar@techinfo.co.id');
 // 		$this->email->cc('coder5@ymail.com');
 // 		$this->email->bcc('haidar.mukmin@gmail.com');

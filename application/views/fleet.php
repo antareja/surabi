@@ -35,7 +35,7 @@
 							<td id="speed_<?php echo $vehicle->gps_mobile_address?>">45</td>
 							<td id="location_<?php echo $vehicle->gps_mobile_address?>" class="hidden-480">Near Bandung</td>
 							<td id="position_<?php echo $vehicle->gps_mobile_address?>">Feb 12 10:45:23</td>
-							<td class="hidden-480"><span class="label label-sm label-warning">Expiring</span></td>
+							<td id="status_<?php echo $vehicle->gps_mobile_address?>"><span class="label label-sm label-warning">Expiring</span></td>
 							<td id="bearing_<?php echo $vehicle->gps_mobile_address?>">N (98)</td>
 						</tr>
 						<?php }?>
