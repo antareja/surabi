@@ -24,7 +24,7 @@
 								<tr>
 									<th><i class="icon-user"></i> User</th>
 
-									<th><i class="icon-group"></i> Vendor</th>
+									<th><i class="icon-group"></i> <?php echo ucfirst($this->config->item('vendor'))?></th>
 									<th class="hidden-480">Status</th>
 								</tr>
 							</thead>
@@ -40,7 +40,6 @@
 								</tr>
 							</tbody>
 						</table>
-
 						<p class="muted">
 						<?php
 						foreach ($all_user as $users) {
@@ -51,11 +50,7 @@
 							echo "</p>";
 						}
 						?>
-						
-						
-						
 						<p>
-					
 					</div>
 				</div>
 			</div>
@@ -99,10 +94,10 @@
 						name="re_password">
 				</div>
 			</div>
-			<?php if($_SESSION['gps_level'] == 'admin' && empty($user)) {?>
+			<?php if($_SESSION['gps_level'] == 'admin') {?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-select-2"> Vendor </label>
+					for="form-field-select-2"> <?php echo ucfirst($this->config->item('vendor'))?> </label>
 				<div class="col-sm-9">
 					<select class="form-control" name="company_id" id="company_id"
 						required="required">
@@ -120,7 +115,7 @@
 				if ($level == 'operator') {?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-select-2"> Admin Vendor</label>
+					for="form-field-select-2"> Admin <?php echo ucfirst($this->config->item('vendor'))?></label>
 				<div class="col-sm-9">
 					<select class="form-control" id="admin_id" name="admin_id">
 						<option value="">&nbsp;</option>
@@ -130,7 +125,7 @@
 			<?php } elseif($level == 'admin' && isset($user)) { ?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-1"> Vendor </label>
+					for="form-field-1"> <?php echo ucfirst($this->config->item('vendor'))?> </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" disabled="disabled"
 						value="<?php echo isset($vendor->name) ? $vendor->name: '';?>">

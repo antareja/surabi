@@ -28,8 +28,14 @@
 				<!-- #sidebar-shortcuts -->
 
 				<ul class="nav nav-list">
-					<li class="active"><a href="<?php echo site_url()?>"> <i class="icon-dashboard"></i> <span
-							class="menu-text"> Dashboard </span>
+					<li class="active"><a href="<?php echo site_url()?>"> 
+					<i class="icon-dashboard"></i> 
+					<span class="menu-text"> Dashboard 
+						<span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+							<i class="icon-warning-sign red bigger-130"></i>
+						</span>
+					</span>
+							
 					</a></li>
 
 
@@ -40,20 +46,47 @@
 
 						<ul class="submenu">
 							<?php 
+							$i = 0;
 							foreach ($vehicles as $vec) {
+// 							$icon_status = array(
+// 											array("Active",""),
+// 											array("Move","icon-road"),
+// 											array("Expire","icon-eye-slash"),
+// 											array("Home","icon-home"),
+// 											array("Maintence","icon-wrench"),
+// 											array("Warning","icon-warning"),
+// 											array("Stop","icon-power-off"),
+// 											array("Accidenct","icon-fire"),
+// 											array("Rest","icon-coffe"),
+// 											array("Food","icon-food"),
+// 											array("Night","icon-food"),
+// 											array("Watch","icon-eye"),
+// 											array("Outarea","icon-eye"),
+// 											array("Speed","icon-fighter-jet"),
+// 										);
+							$icon_status = array("icon-exchange","icon-road","icon-flag-checkered","icon-home","icon-wrench","icon-warning-sign"
+											,"icon-power-off","icon-fire", "icon-coffee","icon-food","icon-moon","icon-eye-open",
+											"icon-fighter-jet");
+							$icon_hover = array("Active","Move","Expire","Home","Maintence","Warning"
+									,"Stop","Accidenct", "Rest","Food","Night","Watch","Speed");
+							$icon_color = array("green","blue","red","grey","red","red"
+									,"orange","red", "green","purple","blue","red","red");
+							$i++;
 							?>
 								<li>
+								
 									<div class="checkbox">
 										<label>
 											 <input class="ace cek" type="checkbox" name="car" id="marker_<?php echo $vec->gps_mobile_address?>" onclick="if(this.checked)add_filter(this.id);else remove_filter(this.id);"/> 
-											 <span class="lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>">
-											 <img alt="" width="20" src="<?php echo base_url()."assets/uploads/icon_".$vec->icon_id.".".$vec->image_type?>">
-											 <?php echo $vec->name;?>
-											 <img alt="" src="<?php echo base_url()?>assets/images/sort_asc_disabled.png">
+											 <span class="menu-text lbl" id="vehivle_<?php echo $vec->gps_mobile_address?>">
+												 <img alt="" width="20" src="<?php echo base_url()."assets/uploads/icon_".$vec->icon_id.".".$vec->image_type?>">
+												 <?php echo $vec->name;?>
+												 <span class="badge badge-transparent tooltip-error" title="<?php echo $icon_hover[$i];?>">
+													<i class="<?php echo $icon_status[$i];?> <?php echo $icon_color[$i];?> bigger-130"></i>
+												</span>
 											 </span>
 										</label>
 									</div>
-									
 								</li>
 							<?php } ?>
 						</ul></li>

@@ -107,7 +107,7 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 									class="icon-user"></i>Admin</a></li>
 							<li><a
 								href="<?php echo site_url()?>admin/sys_config/vendor"><i
-									class="icon-briefcase"></i>Vendor</a></li>
+									class="icon-briefcase"></i><?php echo ucfirst($this->config->item('vendor'))?></a></li>
 							<?php }?>		
 							<li><a href="<?php echo site_url()?>admin/sys_config/driver"><i
 									class="icon-user"></i>Driver</a></li>

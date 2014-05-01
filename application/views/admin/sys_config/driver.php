@@ -46,7 +46,7 @@
 			<?php if($_SESSION['gps_level'] == 'admin') {?>
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="form-field-select-2"> Vendor </label>
+					for="form-field-select-2"> <?php echo ucfirst($this->config->item('vendor'))?> </label>
 				<div class="col-sm-9">
 					<select class="form-control" name="company_id" id="company_id">
 						<option value="">&nbsp;</option>

@@ -28,10 +28,12 @@ class Fleet_config extends CI_Controller {
 	public function base($base_id = NULL) {
 		$data['pageTitle'] = 'Base';
 		$data['all_base'] = $this->mfleet_config->getAllBase();
+		$data['companies'] = $this->mfleet_config->getAllCompany();
 		$post = $this->input->post();
 		if ($post) {
 			$post_data['name'] = $post['name'];
-			$post_data['icon_id'] = $post['icon_id'];
+			$post_data['company_id'] = null_int($post['company_id']);
+			$post_data['icon_id'] = null_int($post['icon_id']);
 			$post_data['description'] = $post['description'];
 			$post_data['address'] = $post['address'];
 			$post_data['phone'] = $post['phone'];
@@ -39,11 +41,11 @@ class Fleet_config extends CI_Controller {
 			$post_data['fax'] = $post['fax'];
 			$post_data['email'] = $post['email'];
 			if ($post['id_base']) {
-				$this->mfleet_config->editBase($base_id, $post_data);
-				redirect('admin/fleet_config/' . $base_id);
+				$this->mfleet_config->editBase($post['id_base'], $post_data);
+				redirect('admin/fleet_config/base/' . $post['id_base']);
 			} else {
 				$id = $this->mfleet_config->insertBase($post_data);
-				redirect('admin/fleet_config/' . $id);
+				redirect('admin/fleet_config/base/' . $id);
 			}
 		} elseif ($base_id) {
 			$data['base'] = $this->mfleet_config->getBase($base_id);

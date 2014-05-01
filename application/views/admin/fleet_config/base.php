@@ -17,16 +17,12 @@
 				<div class="widget-body">
 					<div class="widget-main">
 						<p class="muted">
-<?php
-foreach ($all_base as $bases) {
-	echo "<p><a href='" . base_url() . "admin/fleet_config/base/" . $bases->base_id . "'>" . $bases->name . "</a></p>";
-}
-?>
-
-						
-						
+						<?php
+						foreach ($all_base as $bases) {
+							echo "<p><a href='" . base_url() . "admin/fleet_config/base/" . $bases->base_id . "'>" . $bases->name . "</a></p>";
+						}
+						?>
 						<p>
-					
 					</div>
 				</div>
 			</div>
@@ -45,6 +41,21 @@ foreach ($all_base as $bases) {
 					<input type="text" class="form-control" id="name" name="name"
 						placeholder="Name"
 						value="<?php echo isset($base) ? $base->name : '';?>">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right"
+					for="form-field-select-2"> <?php echo ucfirst($this->config->item('vendor'))?> </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="company_id" id="company_id">
+						<option value="">&nbsp;</option>
+						<?php foreach($companies as $company) { ?>
+						<option value="<?php  echo $company->id_company?>"
+							<?php if(isset($base)) {
+							echo $company->id_company == $base->company_id ? 'selected':'';
+						}?>><?php echo $company->name?></option>
+						<?php  }?>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">

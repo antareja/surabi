@@ -2,7 +2,7 @@
 	<div class="page-header">
 		<h1>
 		<small>System Config <i class="icon-double-angle-right"></i></small> 
-		Vendor<?php echo isset($vendor) ? ' : '.$vendor->name .' &nbsp;<button onclick="location.href=\''.site_url().'admin/sys_config/vendor\'" class="btn btn-sm btn-primary">Add New</button>' : " : Add New"?>
+		<?php echo ucfirst($this->config->item('vendor'))?><?php echo isset($vendor) ? ' : '.$vendor->name .' &nbsp;<button onclick="location.href=\''.site_url().'admin/sys_config/vendor\'" class="btn btn-sm btn-primary">Add New</button>' : " : Add New"?>
 		</h1>
 	</div>
 	<!-- /.page-header -->
@@ -12,7 +12,7 @@
 			<div class="widget-box">
 				<div class="widget-header">
 					<h4 class="smaller">
-						List Vendor 
+						List <?php echo ucfirst($this->config->item('vendor'))?> 
 					</h4>
 				</div>
 				<div class="widget-body">
