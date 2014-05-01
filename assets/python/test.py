@@ -21,7 +21,7 @@ lat = -0.493033
 knots = 30.2
 kmh = nmea_conv.convKnots(knots)
 print(kmh)
-sys.exit(0)
+#sys.exit(0)
 data = '1,2,3';
 x , y,z  = data.split(',')
 print(x)

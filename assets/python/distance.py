@@ -25,7 +25,7 @@ def main(lat, lng):
                 " (select ST_MakePoint(%(lng)f, %(lat)f)::geography as poi) as poi"
                 " WHERE ST_DWithin(geog_def, poi, 100000)"
                 " AND CHAR_LENGTH(label) >=6 "
-                " AND label LIKE '%+%' "
+                " AND label LIKE '%%+%%' "
                 " ORDER BY ST_Distance(geog_def, poi)"
                 " LIMIT 1;" % {'lat':float(lat), 'lng':float(lng)})
     print(sql)
