@@ -19,11 +19,10 @@ def convLatLng(lat,lng):
     resultLatLng = str(resultLat) + ", " + str(resultLng)
     return str(resultLatLng)
 
-def convKnots(knots):
-    return knots
-
 # Convert Knots to KMH
-
+def convKnots(knots):
+    kmh = knots * 1.852
+    return kmh
 
 if __name__ == '__main__':
     # test1.py executed as script

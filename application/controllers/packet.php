@@ -294,7 +294,7 @@ class Packet extends CI_Controller {
 		$data = $this->mpacket->getAlertDetail($packet_id);
 		$html = '<p>Vehicle :<b>'.$data->vehicle.'</b><p>
         		 <p>Driver  :<b>'.$data->driver.'</p>
-        		 <p>Speed   :<b>'.$data->speed.'</p>
+        		 <p>Speed   :<b>'.$data->speed.' Kph</p>
         		 <p>Date    :<b>'.$data->create_at.'</p>
         		 <p>Location:<b>'.$data->location.' Jarak'.$data->distance.'</p>
         		 ';		
