@@ -148,6 +148,28 @@ class MPacket extends CI_Model {
 		$query = $this->db->get('region_alert');
 		return $query->result();
 	}
+	
+	
+	/**
+	 * SELECT tcm_alert.*, tcm_vehicles."name" as vehicle, tcm_driver."name" as driver, 
+	 * tcm_packet.velocity, tcm_packet.create_at, tcm_packet."location", tcm_packet.distance  FROM tcm_alert
+INNER JOIN tcm_packet ON tcm_alert.packet_id = tcm_packet.id_packet
+INNER JOIN tcm_vehicles ON tcm_vehicles.gps_mobile_address = tcm_packet.mobile_address
+LEFT JOIN tcm_driver ON tcm_driver.vehicle_id = tcm_vehicles.vehicle_id
+WHERE tcm_alert.type ='speed'
+AND tcm_packet.id_packet = '36959';
+	 */
+	function getAlertDetail($packet_id){
+		$this->db->select('tcm_alert.*, tcm_vehicles.name as vehicle, tcm_driver.name as driver, 
+				tcm_packet.velocity as speed,tcm_packet.create_at, tcm_packet.location, 
+				tcm_packet.distance');
+		$this->db->join("packet", "alert.packet_id = packet.id_packet", "inner");	
+		$this->db->join("vehicles", "vehicles.gps_mobile_address = packet.mobile_address", "inner");
+		$this->db->join("driver", "driver.vehicle_id = vehicles.vehicle_id", "left");
+		$query = $this->db->get_where('alert', array('packet.id_packet' => $packet_id, 
+				'type'=>'speed'));
+		return $query->row();
+	}
 
 	function insertRegionAlert($data) {
 		$this->db->insert('alert', $data);

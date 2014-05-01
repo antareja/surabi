@@ -9,10 +9,6 @@ if (! defined('BASEPATH'))
  */
 class Packet extends CI_Controller {
 
-	public $mapWidth = 512;
-	public $mapHeight = 424;
-	protected $lat;
-	protected $lon;
 	
 	function __construct() {
 		parent::__construct();
@@ -109,55 +105,6 @@ class Packet extends CI_Controller {
 		echo '</pre>';
 		$short_name = $json['results'][0]['address_components'][0]['short_name'];
 		return $short_name;
-	}
-
-// 	function convertGeoToPixel() {
-// 		$x = ($this->getLon() - $this->getMapLonLeft()) * ($this->mapWidth / $this->getMapLonDelta);
-// 		$this->setLat($this->getLat() * M_PI / 180);
-// 		$worldMapWidth = (($this->mapWidth / $this->getMapLonDelta) * 360) / (2 * M_PI);
-// 		$mapOffsetY = ($worldMapWidth / 2 * log((1 + sin($this->getMapLatBottomDegree)) / (1 - sin($this->getMapLatBottomDegree))));
-// 		$y = $this->mapHeight - (($worldMapWidth / 2 * log((1 + sin($this->getLat())) / (1 - sin($this->getLat())))) - $mapOffsetY);
-// 		return array(
-// 				$x,
-// 				$y 
-// 		);
-// 	}
-
-	public function location_op($lon, $lat) {
-		$mapLonLeft =  $lon-0.00033;
-		$mapLonRight = $lon+0.00033;
-		$mapLonDelta = $mapLonRight - $mapLonLeft;
-		
-		$mapLatUp = $lat+0.00028;
-		$mapLatBottom = $lat-0.00028;
-		$mapLatBottomDegree = $mapLatBottom * M_PI / 180;
-
-		$mapWidth = 512;
-		$mapHeight = 424;
-		$position = convertGeoToPixel($lon,$lat);
-// 		print_r($position);
-		$ch = curl_init();
-		curl_setopt_array($ch, array(
-				CURLOPT_URL => base_url_new() . ":8080/geoserver/tcm/wms?REQUEST=GetFeatureInfo&EXCEPTIONS=application%2Fvnd.ogc.se_xml&BBOX=" . 
-				$mapLonLeft . "%2C" . $mapLatBottom . "%2C" . $mapLonRight . "%2C" . $mapLatUp . "&SERVICE=WMS&INFO_FORMAT=application%2Fjson&QUERY_LAYERS=tcm-layer_group&FEATURE_COUNT=50&Layers=tcm-layer_group&WIDTH=512&HEIGHT=424&format=image%2Fpng&styles=&srs=EPSG%3A4326&version=1.1.1&x=" . round($position[0]) . "&y=" . round($position[1]),
-				CURLOPT_RETURNTRANSFER => true 
-		));
-		$output = curl_exec($ch);
-		$output = json_decode($output);
-// 		echo '<pre>';
-// 		print_r($output);
-// 		echo '</pre>';
-		$jalan = "";
-		$provinsi = "";
-		if (isset($output->features[3]->properties->NAME)) {
-			$jalan = $output->features[3]->properties->NAME;
-		} else if (isset($output->features[1]->properties->name)) {
-			$jalan = $output->features[1]->properties->name;
-		}
-		if (isset($output->features[0]->properties->PROV)) {
-			$provinsi = $output->features[0]->properties->PROV;
-		}
-		echo $lokasi = $jalan . " " . $provinsi;
 	}
 
 	public function get_loc() {
@@ -326,6 +273,35 @@ class Packet extends CI_Controller {
 			$data['type_id'] = 1;
 			$data['packet_id'] = $packet_id;
 			echo $this->mpacket->insertSpeedAlert($data);
+			$this->speed_notif_email($packet_id);
+		}
+	}
+	
+	public function speed_notif_email($packet_id) {
+		$config = $this->config->item('smtp_mail');
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+		$this->email->to('haidar@techinfo.co.id');
+		$this->email->cc('coder5@ymail.com');
+		$this->email->cc('haidar.mukmin@gmail.com');
+		$this->email->bcc('haidar.marie3@gmail.com');
+		$this->email->from('haidar.mukmin@gmail.com', 'haidar.mukmin@gmail.com');
+		// $this->email->to('fiterlan_k@banpuindo.co.id');
+		// $this->email->to('haidar@techinfo.co.id');
+		// $this->email->bcc('haidar.mukmin@gmail.com');
+		$this->email->subject('Notification Speed Alert');
+		$data = $this->mpacket->getAlertDetail($packet_id);
+		$html = '<p>Vehicle :<b>'.$data->vehicle.'</b><p>
+        		 <p>Driver  :<b>'.$data->driver.'</p>
+        		 <p>Speed   :<b>'.$data->speed.'</p>
+        		 <p>Date    :<b>'.$data->create_at.'</p>
+        		 <p>Location:<b>'.$data->location.' Jarak'.$data->distance.'</p>
+        		 ';		
+		$this->email->message($html);
+		if ($this->email->send()) {
+			echo "email has been send!";
+		} else {
+			echo $this->email->print_debugger();
 		}
 	}
 
@@ -350,20 +326,16 @@ class Packet extends CI_Controller {
 	
 	public function notify_node() {
 		$ch = curl_init();
-	
 		curl_setopt($ch, CURLOPT_URL, 'http://192.168.12.250');
-	
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
 		curl_setopt($ch, CURLOPT_PORT, 8000);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-	
 		curl_setopt($ch, CURLOPT_POST, true);
 	
 		$foo  = 'hellow world';
 
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $foo);
-	
 		curl_exec($ch);
 		curl_close($ch);
 	}
