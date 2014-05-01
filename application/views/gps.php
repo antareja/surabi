@@ -54,9 +54,9 @@ foreach ($last_position as $position)
 			<p>
 				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
 			<p>
-			<p>
-				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span>
-			</p>
+<!-- 			<p> -->
+<!-- 				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span> -->
+<!-- 			</p> -->
 		</div>
 	</div>
 </div>

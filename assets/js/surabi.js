@@ -1,4 +1,7 @@
 var iconSizeVehicle;
+var selectControl;
+var selectedFeature;
+
 
 jQuery(function($) {
 	$('#id-input-file-1 , #id-input-file-2').ace_file_input({
@@ -203,9 +206,9 @@ function add_marker(isi) {
 	var icon2 = new OpenLayers.Icon(customIcons["icon_mobil_" + isi2].icon, iconSizeVehicle, null);
 	var point2 = tampung_posisi[isi].posisi;
 	nama_marker[isi].nama = new OpenLayers.Marker(point2, icon2);
-	if(popup_marker["popup_marker_"+isi2].popup=="")
-	{
+	if(popup_marker["popup_marker_"+isi2].popup=="") {
 		markerClick = function (evt) {
+//			alert('klik');
             if (this.popup == null) {
                 this.popup = this.createPopup(this.closeBox);
                 map.addPopup(this.popup);
@@ -222,17 +225,46 @@ function add_marker(isi) {
 		popup_marker["popup_marker_"+isi2].popup.closeBox = true;
         popup_marker["popup_marker_"+isi2].popup.popupClass = popupClass;
         popup_marker["popup_marker_"+isi2].popup.data.popupContentHTML = popupContentHTML;
+//        alert(popupContentHTML);
 	}
 	nama_marker[isi].nama.events.register("mouseover",
 			popup_marker["popup_marker_" + isi2].popup, markerClick);
 	cek_marker.push(isi);
 	marker_layer.addMarker(nama_marker[isi].nama);
+	map.addLayer(marker_layer);
+	selectControl = new OpenLayers.Control.SelectFeature(marker_layer,
+		    {
+		        onSelect: onPopupFeatureSelect,
+		        onUnselect: onPopupFeatureUnselect 
+		    });
+		    map.addControl(selectControl);
+		    selectControl.activate();
+}
+
+function onPopupClose(evt) {
+    selectControl.unselect(selectedFeature);
+}
+function onPopupFeatureSelect(feature) {
+    selectedFeature = feature;
+    popup = new OpenLayers.Popup.FramedCloud("chicken",
+        feature.geometry.getBounds().getCenterLonLat(),
+        null, feature.name, null, true, onPopupClose);
+    popup.panMapIfOutOfView = true;
+    popup.autoSize = true;
+    feature.popup = popup;
+    map.addPopup(popup);
+}
+function onPopupFeatureUnselect(feature) {
+    map.removePopup(feature.popup);
+    feature.popup.destroy();
+    feature.popup = null;
 }
 
 function add_filter(isi) {
 	var ada = jQuery.inArray(isi, filter);
-	if (ada < 0)
+	if (ada < 0){
 		filter.push(isi);
+	}
 	add_marker(isi);
 }
 
