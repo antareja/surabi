@@ -28,7 +28,7 @@
 				<!-- #sidebar-shortcuts -->
 
 				<ul class="nav nav-list">
-					<li><a href="<?php echo site_url()?>"> <i class="icon-dashboard"></i> <span
+					<li class="active"><a href="<?php echo site_url()?>"> <i class="icon-dashboard"></i> <span
 							class="menu-text"> Dashboard </span>
 					</a></li>
 

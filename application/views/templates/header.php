@@ -14,7 +14,7 @@ if (!isset($_SESSION['gps_username'])) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
-<meta name="author" content="Haidar Mar'ie, Rizki Faishal">
+<meta name="author" content="Techinfo Apps Solusi,Haidar Mar'ie, Rizki Faishal">
 <link rel="shortcut icon"
 	href="<?php echo base_url()?>assets/ico/favicon.png">
 
@@ -61,6 +61,9 @@ if (!isset($_SESSION['gps_username'])) {
 /* .form-control::-moz-placeholder {
 	color: #000000;
 } */
+.navbar .navbar-brand {
+	padding-top: 3px;
+}
 ul.nav li.dropdown:hover>ul.dropdown-menu {
 	display: block;
 }
@@ -81,10 +84,9 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
-				<a href="<?php echo site_url()?>" class="navbar-brand"> <small><img
-						width="30"
-						src="<?php echo base_url()?>assets/images/logo-small.png"> <i
-						class="icon-leaf"></i> GPS Fleet Tracking Solutions</small>
+				<a href="<?php echo site_url()?>" class="navbar-brand"> 
+				<img width="30" src="<?php echo base_url()?>assets/images/logo_techinfo.png"> 
+				<img height="40" src="<?php echo base_url()?>assets/images/logo_tcm_small.png">&nbsp;<small>TCM GPS Fleet Tracking Solutions</small>
 				</a>
 				<!-- /.brand -->
 			</div>
