@@ -167,7 +167,7 @@ AND tcm_packet.id_packet = '36959';
 		$this->db->join("vehicles", "vehicles.gps_mobile_address = packet.mobile_address", "inner");
 		$this->db->join("driver", "driver.vehicle_id = vehicles.vehicle_id", "left");
 		$query = $this->db->get_where('alert', array('packet.id_packet' => $packet_id, 
-				'type'=>'speed'));
+				'alert.type'=>'speed'));
 		return $query->row();
 	}
 
