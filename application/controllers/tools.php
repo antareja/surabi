@@ -29,7 +29,7 @@ class Tools extends CI_Controller {
 	public function get_ini(){
 		$ini = $this->config->item('ini_file');
 		echo '<pre>';
-		print_r($ini);
+		print_r($ini['mail']);
 		echo '</pre>';
 		echo $ini['base_url'];
 	}
