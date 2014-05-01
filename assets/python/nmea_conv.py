@@ -21,7 +21,7 @@ def convLatLng(lat,lng):
 
 # Convert Knots to KMH
 def convKnots(knots):
-    kmh = knots * 1.852
+    kmh = float(knots) * 1.852
     return kmh
 
 if __name__ == '__main__':
