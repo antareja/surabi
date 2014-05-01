@@ -18,7 +18,7 @@ $ini = parse_ini_file(FCPATH."config.ini");
 $config['base_url']	= $ini['base_url'];
 // for nodejs, geoserver use only , change return localhost if in local and ip address if server
 $config['base_url_new'] = $ini['base_url_new'];
-$config['vendor'] = 'contractor';
+$config['vendor'] = $ini['vendor'];
 $config['db'] = $ini['db'];
 $config['db_driver'] = $ini['db_driver'];
 $config['db_prefix'] = $ini['db_prefix'];
