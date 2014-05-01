@@ -119,7 +119,7 @@ while True:
             #sys.exit(0)
             value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , 
                           "lat" : lat , "lng" : lng , "lat_nmea" : lat_nmea, "lng_nmea" : lng_nmea, 
-                          "knots" : velocity , "velocity" : speed ,"knots": knots, "bearing" : bearing ,
+                          "knots" : velocity , "velocity" : speed , "bearing" : bearing ,
                           "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, 
                           "location" : d['label'], "distance" : d['distance']})
             parse_data = parse.urlencode(value)
