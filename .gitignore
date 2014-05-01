@@ -2,6 +2,7 @@
 #ignore this configuration if not working add this "git rm -r  --cached ." "git add ." "git commit -m 'fixed'"
 assets/python/__pycache__/
 assets/python/config.py
+application/controllers/tools.php
 application/config/database.php
 application/config/config.php
 application/third_party/mpdf/qrcode/*
