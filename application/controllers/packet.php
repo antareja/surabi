@@ -279,6 +279,7 @@ class Packet extends CI_Controller {
 	
 	public function speed_notif_email($packet_id) {
 		$config = $this->config->item('smtp_mail');
+// 		print_r($config);exit;
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 		$this->email->to('haidar@techinfo.co.id');
@@ -299,7 +300,8 @@ class Packet extends CI_Controller {
         		 ';		
 		$this->email->message($html);
 		if ($this->email->send()) {
-			echo "email has been send!";
+			echo "email has been send!\n";
+			echo $html;
 		} else {
 			echo $this->email->print_debugger();
 		}
