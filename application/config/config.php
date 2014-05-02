@@ -25,6 +25,7 @@ $config['db_prefix'] = $ini['db_prefix'];
 $config['db_name'] = $ini['db_name'];
 $config['db_user'] = $ini['db_user'];
 $config['db_pass'] = $ini['db_pass'];
+$config['timezone'] = $ini['timezone'];
 $config['ini_file'] = $ini;
 $config['smtp_mail'] = $ini['mail'];
 /*
