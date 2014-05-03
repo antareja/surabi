@@ -1,18 +1,20 @@
 # Echo client program
 import socket
-import pymysql
 from urllib.request import Request, urlopen
 from urllib import parse,error
 import nmea_conv
 import time
 import distance
 import sys
+import config
 
-HOST = 'localhost'  # The remote host
+
+options = config.main()
+HOST = options['host']  # The remote host
 PORT = 15000  # The same port as used by the server
-url_parse = 'http://surabi.dev/packet'  # Parse Packet Data to php and insert to database
+url_parse = options['base_url'] + '/packet'  # Parse Packet Data to php and insert to database
 
-url = "http://localhost:8000/?%s"
+url = options['nodejs_url'] + "/?%s"
 #parse_test = parse.urlencode({'spam': 1, 'eggs': 2, 'bacon': 0})
 #sys.exit(0)
 # Get Data from SQL 

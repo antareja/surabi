@@ -3,12 +3,13 @@ import psycopg2
 import sys
 import time
 import label
+import config
  
 def main(lat, lng):
     start_time = time.time()
     #Define our connection string
-    conn_string ="host='localhost' dbname='pg_gps_tracker' user='postgres' password='root'"
- 
+    options = config.main()
+    conn_string = "host='" + options['host'] + "' dbname='" + options['db_name'] + "' user='" + options['db_user'] + "' password='" + options['db_pass'] + "'"
     # print the connection string we will use to connect
     print("Connecting to database") # % (conn_string)
  
@@ -21,7 +22,7 @@ def main(lat, lng):
     lng = float(lng)
     print("Connected!\n")
     sql = ("SELECT label, CHAR_LENGTH(label),lng,lat, ST_Distance(geog_def, poi) AS distance_m"
-                " FROM tcm_road,"
+                " FROM " + options['db_prefix'] + "road,"
                 " (select ST_MakePoint(%(lng)f, %(lat)f)::geography as poi) as poi"
                 " WHERE ST_DWithin(geog_def, poi, 100000)"
                 " AND CHAR_LENGTH(label) >=6 "
@@ -40,7 +41,7 @@ def main(lat, lng):
             # convert label STA or - to KM
             km = label.main(row[0]);
             print("\nGet Closest Distance:", km['km'])
-            return {'label': str(km['km']), 'distance' :str(row[2])}
+            return {'label': str(km['km']), 'distance' :str(row[4])}
  
 if __name__ == "__main__":
     main(lat, lng)

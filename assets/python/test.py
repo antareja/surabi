@@ -1,12 +1,12 @@
 import nmea_conv
 import label
+import config
 import distance
 import time
 import re
 import sys
 from urllib.request import Request, urlopen
 import urllib.parse
-
 
 #url = "http://localhost:8000/?%s"
 #params = urllib.parse.urlencode({'spam': 1, 'eggs': 2, 'bacon': 0})
@@ -15,6 +15,9 @@ import urllib.parse
 #except error.URLError as e: print("URL Error:",e.read() , url)
 #except error.HTTPError as e: print("HTTP Error:",e.read() , url)
 
+#sys.exit(0)
+option = config.main()
+print(option['db_name'])
 #sys.exit(0)
 lng = 115.719
 lat = -0.493033   
