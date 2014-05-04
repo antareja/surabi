@@ -39,6 +39,35 @@ class Mtools extends CI_Model {
 		return $query->result();		
 	}
 	
+	/**
+	 * USING Postgis Extension
+	 * @param unknown $lng
+	 * @param unknown $lat
+	 */
+	function pointContainPolygon($lng, $lat) {
+		$sql = "SELECT ST_Contains(
+				ST_GeomFromText('POLYGON((115.66707935239 -0.57043896996875,115.68964623419 -0.58305510073695,
+				115.72678385857 -0.57772434125743,115.72891616236 -0.55551284342609,115.6690339642 -0.56244283074947,115.66707935239 -0.57043896996875))',4326)
+				,
+				ST_SetSRID(ST_MakePoint(115.72752185633,   -0.56729841977699),4326)
+				)";
+		$query  = $this->db->query($sql);
+		return $query->result();
+	}
+	
+	/**
+	 * USING Postgres Only
+	 * @param unknown $lng
+	 * @param unknown $lat
+	 */
+	function pointContainPolygonPg($lng, $lat) {
+		$sql = "SELECT polygon '((115.66707935239,-0.57043896996875),(115.68964623419,-0.58305510073695),(115.72678385857,-0.57772434125743),
+				(115.72891616236,-0.55551284342609),(115.6690339642,-0.56244283074947))' @> 
+				point '(115.66759523518,   -0.57027476048639)';";
+		$query  = $this->db->query($sql);
+		return $query->result();
+	}
+	
 // 	function containPoly()
 	
 	function getRegion(){

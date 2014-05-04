@@ -8,9 +8,15 @@ if (! defined('BASEPATH'))
  *        
  */
 class Tools extends CI_Controller {
+	
+
+	private $time_start     =   0;
+	private $time_end       =   0;
+	private $time           =   0;
 
 	function __construct() {
 		parent::__construct();
+		$this->time_start= microtime(true);
 		$this->load->model('mtools');
 		$this->mtools = new MTools();
 	}
@@ -180,9 +186,65 @@ class Tools extends CI_Controller {
 		$this->load->view('tools/conv_xy', $data);
 	}
 
-	public function check_poly_db($lng, $lat) {
+	public function check_poly_new($lng, $lat) {
+		$start = microtime(true);
+		$this->load->library('pointLocation');
+		$pointLocation= new pointLocation();
 		$region = $this->mtools->getRegion();
 		
+		$points = array("$lng $lat");
+// 		$polygon = array("-50 30","50 70","100 50","80 10","110 -10","110 -30","-20 -50","-30 -40","10 -10","-10 10","-30 -20","-50 30");
+		$polygon = array(
+				"115.66707935239 -0.57043896996875","115.68964623419 -0.58305510073695",
+				"115.72678385857 -0.57772434125743","115.72891616236 -0.55551284342609",
+				"115.6690339642 -0.56244283074947","115.66707935239 -0.57043896996875"
+				);
+		// The last point's coordinates must be the same as the first one's, to "close the loop"
+		foreach($points as $key => $point) {
+			echo "point " . ($key+1) . " ($point): " . $pointLocation->pointInPolygon($point, $polygon) . "<br>";
+		}
+        $this->time_end = microtime(true);
+        $this->time = $this->time_end - $this->time_start;
+        echo "Loaded in $this->time seconds\n";
+	}
+	
+	public function time_test(){
+		$tri = array();
+		for ($i = 0; $i < 1000000; ++$i) {
+			$x = round(sin($i), 5);
+			$y = round(tan($x), 3);
+			$z = round(cos($y), 4);
+			array_push($tri, $z);
+			// do something
+// 			echo $x;
+		}
+		echo '<pre>';
+		print_r($z);
+		echo '</pre>';
+        $this->time_end = microtime(true);
+        $this->time = $this->time_end - $this->time_start;
+        echo "Loaded in $this->time seconds\n";
+	}
+	
+	public function complex(){
+		$time = -microtime(true);
+		$hash = 0;
+		for ($i=0; $i < rand(10000000,40000000); ++$i) {
+			$hash ^= md5(substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, rand(1,10)));
+		}
+		$time += microtime(true);
+		echo "Hash: $hash iterations:$i time: ",sprintf('%f', $time),PHP_EOL;
+	}
+	
+	public function new_time(){
+		// Randomize sleeping time
+		usleep(mt_rand(100, 10000));
+		
+		// As of PHP 5.4.0, REQUEST_TIME_FLOAT is available in the $_SERVER superglobal array.
+		// It contains the timestamp of the start of the request with microsecond precision.
+		$time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+		
+		echo "Did nothing in $time seconds\n";
 	}
 
 	public function check_poly($lng, $lat) {
