@@ -25,8 +25,8 @@ class Tools extends CI_Controller {
 		$new = string_to_bracket($str);
 		echo $new;
 	}
-	
-	public function get_ini(){
+
+	public function get_ini() {
 		$ini = $this->config->item('ini_file');
 		echo '<pre>';
 		echo $ini['timezone'];
@@ -148,7 +148,19 @@ class Tools extends CI_Controller {
 		echo 'success';
 	}
 
-	public function conv_xy() {
+	public function conv_xy($x, $y) {
+		$this->load->library('gPoint');
+		$gPoint = new gPoint();
+		$gPoint->setUTM($x, $y, "50");
+		$gPoint->convertTMtoLL();
+		echo 'LngLat' . $gPoint->Long() . ',' . $gPoint->Lat() . "<br>";
+		$distance = $this->mtools->getClosestDistance($gPoint->Long(), $gPoint->Lat());
+		foreach ($distance as $dis) {
+			echo $dis->label . " jarak <b>" . $dis->distance_m . "</b>  lnglat" . $dis->lng . ',' . $dis->lng . '<br>';
+		}
+	}
+
+	public function conv_xy_db() {
 		$this->load->library('gPoint');
 		$data['gPoint'] = new gPoint();
 		// $gPoint->setLongLat(-121.85831, 37.42104);
@@ -166,6 +178,45 @@ class Tools extends CI_Controller {
 		// echo "Location $xy->label: "; $gPoint->long; echo "<br>";
 		// }
 		$this->load->view('tools/conv_xy', $data);
+	}
+
+	public function check_poly_db($lng, $lat) {
+		$region = $this->mtools->getRegion();
+		
+	}
+
+	public function check_poly($lng, $lat) {
+		$data['lat'] = $lat;
+		$data['lng'] = $lng;
+		echo $lat . ',' . $lng;
+		$data['latlng'] = $lng . ',' . $lat;
+		$data['region'] = $this->mtools->getRegion();
+		$region = $data['region'];
+		$lnglats = explode(';', $region->latlng);
+		// print_r($lnglats);exit;
+		$point = array(
+				$lat,
+				$lng 
+		);
+		$polygon = array();
+		foreach ($lnglats as $lnglat) {
+			// echo $lnglat.'<br/>';
+			$lng = explode(',', $lnglat);
+			array_push($polygon, array(
+					$lng[1],
+					$lng[0] 
+			));
+		}
+		echo "<pre>";
+		print_r($polygon);
+		print_r($point);
+		echo "</pre>";
+		$in_out = poly_contains($point, $polygon) ? 'in' : 'out';
+		// print_r($polygon);exit;
+		$in_out == $region->in_out ? 'ada' : '';
+		// echo 'test<br/>';
+		echo $in_out;
+		return $in_out;
 	}
 
 	public function update_lat_lng($lat, $lng, $road_id) {

@@ -56,10 +56,10 @@ class MPacket extends CI_Model {
 	 */
 	function getLocationDistance($lng,$lat) {
 		$sql = "SELECT label, CHAR_LENGTH(label),lng,lat, ST_Distance(geog_def, poi) AS distance_m
-				FROM tcm_road,
+				FROM {PRE}road,
 				  (select ST_MakePoint(115.71834017841,   -0.49391354590863)::geography as poi) as poi
 				WHERE ST_DWithin(geog_def, poi, 100000)
-				AND CHAR_LENGTH(label) >=6
+				AND CHAR_LENGTH(label) >=6 AND label LIKE '%+%'
 				ORDER BY ST_Distance(geog_def, poi)
 				LIMIT 1;";
 		$query = $this->db->query($sql);
@@ -74,12 +74,21 @@ class MPacket extends CI_Model {
 	 */
 	function getAllLocationDistance($lng,$lat) {
 		$sql = "SELECT label, CHAR_LENGTH(label),lng,lat, ST_Distance(geog_def, poi) AS distance_m
-				FROM tcm_road,
+				FROM {PRE}road,
 				  (select ST_MakePoint(115.71834017841,   -0.49391354590863)::geography as poi) as poi
 				WHERE ST_DWithin(geog_def, poi, 100000)
-				AND CHAR_LENGTH(label) >=6
+				AND CHAR_LENGTH(label) >=6 AND label LIKE '%+%'
 				ORDER BY ST_Distance(geog_def, poi)
 				LIMIT 10;";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	
+	function getUTCTime(){
+		$sql = "SELECT create_at, date,create_at AT TIME ZONE 'UTC', time , timetz,
+				to_timestamp(concat_ws(' ', date, time), 'DD-MM-YY HH24:MI:SS')  AT TIME ZONE 'UTC+8' as WITA, 
+				minutes_offset, velocity,knots,velocity_old latitude, longitude,satellite from tcm_packet
+				ORDER BY time DESC;";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
