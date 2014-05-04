@@ -1,11 +1,12 @@
 #!/usr/bin/python
 import psycopg2
 import sys
+import config
  
 def main():
     #Define our connection string
-    conn_string ="host='localhost' dbname='pg_gps_tracker' user='postgres' password='root'"
- 
+    options = config.main()
+    conn_string = "host='" + options['host'] + "' dbname='" + options['db_name'] + "' user='" + options['db_user'] + "' password='" + options['db_pass'] + "'" 
     # print the connection string we will use to connect
     print("Connecting to database\n    ->%s") # % (conn_string)
  
