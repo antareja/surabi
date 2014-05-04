@@ -60,6 +60,11 @@ class Profile extends CI_Controller {
 		}
 	}
 	
+	public function region_google(){
+		$data['map_use'] = 'google';
+		$this->load->template('profile/region_alert_google', $data);
+	}
+	
 	public function region_test(){
 		$this->load->view("tools/indonesia.php");
 	}
