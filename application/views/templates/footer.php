@@ -44,8 +44,8 @@
     <!-- page specific plugin scripts -->
     <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
     
-    <!-- date-picker problem & fleet state update problem -->
-	<script src="<?php echo base_url() ?>assets/js/jquery-ui-1.10.3.full.min.js"></script>
+    <!-- date-picker problem & fleet state update problem 
+	<script src="<?php echo base_url() ?>assets/js/jquery-ui-1.10.3.full.min.js"></script>-->
 	<script src="<?php echo base_url() ?>assets/js/jquery-ui-1.10.3.custom.min.js"></script>
 	<script src="<?php echo base_url() ?>assets/js/jquery.ui.touch-punch.min.js"></script>
 	<!-- ace scripts -->
