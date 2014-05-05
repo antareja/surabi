@@ -106,6 +106,7 @@ $('.btn-user').click(function() {
 });
 
 // User Delete
+/* bugs with other ui
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 	_title: function(title) {
 		var $title = this.options.title || '&nbsp;'
@@ -151,7 +152,7 @@ jQuery(function($) {
 		});
 	});
 });
-
+*/
 
 $('.btn-view').click(function() {
 	$("#form-report").submit();
