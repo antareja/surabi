@@ -165,6 +165,10 @@ class Tools extends CI_Controller {
 			echo $dis->label . " jarak <b>" . $dis->distance_m . "</b>  lnglat" . $dis->lng . ',' . $dis->lng . '<br>';
 		}
 	}
+	
+	public function get_close($lng,$lat) {
+		$distance = $this->mtools->getClosestDistance($lng, $lat);
+	}
 
 	public function conv_xy_db() {
 		$this->load->library('gPoint');

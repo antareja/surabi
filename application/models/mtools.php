@@ -31,7 +31,7 @@ class Mtools extends CI_Model {
                 (select ST_MakePoint(".$lng.", ".$lat.")::geography as poi) as poi 
                 WHERE ST_DWithin(geog_def, poi, 100000)
                 AND CHAR_LENGTH(label) >=6 
-                AND label LIKE '%+%' 
+                -- AND label LIKE '%+%' 
                 ORDER BY ST_Distance(geog_def, poi)
                 LIMIT 10;";
 		//echo $sql;exit;
@@ -49,7 +49,7 @@ class Mtools extends CI_Model {
 				ST_GeomFromText('POLYGON((115.66707935239 -0.57043896996875,115.68964623419 -0.58305510073695,
 				115.72678385857 -0.57772434125743,115.72891616236 -0.55551284342609,115.6690339642 -0.56244283074947,115.66707935239 -0.57043896996875))',4326)
 				,
-				ST_SetSRID(ST_MakePoint(115.72752185633,   -0.56729841977699),4326)
+				ST_SetSRID(ST_MakePoint(115.72752185633,-0.56729841977699),4326)
 				)";
 		$query  = $this->db->query($sql);
 		return $query->result();
@@ -63,7 +63,7 @@ class Mtools extends CI_Model {
 	function pointContainPolygonPg($lng, $lat) {
 		$sql = "SELECT polygon '((115.66707935239,-0.57043896996875),(115.68964623419,-0.58305510073695),(115.72678385857,-0.57772434125743),
 				(115.72891616236,-0.55551284342609),(115.6690339642,-0.56244283074947))' @> 
-				point '(115.66759523518,   -0.57027476048639)';";
+				point '(115.66759523518,-0.57027476048639)';";
 		$query  = $this->db->query($sql);
 		return $query->result();
 	}
