@@ -564,7 +564,7 @@ function setHTML(response)
 					var alertNotif = parseInt($('#notifs').text()) || 0;
 					var one = 1;
 					var totalAlert = alertNotif + one;
-					regionAlert('<?php echo $region->in_out;?>');
+					//regionAlert('<?php echo $region->in_out;?>');
 					$('#notifs').replaceWith('29');
 // 					alert($('#notifs').text());
 				 	//echo	'alert('; echo $region->in_out =='out' ? '"Keluar"' : "Sampai"; echo "+data_nodejs['mobile']);";
