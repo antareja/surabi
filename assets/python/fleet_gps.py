@@ -7,6 +7,7 @@ import time
 import distance
 import sys
 import config
+from _symtable import LOCAL
 
 print('connected fleet' , sys.argv, ' arguments')
 
@@ -47,7 +48,6 @@ while True:
             print("072 Packet Number")
             input = line[55]
             state = line[56]
-            url = url + "&input=" + input + "&state=" + state
             value.update({"input" : input , "state=" : state})
             parse_data = parse.urlencode(value)
             try:
@@ -67,8 +67,7 @@ while True:
                 jam = '0' + jam
             if len(tanggal) < 6 :
                 tanggal = '0' + tanggal
-            jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
-            tanggal = tanggal[0:2] + "-" + tanggal[2:4] + "-" + tanggal[4:6]
+            datetime = nmea_conv.convUtcTime(tanggal, jam)
             print(jam)
             lat_nmea = lat
             lng_nmea = lng
@@ -79,11 +78,14 @@ while True:
             print("lat,lng",lat,lng)
             d = distance.main(lat,lng)
             #url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location=" + d['label']  + "&distance=" + str(d['distance'])
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , 
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric ,  
                           "lat_nmea" : lat_nmea , "lng_nmea" : lng_nmea , "lat" : lat , "lng" : lng , 
-                          "knots" : velocity , "velocity" : speed , "bearing" : bearing , "tanggal" : tanggal , 
+                          "knots" : velocity , "velocity" : speed , "bearing" : bearing ,  
                           "satelite" : satelite , "hdop" : hdop, "location" : d['label'], 
-                          "distance" : d['distance']})
+                          "distance" : d['distance'], "date_utc" : datetime['date_utc'],
+                          "time_utc" : datetime['time_utc'], "jam" : datetime['time'], 
+                          "tanggal" : datetime['date']
+                          })
             parse_data = parse.urlencode(value)
             try:
                 insertPacket = urlopen(url_parse, parse_data.encode('utf-8'))
@@ -107,7 +109,7 @@ while True:
                 jam = '0' + jam
             if len(tanggal) < 6 :
                 tanggal = '0' + tanggal
-            jam = jam[0:2] + ":" + jam[2:4] + ":" + jam[4:6]
+            datetime = nmea_conv.convUtcTime(tanggal, jam)    
             print(jam)
             lat_nmea = lat
             lng_nmea = lng
@@ -115,16 +117,17 @@ while True:
             speed = nmea_conv.convKnots(velocity)
             lat = nmea_conv.convLat(lat_nmea)
             lng = nmea_conv.convLng(lng_nmea)
-            tanggal = tanggal[0:2] + "-" + tanggal[2:4] +"-"+ tanggal[4:6]
             d = distance.main(lat,lng)
             #url = url + "&status=" + status + "&offset=" + offset + "&numeric=" + numeric + "&jam=" + jam + "&lat_nmea=" + lat_nmea + "&lng_nmea=" + lng_nmea + "&lat=" + lat + "&lng=" + lng + "&knots=" + knots + "&velocity=" + velocity + "&bearing=" + bearing + "&tanggal=" + tanggal + "&satelite=" + satelite + "&hdop=" + hdop + "&location" + d['label']  + "&distance=" + str(d['distance'])
             #print(url)
             #sys.exit(0)
-            value.update({"status" : status , "offset" : offset , "numeric" : numeric , "jam" : jam , 
+            value.update({"status" : status , "offset" : offset , "numeric" : numeric ,  
                           "lat" : lat , "lng" : lng , "lat_nmea" : lat_nmea, "lng_nmea" : lng_nmea, 
                           "knots" : velocity , "velocity" : speed , "bearing" : bearing ,
-                          "tanggal" : tanggal , "satelite" : satelite , "hdop" : hdop, 
-                          "location" : d['label'], "distance" : d['distance']})
+                          "satelite" : satelite , "hdop" : hdop, "location" : d['label'], 
+                          "distance" : d['distance'],  "date_utc" : datetime['date_utc'],
+                          "time_utc" : datetime['time_utc'], "jam" : datetime['time'], 
+                          "tanggal" : datetime['date'] })
             parse_data = parse.urlencode(value)
             try:
                 insertPacket = urlopen(url_parse, parse_data.encode('utf-8'))

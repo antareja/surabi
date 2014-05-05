@@ -62,6 +62,8 @@ class Packet extends CI_Controller {
 				$data['velocity'] = $post['velocity'];
 				$data['bearing'] = $post['bearing'];
 				$data['date'] = $post['tanggal'];
+				$data['date_utc'] = $post['date_utc'];
+				$data['time_utc'] = $post['time_utc'];
 				$data['satellite'] = $post['satelite'];
 				$data['hdop'] = $post['hdop'];
 			} elseif ($post['packet_number'] == '072') {

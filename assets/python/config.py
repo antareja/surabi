@@ -16,6 +16,7 @@ def main():
     options['db_prefix'] = config['database']['db_prefix'].strip('"')
     options['db_user'] = config['database']['db_user'].strip('"')
     options['db_pass'] = config['database']['db_pass'].strip('"')
+    options['tzname'] = config['config']['tzname'].strip('"')
     return options
       
 if __name__ == "__main__":
