@@ -230,6 +230,34 @@ class Tools extends CI_Controller {
         echo "Loaded in $this->time seconds\n";
 	}
 	
+	public function img_test(){
+		$filename = FCPATH.'assets\uploads\icon_1.png';
+		$imgPng = imagecreatefrompng($filename);
+		imageAlphaBlending($imgPng, true);
+		imageSaveAlpha($imgPng, true);
+		
+		/* Output image to browser */
+		header("Content-type: image/png");
+		imagePng($imgPng);
+	}
+	
+	public function rotation($deg){
+		$filename = FCPATH.'assets\uploads\icon_1.png';
+		$rotang = $deg; // Rotation angle
+		$source = imagecreatefrompng($filename) or die('Error opening file '.$filename);
+		imagealphablending($source, false);
+		imagesavealpha($source, true);
+		
+		$rotation = imagerotate($source, $rotang, imageColorAllocateAlpha($source, 0, 0, 0, 127));
+		imagealphablending($rotation, false);
+		imagesavealpha($rotation, true);
+		
+		header('Content-type: image/png');
+		imagepng($rotation);
+		imagedestroy($source);
+		imagedestroy($rotation);
+	}
+	
 	public function complex(){
 		$time = -microtime(true);
 		$hash = 0;
