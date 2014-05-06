@@ -29,9 +29,7 @@ foreach ($last_position as $position)
 				</strong> , GPS Fleet Management. Collecting Delivery Information in
 				Real-Time
 			</div>
-			<?php echo $dashboard; # load view dashboard?> 
-			<div class="hr hr15 hr-dotted"></div>
-
+			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Maps</h3>
@@ -103,6 +101,9 @@ foreach ($last_position as $position)
 					</tbody>
 			</table>
 		</div>
+		<div class="hr hr15 hr-dotted"></div>
+		<?php echo $dashboard; # load view dashboard?> 
+		
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
