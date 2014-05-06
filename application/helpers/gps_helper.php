@@ -45,6 +45,11 @@ function to_pg_array($set) {
 	return '{' . implode(",", $result) . '}'; // format
 }
 
+function datef($date){
+// 	$now = date('Y-m-d H:i:s');
+	return date("D M d y h:i:s A", strtotime($date));
+}
+
 function string_to_bracket($str) {
 	$array = array();
 	$new_str = explode(';', $str);

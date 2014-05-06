@@ -335,4 +335,13 @@ class Tools extends CI_Controller {
 			echo $this->email->print_debugger();
 		}
 	}
+	
+	public function datef(){
+		$now = date('Y-m-d H:i:s');
+		setlocale(LC_TIME, "id");
+		$date = date("D M y h:i:s A", strtotime($now));
+		echo $date;
+		echo strftime("%a", strtotime("1/9/2005"));
+		
+	}
 }

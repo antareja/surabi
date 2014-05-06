@@ -95,7 +95,7 @@ foreach ($last_position as $position)
 						<td><a href="#"><?php echo $vehicle->name?></a></td>
 						<td id="fleet_speed_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->velocity?></td>
 						<td id="fleet_location_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->location?> jarak <?php echo $data_last_position[$vehicle->gps_mobile_address]->distance?> m</td>
-						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->create_at?></td>
+						<td id="fleet_position_<?php echo $vehicle->gps_mobile_address?>"><?php echo datef($data_last_position[$vehicle->gps_mobile_address]->create_at)?></td>
 						<td id="fleet_status_<?php echo $vehicle->gps_mobile_address?>"><span class="label label-sm label-warning">Expiring</span></td>
 						<td id="fleet_bearing_<?php echo $vehicle->gps_mobile_address?>"><?php echo $data_last_position[$vehicle->gps_mobile_address]->bearing?></td>
 					</tr>
