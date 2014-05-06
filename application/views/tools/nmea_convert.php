@@ -29,9 +29,11 @@ var line = new OpenLayers.Geometry.LineString([point1, point2]);
 
 var Mercator = new OpenLayers.Projection("EPSG:900913");
 var Geographic = new OpenLayers.Projection("EPSG:4326");
-alert('OpernLayers '+line.getGeodesicLength(Geographic));
+console.log('OpernLayers '+line.getGeodesicLength(Geographic));
 
-
+var d = new Date('2014-05-06 14:33:00+0800');
+var n = d.toDateString() + " " + d.toLocaleTimeString();
+console.log(n);
 
 
 //Server Jumbo
@@ -47,7 +49,7 @@ var p1 = new google.maps.LatLng(lat1,lng1);
 var p2 = new google.maps.LatLng(lat2,lng2);
 
 
-alert('GoogleMaps '+calcDistance(p1, p2));
+console.log('GoogleMaps '+calcDistance(p1, p2));
 
 function initialize() {
   var myLatlng = new google.maps.LatLng(<?php echo $lat.','.$lng?>);

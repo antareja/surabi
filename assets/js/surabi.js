@@ -3,6 +3,11 @@ var selectControl;
 var selectedFeature;
 
 
+function refTime(datetime) {
+	var d = new Date(datetime);
+	return d.toDateString() + " " + d.toLocaleTimeString();
+}
+
 jQuery(function($) {
 	$('#id-input-file-1 , #id-input-file-2').ace_file_input({
 		no_file : 'No File ...',

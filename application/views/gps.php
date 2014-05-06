@@ -408,7 +408,7 @@ foreach($vehicles as $vehicle)
 
 			//-----------------------------------udpate fleet------------------------------------------
 			$("#fleet_speed_" + data_nodejs["mobile"]).html(data_nodejs["velocity"]);
-			$("#fleet_position_" + data_nodejs["mobile"]).html(data_nodejs["tanggal"] + " " + data_nodejs["jam"]);
+			$("#fleet_position_" + data_nodejs["mobile"]).html(refTime(data_nodejs["tanggal"] + " " + data_nodejs["jam"]));
 			$("#fleet_bearing_" +data_nodejs["mobile"]).html(data_nodejs["bearing"]);
 			$("#fleet_status_" +data_nodejs["mobile"]).html('<span class="label label-sm label-success">'+data_nodejs["active"]+'</span>');
 			$('#fleet_location_'+data_nodejs["mobile"]).html(data_nodejs["location"] + " jarak "+ data_nodejs["distance"] + " m");
@@ -605,11 +605,11 @@ function generate_popup(nama_mobil_popup,lokasi_popup,lat_popup,lng_popup,tangga
 	popupContentHTML2+="<tr>";
 	popupContentHTML2+="		<td>Position</td>";
 	popupContentHTML2+="		<td>&nbsp;:</td>";
-	popupContentHTML2+="		<td> &nbsp;&nbsp;"+lat_popup+","+lng_popup+"</td>";
+	popupContentHTML2+="		<td> &nbsp;&nbsp;"+lng_popup+","+lat_popup+"</td>";
 	popupContentHTML2+="</tr>";
 	popupContentHTML2+="		<td>Time</td>";
 	popupContentHTML2+="		<td>&nbsp;:</td>";
-	popupContentHTML2+="		<td> &nbsp;&nbsp;" + tanggal_popup + " " + jam_popup+"</td>";
+	popupContentHTML2+="		<td> &nbsp;&nbsp;" + refTime(tanggal_popup + " " + jam_popup)+ "</td>";
 	popupContentHTML2+="<tr>";
 	popupContentHTML2+="<tr>";
 	popupContentHTML2+="		<td>Speed</td>";
