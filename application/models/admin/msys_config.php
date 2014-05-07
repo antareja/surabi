@@ -107,6 +107,25 @@ class MSys_config extends CI_Model {
 		return $query->result();
 	}
 
+	function getAllEmailData(){
+		$query = $this->db->get('email_data');
+		return $query->result();
+	}
+	
+	function getEmailData($email_id) {
+		$query = $this->db->get_where('email_data', array('email_id'=>$email_id));
+		return $query->row();
+	}
+	
+	function insertEmailData($data){
+		$this->db->insert('email_data',$data);
+		return $this->db->insert_id();
+	}
+	
+	function updateEmailData($email_id, $data) {
+		return $this->db->update('email_data', $data, array('email_id'=> $email_id));
+	}
+	
 	function getDriver($driver_id) {
 		$query = $this->db->get_where('driver', array(
 				'driver_id' => $driver_id 

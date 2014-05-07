@@ -64,6 +64,10 @@ if (!isset($_SESSION['gps_username'])) {
 .navbar .navbar-brand {
 	padding-top: 3px;
 }
+.tooltip {
+	z-index: 9000;
+    position: fixed;
+}
 ul.nav li.dropdown:hover>ul.dropdown-menu {
 	display: block;
 }
@@ -116,14 +120,16 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 							<li><a href="<?php echo site_url()?>admin/sys_config/hardware"><i
 									class="icon-wrench"></i>Hardware</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config"> <i
-									class="icon-cog"></i> Fleet Configuration
+									class="icon-cog"></i>Fleet Configuration
 							</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/base"><i
 									class="icon-home"></i>Base</a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/vehicle"><i
-									class="icon-truck"></i> Vehicle </a></li>
+									class="icon-truck"></i>Vehicle </a></li>
 							<li><a href="<?php echo site_url()?>admin/fleet_config/assign"><i
 									class="icon-truck"></i>Vehicle Assign </a></li>
+							<li><a href="<?php echo site_url()?>admin/sys_config/email_data"><i
+									class="icon-envelope"></i>Email Notification</a></li>
 							<li></li>
 						</ul></li>
 					<?php } ?>	

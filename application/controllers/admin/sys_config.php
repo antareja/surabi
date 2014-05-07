@@ -230,6 +230,32 @@ class Sys_config extends CI_Controller {
 	}
 	
 	/**
+	 * Input Email Data for notification Alert Only
+	 * @param string $email_id
+	 */
+	public function email_data($email_id = NULL){
+		$data['pageTitle'] = 'Email Notification';
+		$data['all_email'] = $this->msys_config->getAllEmailData();
+		$post = $this->input->post();
+		if ($post) {
+			$post_data['fullname'] = $post['fullname'];
+			$post_data['email'] = $post['email'];
+			if($post_data['email_id']) {
+				$this->msys_config->updateEmailData($email_id, $data);
+				redirect('admin/sys_config/email_data/'. $post_data['email_id']);
+			} else {
+				$id = $this->msys_config->insertEmailData($post_data);
+				redirect('admin/sys_config/email_data/'. $id);
+			}
+		} elseif ($email_id) {
+			$data['email_data'] = $this->msys_config->getEmailData($email_id);
+			$this->load->template("admin/sys_config/email_data",$data);
+		} else {
+			$this->load->template("admin/sys_config/email_data",$data);
+		}
+	}
+	
+	/**
 	 *
 	 * @param string $hardware_id
 	 *        	Hardware
