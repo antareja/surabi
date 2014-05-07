@@ -18,7 +18,7 @@ import urllib.parse
 #sys.exit(0)
 option = config.main()
 print(option['db_name'])
-print("round(80.33956, 2) : ", round(80.33956, 2))
+print("round(80.33956, 2) : ", round(-0.57986588888, 6))
 sys.exit(0)
 lng = 115.719
 lat = -0.493033   

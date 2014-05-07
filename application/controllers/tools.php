@@ -370,6 +370,11 @@ class Tools extends CI_Controller {
 		$date = date("D M y h:i:s A", strtotime($now));
 		echo $date;
 		echo strftime("%a", strtotime("1/9/2005"));
-		
+	}
+	
+	public function roundf($lng, $lat){
+		$latf = floor($lat*1000+0.5)/1000;
+		$lngf = floor($lng*1000+0.5)/1000;
+		echo $lngf. ' '. $latf;
 	}
 }

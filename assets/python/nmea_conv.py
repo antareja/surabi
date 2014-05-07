@@ -6,14 +6,14 @@ import config
 # Convert NMEA Lat
 # Convert NMEA to regular Latitude Longitude
 def convLat(lat):
-    return str((float(lat) / 60))
+    return (float(lat) / 60)
 
 def convLng(lng):
     firstLng = str(lng)[:3]
     secLng = str(lng)[3:]
     secSixty = float(secLng) / 60
     resultLng = float(firstLng) + float(secSixty) 
-    return str(resultLng)
+    return resultLng
 
 def convLatLng(lat,lng):
     resultLat = (float(lat) / 60)
