@@ -1,11 +1,14 @@
 import configparser
-
+import os,sys
 
 def main():
     options  = {}
     config = configparser.ConfigParser()
     config.sections()
-    config.read('../../config.ini')
+    SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+    PARENT_ROOT=os.path.abspath(os.path.join(SITE_ROOT, os.pardir))
+    GRANDPAPA_ROOT=os.path.abspath(os.path.join(PARENT_ROOT, os.pardir))
+    config.read(GRANDPAPA_ROOT +'/config.ini')
     config.sections()
     options['host'] = config['config']['host'].strip('"')
     options['base_url'] = config['config']['base_url'].strip('"')

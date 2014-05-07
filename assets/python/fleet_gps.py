@@ -1,4 +1,3 @@
-# Echo client program
 import socket
 from urllib.request import Request, urlopen
 from urllib import parse,error

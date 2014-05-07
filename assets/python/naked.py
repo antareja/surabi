@@ -1,8 +1,11 @@
-import sys
+import sys,os
 from Naked.toolshed.shell import execute_js
 
+
 #def main():
-success = execute_js('../nodejs/server.js')
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+PARENT_ROOT=os.path.abspath(os.path.join(SITE_ROOT, os.pardir))
+success = execute_js(PARENT_ROOT + '/nodejs/server.js')
 print('connected nodejs' , sys.argv, ' arguments')
 if success:
     print('success')
