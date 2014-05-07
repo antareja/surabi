@@ -27,7 +27,7 @@ def convLatLng(lat,lng):
 # Convert Knots to KMH
 def convKnots(knots):
     kmh = float(knots) * 1.852
-    return kmh
+    return round(kmh,2)
 
 def convUtcTime(date, time):
     options = config.main()

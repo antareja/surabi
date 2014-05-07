@@ -28,7 +28,7 @@ def main(lat, lng):
                 " AND CHAR_LENGTH(label) >=6 "
                 " AND label LIKE '%%+%%' "
                 " ORDER BY ST_Distance(geog_def, poi)"
-                " LIMIT 1;" % {'lat':float(lat), 'lng':float(lng)})
+                " LIMIT 1;" % {'lat': lat, 'lng': lng})
     print(sql)
     cur.execute(sql)
     rows = cur.fetchall()
@@ -41,7 +41,7 @@ def main(lat, lng):
             # convert label STA or - to KM
             km = label.main(row[0]);
             print("\nGet Closest Distance:", km['km'])
-            return {'label': str(km['km']), 'distance' :str(row[4])}
+            return {'label': str(km['km']), 'distance' : round(row[4],2)}
  
 if __name__ == "__main__":
     main(lat, lng)
