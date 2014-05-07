@@ -158,6 +158,11 @@ class MPacket extends CI_Model {
 		return $query->result();
 	}
 	
+	function getAllEmailData() {
+		$query = $this->db->get('email_data');
+		return $query->result();
+	}
+	
 	
 	/**
 	 * SELECT tcm_alert.*, tcm_vehicles."name" as vehicle, tcm_driver."name" as driver, 

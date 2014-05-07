@@ -284,11 +284,12 @@ class Packet extends CI_Controller {
 // 		print_r($config);exit;
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
-		$this->email->to('haidar@techinfo.co.id');
-		$this->email->cc('coder5@ymail.com');
-		$this->email->cc('haidar.mukmin@gmail.com');
-		$this->email->bcc('haidar.marie3@gmail.com');
-		$this->email->from('haidar.mukmin@gmail.com', 'haidar.mukmin@gmail.com');
+		$email_data = $this->mpacket->getAllEmailData();
+		# Send Mail to Register Email
+		foreach($email_data as $email) {
+			$this->email->to($email->email);
+		}
+		$this->email->from('no_reply@banpuindo.co.id', 'no_reply@banpuindo.co.id');
 		// $this->email->to('fiterlan_k@banpuindo.co.id');
 		// $this->email->to('haidar@techinfo.co.id');
 		// $this->email->bcc('haidar.mukmin@gmail.com');
