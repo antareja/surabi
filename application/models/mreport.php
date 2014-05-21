@@ -91,10 +91,11 @@ class MReport extends CI_Model {
 	}
 	
 	function getSpeedReport($begin, $end, $vehicles) {
-		$this->db->select('vehicles.name, velocity, create_at, location, bearing, latitude, longitude');
+		$this->db->select('vehicles.name, velocity, driver.name as driver_name, create_at, location, bearing, latitude, longitude');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
+		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id','left');
 		if ($vehicles != '') {
-			$this->db->where_in('vehicle_id', $vehicles);
+			$this->db->where_in('vehicles.vehicle_id', $vehicles);
 		}
 		if($_SESSION['gps_level'] == 'operator') {
 			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
@@ -105,12 +106,15 @@ class MReport extends CI_Model {
 			'create_at >=' => $begin . ' 09:00',
 			'create_at <=' => $end . ' 23:00'
 		));
+		//echo $this->db->last_query();exit;
 		return $query->result();
 	}
 	
 	function getAlertReport($begin, $end, $vehicle) {
-		$this->db->select('vehicles.name, driver.name as driver_name,  
-				alert.type, velocity, alert.create_at as create_at, latitude, longitude,  location, bearing');
+		$this->db->select('vehicles.name, driver.name as driver_name, 
+				CASE  {PRE}alert.type WHEN \'speed\' THEN (\'speed max\' , packet.velocity)
+WHEN \'region\' THEN (\'region is\', packet.location) END AS desc,
+				alert.type, velocity, alert.create_at as create_at, latitude, longitude,  location, bearing', FALSE);
 		$this->db->join('packet', 'alert.packet_id = packet.id_packet','inner');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address','inner');
 		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id','left');
@@ -126,7 +130,7 @@ class MReport extends CI_Model {
 				'alert.create_at >=' => $begin . ' 09:00',
 				'alert.create_at <=' => $end . ' 23:00'
 		));
-// 		echo $this->db->last_query();exit;
+		//echo $this->db->last_query();exit;
 		return $query->result();
 	}
 	

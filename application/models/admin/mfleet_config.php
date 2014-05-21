@@ -50,6 +50,8 @@ class MFleet_config extends CI_Model {
 	}
 
 	function getAllUserByAdmin($admin_id) {
+		$this->db->select('user_id,fullname, username, name');
+		$this->db->join('company_data', 'company_data.id_company = user.company_id', 'inner');
 		$query = $this->db->get_where('user', array(
 				'admin_id' => $admin_id 
 		));

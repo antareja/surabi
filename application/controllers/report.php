@@ -143,8 +143,8 @@ class Report extends CI_Controller {
 					'Driver',
 					'Date',
 					'type',
-					'Latitude',
-					'Longitude',
+					'Location',
+					'LongLat',
 					'Description' 
 			);
 			$alert = $this->mreport->getAlertReport($begin, $end, $vehicle);
@@ -156,7 +156,7 @@ class Report extends CI_Controller {
 				else
 					$class = "ganjil";
 				$x ++;
-				array_push($alerts, '<tr class="' . $class . '">', add_td($row->name), add_td($row->driver_name), add_td($row->create_at), add_td($row->type), add_td($row->latitude), add_td($row->longitude), add_td('alert description'), '</tr>');
+				array_push($alerts, '<tr class="' . $class . '">', add_td($row->name), add_td($row->driver_name), add_td($row->create_at), add_td($row->type), add_td($row->location), add_td($row->longitude.', '.$row->latitude), add_td($row->desc), '</tr>');
 			}
 			$data['report'] = $alerts;
 		}
@@ -172,8 +172,10 @@ class Report extends CI_Controller {
 		$post = $this->input->post();
 		$data['headers'] = array(
 				'Vehicle',
+				'Driver',
 				'Time',
 				'Location',
+				'LongLat',
 				'Speed',
 				'Bearing' 
 		);
@@ -194,7 +196,7 @@ class Report extends CI_Controller {
 				else
 					$class = "ganjil";
 				$x ++;
-				array_push($speeds, '<tr class="' . $class . '">', add_td($row->name), add_td($row->create_at), add_td($row->latitude . ',' . $row->longitude), add_td($row->velocity), add_td($row->bearing), '</tr>');
+				array_push($speeds, '<tr class="' . $class . '">', add_td($row->name),add_td($row->driver_name), add_td($row->create_at), add_td($row->location) ,add_td($row->latitude . ',' . $row->longitude), add_td($row->velocity), add_td($row->bearing), '</tr>');
 			}
 		}
 		$data['report'] = $speeds;
