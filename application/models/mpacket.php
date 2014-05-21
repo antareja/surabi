@@ -43,6 +43,7 @@ class MPacket extends CI_Model {
 		$this->db->where("DATE({PRE}packet.create_at)", $tanggal);
 		$this->db->join("vehicles","gps_mobile_address=mobile_address", 'inner');
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id",'left');
+		$this->db->limit(50))
 		$query = $this->db->get("packet");
 		echo 'db'.$this->db->last_query();
 		return $query->result();
