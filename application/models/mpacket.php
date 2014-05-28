@@ -36,11 +36,12 @@ class MPacket extends CI_Model {
 		return $query;
 	}
 	
-	function getReplayData($mobile_address,$tanggal) {
+	function getReplayData($mobile_address,$tanggal,$time_begin, $time_end) {
 // 		$this->db->select('packet.*, vehicles.name');
 		$this->db->order_by("packet.create_at", "ASC");
 		$this->db->where("mobile_address", $mobile_address);
-		$this->db->where("DATE({PRE}packet.create_at)", $tanggal);
+		$this->db->where("packet.create_at >=", $tanggal. ' '. $time_begin);
+		$this->db->where("packet.create_at <=", $tanggal. ' '. $time_end);
 		$this->db->join("vehicles","gps_mobile_address=mobile_address", 'inner');
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id",'left');
 		$query = $this->db->get("packet");

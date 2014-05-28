@@ -33,10 +33,12 @@ class Replay extends CI_Controller {
 		$data['pageTitle'] = "Replay Module";
 		$post = $this->input->post();
 		if ($post) {
-			$mobile_address = $this->input->post("gps_mobile_address");
-			$tanggal = $this->input->post("tanggal");
+			$time_begin = isset($post["time"]) ? $post['time'] : '07:00:00';
+			$time_end = isset($post["time"]) ? $post['time'] : '11:00:00';
+			$mobile_address = $post["gps_mobile_address"];
+			$tanggal = $post["tanggal"];
 			$tanggal = date("Y-m-d", strtotime($tanggal));
-			$data['data_replay'] = $this->mpacket->getReplayData($mobile_address, $tanggal);
+			$data['data_replay'] = $this->mpacket->getReplayData($mobile_address, $tanggal, $time_begin, $time_end);
 		} else {
 			$data['allvehicle'] = $this->mfleet_config->getAllVehicle($_SESSION['gps_user_id'], $show);
 		}

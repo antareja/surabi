@@ -347,6 +347,12 @@ if(isset($data_replay))
 	<input   type="button" id="faster"
 				onclick="faster()" value=">>" /> <input type="button" id="normal"
 				onclick="normal()" value="Reset" />
+	<select name="time">
+	<option value="7">07-11</option>
+	<option value="11">11-15</option>
+	<option value="15">15-19</option>
+	<option value="19">19-23</option>
+	</select>			
 			<p id="jam" style="display: none"></p>
 			<div id="map" style="width: 80%; height: 300px"></div>
 			<div>
