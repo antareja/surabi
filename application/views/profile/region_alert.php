@@ -446,6 +446,9 @@ table.featureInfo caption {
 			<div class="widget-box">
 				<div class="widget-header">
 					<h4 class="smaller">List Region</h4>
+				<div class="widget-toolbar">
+					<?php echo isset($region) ? '<button onclick="location.href=\''. site_url().'\'profile/region_alert/\'" class="btn btn-xs btn-primary">Add New </button>' : '' ?>
+				</div>
 				</div>
 				<div class="widget-body">
 					<div class="widget-main">
