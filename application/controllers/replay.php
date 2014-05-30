@@ -25,8 +25,19 @@ class Replay extends CI_Controller {
 		$data['replay'] = $this->mpacket->getReplay($mobile_address);
 		$this->load->template('replay', $data);
 	}
+	
+	public function fphp(){
+		//$fb = new FB();
+		$test = 'haidar gets';
+		fb($test);
+	}
+	
 
 	public function replay2($mobile_address = NULL, $unix = NULL, $time = NULL) {
+		ob_start();
+		//fb('haidar get one');
+		$this->firephp->log("FirePHP is working!");
+		//print_r($this->firephp);
 		$show = 'only';
 		$this->load->model('admin/mfleet_config');
 		$this->mfleet_config = new MFleet_config();

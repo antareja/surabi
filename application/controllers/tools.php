@@ -166,6 +166,20 @@ class Tools extends CI_Controller {
 		}
 	}
 	
+	public function fphp(){
+		$this->load->library('fb');
+		//$fb = new FB();
+		ob_start();
+		$var = array('a'=>'pizza', 'b'=>'cookies', 'c'=>'celery');
+		$test = 'haidar';
+		fb($test);
+		fb($var);
+		fb($var, "An array");
+		fb($var, FirePHP::WARN);
+		fb($var, FirePHP::INFO);
+		fb($var, 'An array with an Error type', FirePHP::ERROR);
+	}
+	
 	public function get_close($lng,$lat) {
 		$distance = $this->mtools->getClosestDistance($lng, $lat);
 	}

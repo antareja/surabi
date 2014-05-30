@@ -1,3 +1,5 @@
+<?php 
+if(isset($data_replay)) { ?>
 <script>
 $(function(){
     // bind change event to select
@@ -14,9 +16,7 @@ $(function(){
     });
   });
 </script>
-
 <?php 
-if(isset($data_replay)) {
 	if($data_replay->num_rows() > 0) {
 ?>
 <script type="text/javascript">
