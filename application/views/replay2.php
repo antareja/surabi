@@ -36,7 +36,7 @@ var array_waktu = {
 		?>
 		//<?php echo $replay->id_packet?>
 "<?php echo $x?>": { 
-			jam: '<?php echo $date->format('H:i:s')?>', 
+			jam: '<?php echo @$date->format('H:i:s')?>', 
 			lat: '<?php echo $replay->latitude?>', 
 			lng: '<?php echo $replay->longitude?>',
 			velocity: '<?php echo $replay->velocity?>',
