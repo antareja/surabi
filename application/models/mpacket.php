@@ -47,7 +47,7 @@ class MPacket extends CI_Model {
 		$this->db->join("icon","vehicles.icon_id=icon.icon_id",'left');
 		$query = $this->db->get("packet");
 		//echo 'db'.$this->db->last_query();
-		return $query->result();
+		return $query;
 	}
 	
 	/**

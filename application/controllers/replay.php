@@ -26,19 +26,39 @@ class Replay extends CI_Controller {
 		$this->load->template('replay', $data);
 	}
 
-	public function replay2() {
+	public function replay2($mobile_address = NULL, $unix = NULL, $time = NULL) {
 		$show = 'only';
 		$this->load->model('admin/mfleet_config');
 		$this->mfleet_config = new MFleet_config();
 		$data['pageTitle'] = "Replay Module";
-		$post = $this->input->post();
-		if ($post) {
-			$time_begin = isset($post["time"]) ? $post['time'] : '07:00:00';
-			$time_end = isset($post["time"]) ? $post['time'] : '11:00:00';
-			$mobile_address = $post["gps_mobile_address"];
-			$tanggal = $post["tanggal"];
-			$tanggal = date("Y-m-d", strtotime($tanggal));
-			$data['data_replay'] = $this->mpacket->getReplayData($mobile_address, $tanggal, $time_begin, $time_end);
+		if ($mobile_address) {
+			$data['mobile_address'] = $mobile_address;
+// 			$time_begin = isset($post["time"]) ? $post['time'] : '07:00:00';
+// 			$time_end = isset($post["time"]) ? $post['time'] : '11:00:00';
+			$time = isset($time) ? $time : '07';
+			if($time =='07') {
+				$time_begin = '07:00:00';
+				$time_end = '11:00:00';
+			} elseif($time == '11') {
+				$time_begin = '11:00:00';
+				$time_end = '15:00:00';
+			} elseif($time == '15') {
+				$time_begin = '15:00:00';
+				$time_end = '19:00:00';
+			} elseif ($time == '19') {
+				$time_begin = '19:00:00';
+				$time_end = '23:00:00';
+			} else {
+				$time_begin = '07:00:00';
+				$time_end = '11:00:00';
+			}
+			$data['mobile_address'] =  $mobile_address;
+			$data['time'] = $time;
+			$date = unixf($unix);
+			$data['unixf'] = $date;
+			$data['unix'] = $unix;
+			//$date = date("Y-m-d", strtotime($date));
+			$data['data_replay'] = $this->mpacket->getReplayData($mobile_address, $date, $time_begin, $time_end);
 		} else {
 			$data['allvehicle'] = $this->mfleet_config->getAllVehicle($_SESSION['gps_user_id'], $show);
 		}

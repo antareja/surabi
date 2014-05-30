@@ -1,12 +1,29 @@
+<script>
+$(function(){
+    // bind change event to select
+    $('#time').bind('change', function () {
+    	mobile_address = '<?php echo $mobile_address;?>';
+    	unix = <?php echo $unix;?>;
+        time = $(this).val(); // get selected value
+        url = "<?php echo site_url();?>replay/replay2/" + mobile_address + '/' + unix + '/' + time;
+        if (time) { // require a URL
+            //alert(url);
+            window.location = url; // redirect
+        }
+        return false;
+    });
+  });
+</script>
+
 <?php 
-if(isset($data_replay))
-{
+if(isset($data_replay)) {
+	if($data_replay->num_rows() > 0) {
 ?>
 <script type="text/javascript">
 var array_waktu = {
 		<?php
 	$x = 1;
-	foreach ($data_replay as $replay) {
+	foreach ($data_replay->result() as $replay) {
 // 		print_r($replay);exit;
 		$jam_replay = explode(".", $replay->create_at)[0];
 		$date = DateTime::createFromFormat('Y-m-d H:i:s', $jam_replay);
@@ -126,6 +143,7 @@ var array_waktu = {
         map.addControl(new OpenLayers.Control.Scale($('scale')));
         map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
         map.zoomToExtent(bounds);
+        map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 7 )
         
         // wire up the option button
         var options = document.getElementById("options");
@@ -288,25 +306,52 @@ var array_waktu = {
 }
 </style>
 <?php
-}
-?>
+} else { ?>
+<div class="alert alert-block alert-success">
+				<button type="button" class="close" data-dismiss="alert">
+					<i class="icon-remove"></i>
+				</button>
+				<i class="icon-ok green"></i> Data Pada <strong class="green">Tanggal <?php echo unixf($unix)?> Jam 
+				<?php echo $time?>
+				</strong> , Tidak Tersedia Silahkan Coba Waktu yang Lain
+			</div>
+<?php }
+
+}?>
 <div class="page-content">
 	<div class="row">
 		<div class="col-xs-12">
+		
 <?php 
 if(!isset($data_replay))
 {
 ?>
+<script>
+function parseDate(input) {
+	  var parts = input.split('/');
+	  // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
+	  date = new Date(parts[2], parts[0]-1, parts[1]); // Note: months are 0-based
+	  return  Math.round(date/1000);
+}
+
+$(document).ready(function(){
+	$('.submit').click(function() {
+		//alert(n);
+		//mobile_address = $("#mobile_address option:selected").text();
+		mobile_address = $("#mobile_address").val();
+		date = parseDate($("input[name='date']").val());
+		window.location = "<?php echo site_url();?>replay/replay2/" + mobile_address + "/" + date ;
+	});
+});
+</script>
 <br>
-			<form role="form" class="form-horizontal"
-				enctype="multipart/form-data"
-				action="<?php echo site_url();?>replay/replay2" method="POST" />
+			<div class="form-horizontal"/> 
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label no-padding-right"
-					for="gps_mobile_address"> Vehicle </label>
+					for="mobile_address"> Vehicle </label>
 				<div class="col-sm-9">
-					<select name="gps_mobile_address" id="gps_mobile_address">	
+					<select name="mobile_address" id="mobile_address">	
 					<?php 
 					foreach($allvehicle as $vehicle)
 					{
@@ -322,36 +367,38 @@ if(!isset($data_replay))
 				<label class="col-sm-3 control-label no-padding-right" for="tanggal">
 					Tanggal </label>
 				<div class="col-sm-9">
-					<input type="text" name="tanggal" id="date-picker" value="">
+					<input type="text" name="date" id="date-picker" value="">
 				</div>
 			</div>
 			<div class="clearfix form-actions">
 				<div class="col-md-offset-3 col-md-9">
-					<input type="submit" class="btn btn-info" value="Submit"> &nbsp;
+					<button class="submit btn btn-info">Submit</button> &nbsp;
 					&nbsp; &nbsp;
 					<button class="btn" type="reset">
 						<i class="icon-undo bigger-110"></i> Reset
 					</button>
 				</div>
 			</div>
-			</form>
+			</div>
 <?php
 } 
 if(isset($data_replay))
 {
 ?>
+	<input type="hidden" name='mobile_address' value="<?php echo $mobile_address;?>">
+	<input type="hidden" name='date' value="<?php echo $unix;?>">
 	<input type="button" id="stop" onclick="stop()" class="stop" value="" />
-			<input type="button" id="start_pause" onclick="start(this.id)"
+	<input type="button" id="start_pause" onclick="start(this.id)"
 				class="start" value="" /> <input type="button" id="slower"
 				onclick="slower()" value="<<"/>
 	<input   type="button" id="faster"
 				onclick="faster()" value=">>" /> <input type="button" id="normal"
 				onclick="normal()" value="Reset" />
-	<select name="time">
-	<option value="7">07-11</option>
-	<option value="11">11-15</option>
-	<option value="15">15-19</option>
-	<option value="19">19-23</option>
+	<select id="time" name="time">
+		<option value="7"  <?php echo $time =='7'? 'selected':''?>>07-11</option>
+		<option value="11" <?php echo $time =='11'? 'selected':''?>>11-15</option>
+		<option value="15" <?php echo $time =='15'? 'selected':''?>>15-19</option>
+		<option value="19" <?php echo $time =='19'? 'selected':''?>>19-23</option>
 	</select>			
 			<p id="jam" style="display: none"></p>
 			<div id="map" style="width: 80%; height: 300px"></div>
