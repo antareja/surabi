@@ -34,6 +34,7 @@ var array_waktu = {
 			$jam_akhir = $date->format('H:i:s');
 		}
 		?>
+		//<?php echo $replay->id_packet?>
 "<?php echo $x?>": { 
 			jam: '<?php echo $date->format('H:i:s')?>', 
 			lat: '<?php echo $replay->latitude?>', 
