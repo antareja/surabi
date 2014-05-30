@@ -286,9 +286,11 @@ class Packet extends CI_Controller {
 		$this->email->set_newline("\r\n");
 		$email_data = $this->mpacket->getAllEmailData();
 		# Send Mail to Register Email
+		$cc = [];
 		foreach($email_data as $email) {
-			$this->email->to($email->email);
+			$cc[] = $email->email;
 		}
+		$this->email->to($cc);
 		$this->email->from('no_reply@banpuindo.co.id', 'no_reply@banpuindo.co.id');
 		// $this->email->to('fiterlan_k@banpuindo.co.id');
 		// $this->email->to('haidar@techinfo.co.id');
