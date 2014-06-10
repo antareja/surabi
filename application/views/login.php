@@ -51,9 +51,9 @@
 								<h1>
 									<i class="icon-globe green"></i>
 									<span class="red">GPS</span>
-									<span class="white">Fleet Tracking</span>
+									<span class="white">Fleet Tracking v2.1</span>
 								</h1>
-								<h4 class="blue">&copy; Trubaindo Coal Mining v1</h4>
+								<h4 class="blue">&copy; Trubaindo Coal Mining</h4>
 							</div>
 
 							<div class="space-6"></div>
