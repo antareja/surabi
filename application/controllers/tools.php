@@ -183,7 +183,11 @@ class Tools extends CI_Controller {
 	public function get_close($lng,$lat) {
 		$distance = $this->mtools->getClosestDistance($lng, $lat);
 	}
-
+	
+	public function omap(){
+		$this->load->view('tools/omap');
+	}
+	
 	public function conv_xy_db() {
 		$this->load->library('gPoint');
 		$data['gPoint'] = new gPoint();
