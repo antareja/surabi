@@ -350,6 +350,16 @@ class Tools extends CI_Controller {
 		// }
 		$this->load->view('tools/progress');
 	}
+	
+	public function panggil_ini(){
+		$ci= &get_instance();
+		print_r( $ci->config->item['smtp_mail']);
+	}
+	
+	public function asep($angka,$angka2){
+		echo $angka;
+		echo $angka2;
+	}
 
 	public function mail() {
 		$config = Array(
@@ -357,7 +367,7 @@ class Tools extends CI_Controller {
 				'smtp_host' => 'ssl://smtp.gmail.com',
 				'smtp_port' => 465,
 				'smtp_user' => 'haidar.mukmin@gmail.com',
-				'smtp_pass' => 'SnuffCoed24',
+				'smtp_pass' => '',
 				'mailtype' => 'html',
 				'charset' => 'iso-8859-1' 
 		);

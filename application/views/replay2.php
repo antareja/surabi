@@ -34,7 +34,7 @@ var array_waktu = {
 			$jam_akhir = $date->format('H:i:s');
 		}
 		?>
-		//<?php echo $replay->id_packet?>
+		//<?php echo $replay->id_packet."\n"?>
 "<?php echo $x?>": { 
 			jam: '<?php echo @$date->format('H:i:s')?>', 
 			lat: '<?php echo $replay->latitude?>', 
@@ -144,7 +144,7 @@ var array_waktu = {
         map.addControl(new OpenLayers.Control.Scale($('scale')));
         map.addControl(new OpenLayers.Control.MousePosition({element: $('location')}));
         map.zoomToExtent(bounds);
-        map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 7 )
+        map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 8 )
         
         // wire up the option button
         var options = document.getElementById("options");
@@ -402,7 +402,7 @@ if(isset($data_replay))
 		<option value="19" <?php echo $time =='19'? 'selected':''?>>19-23</option>
 	</select>			
 			<p id="jam" style="display: none"></p>
-			<div id="map" style="width: 80%; height: 300px"></div>
+			<div id="map" style="width: 100%; height: 700px"></div>
 			<div>
 				<table>
 					<tr>

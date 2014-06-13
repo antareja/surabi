@@ -5,59 +5,9 @@ foreach ($last_position as $position)
 	$data_last_position[$position->gps_mobile_address]=$position;
 }
 ?>
-<div class="page-content">
-	<div class="page-header">
-		<h1>
-			Dashboard <small> <i class="icon-double-angle-right"></i> overview
-				&amp; stats
-			</small>
-		</h1>
-	</div>
 	<!-- /.page-header -->
-
-	<!-- load view Dashboard -->
-	<div class="row">
-		<div class="col-xs-12">
-			<!-- <h1 class="page-header">Dashboard</h1> -->
-			<div class="alert alert-block alert-success">
-				<button type="button" class="close" data-dismiss="alert">
-					<i class="icon-remove"></i>
-				</button>
-
-				<i class="icon-ok green"></i> Welcome to <strong class="green"> GPS
-					Tracking <small>(v2.1)</small>
-				</strong> , GPS Fleet Management. Collecting Delivery Information in
-				Real-Time
-			</div>
-			
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Maps <a href="<?php site_url()?>map/full"  class="blue">View FullScreen</a></h3>
-				</div>
-				<div class="panel-body">
-					<div id="map" style="width: 100%; height: 400px"></div>
-				</div>
-			</div>
-		</div>
-		<!-- /.col-lg-12 -->
-	</div>
-	<!-- /.row -->
-</div>
+					<div id="map" style="width: 100%; height: 800px;"></div>
 <!-- /.page-content -->
-
-<div class="row">
-	<div class="col-xs-12">
-		<div id="map_canvas" style="width: 100%; height: 80%"></div>
-		<div>
-			<p>
-				Lng Lat  &nbsp;&nbsp;&nbsp;: &nbsp; <span id="txt_long"></span>, &nbsp;<span id="txt_lat"></span>
-			<p>
-			<p>
-				Click Lng Lat  &nbsp;&nbsp;&nbsp;: <span id="click_lng"></span>, &nbsp; <span id="click_lat"></span>
-			</p>
-		</div>
-	</div>
-</div>
 <!-- <div id="nodelist"> -->
 <!--             <em>Click on the map to get feature info</em> -->
 <!--         </div> -->
@@ -102,7 +52,7 @@ foreach ($last_position as $position)
 			</table>
 		</div>
 		<div class="hr hr15 hr-dotted"></div>
-		<?php echo $dashboard; # load view dashboard?> 
+		<?php //echo $dashboard; # load view dashboard?> 
 		
 	</div>
 	<!-- /.col-lg-12 -->
@@ -348,7 +298,7 @@ foreach($vehicles as $vehicle)
                 
                 map.zoomToExtent(bounds);
                 // center location
-                map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 7 )
+                map.setCenter(new OpenLayers.LonLat(centerLng, centerLat), 8 )
                 // Mouse hover to show lat lng
 				map.events.register("mousemove", map, function(e) {
 					var position = map.getLonLatFromPixel(e.xy);

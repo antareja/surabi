@@ -1,4 +1,11 @@
-<div class="sidebar" id="sidebar">
+<?php 
+$sidebar = 'sidebar';
+if($this->uri->segment(1) == 'map') {
+	$sidebar = 'sidebar menu-min';
+}
+?>
+
+<div class="<?php echo $sidebar?>" id="sidebar">
 				<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 					</script>

@@ -71,6 +71,9 @@ if (!isset($_SESSION['gps_username'])) {
 ul.nav li.dropdown:hover>ul.dropdown-menu {
 	display: block;
 }
+.menu-min .nav-list > li > a > .menu-text {
+    z-index: 10000;
+}
 </style>
 </head>
 <body>
@@ -146,12 +149,14 @@ ul.nav li.dropdown:hover>ul.dropdown-menu {
 					<!-- 					<li class="purple dropdown-hover"><a href="#"> <i class="icon-laptop"></i>  -->
 					<!-- 					Job Module</a></li> -->
 					<li class="green dropdown-hover"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="#"> <i class="icon-globe"></i> Map <i
+						class="dropdown-toggle" href="<?php site_url()?>/map"> <i class="icon-globe"></i> Map <i
 							class="icon-caret-down"></i>
 					</a>
 						<?php if($_SESSION['gps_level'] != 'operator') { ?>
-						<ul
-							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="<?php echo site_url()?>map/full"> <i
+									class="icon-globe"></i> Full Map
+							</a></li>
 							<li><a href="<?php echo site_url()?>profile/region_alert"> <i
 									class="icon-cog"></i> Create Region
 							</a></li>
