@@ -146,6 +146,12 @@ class Tools extends CI_Controller {
 		$this->load->view('tools/nmea_convert', $data);
 	}
 
+
+	public function distance(){
+		$data['lat'] = -0.47171315382621;
+		$data['lng'] = 115.72020039136;
+		$this->load->view('tools/distance',$data);
+	}
 	/**
 	 * Convert from fleet control packet data
 	 */

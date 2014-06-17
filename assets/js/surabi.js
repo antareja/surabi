@@ -83,7 +83,6 @@ jQuery(function($) {
 });
 
 
-
 $('.form-user').validate({
 	rules : {
 		password : {

@@ -127,7 +127,7 @@ function calcDistance(p1, p2){
 // 	};
 
 // 	var getDistance = function (p1, p2) {
-// 	  var R = 6378137; // Earth’s mean radius in meter
+// 	  var R = 6378137; // Earthï¿½s mean radius in meter
 // 	  var dLat = rad(p2.lat() - p1.lat());
 // 	  var dLong = rad(p2.lng() - p1.lng());
 // 	  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -139,7 +139,7 @@ function calcDistance(p1, p2){
 // 	};
 
 // 	function calcDistance(p1, p2) {
-// 		  var R = 6378137; // Earth’s mean radius in meter
+// 		  var R = 6378137; // Earthï¿½s mean radius in meter
 // 		  var dLat = rad(p2.lat() - p1.lat());
 // 		  var dLong = rad(p2.lng() - p1.lng());
 // 		  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
