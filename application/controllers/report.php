@@ -207,6 +207,69 @@ class Report extends CI_Controller {
 		}
 	}
 
+	public function speed_limit($mobile_address = NULL, $unix = NULL, $time = NULL) {
+		$data['pageTitle'] = 'Speed Report';
+		$data['headers'] = array(
+				'Vehicle',
+				'Driver',
+				'Time',
+				'Location',
+				'LongLat',
+				'Speed',
+				'Bearing'
+		);
+		if ($mobile_address) {
+			// print_r($post);exit;
+			$begin = date("Y-m-d", strtotime($post['begin']));
+			$end = date("Y-m-d", strtotime($post['end']));
+			$time = isset($time) ? $time : '07';
+			if($time == 20) {
+				$speed_min = 20;
+				$speed_max = 40;
+			} elseif($time == '50') {
+				$speed_min = 50;
+				$speed_max = 60;
+			} elseif($time == 60) {
+				$speed_min = 60;
+				$speed_max = 65;
+			} elseif ($time == 65) {
+				$speed_min = 65;
+				$speed_max = 70;
+			} elseif ($time == 70) {
+				$speed_min = 70;
+				$speed_max = 120;
+			} else {
+				$speed_min = '20';
+				$speed_max = '40';
+			}
+			$data['mobile_address'] =  $mobile_address;
+			$data['speed'] = $speed;
+			$date = unixf($unix);
+			$data['unixf'] = $date;
+			$data['begin'] = $begin;
+			$data['end'] = $end;
+			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
+			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
+			$speed = $this->mreport->getSpeedReport($begin, $end, $vehicle);
+			$x = 1;
+			$speeds = array();
+			foreach ($speed as $row) {
+				if ($x % 2 == 0)
+					$class = "genap";
+				else
+					$class = "ganjil";
+				$x ++;
+				array_push($speeds, '<tr class="' . $class . '">', add_td($row->name),add_td($row->driver_name), add_td($row->create_at), add_td($row->location) ,add_td($row->latitude . ',' . $row->longitude), add_td($row->velocity), add_td($row->bearing), '</tr>');
+			}
+		}
+		$data['report'] = $speeds;
+		if (empty($post['pdf'])) {
+			$this->load->template("report/speed", $data);
+		} else {
+			$this->pdf($data);
+		}
+	}
+	
 	public function stop() {
 		$data['pageTitle'] = 'Stop Idling Report';
 		$post = $this->input->post();
