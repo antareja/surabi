@@ -3,10 +3,11 @@ $(function(){
     // bind change event to select
     $('#speed').bind('change', function () {
     	mobile_address = '<?php echo $mobile_address;?>';
-    	unix = <?php echo $unix;?>;
+    	begin = <?php echo $begin;?>;
+    	end = <?php echo $end;?>;
         speed = $(this).val(); // get selected value
-        url = "<?php echo site_url();?>report/speed_limit/" + mobile_address + '/' + unix + '/' + speed;
-        if (time) { // require a URL
+        url = "<?php echo site_url();?>report/speed_limit/" + mobile_address + '/' + begin + "/" + end + '/' + speed;
+        if (speed) { // require a URL
             //alert(url);
             window.location = url; // redirect
         }
@@ -39,9 +40,8 @@ $(document).ready(function(){
 		<input type="hidden" name="end" value="<?php echo !empty($end) ? $end : ''?>">
 		<input type="hidden" name="vehicle" value="<?php echo !empty($vehicle) ? $vehicle : ''?>">
 		<input type="hidden" name='mobile_address' value="<?php echo $vehicle;?>">
-		<input type="hidden" name='date' value="<?php echo $unix;?>">
 		<input type="hidden" name="pdf" value="1">
-		<select id="time" name="time">
+		<select id="speed" name="speed">
 			<option value="20" <?php echo $speed =='20'? 'selected':''?>>20-40</option>
 			<option value="50" <?php echo $speed =='50'? 'selected':''?>>50-60</option>
 			<option value="60" <?php echo $speed =='60'? 'selected':''?>>60-65</option>

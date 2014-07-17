@@ -26,6 +26,12 @@ class Report extends CI_Controller {
 		$data['vehicles'] = $this->mreport->getAllVehicles();
 		$this->load->template("report/form", $data);
 	}
+	
+	public function form_limit($report) {
+		$data['pageTitle'] = "Select " . ucfirst($report);
+		$data['vehicles'] = $this->mreport->getAllVehicles();
+		$this->load->template("report/form_limit", $data);
+	}
 
 	public function vehicle($pdf = NULL) {
 		$data['pageTitle'] = 'Vehicle Report';
@@ -207,7 +213,7 @@ class Report extends CI_Controller {
 		}
 	}
 
-	public function speed_limit($mobile_address = NULL, $unix = NULL, $time = NULL) {
+	public function speed_limit($mobile_address = NULL, $begin = NULL, $end = NULL, $speed = NULL) {
 		$data['pageTitle'] = 'Speed Report';
 		$data['headers'] = array(
 				'Vehicle',
@@ -220,22 +226,22 @@ class Report extends CI_Controller {
 		);
 		if ($mobile_address) {
 			// print_r($post);exit;
-			$begin = date("Y-m-d", strtotime($post['begin']));
-			$end = date("Y-m-d", strtotime($post['end']));
-			$time = isset($time) ? $time : '07';
-			if($time == 20) {
+			$begin = unixf($begin);
+			$end = unixf($end);
+			$speed= !empty($speed) ? $speed : 20;
+			if($speed == 20) {
 				$speed_min = 20;
 				$speed_max = 40;
-			} elseif($time == '50') {
+			} elseif($speed == '50') {
 				$speed_min = 50;
 				$speed_max = 60;
-			} elseif($time == 60) {
+			} elseif($speed == 60) {
 				$speed_min = 60;
 				$speed_max = 65;
-			} elseif ($time == 65) {
+			} elseif ($speed == 65) {
 				$speed_min = 65;
 				$speed_max = 70;
-			} elseif ($time == 70) {
+			} elseif ($speed == 70) {
 				$speed_min = 70;
 				$speed_max = 120;
 			} else {
@@ -244,12 +250,11 @@ class Report extends CI_Controller {
 			}
 			$data['mobile_address'] =  $mobile_address;
 			$data['speed'] = $speed;
-			$date = unixf($unix);
-			$data['unixf'] = $date;
 			$data['begin'] = $begin;
 			$data['end'] = $end;
-			$data['vehicle'] = is_array($post['vehicle']) ?  implode(',', $post['vehicle']) : $post['vehicle'];
-			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
+			$data['vehicle'] = $mobile_address;
+// 			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
+			$vehicle = $mobile_address;
 			$speed = $this->mreport->getSpeedReport($begin, $end, $vehicle);
 			$x = 1;
 			$speeds = array();
