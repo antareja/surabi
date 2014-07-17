@@ -226,8 +226,8 @@ class Report extends CI_Controller {
 		);
 		if ($mobile_address) {
 			// print_r($post);exit;
-			$begin = unixf($begin);
-			$end = unixf($end);
+			$beginf = unixf($begin);
+			$endf = unixf($end);
 			$speed= !empty($speed) ? $speed : 20;
 			if($speed == 20) {
 				$speed_min = 20;
@@ -255,7 +255,7 @@ class Report extends CI_Controller {
 			$data['vehicle'] = $mobile_address;
 // 			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
 			$vehicle = $mobile_address;
-			$speed = $this->mreport->getSpeedReport($begin, $end, $vehicle);
+			$speed = $this->mreport->getSpeedReport($beginf, $endf, $vehicle);
 			$x = 1;
 			$speeds = array();
 			foreach ($speed as $row) {
