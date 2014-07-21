@@ -41,12 +41,13 @@ $(document).ready(function(){
 		<input type="hidden" name="vehicle" value="<?php echo !empty($vehicle) ? $vehicle : ''?>">
 		<input type="hidden" name='mobile_address' value="<?php echo $vehicle;?>">
 		<input type="hidden" name="pdf" value="1">
+		<label class="control-label" for="tanggal">
+					Speed </label>
 		<select id="speed" name="speed">
 			<option value="20" <?php echo $speed =='20'? 'selected':''?>>20-40</option>
-			<option value="50" <?php echo $speed =='50'? 'selected':''?>>50-60</option>
-			<option value="60" <?php echo $speed =='60'? 'selected':''?>>60-65</option>
-			<option value="65" <?php echo $speed =='65'? 'selected':''?>>65-70</option>
-			<option value="70" <?php echo $speed =='70'? 'selected':''?>>70-120</option>
+			<option value="40" <?php echo $speed =='40'? 'selected':''?>>40-60</option>
+			<option value="60" <?php echo $speed =='60'? 'selected':''?>>60-80</option>
+			<option value="80" <?php echo $speed =='80'? 'selected':''?>>80-200</option>
 		</select>
 	<h4>View PDF : <img onclick="pdf_report.submit()" src="<?php base_url()?>/assets/img/pdf.png"
 		style="cursor: pointer"></h4>

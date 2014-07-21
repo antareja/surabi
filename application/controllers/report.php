@@ -232,22 +232,20 @@ class Report extends CI_Controller {
 			if($speed == 20) {
 				$speed_min = 20;
 				$speed_max = 40;
-			} elseif($speed == '50') {
-				$speed_min = 50;
+			} elseif($speed == 40) {
+				$speed_min = 40;
 				$speed_max = 60;
 			} elseif($speed == 60) {
 				$speed_min = 60;
-				$speed_max = 65;
-			} elseif ($speed == 65) {
-				$speed_min = 65;
-				$speed_max = 70;
-			} elseif ($speed == 70) {
-				$speed_min = 70;
-				$speed_max = 120;
+				$speed_max = 80;
+			} elseif($speed == 80) {
+				$speed_min = 80;
+				$speed_max = 200;
 			} else {
 				$speed_min = '20';
 				$speed_max = '40';
 			}
+			$this->firephp->log('speed_min ='. $speed_min .' speed max = '. $speed_max);
 			$data['mobile_address'] =  $mobile_address;
 			$data['speed'] = $speed;
 			$data['begin'] = $begin;
@@ -255,7 +253,7 @@ class Report extends CI_Controller {
 			$data['vehicle'] = $mobile_address;
 // 			$vehicle = is_array($post['vehicle']) ? $post['vehicle'] : explode(',', $post['vehicle']);
 			$vehicle = $mobile_address;
-			$speed = $this->mreport->getSpeedReport($beginf, $endf, $vehicle);
+			$speed = $this->mreport->getSpeedReport($beginf, $endf, $vehicle, $speed_min, $speed_max);
 			$x = 1;
 			$speeds = array();
 			foreach ($speed as $row) {

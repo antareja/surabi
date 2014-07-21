@@ -90,22 +90,25 @@ class MReport extends CI_Model {
 		return $query;
 	}
 	
-	function getSpeedReport($begin, $end, $vehicles) {
+	function getSpeedReport($begin, $end, $vehicle, $speed_min, $speed_max) {
 		$this->db->select('vehicles.name, velocity, driver.name as driver_name, create_at, location, bearing, latitude, longitude');
+		$this->db->where("packet.velocity >=", $speed_min);
+		$this->db->where("packet.velocity <=", $speed_max);
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->join('driver', 'driver.vehicle_id = vehicles.vehicle_id','left');
-		if ($vehicles != '') {
-			$this->db->where_in('vehicles.vehicle_id', $vehicles);
-		}
+		$this->db->where('packet.mobile_address', $vehicle);
+// 		if ($vehicles != '') {
+// 			$this->db->where_in('vehicles.vehicle_id', $vehicles);
+// 		}
 		if($_SESSION['gps_level'] == 'operator') {
 			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
 		} elseif ($_SESSION['gps_level'] == 'admin_vendor') {
 			$this->db->where('vehicles.company_id', $_SESSION['gps_company_id']);
 		}
 		$query = $this->db->get_where('packet' , array(
-			'create_at >=' => $begin . ' 09:00',
-			'create_at <=' => $end . ' 23:00'
+			'DATE(create_at) =' => $begin 
 		));
+		$this->firephp->log($this->db->last_query());
 		//echo $this->db->last_query();exit;
 		return $query->result();
 	}
