@@ -241,6 +241,9 @@ class Report extends CI_Controller {
 			} elseif($speed == 80) {
 				$speed_min = 80;
 				$speed_max = 200;
+			} elseif($speed == 0) {
+				$speed_min = 0;
+				$speed_max = 20;
 			} else {
 				$speed_min = '20';
 				$speed_max = '40';

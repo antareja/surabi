@@ -44,6 +44,7 @@ $(document).ready(function(){
 		<label class="control-label" for="tanggal">
 					Speed </label>
 		<select id="speed" name="speed">
+			<option value="0" <?php echo $speed =='0'? 'selected':''?>>0-20</option>
 			<option value="20" <?php echo $speed =='20'? 'selected':''?>>20-40</option>
 			<option value="40" <?php echo $speed =='40'? 'selected':''?>>40-60</option>
 			<option value="60" <?php echo $speed =='60'? 'selected':''?>>60-80</option>
