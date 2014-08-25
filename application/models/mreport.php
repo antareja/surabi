@@ -141,12 +141,12 @@ WHEN \'region\' THEN (\'region is\', packet.location) END AS desc,
 // 		$postgres = 'EXTRACT(EPOCH FROM (MAX(create_at::time) - MIN(create_at::time)))/3600 AS duration';
 		$postgres = 'MAX(create_at::time) - MIN(create_at::time) AS duration,';
 		$mysql = 'TIMEDIFF(MAX(time),MIN(time)) AS duration';
-		$this->db->select('vehicles.name, vehicles.vehicle_id, MIN(time) start_time, MAX(time) end_time, mobile_address, latitude,longitude
-				, MAX(location) as location , '.$postgres.', MAX(DATE(create_at)) date');
+		$this->db->select('vehicles.name, vehicles.vehicle_id, MIN(time) start_time, MAX(time) end_time, mobile_address,
+				location , '.$postgres.', MAX(DATE(create_at)) date');
 		$this->db->join('vehicles', 'vehicles.gps_mobile_address = packet.mobile_address');
 		$this->db->where_in('vehicle_id', $vehicles);
 		$this->db->where('velocity','0.0');
-		$this->db->group_by('latitude, longitude, mobile_address,DATE(create_at), vehicles.name, vehicles.vehicle_id');
+		$this->db->group_by('location, mobile_address,DATE(create_at), vehicles.name, vehicles.vehicle_id');
 		$this->db->order_by('DATE(create_at), mobile_address','DESC');
 		if($_SESSION['gps_level'] == 'operator') {
 			$this->db->where('vehicles.user_id', $_SESSION['gps_user_id']);
