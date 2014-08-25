@@ -157,7 +157,7 @@ WHEN \'region\' THEN (\'region is\', packet.location) END AS desc,
 				'DATE(create_at) >=' => $begin ,
 				'DATE(create_at) <=' => $end 
 		));
-// 		echo $this->db->last_query();exit;
+		$this->firephp->log($this->db->last_query());
 		return $query;
 	}
 	
